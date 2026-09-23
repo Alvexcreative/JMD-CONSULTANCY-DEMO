@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JMD Consulting — Concept 02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/review.css">
+<style>
+/* ═══ CONCEPT 02 · MONTFORT ══════════════════════════════════════════
+   Corporate posture as a weather condition. Almost no contrast, almost
+   no colour — one slate blue doing all the work, and an enormous amount
+   of white doing the rest. The wordmark sits left of centre and waits.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --slate: #3C5170;
+  --slate-deep: #26354A;
+  --slate-soft: #6E839E;
+  --mist: #EEF2F6;
+  --white: #FBFCFD;
+  --pad: clamp(20px, 4.4vw, 74px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--slate-deep);
+  font-family: 'Jost', system-ui, sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+::selection { background: var(--slate); color: #fff; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--slate); outline-offset: 4px; border-radius: 2px; }
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: var(--mist);
+}
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 108%;
+  object-fit: cover; object-position: 62% 50%;
+}
+/* Lift the top-left corner to near-white so the nav always has a ground */
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(251,252,253,.92) 0%, rgba(251,252,253,.34) 16%, rgba(251,252,253,0) 34%),
+    linear-gradient(to top, rgba(251,252,253,.72) 0%, rgba(251,252,253,0) 22%);
+}
+
+/* ── Masthead ──────────────────────────────────────────────────────── */
+.masthead {
+  position: relative; z-index: 3;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px;
+  padding: clamp(24px, 3.6vw, 44px) var(--pad) 0;
+}
+.divisions { display: flex; flex-wrap: wrap; gap: clamp(16px, 2.6vw, 38px); }
+.divisions a {
+  position: relative;
+  padding-bottom: 12px;
+  font-size: clamp(9px, .78vw, 11px);
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--slate-soft);
+  transition: color .25s ease;
+}
+.divisions a:hover { color: var(--slate-deep); }
+.divisions a[aria-current] { color: var(--slate-deep); }
+.divisions .underline {
+  position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 1px; background: var(--slate-deep);
+  transform-origin: left center;
+}
+
+.utility { display: flex; align-items: center; gap: clamp(14px, 1.8vw, 26px); flex: none; }
+.utility a, .utility button {
+  display: flex; align-items: center; gap: 9px;
+  font-family: inherit;
+  font-size: clamp(9px, .78vw, 11px);
+  font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--slate-deep);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  transition: opacity .2s ease;
+}
+.utility a:hover, .utility button:hover { opacity: .6; }
+.badge {
+  display: grid; place-items: center;
+  width: 21px; height: 21px; border-radius: 50%;
+  background: var(--slate-deep); color: #fff;
+  font-size: 9px; letter-spacing: 0; font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.dots { display: flex; gap: 5px; }
+.dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--slate-deep); }
+
+/* ── Lockup ────────────────────────────────────────────────────────── */
+.lockup {
+  position: relative; z-index: 3;
+  flex: 1;
+  display: flex; align-items: center;
+  padding: 0 var(--pad);
+}
+.lockup-inner { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+.mark { flex: none; width: clamp(38px, 4vw, 58px); height: auto; }
+.mark circle { fill: var(--slate); }
+.mark line { stroke: var(--slate); stroke-width: 1.4; }
+.rule { width: 1px; height: clamp(40px, 4.6vw, 66px); background: color-mix(in srgb, var(--slate) 40%, transparent); flex: none; }
+.name {
+  margin: 0;
+  font-size: clamp(2.1rem, 6.4vw, 5.6rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+.strapline {
+  position: relative; z-index: 3;
+  padding: clamp(16px, 2.2vh, 26px) var(--pad) 0;
+  margin: 0;
+  max-width: 30ch;
+  font-size: clamp(.8rem, .98vw, .95rem);
+  line-height: 1.7;
+  color: var(--slate);
+}
+
+/* ── Foot of hero ──────────────────────────────────────────────────── */
+.hero-foot {
+  position: relative; z-index: 3;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px;
+  padding: clamp(28px, 5vh, 56px) var(--pad) clamp(88px, 11vh, 112px);
+  font-size: clamp(9px, .78vw, 11px);
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--slate);
+}
+.scroll-cue { display: flex; align-items: center; gap: 14px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; }
+.scroll-cue .line { display: block; width: 46px; height: 1px; background: currentColor; transform-origin: left center; }
+.hero-foot .tail { display: block; width: 34px; height: 1px; background: currentColor; margin-bottom: 5px; }
+
+/* ── Services ──────────────────────────────────────────────────────── */
+.services { padding: clamp(66px, 12vh, 150px) var(--pad) clamp(100px, 14vh, 160px); background: var(--white); }
+.services h2 {
+  margin: 0 0 clamp(40px, 6vh, 74px);
+  max-width: 17ch;
+  font-size: clamp(1.5rem, 3.4vw, 2.9rem);
+  font-weight: 200;
+  line-height: 1.22;
+  letter-spacing: .01em;
+  color: var(--slate);
+}
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(30px, 4vw, 70px); }
+.svc { padding-top: 26px; border-top: 1px solid color-mix(in srgb, var(--slate) 26%, transparent); }
+.svc h3 {
+  margin: 0 0 16px;
+  font-size: clamp(9px, .8vw, 11px);
+  font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--slate-deep);
+}
+.svc p {
+  margin: 0;
+  font-size: clamp(.83rem, 1vw, .96rem);
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--slate-deep) 84%, var(--white));
+  max-width: 42ch;
+}
+.ledger {
+  margin-top: clamp(50px, 8vh, 96px);
+  padding-top: clamp(24px, 3.4vh, 38px);
+  border-top: 1px solid color-mix(in srgb, var(--slate) 26%, transparent);
+  display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: space-between;
+  font-size: clamp(9px, .78vw, 11px);
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--slate);
+}
+
+@media (max-width: 980px) {
+  .grid { grid-template-columns: 1fr; gap: 30px; }
+  .divisions { display: none; }
+  .name { letter-spacing: .14em; }
+}
+/* ── Phone ────────────────────────────────────────────────────────────
+   The tracked micro-caps that carry this design bottom out at 9px once
+   the viewport stops feeding the clamp, which is unreadable in the hand.
+   Lift them to the 12px floor and give every control a 44px box — the
+   hairline aesthetic survives the larger target because the target is
+   padding, not ink. */
+@media (max-width: 620px) {
+  .masthead, .hero-foot { font-size: 12px; }
+  .utility a, .utility button { font-size: 12px; min-height: 44px; }
+  .svc h3 { font-size: 12px; }
+  .ledger { font-size: 12px; gap: 18px 24px; }
+  .scroll-cue { min-height: 44px; }
+  .hero-foot { padding-bottom: clamp(96px, 14vh, 124px); }
+  .services { padding-bottom: clamp(112px, 16vh, 168px); }
+}
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-media" id="media">
+    <img class="hero-img" src="../assets/heroes/02-genre.jpg"
+         alt="A snow-capped summit breaking through a vast sea of cloud.">
+  </div>
+
+  <div class="masthead">
+    <nav class="divisions" aria-label="Practice areas">
+      <a href="#" aria-current="page">JMD Consulting<span class="underline"></span></a>
+      <a href="#services">Project Management</a>
+      <a href="#services">Systems Implementation</a>
+      <a href="#services">ETL &amp; BI</a>
+      <a href="#ledger">CODA / Unit4</a>
+    </nav>
+    <div class="utility">
+      <a href="#ledger">Clients <span class="badge">100</span></a>
+      <button type="button">Menu <span class="dots"><i></i><i></i></span></button>
+    </div>
+  </div>
+
+  <div class="lockup">
+    <div class="lockup-inner">
+      <svg class="mark" viewBox="0 0 32 36" aria-hidden="true" id="mark">
+        <circle cx="16" cy="4"  r="1.7"/>
+        <circle cx="11" cy="9"  r="1.7"/><circle cx="16" cy="9"  r="1.7"/><circle cx="21" cy="9"  r="1.7"/>
+        <circle cx="6"  cy="14" r="1.7"/><circle cx="11" cy="14" r="1.7"/><circle cx="16" cy="14" r="1.7"/><circle cx="21" cy="14" r="1.7"/><circle cx="26" cy="14" r="1.7"/>
+        <circle cx="6"  cy="19" r="1.7"/><circle cx="11" cy="19" r="1.7"/><circle cx="16" cy="19" r="1.7"/><circle cx="21" cy="19" r="1.7"/><circle cx="26" cy="19" r="1.7"/>
+        <circle cx="11" cy="24" r="1.7"/><circle cx="16" cy="24" r="1.7"/><circle cx="21" cy="24" r="1.7"/>
+        <line x1="16" y1="26" x2="16" y2="34"/>
+      </svg>
+      <span class="rule"></span>
+      <h1 class="name" id="name">JMD</h1>
+    </div>
+  </div>
+
+  <p class="strapline" id="strapline">Financial Systems &amp; Integration Consulting Services</p>
+
+  <div class="hero-foot">
+    <button class="scroll-cue" type="button" id="cue">
+      <span class="line"></span> Scroll down to discover
+    </button>
+    <span class="tail" aria-hidden="true"></span>
+  </div>
+</header>
+
+<main>
+  <section class="services" id="services">
+    <h2>We specialise in the delivery of consultancy services and systems integration solutions.</h2>
+
+    <div class="grid">
+      <article class="svc" data-svc>
+        <h3>Project Management</h3>
+        <p>Providing project management services to clients including project planning, resource management, risk analysis, and tracking and monitoring budgets.</p>
+      </article>
+      <article class="svc" data-svc>
+        <h3>Systems Implementation</h3>
+        <p>Offering experience of ERP Implementations with a proven track record of delivering complex multi-currency, multi-company and multi-site ERP financial reporting systems.</p>
+      </article>
+      <article class="svc" data-svc>
+        <h3>ETL &amp; Business Intelligence</h3>
+        <p>Servicing clients in Europe, throughout the USA and Canada with business intelligence expertise, developing complex financial reports and KPIs. Migrating financial data from legacy systems, data analysis, development of SQL scripts and stored procedures.</p>
+      </article>
+    </div>
+
+    <div class="ledger" id="ledger">
+      <span>CODA / Unit4 Financials® since 1990</span>
+      <span>Circa 100 clients worldwide</span>
+      <span>Harrogate, North Yorkshire</span>
+      <span>+44 (0) 1423 884000</span>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../shared/review.js"></script>
+<script>
+/* The authored moment: the weather settles and the name closes.
+   Tracking starts far too wide and draws in while the cloud sinks —
+   the whole hero arrives by contracting rather than by fading. */
+(function () {
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  gsap.set('.masthead, .strapline, .hero-foot', { opacity: 0 });
+
+  var tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
+    .from('#media', { scale: 1.09, yPercent: 3, duration: 2.6 }, 0)
+    .from('#name', { letterSpacing: '1.1em', opacity: 0, duration: 2.3 }, 0.1)
+    .from('#mark circle', { scale: 0, transformOrigin: 'center', duration: 1.1, stagger: { each: 0.035, from: 'center' } }, 0.5)
+    .from('#mark line', { scaleY: 0, transformOrigin: 'top center', duration: .9 }, 1.1)
+    .from('.rule', { scaleY: 0, duration: 1.1 }, 0.8)
+    .to('.masthead', { opacity: 1, duration: 1.4 }, 0.9)
+    .from('.divisions .underline', { scaleX: 0, duration: 1.2 }, 1.2)
+    .to('.strapline', { opacity: 1, duration: 1.4 }, 1.1)
+    .to('.hero-foot', { opacity: 1, duration: 1.4 }, 1.3);
+
+  jmdSettle(tl);
+
+  /* The cloud keeps sinking as you scroll; the lockup holds its ground
+     a moment longer, then releases. */
+  gsap.to('#media', {
+    yPercent: 9, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .7 }
+  });
+  gsap.to('.lockup-inner', {
+    yPercent: -22, opacity: .25, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .7 }
+  });
+
+  gsap.utils.toArray('[data-svc]').forEach(function (el, i) {
+    gsap.from(el, {
+      y: 26, opacity: 0, duration: 1.3, ease: 'expo.out', delay: i * 0.08,
+      scrollTrigger: { trigger: el, start: 'top 86%' }
+    });
+  });
+
+  document.getElementById('cue').addEventListener('click', function () {
+    document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  gsap.to('.scroll-cue .line', { scaleX: .35, duration: 1.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  jmdSettleScroll();
+})();
+</script>
+</body>
+</html>

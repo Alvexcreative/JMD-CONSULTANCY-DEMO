@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JMD Consulting — Concept 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/review.css">
+<style>
+/* ═══ CONCEPT 01 · SON DAVEN ═════════════════════════════════════════
+   Two colours only. Everything that is not near-black is sand-gold.
+   The line-screen is the whole idea: image, type and the flood at the
+   base are all the same field of vertical bars at different densities.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --ink: #221D16;
+  --ink-deep: #1A160F;
+  --gold: #BBA075;
+  --gold-bright: #D4BC94;
+  --bar-w: 2px;
+  --bar-gap: 6px;
+  --pad: clamp(20px, 4vw, 64px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--gold);
+  font-family: 'Archivo', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+
+::selection { background: var(--gold); color: var(--ink); }
+
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 4px; }
+
+/* ── The bar field, shared by every sliced element ─────────────────── */
+.sliced {
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 var(--bar-w), transparent var(--bar-w) var(--bar-gap));
+          mask-image: repeating-linear-gradient(90deg, #000 0 var(--bar-w), transparent var(--bar-w) var(--bar-gap));
+}
+
+/* ── Top ticks ─────────────────────────────────────────────────────── */
+.ticks {
+  position: absolute; inset: 0 var(--pad) auto;
+  top: clamp(16px, 2.4vw, 28px);
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--gold) 62%, var(--ink));
+  z-index: 4;
+}
+.ticks nav { display: flex; gap: clamp(14px, 2.4vw, 30px); }
+.ticks a { text-decoration: none; transition: color .2s ease; }
+.ticks a:hover { color: var(--gold-bright); }
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(58px, 8vh, 104px) var(--pad) 0;
+  display: flex; flex-direction: column;
+  isolation: isolate;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #2A241B 0%, var(--ink) 46%, var(--ink-deep) 100%);
+}
+
+.wordmark {
+  margin: 0;
+  font-family: 'Archivo Black', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 8.4vw, 8.8rem);
+  line-height: .84;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  text-align: center;
+  z-index: 3;
+}
+
+.legend {
+  margin: clamp(12px, 1.8vh, 22px) 0 0;
+  display: flex; justify-content: space-between;
+  font-size: clamp(8px, 1.06vw, 13px);
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--gold) 78%, var(--ink));
+  z-index: 3;
+}
+.legend span { white-space: nowrap; }
+
+/* ── Totem ─────────────────────────────────────────────────────────── */
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 46vh;
+  margin: 0 calc(var(--pad) * -1);
+  z-index: 1;
+}
+.totem { position: absolute; inset: 0; }
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 42%;
+}
+
+/* the bars flooding into solid gold at the base */
+.flood {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: clamp(120px, 26vh, 260px);
+  background: var(--gold);
+  z-index: 2;
+  pointer-events: none;
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg, #000 0 3px, transparent 3px 8px),
+    linear-gradient(to bottom, transparent 2%, #000 78%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    repeating-linear-gradient(90deg, #000 0 3px, transparent 3px 8px),
+    linear-gradient(to bottom, transparent 2%, #000 78%);
+          mask-composite: intersect;
+}
+.floor {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: clamp(26px, 5vh, 54px);
+  background: var(--gold);
+  z-index: 2;
+}
+
+/* ── Services, standing on the gold ────────────────────────────────── */
+.services {
+  background: var(--gold);
+  color: var(--ink);
+  padding: clamp(40px, 7vh, 88px) var(--pad) clamp(96px, 14vh, 150px);
+}
+.services-head {
+  display: flex; flex-wrap: wrap; gap: 16px 40px;
+  justify-content: space-between; align-items: baseline;
+  padding-bottom: clamp(26px, 4vh, 44px);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 26%, transparent);
+}
+.services-head h2 {
+  margin: 0;
+  font-family: 'Archivo Black', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4.4vw, 3.4rem);
+  line-height: .95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  max-width: 14ch;
+}
+.services-head p {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(.83rem, 1.05vw, .95rem);
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ink) 82%, var(--gold));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  padding-top: clamp(30px, 5vh, 56px);
+}
+.svc h3 {
+  margin: 0 0 14px;
+  font-family: 'Archivo Black', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(.98rem, 1.5vw, 1.32rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+.svc p {
+  margin: 0;
+  font-size: clamp(.82rem, 1vw, .93rem);
+  line-height: 1.68;
+  color: color-mix(in srgb, var(--ink) 84%, var(--gold));
+  max-width: 42ch;
+}
+.svc-rule {
+  height: 34px; margin-bottom: 18px;
+  background: var(--ink);
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 2px, transparent 2px 7px);
+          mask-image: repeating-linear-gradient(90deg, #000 0 2px, transparent 2px 7px);
+  transform-origin: left center;
+}
+
+.coda {
+  margin-top: clamp(40px, 6vh, 76px);
+  padding-top: clamp(24px, 3.4vh, 38px);
+  border-top: 1px solid color-mix(in srgb, var(--ink) 26%, transparent);
+  display: flex; flex-wrap: wrap; gap: 12px 34px;
+  align-items: baseline; justify-content: space-between;
+  font-size: clamp(.78rem, .95vw, .88rem);
+  line-height: 1.6;
+}
+.coda strong { font-weight: 600; }
+.coda span { color: color-mix(in srgb, var(--ink) 70%, var(--gold)); }
+
+@media (max-width: 880px) {
+  .grid { grid-template-columns: 1fr; gap: 34px; }
+  .legend { flex-direction: column; gap: 6px; align-items: center; text-align: center; letter-spacing: .22em; }
+  .wordmark { white-space: normal; font-size: clamp(1.8rem, 11.2vw, 5rem); }
+  .ticks nav { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero" data-hero-toggle>
+  <div class="ticks">
+    <span>Est. 2000</span>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#coda">CODA / Unit4</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span>Harrogate</span>
+  </div>
+
+  <h1 class="wordmark sliced" id="wordmark">JMD Consulting</h1>
+
+  <p class="legend" id="legend">
+    <span>Moving</span><span>Business</span><span>Forward</span>
+  </p>
+
+  <div class="stage">
+    <div class="totem sliced" id="totem">
+      <img class="hero-img hero-img--land" src="../assets/heroes/01-land.jpg"
+           alt="A Yorkshire dale at dusk, drystone walls climbing the fell, rendered in two colours.">
+      <img class="hero-img hero-img--genre" src="../assets/heroes/01-genre.jpg"
+           alt="A stacked totem of a Swaledale ram, a sheep and a round-canopied tree against darkness.">
+    </div>
+    <div class="flood" id="flood"></div>
+    <div class="floor"></div>
+  </div>
+</header>
+
+<main>
+  <section class="services" id="services">
+    <div class="services-head">
+      <h2>Implementing Solution&nbsp;Services</h2>
+      <p>Clients ultimately want solutions and not just reports after engaging the services of consultants. They want and should demand a service that goes one step further.</p>
+    </div>
+
+    <div class="grid">
+      <article class="svc">
+        <div class="svc-rule" data-rule></div>
+        <h3>Project<br>Management</h3>
+        <p>Providing project management services to clients including project planning, resource management, risk analysis, and tracking and monitoring budgets.</p>
+      </article>
+      <article class="svc">
+        <div class="svc-rule" data-rule></div>
+        <h3>Systems<br>Implementation</h3>
+        <p>Offering experience of ERP Implementations with a proven track record of delivering complex multi-currency, multi-company and multi-site ERP financial reporting systems.</p>
+      </article>
+      <article class="svc">
+        <div class="svc-rule" data-rule></div>
+        <h3>ETL &amp;<br>Business Intelligence</h3>
+        <p>Servicing clients in Europe, throughout the USA and Canada with business intelligence expertise, developing complex financial reports and KPIs. Migrating financial data from legacy systems, data analysis, development of SQL scripts and stored procedures.</p>
+      </article>
+    </div>
+
+    <div class="coda" id="coda">
+      <strong>CODA / Unit4 Financials® consultants since 1990.</strong>
+      <span>Independent consultancy since 2000 to circa 100 clients worldwide.</span>
+      <span id="contact">+44 (0) 1423 884000 · info@jmdconsulting.co.uk</span>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../shared/review.js"></script>
+<script>
+/* The authored moment: the bar field resolves. Everything arrives as a
+   coarse screen and tightens into an image — wordmark, totem and flood
+   on one clock, so it reads as a single material settling. */
+(function () {
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  var root = document.documentElement;
+  var screen = { w: 14, gap: 15 };
+
+  gsap.set('.stage', { opacity: 0 });
+  gsap.set('#wordmark', { opacity: 0, scaleY: 1.16, transformOrigin: 'center bottom' });
+  gsap.set('#legend span', { opacity: 0, y: 8 });
+
+  var tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+  tl.to(screen, {
+      w: 2, gap: 6, duration: 2.1,
+      onUpdate: function () {
+        root.style.setProperty('--bar-w', screen.w.toFixed(2) + 'px');
+        root.style.setProperty('--bar-gap', screen.gap.toFixed(2) + 'px');
+      }
+    })
+    .to('#wordmark', { opacity: 1, scaleY: 1, duration: 1.7 }, 0.05)
+    .to('.stage', { opacity: 1, duration: 1.5 }, 0.2)
+    .from('#flood', { yPercent: 62, duration: 1.9 }, 0.25)
+    .to('#legend span', { opacity: 1, y: 0, duration: 1.1, stagger: 0.07 }, 0.75);
+
+  jmdSettle(tl);
+
+  /* Parallax: the totem drifts slower than the flood, so the bars
+     shear against each other as you leave the hero. */
+  gsap.to('#totem', {
+    yPercent: 11, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 }
+  });
+
+  gsap.utils.toArray('[data-rule]').forEach(function (el) {
+    gsap.from(el, {
+      scaleX: 0, duration: 1.1, ease: 'expo.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  /* Flipping the hero re-runs a short screen pulse, so the swap feels
+     like the same material re-resolving rather than a crossfade. */
+  document.addEventListener('herovariantchange', function () {
+    var p = { w: 7, gap: 10 };
+    gsap.timeline()
+      .to(p, { w: 2, gap: 6, duration: 1.0, ease: 'expo.out',
+        onUpdate: function () {
+          root.style.setProperty('--bar-w', p.w.toFixed(2) + 'px');
+          root.style.setProperty('--bar-gap', p.gap.toFixed(2) + 'px');
+        } });
+  });
+  jmdSettleScroll();
+})();
+</script>
+</body>
+</html>

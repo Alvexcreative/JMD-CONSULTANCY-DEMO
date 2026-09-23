@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JMD Consulting — Concept 04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/review.css">
+<style>
+/* ═══ CONCEPT 04 · YOLKK ═════════════════════════════════════════════
+   Everything on the centre line, one hairline rule holding the top, and
+   the margins used as a place to put small facts. The page is mostly
+   warm empty ground — that emptiness is the confidence.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --sand: #E3D6BC;
+  --cream: #F6F3EC;
+  --ink: #2B2219;
+  --ink-soft: #6B5F50;
+  --line: #B9A98A;
+  --pad: clamp(18px, 4vw, 56px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100svh;
+  color: var(--ink);
+  font-family: 'Karla', system-ui, sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  background:
+    radial-gradient(120% 90% at 84% 6%, var(--sand) 0%, rgba(227,214,188,0) 58%),
+    radial-gradient(100% 80% at 6% 92%, #DED0B2 0%, rgba(222,208,178,0) 62%),
+    linear-gradient(152deg, var(--cream) 0%, #EFE8D8 48%, var(--sand) 100%);
+  background-attachment: fixed;
+}
+img { display: block; max-width: 100%; }
+::selection { background: var(--ink); color: var(--cream); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+/* ── Masthead ──────────────────────────────────────────────────────── */
+.masthead { padding-top: clamp(20px, 3vw, 34px); }
+.wordmark {
+  margin: 0 0 clamp(14px, 2vw, 22px);
+  text-align: center;
+  font-family: 'Cormorant', Garamond, serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3.1vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.005em;
+}
+.hairline { height: 1px; background: var(--line); transform-origin: center; }
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.hero { position: relative; padding: clamp(46px, 9vh, 104px) var(--pad) clamp(40px, 7vh, 80px); }
+.centre { max-width: 1000px; margin: 0 auto; text-align: center; }
+
+.stamp {
+  margin: 0 0 clamp(14px, 2.2vh, 24px);
+  font-size: clamp(.78rem, .92vw, .9rem);
+  color: var(--ink-soft);
+  letter-spacing: .005em;
+}
+
+.headline {
+  margin: 0 auto;
+  max-width: 17ch;
+  font-family: 'Cormorant', Garamond, serif;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7.4vw, 6.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+.headline .row { display: block; overflow: hidden; }
+.headline .row > span { display: block; }
+
+.blurb {
+  margin: clamp(22px, 3.4vh, 38px) auto 0;
+  max-width: 62ch;
+  font-size: clamp(.9rem, 1.08vw, 1.04rem);
+  font-weight: 300;
+  line-height: 1.66;
+  color: color-mix(in srgb, var(--ink) 88%, var(--cream));
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(14px, 2vw, 30px);
+  margin-top: clamp(28px, 4.2vh, 48px);
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 clamp(20px, 2.4vw, 32px);
+  border: 1px solid var(--ink);
+  font-size: clamp(.74rem, .86vw, .84rem);
+  font-weight: 400; letter-spacing: .13em; text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  transition: background .28s cubic-bezier(.4,0,.2,1), color .28s cubic-bezier(.4,0,.2,1);
+}
+.btn:hover { background: var(--ink); color: var(--cream); }
+.btn-plain {
+  display: inline-flex; align-items: center; min-height: 48px;
+  font-size: clamp(.74rem, .86vw, .84rem);
+  letter-spacing: .13em; text-transform: uppercase; text-decoration: none;
+  position: relative;
+}
+.btn-plain::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 13px;
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right center;
+  transition: transform .34s cubic-bezier(.4,0,.2,1);
+}
+.btn-plain:hover::after { transform: scaleX(1); transform-origin: left center; }
+
+/* Facts pinned out in the margins */
+.margin-note {
+  position: absolute; bottom: clamp(52px, 8.4vh, 96px);
+  display: flex; align-items: center; gap: 9px;
+  font-size: clamp(.72rem, .84vw, .82rem);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.margin-note::before { content: ''; width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+.margin-note.left { left: var(--pad); }
+.margin-note.right { right: var(--pad); }
+
+/* ── Reel ──────────────────────────────────────────────────────────── */
+.reel { padding: clamp(30px, 6vh, 70px) var(--pad) clamp(100px, 13vh, 150px); }
+.reel-inner { max-width: 1000px; margin: 0 auto; }
+.reel-label {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; width: min(100%, 560px); margin: 0 auto clamp(14px, 2vh, 22px);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: inherit; color: var(--ink);
+  font-size: clamp(.9rem, 1.08vw, 1.05rem);
+}
+.reel-label svg { flex: none; transition: transform .3s cubic-bezier(.4,0,.2,1); }
+.reel-label:hover svg { transform: translateX(5px); }
+.reel-frame {
+  position: relative;
+  width: min(100%, 560px); margin: 0 auto;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: #DCD1B8;
+}
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Services ──────────────────────────────────────────────────────── */
+.services { padding: 0 var(--pad) clamp(100px, 14vh, 160px); }
+.services-inner { max-width: 1180px; margin: 0 auto; }
+.services h2 {
+  margin: 0 0 clamp(34px, 5vh, 58px);
+  text-align: center;
+  font-family: 'Cormorant', Garamond, serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.2vw, 2.7rem);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+}
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(26px, 3.6vw, 58px); }
+.svc { padding-top: 22px; border-top: 1px solid var(--line); }
+.svc h3 {
+  margin: 0 0 13px;
+  font-family: 'Cormorant', Garamond, serif;
+  font-weight: 600;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.008em;
+}
+.svc p {
+  margin: 0; max-width: 40ch;
+  font-size: clamp(.84rem, .98vw, .93rem);
+  font-weight: 300; line-height: 1.7;
+  color: var(--ink-soft);
+}
+.ledger {
+  margin-top: clamp(44px, 7vh, 84px);
+  padding-top: clamp(20px, 3vh, 34px);
+  border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: 12px 36px; justify-content: space-between;
+  font-size: clamp(.74rem, .86vw, .84rem);
+  color: var(--ink-soft);
+}
+
+@media (max-width: 1240px) { .margin-note { display: none; } }
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; gap: 28px; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="wordmark" id="wordmark">JMD Consulting</p>
+  <div class="hairline" id="hairline"></div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="margin-note left" data-note>Financial Systems &amp; Integration</span>
+    <span class="margin-note right" data-note>Est 2000</span>
+
+    <div class="centre">
+      <p class="stamp" id="stamp">Harrogate, North Yorkshire</p>
+
+      <h1 class="headline" id="headline">
+        <span class="row"><span>Develop. Innovate.</span></span>
+        <span class="row"><span>Evolve.</span></span>
+      </h1>
+
+      <p class="blurb" id="blurb">We specialise in the delivery of consultancy services and systems integration solutions. With a key focus on accounting &amp; finance systems such as CODA/Unit4 Financials® or more recently NetSuite®, linked with MS SQL Server® or Oracle®, we are able to deliver our clients strategic and functional solutions.</p>
+
+      <div class="actions" id="actions">
+        <a class="btn" href="#contact">Contact us</a>
+        <a class="btn-plain" href="#services">See our services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="reel">
+    <div class="reel-inner">
+      <button class="reel-label" type="button" data-hero-toggle-btn>
+        Click to switch
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+          <path d="M3.5 2.2 12 7.5l-8.5 5.3V2.2Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="reel-frame" id="reel" data-hero-toggle>
+        <img class="hero-img hero-img--land" src="../assets/heroes/04-land.jpg"
+             alt="An English hedgerow and open field in low warm afternoon light.">
+        <img class="hero-img hero-img--genre" src="../assets/heroes/04-genre.jpg"
+             alt="Three tall dark-green exhibition panels standing on a lawn before mature trees.">
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="services-inner">
+      <h2>Clients want solutions, not just reports.</h2>
+
+      <div class="grid">
+        <article class="svc" data-svc>
+          <h3>Project Management</h3>
+          <p>Providing project management services to clients including project planning, resource management, risk analysis, and tracking and monitoring budgets.</p>
+        </article>
+        <article class="svc" data-svc>
+          <h3>Systems Implementation</h3>
+          <p>Offering experience of ERP Implementations with a proven track record of delivering complex multi-currency, multi-company and multi-site ERP financial reporting systems.</p>
+        </article>
+        <article class="svc" data-svc>
+          <h3>ETL &amp; Business Intelligence</h3>
+          <p>Servicing clients in Europe, throughout the USA and Canada with business intelligence expertise, developing complex financial reports and KPIs. Migrating financial data from legacy systems, data analysis, development of SQL scripts and stored procedures.</p>
+        </article>
+      </div>
+
+      <div class="ledger" id="contact">
+        <span>CODA / Unit4 Financials® since 1990</span>
+        <span>Circa 100 clients worldwide</span>
+        <span>+44 (0) 1423 884000</span>
+        <span>info@jmdconsulting.co.uk</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../shared/review.js"></script>
+<script>
+/* The authored moment: the rule is drawn from the centre outward and
+   the headline rises out from under it, line by line. Everything else
+   follows the same centre line, so the page composes itself around one
+   axis instead of arriving in pieces. */
+(function () {
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // The reel label flips the hero, same as the frame itself.
+  var btn = document.querySelector('[data-hero-toggle-btn]');
+  if (btn) btn.addEventListener('click', function () {
+    document.getElementById('reel').click();
+  });
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
+    .from('#wordmark', { opacity: 0, y: -10, duration: 1.4 }, 0)
+    .from('#hairline', { scaleX: 0, duration: 1.9 }, 0.1)
+    .from('#stamp', { opacity: 0, y: 12, duration: 1.2 }, 0.5)
+    .from('.headline .row > span', { yPercent: 108, duration: 1.7, stagger: .1 }, 0.45)
+    .from('#blurb', { opacity: 0, y: 16, duration: 1.4 }, 0.85)
+    .from('#actions', { opacity: 0, y: 14, duration: 1.3 }, 1.0)
+    .from('[data-note]', { opacity: 0, x: function (i) { return i === 0 ? -18 : 18; }, duration: 1.4 }, 1.05);
+
+  jmdSettle(tl);
+
+  /* The reel opens from a slot as it comes up the page. */
+  gsap.from('#reel', {
+    clipPath: 'inset(46% 0% 46% 0%)', duration: 1.5, ease: 'expo.out',
+    scrollTrigger: { trigger: '.reel', start: 'top 80%' }
+  });
+  gsap.from('.reel-label', {
+    opacity: 0, y: 12, duration: 1.1, ease: 'expo.out',
+    scrollTrigger: { trigger: '.reel', start: 'top 80%' }
+  });
+
+  gsap.utils.toArray('[data-svc]').forEach(function (el, i) {
+    gsap.from(el, {
+      y: 26, opacity: 0, duration: 1.2, ease: 'expo.out', delay: i * .08,
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+  jmdSettleScroll();
+})();
+</script>
+</body>
+</html>

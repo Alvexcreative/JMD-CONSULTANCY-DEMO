@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JMD Consulting — Harrogate hero options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Lora:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/review.css">
+<style>
+/* ═══ HARROGATE HERO OPTIONS ═════════════════════════════════════════
+   A picking surface, not a concept. Each frame is full-bleed so the
+   image is judged at the size it would actually run, and the type
+   overlay can be switched on because a hero image is only as good as
+   the words that have to sit on top of it.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --ink: #16181B;
+  --paper: #F4F2ED;
+  --line: rgba(255,255,255,.22);
+  --pad: clamp(18px, 4vw, 56px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Lora', Georgia, serif;
+  overflow-x: hidden;
+}
+img { display: block; }
+::selection { background: var(--paper); color: var(--ink); }
+:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.ossy { font-family: 'Oswald', 'Arial Narrow', sans-serif; text-transform: uppercase; }
+
+/* ── Control bar ───────────────────────────────────────────────────── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 14px var(--pad);
+  background: linear-gradient(to bottom, rgba(10,12,14,.82), rgba(10,12,14,0));
+  pointer-events: none;
+}
+.topbar > * { pointer-events: auto; }
+.topbar-title {
+  font-family: 'Oswald', sans-serif; text-transform: uppercase;
+  font-size: clamp(.7rem, .86vw, .82rem); letter-spacing: .2em;
+  color: rgba(244,242,237,.82);
+  margin: 0;
+}
+.typebtn {
+  display: inline-flex; align-items: center; gap: 9px;
+  min-height: 38px; padding: 0 16px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.28);
+  color: var(--paper);
+  font-family: 'Oswald', sans-serif; font-size: .74rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer; border-radius: 0;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  transition: background .2s ease, border-color .2s ease;
+}
+.typebtn:hover { background: rgba(255,255,255,.2); }
+.typebtn[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .55; }
+.typebtn[aria-pressed="true"] .dot { opacity: 1; }
+
+/* ── Frames ────────────────────────────────────────────────────────── */
+.reel { scroll-snap-type: y mandatory; }
+.frame {
+  position: relative;
+  height: 100svh; min-height: 520px;
+  scroll-snap-align: start;
+  overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+.frame img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,10,12,.86) 0%, rgba(8,10,12,.34) 26%, rgba(8,10,12,0) 52%);
+}
+
+/* ── Caption ───────────────────────────────────────────────────────── */
+.caption {
+  position: relative; z-index: 2;
+  width: 100%;
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: end; gap: clamp(16px, 3vw, 44px);
+  padding: var(--pad) var(--pad) clamp(84px, 11vh, 108px);
+}
+.num {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 5rem); line-height: .8;
+  letter-spacing: -0.03em;
+  color: rgba(244,242,237,.9);
+}
+.cap-body h2 {
+  margin: 0 0 8px;
+  font-family: 'Oswald', sans-serif; font-weight: 500; text-transform: uppercase;
+  font-size: clamp(1rem, 1.6vw, 1.35rem); line-height: 1.1; letter-spacing: .04em;
+}
+.cap-body p {
+  margin: 0; max-width: 62ch;
+  font-size: clamp(.85rem, 1vw, .96rem); line-height: 1.6;
+  color: rgba(244,242,237,.8);
+}
+.file {
+  font-family: 'Oswald', sans-serif; font-size: .68rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(244,242,237,.56);
+  white-space: nowrap;
+}
+
+/* ── Sample hero type, switched on to test legibility ──────────────── */
+.overlay {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 var(--pad) clamp(120px, 18vh, 200px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .38s cubic-bezier(.4,0,.2,1), visibility .38s;
+}
+body[data-type="on"] .overlay { opacity: 1; visibility: visible; }
+body[data-type="on"] .frame::after {
+  background: linear-gradient(to top, rgba(8,10,12,.88) 0%, rgba(8,10,12,.58) 34%, rgba(8,10,12,.3) 68%, rgba(8,10,12,.2) 100%);
+}
+.overlay-inner { max-width: 900px; }
+.overlay h3 {
+  margin: 0 0 18px;
+  font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 4.4rem); line-height: .95; letter-spacing: -0.025em;
+  color: #fff;
+  text-shadow: 0 2px 30px rgba(0,0,0,.4);
+}
+.overlay h3 .tan { color: #D9B98A; display: block; }
+.overlay p {
+  margin: 0 0 26px; max-width: 46ch;
+  font-size: clamp(.95rem, 1.3vw, 1.2rem); line-height: 1.62;
+  color: rgba(255,255,255,.94);
+  text-shadow: 0 1px 18px rgba(0,0,0,.5);
+}
+.overlay .btns { display: flex; flex-wrap: wrap; gap: 14px; }
+.overlay .b {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 52px; padding: 0 28px;
+  font-family: 'Oswald', sans-serif; font-size: clamp(.8rem, 1vw, 1rem);
+  font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; border-radius: 0;
+}
+.overlay .b1 { background: #F4F2ED; color: #16181B; }
+.overlay .b2 { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.8); }
+
+@media (max-width: 860px) {
+  .caption { grid-template-columns: auto 1fr; }
+  .file { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .topbar-title { font-size: .64rem; letter-spacing: .14em; }
+  .topbar-title .long { display: none; }
+  .typebtn { padding: 0 12px; font-size: .68rem; letter-spacing: .08em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition-duration: .01ms !important; }
+  .reel { scroll-snap-type: none; }
+}
+</style>
+</head>
+<body data-type="off">
+
+<div class="topbar">
+  <p class="topbar-title">Harrogate<span class="long"> — five hero options</span></p>
+  <button class="typebtn" type="button" id="typebtn" aria-pressed="false">
+    <span class="dot"></span> Show hero type
+  </button>
+</div>
+
+<main class="reel">
+
+  <section class="frame">
+    <img src="../assets/harrogate/harrogate-01.jpg" alt="Elevated view over the rooftops of a Victorian Yorkshire spa town, with a church spire, a domed civic building, stone terraces and open parkland beyond.">
+    <div class="overlay"><div class="overlay-inner">
+      <h3>Moving business forward.<span class="tan">Develop. Innovate. Evolve.</span></h3>
+      <p>Financial systems and integration consulting, from Harrogate to a global client base.</p>
+      <div class="btns"><a class="b b1" href="#">See our services</a><a class="b b2" href="#">Contact us</a></div>
+    </div></div>
+    <div class="caption">
+      <span class="num">01</span>
+      <div class="cap-body">
+        <h2>Over the rooftops</h2>
+        <p>The widest read of the town itself — spire, dome, stone terraces, chimney stacks and the Stray running out to the Dales. The most buildings of any of the five, and the clearest “this is a real town centre”.</p>
+      </div>
+      <span class="file">harrogate-01.jpg</span>
+    </div>
+  </section>
+
+  <section class="frame">
+    <img src="../assets/harrogate/harrogate-02.jpg" alt="A broad Victorian parade lined with cast-iron and glass shop verandas, mature trees and stone terraces receding into the distance.">
+    <div class="overlay"><div class="overlay-inner">
+      <h3>Moving business forward.<span class="tan">Develop. Innovate. Evolve.</span></h3>
+      <p>Financial systems and integration consulting, from Harrogate to a global client base.</p>
+      <div class="btns"><a class="b b1" href="#">See our services</a><a class="b b2" href="#">Contact us</a></div>
+    </div></div>
+    <div class="caption">
+      <span class="num">02</span>
+      <div class="cap-body">
+        <h2>The parade</h2>
+        <p>Cast-iron and glass verandas over the shopfronts — the detail most people actually picture when they think of Harrogate. Street level but high enough to show the whole run of buildings.</p>
+      </div>
+      <span class="file">harrogate-02.jpg</span>
+    </div>
+  </section>
+
+  <section class="frame">
+    <img src="../assets/harrogate/harrogate-03.jpg" alt="A wide open grassy common with avenues of mature trees, backed by a long frontage of Victorian stone terraces.">
+    <div class="overlay"><div class="overlay-inner">
+      <h3>Moving business forward.<span class="tan">Develop. Innovate. Evolve.</span></h3>
+      <p>Financial systems and integration consulting, from Harrogate to a global client base.</p>
+      <div class="btns"><a class="b b1" href="#">See our services</a><a class="b b2" href="#">Contact us</a></div>
+    </div></div>
+    <div class="caption">
+      <span class="num">03</span>
+      <div class="cap-body">
+        <h2>Across the common</h2>
+        <p>The Stray reading as foreground, town as a long horizontal band behind it. Calmest of the five and the easiest to put type on, but it shows the least architecture.</p>
+      </div>
+      <span class="file">harrogate-03.jpg</span>
+    </div>
+  </section>
+
+  <section class="frame">
+    <img src="../assets/harrogate/harrogate-04.jpg" alt="A curving terrace of honey sandstone buildings with ornate canopies over independent shopfronts, trees and lamp posts along a paved street.">
+    <div class="overlay"><div class="overlay-inner">
+      <h3>Moving business forward.<span class="tan">Develop. Innovate. Evolve.</span></h3>
+      <p>Financial systems and integration consulting, from Harrogate to a global client base.</p>
+      <div class="btns"><a class="b b1" href="#">See our services</a><a class="b b2" href="#">Contact us</a></div>
+    </div></div>
+    <div class="caption">
+      <span class="num">04</span>
+      <div class="cap-body">
+        <h2>The quarter</h2>
+        <p>Tighter and more intimate — the curving Montpellier-style run of independent shopfronts. Closest of the five, so the least “zoomed out”, but the strongest on stone detail.</p>
+      </div>
+      <span class="file">harrogate-04.jpg</span>
+    </div>
+  </section>
+
+  <section class="frame">
+    <img src="../assets/harrogate/harrogate-05.jpg" alt="A high golden-hour view of a Victorian spa town in rolling Yorkshire countryside, with a spire, a dome, dense stone terraces and farmland to the horizon.">
+    <div class="overlay"><div class="overlay-inner">
+      <h3>Moving business forward.<span class="tan">Develop. Innovate. Evolve.</span></h3>
+      <p>Financial systems and integration consulting, from Harrogate to a global client base.</p>
+      <div class="btns"><a class="b b1" href="#">See our services</a><a class="b b2" href="#">Contact us</a></div>
+    </div></div>
+    <div class="caption">
+      <span class="num">05</span>
+      <div class="cap-body">
+        <h2>The wider setting</h2>
+        <p>Golden hour from above, town in the middle distance with the Dales behind. Puts Harrogate in its landscape rather than showing the streets — the most romantic and the least literal.</p>
+      </div>
+      <span class="file">harrogate-05.jpg</span>
+    </div>
+  </section>
+
+</main>
+
+<script src="../shared/review.js"></script>
+<script>
+(function () {
+  var btn = document.getElementById('typebtn');
+  btn.addEventListener('click', function () {
+    var on = document.body.dataset.type === 'on';
+    document.body.dataset.type = on ? 'off' : 'on';
+    btn.setAttribute('aria-pressed', String(!on));
+    btn.lastChild.textContent = on ? ' Show hero type' : ' Hide hero type';
+  });
+
+  /* T toggles the type overlay, matching the single-key habit of the
+     other pages. */
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (e.key.toLowerCase() === 't') btn.click();
+  });
+})();
+</script>
+</body>
+</html>

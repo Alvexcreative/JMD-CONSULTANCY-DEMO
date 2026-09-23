@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jmd-concepts",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["serve.py", "8745"],
+      "port": 8745,
+      "url": "http://localhost:8745"
+    }
+  ]
+}

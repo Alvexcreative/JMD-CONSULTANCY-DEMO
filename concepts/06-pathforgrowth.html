@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JMD Consulting — Concept 06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/review.css">
+<style>
+/* ═══ CONCEPT 06 · PATH FOR GROWTH TEMPLATE ══════════════════════════
+   A direct reproduction of the pathforgrowth.com layout system, carrying
+   JMD's content. Measured values are in PFG-TEMPLATE.md. Structure, type
+   scale, spacing and section rhythm are copied; every word, image and
+   mark here is JMD's own or generated for it.
+
+   One deliberate deviation: their tan (#96764F) gives 4.1:1 against cream,
+   which fails body text. Backgrounds and buttons use a slightly deeper tan
+   so cream copy clears 4.5:1; the bright original is kept for display type,
+   where the 3:1 large-text bar applies. The look is unchanged.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --cream: #FFFEF5;
+  --ink: #343432;
+  --tan: #8A6B47;          /* backgrounds + buttons — cream on this = 4.8:1 */
+  --tan-bright: #96764F;   /* display type only */
+  --tan-text: #7E6241;     /* small tan text on cream = 5.5:1 */
+  --muted: #F5F2EE;
+  --muted-fg: #6B6761;
+  --border: #DDD9D5;
+  --container: 1280px;
+  --gut: clamp(16px, 3vw, 24px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+::selection { background: var(--tan); color: var(--cream); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--tan-text); outline-offset: 3px; }
+
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding-inline: var(--gut); }
+
+/* ── Type ──────────────────────────────────────────────────────────── */
+h1, h2, h3, .ossy {
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+}
+h1 {
+  font-weight: 700;
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: .95;
+  letter-spacing: -0.025em;
+}
+h2 {
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.34vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+h3 {
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.67vw, 1.5rem);
+  line-height: 1.34;
+  letter-spacing: .025em;
+}
+.lead-xl { font-size: clamp(1.06rem, 1.67vw, 1.5rem); line-height: 1.625; }
+.lead    { font-size: clamp(1rem, 1.4vw, 1.25rem);  line-height: 1.625; }
+.body    { font-size: clamp(.95rem, 1.25vw, 1.125rem); line-height: 1.625; color: var(--muted-fg); }
+
+/* ── Buttons — square, Oswald, tracked ─────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 56px; padding: 0 32px;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(.875rem, 1.25vw, 1.125rem);
+  font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; border-radius: 0; cursor: pointer;
+  transition: background-color .22s ease, color .22s ease, border-color .22s ease;
+}
+.btn-primary { background: var(--tan); color: var(--cream); border: 1px solid var(--tan); }
+.btn-primary:hover { background: #745939; border-color: #745939; }
+.btn-outline { background: transparent; color: var(--tan-text); border: 1px solid var(--tan); }
+.btn-outline:hover { background: var(--tan); color: var(--cream); }
+.btn-light { background: #fff; color: var(--tan-text); border: 1px solid var(--border); }
+.btn-light:hover { background: var(--cream); }
+.btn-sm { height: 38px; padding: 0 24px; font-size: .875rem; letter-spacing: .05em; }
+
+/* ── Header ────────────────────────────────────────────────────────── */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+.site-header .container { height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand svg { flex: none; }
+.brand-name {
+  font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1rem, 1.5vw, 1.32rem); line-height: .96; letter-spacing: .01em;
+}
+.site-nav { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 32px); }
+.site-nav a {
+  font-family: 'Oswald', sans-serif; font-weight: 400; font-size: .875rem;
+  letter-spacing: .05em; text-transform: uppercase; text-decoration: none;
+  transition: color .2s ease;
+}
+.site-nav a:hover { color: var(--tan-text); }
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.hero { position: relative; min-height: 810px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+/* Hero ground: the Harrogate photograph full-bleed, carried under the
+   template's own cream wash. The wash stays near-opaque across the type
+   column so the dark Oswald keeps its contrast, then clears to the right
+   where the terraces and the spire are. The topographic texture survives
+   on the left, over the cream, so the template's surface is still there. */
+.hero-photo {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 72% 58%;
+}
+/* The cream wash over the photograph: held across the type, then falling
+   away to nothing at 84% so the last stretch of the picture runs at its
+   true colour with nothing over it. */
+.hero-wash { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero-wash {
+  background:
+    linear-gradient(to bottom, rgba(255,254,245,.18) 0%, rgba(255,254,245,0) 24%, rgba(255,254,245,0) 100%),
+    linear-gradient(to right,
+      rgba(255,254,245,.96) 0%,
+      rgba(255,254,245,.93) 36%,
+      rgba(255,254,245,.80) 52%,
+      rgba(255,254,245,.46) 66%,
+      rgba(255,254,245,.12) 76%,
+      rgba(255,254,245,0) 84%,
+      rgba(255,254,245,0) 100%);
+}
+
+.hero .container { position: relative; z-index: 3; padding-block: 80px; }
+.hero-copy { max-width: 896px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+.hero h1 .l2 { color: var(--tan-bright); display: block; }
+.hero .lead-xl { margin: 0; max-width: 42ch; color: color-mix(in srgb, var(--ink) 85%, var(--cream)); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* The credential strip keeps its own cream ground at every fade level —
+   it is small text and it is centred, so it would otherwise run out over
+   the bright part of the photograph. In the source template it sits on
+   plain cream anyway. */
+.strip {
+  position: relative; z-index: 3;
+  width: 100%;
+  padding-top: clamp(28px, 5vh, 52px);
+  padding-bottom: clamp(72px, 10vh, 96px);
+  background: linear-gradient(to bottom,
+    rgba(255,254,245,0) 0%,
+    rgba(255,254,245,.90) 30%,
+    var(--cream) 58%, var(--cream) 100%);
+}
+.strip-label {
+  font-family: 'Oswald', sans-serif; font-size: .75rem; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted-fg);
+  text-align: center; margin: 0 0 22px;
+}
+.strip-items {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: clamp(20px, 4vw, 56px);
+  font-family: 'Oswald', sans-serif; font-weight: 500;
+  font-size: clamp(.82rem, 1.2vw, 1.05rem);
+  letter-spacing: .06em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 62%, var(--cream));
+}
+
+/* ── Section rhythm ────────────────────────────────────────────────── */
+section.block { padding-block: clamp(56px, 8vw, 96px); }
+.block-muted { background: var(--muted); }
+.block-tan { background: var(--tan); color: var(--cream); }
+.block-tan .body, .block-tan .lead { color: var(--cream); }
+
+/* ── Three-up ──────────────────────────────────────────────────────── */
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.three .item h3 { margin-bottom: 14px; }
+.three .item p { margin: 0; }
+.three .rule { width: 40px; height: 3px; background: var(--tan); margin-bottom: 20px; }
+
+/* ── Founder ───────────────────────────────────────────────────────── */
+.founder { display: grid; grid-template-columns: 420px 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.plate { position: relative; aspect-ratio: 3 / 4; background: #7A5E3E; overflow: hidden; }
+.plate img { width: 100%; height: 100%; object-fit: cover; opacity: .62; }
+.plate-mono {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: clamp(3.4rem, 7vw, 6rem); letter-spacing: .04em;
+  color: var(--cream);
+  background: linear-gradient(to top, rgba(60,44,26,.72), rgba(60,44,26,.18));
+}
+.plate-note {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 10px 14px;
+  font-family: 'Oswald', sans-serif; font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,254,245,.82);
+  background: rgba(40,29,17,.62);
+}
+.founder h2 { margin-bottom: 6px; }
+.founder .role { font-family: 'Oswald', sans-serif; font-size: 1.125rem; letter-spacing: .025em; text-transform: uppercase; margin: 0 0 24px; color: var(--cream); }
+.founder blockquote {
+  margin: 24px 0; padding-left: 24px;
+  border-left: 3px solid rgba(255,254,245,.5);
+  font-size: clamp(1.05rem, 1.55vw, 1.4rem); line-height: 1.55; font-style: italic;
+}
+.founder .after { margin: 0 0 28px; }
+
+/* ── Services ──────────────────────────────────────────────────────── */
+.section-head { max-width: 720px; margin-bottom: clamp(36px, 5vw, 56px); }
+.section-head h2 { margin-bottom: 16px; }
+.section-head p { margin: 0; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.card {
+  display: flex; flex-direction: column; gap: 14px;
+  background: #fff; border: 1px solid var(--border);
+  padding: clamp(24px, 2.6vw, 34px);
+}
+.card h3 { margin: 0; }
+.card p { margin: 0; flex: 1; }
+.card .more {
+  font-family: 'Oswald', sans-serif; font-size: .82rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+  color: var(--tan-text); display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 6px;
+}
+.card .more svg { transition: transform .25s ease; }
+.card:hover .more svg { transform: translateX(4px); }
+
+/* ── Centred CTA ───────────────────────────────────────────────────── */
+.cta { text-align: center; max-width: 760px; margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.cta p { margin: 0; }
+.cta .sub { font-family: 'Oswald', sans-serif; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; }
+.cta .sub a { color: var(--cream); }
+
+/* ── Credentials (replaces their testimonial block) ────────────────── */
+.creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 44px); }
+.cred { border-top: 3px solid var(--tan); padding-top: 22px; }
+.cred .big {
+  font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.3rem, 2.2vw, 2rem); line-height: 1.08; letter-spacing: -0.015em;
+  margin: 0 0 12px;
+}
+.cred p { margin: 0; }
+
+/* ── Footer ────────────────────────────────────────────────────────── */
+.site-footer { background: var(--ink); color: var(--cream); padding-block: clamp(48px, 6vw, 72px) 120px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(28px, 4vw, 64px); }
+.site-footer .brand-name { color: var(--cream); }
+.site-footer h3 { font-size: .82rem; letter-spacing: .12em; margin-bottom: 16px; color: rgba(255,254,245,.62); }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.site-footer a { color: rgba(255,254,245,.9); text-decoration: none; font-size: .95rem; }
+.site-footer a:hover { color: #fff; text-decoration: underline; }
+.footer-blurb { margin: 16px 0 0; font-size: .95rem; line-height: 1.7; color: rgba(255,254,245,.72); max-width: 38ch; }
+.footer-base {
+  margin-top: clamp(32px, 4vw, 56px); padding-top: 24px;
+  border-top: 1px solid rgba(255,254,245,.18);
+  display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between;
+  font-family: 'Oswald', sans-serif; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,254,245,.6);
+}
+
+/* On a phone the photograph keeps the same axis it has on a laptop: the
+   wash runs left to right and clears a column on the right for the
+   picture. That only works if the copy stops before the clear zone, so
+   the text is held to a column of its own rather than running the full
+   width — smaller display size and a narrower measure, with the buttons
+   stacked because they no longer have the width to sit side by side. */
+@media (max-width: 860px) {
+  .hero { min-height: 100svh; padding-bottom: 0; }
+  .hero-photo { inset: 0; width: 100%; height: 100%; object-position: 76% 56%; }
+  .hero .container { padding-block: 30px 0; }
+
+  .hero-copy { gap: 18px; max-width: 63%; }
+  .hero h1 { font-size: 1.95rem; line-height: 1.0; }
+  .hero .lead-xl { font-size: .88rem; line-height: 1.5; max-width: none; }
+
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
+  .hero-actions .btn {
+    height: 48px; padding: 0 14px;
+    font-size: .76rem; letter-spacing: .06em; white-space: nowrap;
+  }
+  /* The outline button is the one piece of copy that reaches the thinning
+     edge of the wash, where its tan drops to 3.49:1. It gets its own cream
+     fill: invisible where the wash is opaque, and legible where the
+     photograph starts coming through. */
+  .hero-actions .btn-outline { background: var(--cream); }
+
+  .strip { margin-top: clamp(36px, 7vh, 72px); }
+
+  .hero-wash {
+    background: linear-gradient(to right,
+      rgba(255,254,245,.98) 0%,
+      rgba(255,254,245,.97) 60%,
+      rgba(255,254,245,.58) 71%,
+      rgba(255,254,245,.12) 80%,
+      rgba(255,254,245,0) 88%,
+      rgba(255,254,245,0) 100%);
+  }
+}
+
+/* Only on genuinely small handsets (≤340px) does the 63% column drop to a
+   26-character measure, which is too tight for a serif paragraph. There
+   the column widens and the wash moves with it — the photograph keeps a
+   clear edge, just a narrower one. 360 and 375 keep the wider picture. */
+@media (max-width: 340px) {
+  .hero-copy { max-width: 72%; }
+  .hero-wash {
+    background: linear-gradient(to right,
+      rgba(255,254,245,.98) 0%,
+      rgba(255,254,245,.97) 70%,
+      rgba(255,254,245,.58) 79%,
+      rgba(255,254,245,.12) 87%,
+      rgba(255,254,245,0) 93%,
+      rgba(255,254,245,0) 100%);
+  }
+}
+
+@media (max-width: 1000px) {
+  .three, .cards, .creds, .footer-grid { grid-template-columns: 1fr; }
+  .three { gap: 34px; }
+  .founder { grid-template-columns: 1fr; }
+  .plate { max-width: 340px; }
+  .site-nav .nav-link { display: none; }
+}
+/* ── Phone ────────────────────────────────────────────────────────────
+   Square corners and tight labels are the template's character, but on a
+   phone several of its controls are only 20px tall. Every one of them
+   gets a 44px box; where that would stretch a list, the gap comes out
+   instead, so the rhythm holds. */
+@media (max-width: 860px) {
+  .brand { min-height: 44px; }
+  .btn-sm { height: 44px; }
+  .card .more { min-height: 44px; align-items: center; margin-top: 0; }
+  .cta .sub a { display: inline-flex; align-items: center; min-height: 44px; }
+  .site-footer ul { gap: 0; }
+  .site-footer ul a { display: inline-flex; align-items: center; min-height: 44px; }
+  .plate-note { font-size: 12px; }
+  .strip-label { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#">
+      <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
+        <path d="M17 2 33 36H1L17 2Z" fill="#343432"/>
+        <path d="M17 11c-3.2 5.4 3.4 8.6 0 14.2-2.2 3.6-4.6 5.4-6 10.8h12c-1.6-6-6.8-8.4-4.2-13.6C21.4 17.2 20 14 17 11Z" fill="#FFFEF5"/>
+      </svg>
+      <span class="brand-name">JMD<br>Consulting</span>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#approach">Approach</a>
+      <a class="nav-link" href="#credentials">Credentials</a>
+      <a class="btn btn-primary btn-sm" href="#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ── Hero ─────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <img class="hero-photo" id="photo" src="../assets/harrogate/harrogate-03.jpg"
+         alt="A wide open common with avenues of trees in blossom, backed by a long frontage of honey sandstone Victorian terraces and a church spire, with Yorkshire hills beyond.">
+    <div class="hero-wash"></div>
+    <div class="container">
+      <div class="hero-copy">
+        <h1 id="h1">
+          <span class="l1">Moving business forward.</span>
+          <span class="l2">Develop. Innovate. Evolve.</span>
+        </h1>
+        <p class="lead-xl" id="lead">Formed in 2000, our consultancy has provided services to a global client base. We believe that clients ultimately want solutions and not just reports after engaging the services of consultants. They want and should demand a service that goes one step further.</p>
+        <div class="hero-actions" id="actions">
+          <a class="btn btn-primary" href="#services">See our services</a>
+          <a class="btn btn-outline" href="#contact">Schedule a call</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="strip" id="strip">
+      <div class="container">
+        <p class="strip-label">Systems we implement and support</p>
+        <div class="strip-items">
+          <span>CODA / Unit4 Financials®</span>
+          <span>NetSuite®</span>
+          <span>MS SQL Server®</span>
+          <span>Oracle®</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Problem / Guide / Success ────────────────────────────────── -->
+  <section class="block" id="approach">
+    <div class="container">
+      <div class="three">
+        <div class="item" data-rise>
+          <div class="rule"></div>
+          <h3>The Problem</h3>
+          <!-- BRIDGING COPY — not on the current site; built from their own
+               "solutions and not just reports" line. Needs client approval. -->
+          <p class="body">Your finance system is holding the business back, and the last engagement left you with a report rather than a working answer.</p>
+        </div>
+        <div class="item" data-rise>
+          <div class="rule"></div>
+          <h3>The Guide</h3>
+          <p class="body">We specialise in the delivery of consultancy services and systems integration solutions, with a key focus on accounting and finance systems.</p>
+        </div>
+        <div class="item" data-rise>
+          <div class="rule"></div>
+          <h3>The Success</h3>
+          <!-- BRIDGING COPY — see note above. -->
+          <p class="body">You run on finance systems that deliver strategic and functional solutions, with reporting your board can rely on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Founder ──────────────────────────────────────────────────── -->
+  <section class="block block-tan">
+    <div class="container">
+      <div class="founder">
+        <div class="plate" data-rise>
+          <img src="../assets/heroes/06-room.jpg" alt="">
+          <span class="plate-mono">JD</span>
+          <span class="plate-note">Placeholder — photograph of Jason required</span>
+        </div>
+        <div data-rise>
+          <h2>Jason Dodd</h2>
+          <p class="role">Managing Director</p>
+          <p class="lead">Jason founded JMD Consulting in January 2000 to provide consulting services to a wide range of clients across a broad range of vertical markets, building on CODA/Unit4 Financials® experience dating to 1990.</p>
+          <blockquote>“We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive, delivers a solution. In short a ‘Solution Service’.”</blockquote>
+          <p class="after body">Based in Harrogate in the North Yorkshire countryside, we are able to travel to clients anywhere across the globe.</p>
+          <a class="btn btn-light" href="#contact">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services ─────────────────────────────────────────────────── -->
+  <section class="block block-muted" id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Choose your path</h2>
+        <p class="lead body">Whether you are implementing a new finance system, migrating off a legacy one, or making the reporting you already have tell the truth — there is a route for you.</p>
+      </div>
+      <div class="cards">
+        <article class="card" data-rise>
+          <h3>Project Management</h3>
+          <p class="body">Providing project management services to clients including project planning, resource management, risk analysis, and tracking and monitoring budgets.</p>
+          <a class="more" href="#contact">Learn more
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+        </article>
+        <article class="card" data-rise>
+          <h3>Systems Implementation</h3>
+          <p class="body">Offering experience of ERP Implementations with a proven track record of delivering complex multi-currency, multi-company and multi-site ERP financial reporting systems.</p>
+          <a class="more" href="#contact">Learn more
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+        </article>
+        <article class="card" data-rise>
+          <h3>ETL &amp; Business Intelligence</h3>
+          <p class="body">Business intelligence expertise, developing complex financial reports and KPIs. Migrating financial data from legacy systems, data analysis, development of SQL scripts and stored procedures.</p>
+          <a class="more" href="#contact">Learn more
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+        </article>
+        <article class="card" data-rise>
+          <h3>CODA / Unit4 Financials®</h3>
+          <p class="body">Consultancy and support since 1990. Knowledge and experience gained from providing real world consultancy whilst employed by CODA®, followed by independent consultancy since 2000.</p>
+          <a class="more" href="#contact">Learn more
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Centred CTA ──────────────────────────────────────────────── -->
+  <section class="block block-tan" id="contact">
+    <div class="container">
+      <div class="cta" data-rise>
+        <h2>Working with you</h2>
+        <p class="lead">Tell us where the system is failing and we will tell you what it takes to fix it. We work on site across the UK and internationally, or connect remotely to your servers and desktop devices.</p>
+        <a class="btn btn-light" href="tel:+441423884000">Call +44 (0) 1423 884000</a>
+        <p class="sub">Or email <a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Credentials — replaces their testimonial carousel ────────── -->
+  <section class="block" id="credentials">
+    <div class="container">
+      <div class="section-head">
+        <h2>Twenty-six years of delivery</h2>
+      </div>
+      <div class="creds">
+        <div class="cred" data-rise>
+          <p class="big">Since 1990</p>
+          <p class="body">CODA / Unit4 Financials® consultancy and support, first inside CODA® and independently since 2000.</p>
+        </div>
+        <div class="cred" data-rise>
+          <p class="big">Circa 100 clients</p>
+          <p class="body">Worldwide, across a broad range of vertical markets, since commencement in January 2000.</p>
+        </div>
+        <div class="cred" data-rise>
+          <p class="big">Four continents</p>
+          <p class="body">Servicing clients throughout the UK, Europe, the USA and Canada, and the Middle East.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="brand-name">JMD Consulting</span>
+        <p class="footer-blurb">Financial systems and integration consulting services. Based in Harrogate, North Yorkshire, working with clients across the globe.</p>
+      </div>
+      <div>
+        <h3 class="ossy">Services</h3>
+        <ul>
+          <li><a href="#services">Project Management</a></li>
+          <li><a href="#services">Systems Implementation</a></li>
+          <li><a href="#services">ETL &amp; Business Intelligence</a></li>
+          <li><a href="#services">CODA / Unit4 Financials®</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ossy">Contact</h3>
+        <ul>
+          <li><a href="tel:+441423884000">+44 (0) 1423 884000</a></li>
+          <li><a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></li>
+          <li><a href="https://www.jmdconsulting.co.uk">www.jmdconsulting.co.uk</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2000–2026 JMD Consulting. All rights reserved.</span>
+      <span>Harrogate · North Yorkshire</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../shared/review.js"></script>
+<script>
+/* Motion matched to the source: a quiet staged hero, then short rise-and-fade
+   reveals as each block enters. Nothing showy — the template's confidence is
+   in its type and its spacing, not its movement. */
+(function () {
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+    .from('#h1 .l1', { yPercent: 104, opacity: 0, duration: 1.1 }, 0)
+    .from('#h1 .l2', { yPercent: 104, opacity: 0, duration: 1.1 }, 0.12)
+    .from('#lead',   { y: 20, opacity: 0, duration: 1.0 }, 0.3)
+    .from('#actions',{ y: 18, opacity: 0, duration: .9 }, 0.44)
+    .from('#strip',  { y: 16, opacity: 0, duration: .9 }, 0.56)
+    .from('#photo',  { scale: 1.07, opacity: 0, duration: 1.9 }, 0);
+
+  jmdSettle(tl);
+
+  gsap.utils.toArray('[data-rise]').forEach(function (el, i) {
+    gsap.from(el, {
+      y: 28, opacity: 0, duration: .85, ease: 'power3.out', delay: (i % 3) * .08,
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  /* The topographic ground drifts a little as the hero leaves — the only
+     scrubbed movement on the page. */
+  gsap.to('#photo', {
+    yPercent: 7, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 }
+  });
+
+  jmdSettleScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!-- Concept 08 — supplied as "JMD Consulting.zip" on 2026-09-22 and added to the
+     review set unchanged, apart from: the logo path (now ../assets/), and the
+     shared review harness appended at the end so the concept switcher appears.
+     The original is kept untouched at _archive/supplied/. -->
+<title>JMD Consulting</title>
+<link rel="stylesheet" href="../shared/review.css">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light}
+
+:root{
+  /* Chalk. The page is light throughout: --ink names the chalk surfaces and
+     --on-ink is the navy that sits on them, not the other way round. */
+  --ink:#DCE6ED; --ink-2:#D3E0E8; --ink-3:#C9D9E3;
+  --paper:#FAFAF7; --paper-2:#EDEDE7;
+  --blue:#1F5B8B; --blue-lift:#2E7FB8; --ochre:#B9822A; --bronze:#7E5A14;
+  --on-ink:#143247; --on-ink-dim:#46627A; --on-ochre:#0E2436;
+  --on-paper:#143247; --on-paper-dim:#46627A;
+  --rule-ink:rgba(20,50,71,.20); --rule-ink-soft:rgba(20,50,71,.10);
+  --rule-paper:rgba(20,50,71,.20); --rule-paper-soft:rgba(20,50,71,.09);
+  --gut:clamp(20px,4.2vw,64px);
+  --serif:"Spectral",Georgia,"Times New Roman",serif;
+  --mono:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--paper);color:var(--on-paper);
+  font-family:var(--serif);font-weight:300;font-size:clamp(16px,1.02vw,18px);line-height:1.66;
+  font-variant-numeric:tabular-nums lining-nums;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ochre);color:var(--on-ochre)}
+:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:1px}
+a{color:inherit}
+h1,h2,h3{font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.018em}
+p{margin:0}
+.mono{font-family:var(--mono);font-weight:400;font-size:.715rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.5}
+.wrap{max-width:1460px;margin-inline:auto;padding-inline:var(--gut)}
+.measure{max-width:64ch}
+
+/* ── Filing header ─────────────────────────────────────────── */
+.filing{position:sticky;top:0;z-index:40;background:var(--ink);color:var(--on-ink);
+  border-bottom:1px solid var(--rule-ink)}
+.filing__in{display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding-block:10px;min-height:64px}
+.mark{display:inline-flex;align-items:center;background:#fff;border-radius:2px;padding:7px 11px;
+  box-shadow:0 0 0 1px rgba(20,50,71,.14);
+  text-decoration:none;flex:none;transition:box-shadow .24s var(--ease)}
+.mark img{display:block;height:36px;width:auto}
+.mark:hover{box-shadow:0 0 0 1px rgba(20,50,71,.14), 0 0 0 4px rgba(20,50,71,.09)}
+.mark:focus-visible{outline-offset:4px}
+@media(max-width:560px){.mark{padding:6px 9px}.mark img{height:28px}}
+.filing__in{gap:clamp(16px,3vw,44px)}
+
+/* ── Hero: the "Dark Room" composition (the name is the layout's, from the
+      hero lab — the palette is now Chalk and the ground is light). Lit from
+      the upper left, with a torch that follows the cursor across the headline.
+      --tx/--ty (torch) are set by the script below; the mark itself is still. ── */
+.hero{position:relative;background:#D6E2EA;color:var(--on-ink);overflow:hidden;
+  padding-block:clamp(62px,11vh,132px) clamp(60px,10vh,120px);--mx:50%;--my:42%}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(112deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.26) 28%,transparent 56%)}
+.hero::after{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(640px 540px at var(--mx) var(--my),rgba(255,255,255,.7),transparent 62%),
+    linear-gradient(112deg,transparent 58%,rgba(120,150,172,.22) 100%)}
+.room{position:relative;z-index:3;display:grid;gap:clamp(40px,6vw,86px);align-items:center}
+@media(min-width:960px){.room{grid-template-columns:minmax(0,.92fr) minmax(0,1fr)}}
+.room__obj{justify-self:center}
+@media(min-width:960px){.room__obj{justify-self:start}}
+/* the mark is drawn now, so the white card, its padding, its shadow and the
+   magnetic leash all go. the plate keeps its depth in the artwork instead:
+   a lighter ghost of the letters set 4px down and right of the face. */
+.room__card{display:block;position:relative}
+.mk{display:block;width:clamp(230px,30vw,392px);height:auto;overflow:visible}
+.mk text{font-kerning:normal}
+.mk .serifmark{font-family:"Spectral",Georgia,serif;font-weight:600;letter-spacing:-.03em}
+.mk .sub{font-family:"Martian Mono",ui-monospace,monospace;font-size:13px;letter-spacing:.34em;
+  fill:var(--on-paper-dim)}
+
+/* headline: readable on its own; the torch only ever adds light.
+   both layers carry .rh so their metrics match, and text-wrap is pinned
+   because base h1 styling balances and the overlay is a <p>. */
+.torchwrap{position:relative;--tx:38%;--ty:44%}
+.torchwrap .rh{margin:0;position:relative;z-index:1;
+  font-size:clamp(2.05rem,4.7vw,3.8rem);line-height:1.04;font-weight:300;
+  letter-spacing:-.032em;max-width:16ch;text-wrap:wrap}
+.torchwrap .rh em{font-style:italic;color:var(--blue-lift)}
+.torchwrap .rh.torch{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:radial-gradient(230px circle at var(--tx) var(--ty),
+    rgba(31,91,139,.62) 0%,rgba(31,91,139,.2) 36%,rgba(31,91,139,0) 62%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.torchwrap .rh.torch em{color:transparent}
+@media (prefers-reduced-motion:reduce){.torchwrap .rh.torch{display:none}}
+@media (hover:none){.torchwrap .rh.torch{display:none}}
+
+.hero__acts{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:clamp(26px,3.2vw,38px)}
+
+/* contents — the running nav in the header. the scroll-spy that marked the
+   old hero rail is unchanged and still drives it. the strip scrolls sideways
+   rather than wrapping, so the sticky header never grows a second row. */
+.contents{min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 22px),transparent 100%);
+  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 22px),transparent 100%)}
+.contents::-webkit-scrollbar{display:none}
+.contents ol{list-style:none;margin:0;padding:0;display:flex;gap:clamp(13px,1.9vw,30px)}
+.contents li{flex:none}
+.contents a{display:flex;gap:8px;align-items:baseline;padding:6px 0;text-decoration:none;
+  color:var(--on-ink-dim);border-bottom:1px solid transparent;white-space:nowrap;
+  transition:color .24s var(--ease),border-color .24s var(--ease)}
+.contents a:hover{color:var(--on-ink)}
+.contents a[aria-current="true"]{color:var(--on-ink);border-color:var(--ochre)}
+.contents a[aria-current="true"] .contents__n{color:var(--ochre)}
+.contents__n{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;flex:none;color:rgba(70,98,122,.62);transition:color .24s}
+.contents__t{font-size:.9rem}
+@media(min-width:1180px){.contents{-webkit-mask-image:none;mask-image:none}}
+
+/* ── Controls ──────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:50px;padding:0 26px;
+  border:0;border-radius:2px;background:var(--ochre);color:var(--on-ochre);
+  font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:background .22s var(--ease),transform .22s var(--ease),box-shadow .34s var(--ease)}
+.btn:hover{background:#DCA745;transform:translateY(-1px)}
+.btn:active{transform:translateY(0) scale(.988)}
+.btn svg{width:13px;height:13px;flex:none}
+
+/* buttons pick up a sheen that tracks the pointer, and an ochre bloom */
+.btn{position:relative;isolation:isolate;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.26) inset, 0 10px 22px -14px rgba(20,50,71,.5)}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;pointer-events:none;
+  background:radial-gradient(150px circle at var(--bx,50%) var(--by,50%),rgba(255,255,255,.55),transparent 68%);
+  transition:opacity .28s var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{opacity:1}
+.btn:hover,.btn:focus-visible{box-shadow:0 1px 0 rgba(255,255,255,.36) inset,
+  0 14px 32px -12px rgba(200,146,47,.5), 0 0 0 1px rgba(233,178,74,.45)}
+@media (hover:none){.btn::before{display:none}}
+
+/* the contents nav now lives in the sticky header, so every jump target has
+   to clear it — without this the top ~71px of each section lands behind it. */
+.note,.enq{scroll-margin-top:92px}
+
+/* ── Contents, down the right-hand side ("Docking Index", from jmd-nav-lab).
+      Large in the first screen, docks into a compact rail past the hero.
+      Each option pulls left as the cursor is about to touch it; only the
+      nearest option moves. Desktop only — below 1100px the header strip
+      above takes over. ── */
+/* the first screen fills the viewport now — the brief was that it had
+   become too small. capped so very tall monitors do not get a void. */
+@media(min-width:1100px){
+  .hero{min-height:min(calc(100svh - 71px),980px);display:grid;align-content:center}
+}
+/* below that the side nav is gone, so a full-height first screen would
+   just be empty chalk; the hero keeps its natural height there */
+
+.sn ol{list-style:none;margin:0;padding:0}
+.sn a{color:var(--on-ink-dim);text-decoration:none;cursor:pointer;transition:color .25s var(--ease)}
+.sn a:hover,.sn a[aria-current="true"]{color:var(--on-ink)}
+.sn a:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+/* --p (px) and --k (0..1) are written onto each <li> by the script; only
+   the inner .pull moves, so the element being measured never moves */
+.sn .pull{display:inline-flex;transform:translate3d(calc(var(--p,0) * -1px),0,0);will-change:transform}
+.sn .n{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:var(--on-ink-dim);font-variant-numeric:tabular-nums}
+.sn a[aria-current="true"] .n{color:var(--bronze)}
+@media (prefers-reduced-motion:reduce){.sn .pull{transform:none!important}}
+
+/* below desktop there is no room at the side: the side nav goes and the
+   header strip that already works on phones stays */
+@media(max-width:1099px){.sn{display:none!important}}
+
+@media(min-width:1100px){
+  .filing .contents{display:none}
+  .wrap{padding-right:calc(var(--gut) + var(--rail))}
+  .torchwrap .rh{font-size:clamp(2.2rem,4.3vw,4.1rem)}
+}
+
+:root{--rail:210px}
+@media(min-width:1100px){.hero .wrap{padding-right:calc(var(--gut) + 290px)}
+  .torchwrap .rh{font-size:clamp(2.1rem,3.7vw,3.6rem)}}
+.sn--dock{position:fixed;z-index:30;right:var(--gut);top:calc(50svh + 35px);transform:translateY(-50%)}
+.sn--dock ol{display:grid;justify-items:end;gap:clamp(4px,1.2vh,14px);transition:gap .6s var(--ease)}
+.sn--dock a{display:flex;align-items:center;min-height:48px;padding-left:44px}
+.sn--dock .pull{align-items:baseline;gap:14px}
+.sn--dock .t{font-size:clamp(1.3rem,1.95vw,1.95rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;
+  transition:font-size .6s var(--ease)}
+.sn--dock .n{width:2ch;text-align:right}
+.sn--dock::after{content:"";position:absolute;right:-20px;top:10px;bottom:10px;width:1px;background:var(--rule-ink)}
+.sn--dock a[aria-current="true"] .t{color:var(--on-ink)}
+html.past-hero .sn--dock ol{gap:0}
+html.past-hero .sn--dock a{min-height:38px;padding-left:22px}
+html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
+
+
+/* ── Note 1: Solutions & Services — the three disciplines as a ruled schedule.
+      No cards: each discipline is a column under a hairline rule, ranked by a
+      large numeral. The rules draw across in turn as the note arrives; if the
+      note is already on screen at load they are simply there. ── */
+.svcs{list-style:none;margin:clamp(30px,3.6vw,48px) 0 0;padding:0;display:grid;gap:clamp(34px,4vw,40px)}
+@media(min-width:860px){
+  .svcs{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(26px,2.8vw,44px);row-gap:12px}
+  /* subgrid lines the numeral, name, description and scope list up across all
+     three columns, so a longer description cannot push one list out of line */
+  @supports (grid-template-rows:subgrid){
+    .svc{grid-row:span 4;grid-template-rows:subgrid}
+    .svc__name{align-self:end}
+  }
+}
+.svc{position:relative;padding-top:clamp(18px,2vw,26px);display:grid;align-content:start;gap:12px}
+/* the rule draws in on arrival and thickens on hover. Both are one transform
+   so neither animates a layout property: --sx draws it, --sy thickens it. */
+.svc::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--on-paper);
+  transform:scaleX(var(--sx,1)) scaleY(var(--sy,.5));transform-origin:left top;
+  transition:background .35s var(--ease),transform .35s var(--ease)}
+.reveal.pending .svc::before{--sx:0}
+.reveal.in .svc::before{--sx:1;
+  transition:transform .9s var(--ease) calc(.15s + var(--i,0) * .14s),background .35s var(--ease)}
+.svc__n{font-family:var(--serif);font-weight:300;font-size:clamp(3.2rem,5.4vw,5rem);line-height:.9;
+  letter-spacing:-.04em;color:var(--blue);font-variant-numeric:lining-nums;transition:color .35s var(--ease)}
+.svc__name{font-size:clamp(1.22rem,1.55vw,1.45rem);font-weight:400;line-height:1.2;letter-spacing:-.015em;margin-top:6px}
+.svc__desc{color:var(--on-paper-dim);font-size:.99rem;line-height:1.6;max-width:36ch}
+.svc__scope{list-style:none;margin:8px 0 0;padding:0;display:grid;font-size:.66rem;color:var(--on-paper-dim)}
+.svc__scope li{padding:9px 0;border-top:1px solid var(--rule-paper-soft)}
+.svc:hover::before{background:var(--bronze);--sy:1}
+.svc:hover .svc__n{color:var(--bronze)}
+@media (prefers-reduced-motion:reduce){.reveal.pending .svc::before,.reveal.in .svc::before{transform:none;transition:none}}
+
+/* Jason's statement, given room to read as a signed principle */
+.quote--signed{margin-top:clamp(52px,6vw,84px);padding-left:clamp(20px,2.6vw,34px)}
+.quote--signed blockquote{font-size:clamp(1.3rem,2.1vw,1.9rem);line-height:1.36;max-width:38ch}
+.quote--signed figcaption{margin-top:18px}
+
+/* ── Note sections ─────────────────────────────────────────── */
+.note{border-top:1px solid var(--rule-paper);padding-block:clamp(56px,8vw,104px)}
+.note__grid{display:grid;gap:clamp(24px,3.2vw,48px)}
+@media(min-width:900px){.note__grid{grid-template-columns:172px minmax(0,1fr)}}
+.note__ref{color:var(--on-paper-dim);position:sticky;top:88px;align-self:start;height:max-content}
+.note__ref b{display:block;color:var(--bronze);font-weight:500;margin-bottom:5px}
+h2{font-size:clamp(1.7rem,3.1vw,2.7rem);line-height:1.1;font-weight:300;max-width:20ch;letter-spacing:-.024em}
+.note__body{margin-top:clamp(20px,2.4vw,30px);color:var(--on-paper-dim);font-size:1.03rem}
+.note__body p+p{margin-top:1.05em}
+
+/* pull quote */
+.quote{margin-top:clamp(34px,4vw,52px);padding-left:clamp(18px,2.4vw,30px);border-left:1px solid var(--bronze)}
+.quote blockquote{margin:0;font-size:clamp(1.14rem,1.9vw,1.48rem);line-height:1.42;font-style:italic;font-weight:300;max-width:34ch}
+.quote figcaption{margin-top:14px;color:var(--on-paper-dim)}
+
+
+/* systems table */
+/* Note 2: the systems list, with three short statements set beside it.
+   Each statement is its own line, not a paragraph; hovering one lifts it
+   slightly and darkens it. */
+.sysgrid{display:grid;margin-top:clamp(18px,2.4vw,28px);column-gap:clamp(40px,5vw,90px);
+  grid-template-areas:"cap" "list" "claims"}
+@media(min-width:960px){.sysgrid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+  grid-template-areas:"cap ." "list claims";align-items:start}}
+.sys__cap{grid-area:cap;color:var(--on-paper-dim);margin-bottom:12px}
+.sys{grid-area:list;list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-paper)}
+.sys li{padding:13px 0;border-bottom:1px solid var(--rule-paper-soft);font-size:1.02rem}
+.claims{grid-area:claims;list-style:none;margin:clamp(40px,5vw,56px) 0 0;padding:0;display:grid;max-width:33rem}
+@media(min-width:960px){.claims{margin-top:0;border-top:1px solid var(--rule-paper)}}
+.claim{position:relative;padding:clamp(16px,1.8vw,22px) 0 clamp(16px,1.8vw,22px) 30px;
+  border-bottom:1px solid var(--rule-paper-soft);
+  font-size:clamp(1.1rem,1.42vw,1.34rem);line-height:1.42;letter-spacing:-.008em;
+  color:var(--on-paper-dim);
+  transform-origin:left center;
+  transition:transform .5s var(--ease),color .3s var(--ease)}
+.claim::before{content:"";position:absolute;left:0;top:calc(clamp(16px,1.8vw,22px) + .72em);
+  width:22px;height:1px;background:var(--bronze);
+  transform:scaleX(var(--dx,.636));transform-origin:left center;transition:transform .5s var(--ease)}
+.claim:hover{transform:scale(1.035);color:var(--on-paper)}
+.claim:hover::before{--dx:1}
+@media (prefers-reduced-motion:reduce){.claim,.claim::before{transition:color .3s}.claim:hover{transform:none}}
+/* side by side, the first statement sits on the same baseline as the first
+   system on the left. That row's baseline is fixed: 13px padding plus
+   1.13em of 16.32px type = 31.5px. The statement's own is 1em below its
+   padding, so its padding is 31.5px less 1em at whatever size it is set. */
+@media(min-width:960px){
+  .claim:first-child{padding-top:calc(31.5px - 1em)}
+  .claim:first-child::before{top:calc(31.5px - .28em)}
+}
+
+/* reach */
+.reach{display:grid;gap:clamp(24px,3vw,40px);margin-top:clamp(22px,2.6vw,32px)}
+@media(min-width:800px){.reach{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.reach dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 20px;align-content:start}
+.reach dt{color:var(--on-paper-dim);padding-top:4px}
+.reach dd{margin:0;border-bottom:1px solid var(--rule-paper-soft);padding-bottom:12px}
+
+/* evidence — designed absence (ghost cells) */
+.ghosts{display:grid;gap:14px;margin-top:clamp(20px,2.4vw,30px)}
+@media(min-width:820px){.ghosts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ghost{min-height:196px;padding:22px;position:relative;display:flex;flex-direction:column;justify-content:space-between;
+  background:repeating-linear-gradient(135deg,transparent 0 9px,rgba(20,50,71,.05) 9px 10px);
+  box-shadow:inset 0 0 0 1px var(--rule-paper)}
+.ghost__lbl{color:var(--on-paper-dim)}
+.ghost__txt{font-style:italic;color:var(--on-paper-dim);font-size:1.02rem;line-height:1.45;max-width:26ch}
+.ghost__rule{height:1px;background:var(--rule-paper);margin-bottom:14px}
+
+/* ── Enquiry ───────────────────────────────────────────────── */
+.enq{background:var(--ink);color:var(--on-ink);padding-block:clamp(60px,8vw,104px);position:relative;overflow:hidden}
+.enq::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(90% 120% at 12% 100%,rgba(255,255,255,.7),transparent 60%)}
+.enq__in{position:relative;display:grid;gap:clamp(34px,4.6vw,72px)}
+@media(min-width:960px){.enq__in{grid-template-columns:minmax(0,.86fr) minmax(0,1fr)}}
+.enq h2{color:var(--on-ink)}
+.enq__lede{margin-top:22px;color:var(--on-ink-dim);max-width:44ch}
+.enq__facts{margin-top:clamp(28px,3.2vw,40px);border-top:1px solid var(--rule-ink);padding-top:18px;display:grid;gap:11px}
+.enq__facts a{color:var(--on-ink);text-decoration:none;border-bottom:1px solid var(--rule-ink);padding-bottom:2px}
+.enq__facts a:hover{border-color:var(--ochre)}
+
+form{display:grid;gap:18px}
+.f2{display:grid;gap:18px}
+@media(min-width:620px){.f2{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:8px}
+.field label{color:var(--on-ink-dim);display:flex;gap:7px;align-items:baseline}
+.field label i{font-style:normal;color:var(--ochre)}
+.field input,.field select,.field textarea{
+  width:100%;min-height:50px;padding:13px 15px;border:0;border-radius:2px;
+  background-color:rgba(255,255,255,.72);color:var(--on-ink);
+  box-shadow:inset 0 0 0 1px var(--rule-ink);
+  font-family:var(--serif);font-weight:300;font-size:1rem;line-height:1.5;
+  caret-color:var(--ochre);transition:box-shadow .2s var(--ease),background .2s var(--ease)}
+.field textarea{min-height:128px;resize:vertical}
+.field select{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%2346627A' stroke-width='1.4'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;background-size:12px;padding-right:42px}
+.field select option{background:var(--ink-2);color:var(--on-ink)}
+.field input::placeholder,.field textarea::placeholder{color:var(--on-ink-dim)}
+.field input:hover,.field select:hover,.field textarea:hover{background-color:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;background-color:#fff;
+  box-shadow:inset 0 0 0 2px var(--blue)}
+.field[data-invalid="true"] input,.field[data-invalid="true"] select,.field[data-invalid="true"] textarea{
+  box-shadow:inset 0 0 0 2px #B0412E}
+.err{color:#9E2F1C;display:none;align-items:center;gap:7px}
+.field[data-invalid="true"] .err{display:flex}
+.err svg{width:12px;height:12px;flex:none}
+.enq .btn{justify-content:center;width:100%;min-height:54px}
+@media(min-width:620px){.enq .btn{width:auto}}
+.enq__note{color:var(--on-ink-dim);font-size:.9rem}
+.sent{display:none;padding:20px;box-shadow:inset 0 0 0 1px rgba(31,91,139,.4);border-radius:2px;
+  background:rgba(31,91,139,.1);gap:13px;align-items:flex-start}
+.sent svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--blue-lift)}
+form[data-sent="true"] .sent{display:flex}
+form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] .btn,form[data-sent="true"] .enq__note{display:none}
+
+/* ── Billing block ─────────────────────────────────────────── */
+.billing{background:var(--ink-2);color:var(--on-ink-dim);padding-block:clamp(40px,5vw,62px) 34px;
+  border-top:1px solid var(--rule-ink)}
+.billing__cols{display:grid;gap:30px clamp(24px,3vw,48px)}
+@media(min-width:700px){.billing__cols{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.billing__cols{grid-template-columns:repeat(4,1fr)}}
+.billing__mark{display:inline-flex;align-items:center;background:#fff;border-radius:2px;padding:9px 13px;
+  margin-bottom:clamp(28px,3.4vw,40px)}
+.billing__mark img{display:block;height:40px;width:auto}
+.billing h3{color:var(--on-ink);margin-bottom:13px}
+.billing ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.93rem}
+.billing a{text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.billing a:hover{color:var(--on-ink);border-color:var(--rule-ink)}
+.billing__foot{margin-top:clamp(34px,4vw,52px);padding-top:18px;border-top:1px solid var(--rule-ink-soft);
+  display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;color:rgba(70,98,122,.8)}
+
+.reveal.pending{opacity:0;transform:translateY(18px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+@media (prefers-reduced-motion:reduce){.reveal,.reveal.pending,.reveal.in{opacity:1;transform:none;transition:none}}
+
+/* ── First-load intro: "Struck", adopted 21 September 2026 from
+      jmd-shortlist-lab. The two layers of the Plate mark close on their own
+      diagonal, strike with a soft damped click that prints the bronze rule
+      and CONSULTING, then the mark is flown onto the real one in the hero.
+      Plays on every load of the home page: the gate at the top of the body
+      sets html.intro-on unless the visit arrived on an anchor. Without that class the overlay never shows, so a
+      page without JavaScript simply loads. ── */
+.intro{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}
+.intro[hidden],html:not(.intro-on) .intro{display:none}
+.intro__stage{position:absolute;inset:0;display:grid;place-items:center}
+.intro__mk{display:block;transform-origin:0 0}
+.intro__mk .mk{width:min(54vw,560px);overflow:visible}
+@media(max-width:720px){.intro__mk .mk{width:72vw}}
+.intro__paper{position:absolute;inset:0;
+  background-image:linear-gradient(112deg,#F5F8F9 0%,#E4EBF0 52%,#D3DFE7 100%)}
+html.intro-on{overflow:hidden}
+html.intro-on .room__card .mk{visibility:hidden}
+/* ── Phone, round 1: reach ─────────────────────────────────────────────
+      On a phone the header strip is the whole navigation — the right-hand
+      rail is desktop only — so everything in it has to be reachable and
+      legible at arm's length. ── */
+/* the note numbers were rgba(70,98,122,.62): 2.64:1 at 9.6px, a fail */
+.contents__n{color:var(--on-ink-dim);font-size:.64rem}
+@media(max-width:1099px){
+  .contents a{min-height:44px;align-items:center;padding-block:0}
+  .contents__n{font-size:.72rem}
+  .contents__t{font-size:.95rem}
+  .contents ol{gap:clamp(16px,4.6vw,30px)}
+  /* the logo is a link: give it a 44px hit area without changing how it looks */
+  .mark{padding-block:8px}
+  .mark img{height:30px}
+  /* footer and enquiry links were 20-24px tall */
+  .billing ul{gap:2px}
+  .billing a{display:inline-flex;align-items:center;min-height:44px}
+  .enq__facts{gap:2px}
+  .enq__facts a{display:inline-flex;align-items:center;min-height:44px}
+}
+
+/* ── Phone, round 2: type and density ─────────────────────────────────
+      The secondary layers were carrying desktop sizes: 10.6px scope lists,
+      11.4px labels, a 10.9px button. Caps-and-mono is the least forgiving
+      combination at arm's length, so it is the one that has to grow. ── */
+@media(max-width:720px){
+  .mono,.note__ref,.ghost__lbl,.field label,.quote figcaption,.reach dt,
+  .billing__foot,.sys__cap{font-size:.78rem}
+  .btn{font-size:.75rem;letter-spacing:.09em}
+  .svc__desc{font-size:1.02rem}
+  .enq__note{font-size:.95rem}
+  /* the four scope rows under each service cost about a screen and a half
+     across the three. On a phone they read better as one wrapped line. */
+  .svc__scope{display:flex;flex-wrap:wrap;gap:7px 0;font-size:.78rem;margin-top:12px}
+  .svc__scope li{border-top:0;padding:0;display:inline-flex;align-items:center}
+  .svc__scope li+li::before{content:"";width:3px;height:3px;border-radius:50%;
+    background:var(--bronze);opacity:.55;margin:0 10px}
+  /* the empty evidence slots were three 196px boxes: 712px of nothing */
+  .ghost{min-height:132px;padding:18px}
+  .ghosts{gap:10px}
+}
+
+/* ── Phone, round 3: touch ────────────────────────────────────────────
+      Hover states never fire on a touch screen, and the ones that do fire
+      stick after a tap. On touch the page answers to :active instead, and
+      the browser's own blue tap flash is replaced with the site's blue. ── */
+@media (hover:none){
+  a,button,input,select,textarea,.claim,.svc{-webkit-tap-highlight-color:rgba(31,91,139,.12)}
+  .claim:hover{transform:none;color:var(--on-paper-dim)}
+  .claim:hover::before{--dx:.636}
+  .claim:active{color:var(--on-paper)}
+  .claim:active::before{--dx:1}
+  .svc:hover::before{background:var(--on-paper);--sy:.5}
+  .svc:hover .svc__n{color:var(--blue)}
+  .btn:hover{transform:none;background:var(--ochre)}
+  .btn:active{background:#DCA745;transform:scale(.988)}
+  .mark:hover{box-shadow:0 0 0 1px rgba(20,50,71,.14)}
+  .billing a:hover,.contents a:hover{border-color:transparent}
+  .billing a:active,.contents a:active{color:var(--on-ink)}
+}
+/* the hero opened with 93px of air above a 103px mark, which pushed the
+   sentence that does the work down past the middle of the screen */
+@media(max-width:720px){
+  .hero{padding-block:clamp(34px,6vh,62px) clamp(42px,7vh,74px)}
+  .room{gap:clamp(24px,4.4vw,40px)}
+  .intro__skip{position:absolute;left:0;right:0;bottom:calc(30px + env(safe-area-inset-bottom));
+    margin:0;text-align:center;font-family:var(--mono);letter-spacing:.16em;
+    text-transform:uppercase;color:var(--on-paper-dim);opacity:0;font-size:.78rem;animation:introSkip 1.7s var(--ease) .35s both}
+}
+@media(min-width:721px){.intro__skip{display:none}}
+@media (hover:hover){.intro__skip{display:none}}
+@keyframes introSkip{0%{opacity:0}22%{opacity:.7}72%{opacity:.7}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.intro__skip{animation:none;opacity:.75}}
+
+/* ── Phone: a screen per note ─────────────────────────────────────────
+      The hero fills what is left of the screen under the sticky header, and
+      every note is at least a screenful with its content centred, so each one
+      arrives as its own page rather than as a band of text.
+
+      svh, not vh: vh on iOS is the height with the address bar hidden, so a
+      100vh hero is cut off on landing and only fits once the bar retracts.
+
+      Snapping is "proximity", never "mandatory": Note 1 is taller than a phone
+      screen, and mandatory snapping fights someone reading a section that does
+      not fit. Proximity settles onto a note when you finish near one and
+      otherwise leaves scrolling alone. scroll-padding keeps the snapped edge
+      clear of the sticky header. ── */
+@media(max-width:720px) and (min-height:560px){
+  :root{--hdr:67px}
+  html{scroll-snap-type:y proximity;scroll-padding-top:var(--hdr)}
+  .hero{min-height:calc(100vh - var(--hdr));min-height:calc(100svh - var(--hdr));
+    display:grid;align-content:center;scroll-snap-align:start}
+  .note,.enq{min-height:100vh;min-height:100svh;display:grid;align-content:center;
+    scroll-snap-align:start}
+  /* a note that is taller than the screen keeps its own top padding as the
+     breathing room; a short one centres instead */
+  .note>.wrap,.enq>.wrap{width:100%}
+  .billing{scroll-snap-align:start}
+}
+</style>
+<script id="intro-gate">(function(){var r=document.documentElement,n,re=false;try{n=performance.getEntriesByType('navigation')[0];re=n?n.type==='reload':performance.navigation.type===1}catch(e){}if('scrollRestoration' in history)history.scrollRestoration='manual';if(re&&location.hash)history.replaceState(null,'',location.pathname+location.search);if(!location.hash)r.classList.add('intro-on')})();</script>
+<div class="intro intro--struck" id="intro" aria-hidden="true">
+  <div class="intro__paper"></div>
+  <p class="intro__skip" aria-hidden="true">Tap to skip</p>
+  <div class="intro__stage"><span class="intro__mk"><svg class="mk mk--plate" viewBox="0 0 392 176" role="presentation" aria-hidden="true" aria-label="JMD Consulting">
+            <defs>
+              <linearGradient id="ink-intro" x1="0" y1="0" x2=".25" y2="1">
+                <stop offset="0" stop-color="#4C9BD1"/><stop offset=".42" stop-color="#1F5B8B"/>
+                <stop offset="1" stop-color="#0F2A3F"/>
+              </linearGradient>
+            </defs>
+            <g class="plate__deep">
+              <text class="serifmark" x="4" y="116" font-size="128" fill="#9DB4C6" opacity=".55">JMD</text>
+            </g>
+            <g class="plate__face">
+              <text class="serifmark" x="0" y="112" font-size="128" fill="url(#ink-intro)">JMD</text>
+              <path d="M2 133 H250" stroke="#B9822A" stroke-width="2"/>
+              <text class="sub" x="2" y="162">CONSULTING</text>
+            </g>
+          </svg></span></div>
+</div>
+
+<header class="filing">
+  <div class="wrap filing__in">
+    <a class="mark" href="#top">
+      <img src="../assets/jmd-logo.jpg" width="307" height="125" alt="JMD Consulting">
+    </a>
+    <nav class="contents" aria-label="Contents">
+      <ol>
+        <li><a href="#note-1"><span class="contents__n">1</span><span class="contents__t">Services</span></a></li>
+        <li><a href="#note-2"><span class="contents__n">2</span><span class="contents__t">Systems</span></a></li>
+        <li><a href="#note-3"><span class="contents__n">3</span><span class="contents__t">Reach</span></a></li>
+        <li><a href="#note-4"><span class="contents__n">4</span><span class="contents__t">Evidence</span></a></li>
+        <li><a href="#enquiry"><span class="contents__n">5</span><span class="contents__t">Enquiry</span></a></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<nav class="sn sn--dock" aria-label="Contents">
+      <ol>
+        <li><a href="#note-1"><span class="pull"><span class="t">Services</span><span class="n">1</span></span></a></li>
+        <li><a href="#note-2"><span class="pull"><span class="t">Systems</span><span class="n">2</span></span></a></li>
+        <li><a href="#note-3"><span class="pull"><span class="t">Reach</span><span class="n">3</span></span></a></li>
+        <li><a href="#note-4"><span class="pull"><span class="t">Evidence</span><span class="n">4</span></span></a></li>
+        <li><a href="#enquiry"><span class="pull"><span class="t">Enquiry</span><span class="n">5</span></span></a></li>
+      </ol>
+    </nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap room">
+      <div class="room__obj">
+        <span class="room__card">
+          <svg class="mk mk--plate" viewBox="0 0 392 176" role="img" aria-label="JMD Consulting">
+            <defs>
+              <linearGradient id="ink" x1="0" y1="0" x2=".25" y2="1">
+                <stop offset="0" stop-color="#4C9BD1"/><stop offset=".42" stop-color="#1F5B8B"/>
+                <stop offset="1" stop-color="#0F2A3F"/>
+              </linearGradient>
+            </defs>
+            <g class="plate__deep">
+              <text class="serifmark" x="4" y="116" font-size="128" fill="#9DB4C6" opacity=".55">JMD</text>
+            </g>
+            <g class="plate__face">
+              <text class="serifmark" x="0" y="112" font-size="128" fill="url(#ink)">JMD</text>
+              <path d="M2 133 H250" stroke="#B9822A" stroke-width="2"/>
+              <text class="sub" x="2" y="162">CONSULTING</text>
+            </g>
+          </svg>
+        </span>
+      </div>
+      <div>
+        <div class="torchwrap">
+          <h1 class="rh">One specialist. <em>One family of systems.</em> Twenty&#8209;five years.</h1>
+          <p class="rh torch" aria-hidden="true">One specialist. <em>One family of systems.</em> Twenty&#8209;five years.</p>
+        </div>
+        <div class="hero__acts">
+          <a class="btn" href="#enquiry">
+            Describe your situation
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="note note--solution" id="note-1">
+    <div class="wrap note__grid reveal">
+      <p class="mono note__ref"><b>Note 1</b>Solutions &amp; Services</p>
+      <div>
+        <h2>Solutions &amp; Services</h2>
+        <ol class="svcs">
+          <li class="svc" style="--i:0">
+            <span class="svc__n" aria-hidden="true">1</span>
+            <h3 class="svc__name">Project management</h3>
+            <p class="svc__desc">Finance-systems projects planned, resourced and controlled from start to finish, with risk analysed and budgets tracked and monitored throughout.</p>
+            <ul class="svc__scope mono">
+              <li>Project planning</li>
+              <li>Resource management</li>
+              <li>Risk analysis</li>
+              <li>Budget tracking</li>
+            </ul>
+          </li>
+          <li class="svc" style="--i:1">
+            <span class="svc__n" aria-hidden="true">2</span>
+            <h3 class="svc__name">Systems implementation</h3>
+            <p class="svc__desc">ERP implementation with a proven track record of delivering complex multi&#8209;currency, multi&#8209;company and multi&#8209;site financial reporting systems.</p>
+            <ul class="svc__scope mono">
+              <li>ERP implementation</li>
+              <li>Multi-currency</li>
+              <li>Multi-company</li>
+              <li>Multi-site reporting</li>
+            </ul>
+          </li>
+          <li class="svc" style="--i:2">
+            <span class="svc__n" aria-hidden="true">3</span>
+            <h3 class="svc__name">ETL &amp; business intelligence</h3>
+            <p class="svc__desc">Business intelligence for clients across Europe, the USA and Canada: complex financial reports and KPIs, and financial data migrated from legacy systems.</p>
+            <ul class="svc__scope mono">
+              <li>Financial reports &amp; KPIs</li>
+              <li>Legacy data migration</li>
+              <li>Data analysis</li>
+              <li>SQL &amp; stored procedures</li>
+            </ul>
+          </li>
+        </ol>
+        <figure class="quote quote--signed">
+          <blockquote>We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive delivers a solution. In short, a &lsquo;Solution Service&rsquo;.</blockquote>
+          <figcaption class="mono">Jason Dodd &middot; Managing Director</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="note" id="note-2">
+    <div class="wrap note__grid reveal">
+      <p class="mono note__ref"><b>Note 2</b>Systems</p>
+      <div>
+        <h2>Practiced System&rsquo;s</h2>
+        <div class="sysgrid">
+          <p class="mono sys__cap">Systems worked with in delivery</p>
+          <ul class="sys">
+            <li>CODA / Unit4 Financials</li>
+            <li>NetSuite</li>
+            <li>Microsoft SQL Server</li>
+            <li>Oracle</li>
+          </ul>
+          <ul class="claims">
+            <li class="claim">We specialise in the delivery of consultancy services and systems integration solutions.</li>
+            <li class="claim">Thanks to our clients and business partnerships we can deliver solutions using the latest technologies and ideas.</li>
+            <li class="claim">With our proven experience we are well placed to provide a high quality service to our clients and at competitive rates.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="note" id="note-3">
+    <div class="wrap note__grid reveal">
+      <p class="mono note__ref"><b>Note 3</b>Reach</p>
+      <div>
+        <h2>Harrogate is our base</h2>
+        <div class="note__body measure">
+          <p>The practice sits in North Yorkshire at the gateway to the Dales — twenty minutes from Leeds Bradford airport, thirty from York station. Where a site visit is not wanted, the work runs remotely into your servers or desktops.</p>
+        </div>
+        <div class="reach">
+          <dl>
+            <dt class="mono">Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
+            <dt class="mono">Base</dt><dd>Harrogate, North Yorkshire</dd>
+          </dl>
+          <dl>
+            <dt class="mono">Formed</dt><dd>January 2000</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="note" id="note-4">
+    <div class="wrap note__grid reveal">
+      <p class="mono note__ref"><b>Note 4</b>Client evidence</p>
+      <div>
+        <h2>Held open for the clients&rsquo; own words.</h2>
+        <div class="note__body measure">
+          <p>This practice does not publish a client list it has not been given permission to publish, and does not write its own testimonials. Three slots sit here for the real ones.</p>
+        </div>
+        <div class="ghosts">
+          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Client testimonial to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.1 &middot; awaiting content</figcaption></figure>
+          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Client testimonial to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.2 &middot; awaiting content</figcaption></figure>
+          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Case study to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.3 &middot; awaiting content</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="enq" id="enquiry">
+    <div class="wrap enq__in">
+      <div class="reveal">
+        <h2>Tell me what the system is doing.</h2>
+        <p class="enq__lede">The more precise you are about the system and the symptom, the more useful the first reply will be. Every enquiry is read by Jason.</p>
+        <div class="enq__facts mono">
+          <a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a>
+          <span>Harrogate, North Yorkshire, United Kingdom</span>
+        </div>
+      </div>
+
+      <form id="enquiry-form" novalidate>
+        <div class="f2">
+          <div class="field" data-field>
+            <label for="a-name" class="mono">Name <i aria-hidden="true">*</i></label>
+            <input id="a-name" name="name" type="text" autocomplete="name" required>
+            <p class="err mono" id="a-name-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Enter your name</p>
+          </div>
+          <div class="field" data-field>
+            <label for="a-org" class="mono">Organisation <i aria-hidden="true">*</i></label>
+            <input id="a-org" name="organisation" type="text" autocomplete="organization" required>
+            <p class="err mono" id="a-org-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Enter your organisation</p>
+          </div>
+        </div>
+        <div class="f2">
+          <div class="field" data-field>
+            <label for="a-email" class="mono">Email <i aria-hidden="true">*</i></label>
+            <input id="a-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <p class="err mono" id="a-email-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Enter a valid email address</p>
+          </div>
+          <div class="field" data-field>
+            <label for="a-sys" class="mono">Finance system <i aria-hidden="true">*</i></label>
+            <select id="a-sys" name="system" required>
+              <option value="">Select&hellip;</option>
+              <option>CODA / Unit4 Financials</option>
+              <option>NetSuite</option>
+              <option>Another ERP</option>
+              <option>Not sure yet</option>
+            </select>
+            <p class="err mono" id="a-sys-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Choose a system</p>
+          </div>
+        </div>
+        <div class="field" data-field>
+          <label for="a-detail" class="mono">What is happening <i aria-hidden="true">*</i></label>
+          <textarea id="a-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger&hellip;"></textarea>
+          <p class="err mono" id="a-detail-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Tell me briefly what is happening</p>
+        </div>
+        <button class="btn" type="submit">
+          Send enquiry
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </button>
+        <p class="mono enq__note">Replies come from Jason directly, usually the same working day.</p>
+        <div class="sent" role="status">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8.4 6.2 12l7.3-8"/></svg>
+          <p>Enquiry recorded. <span style="color:var(--on-ink-dim)">Demonstration only — this concept is not yet wired to a mailbox.</span></p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="billing">
+  <div class="wrap">
+    <span class="billing__mark"><img src="../assets/jmd-logo.jpg" width="307" height="125" alt="JMD Consulting"></span>
+    <div class="billing__cols">
+      <div>
+        <h3 class="mono">Practice</h3>
+        <ul>
+          <li>JMD Consulting</li>
+          <li>Jason Dodd, Managing Director</li>
+          <li>Formed January 2000</li>
+          <li>CODA consultancy since 1990</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="mono">Services</h3>
+        <ul>
+          <li><a href="#note-1">Project management</a></li>
+          <li><a href="#note-1">Systems implementation</a></li>
+          <li><a href="#note-1">ETL &amp; business intelligence</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="mono">Systems</h3>
+        <ul>
+          <li>CODA / Unit4 Financials</li>
+          <li>NetSuite</li>
+          <li>Microsoft SQL Server</li>
+          <li>Oracle</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="mono">Contact</h3>
+        <ul>
+          <li><a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></li>
+          <li>Harrogate, North Yorkshire</li>
+          <li>United Kingdom</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mono billing__foot">
+      <span>&copy; 2000&ndash;2026 JMD Consulting</span>
+      <span>CODA and Unit4 Financials are trademarks of their respective owners</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{rootMargin:'0px 0px -12% 0px'});
+  var fold = window.innerHeight * 0.92;
+  document.querySelectorAll('.reveal').forEach(function(el){
+    if(el.getBoundingClientRect().top > fold){ el.classList.add('pending'); io.observe(el); }
+  });
+
+  var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var links = Array.prototype.slice.call(document.querySelectorAll('.contents a'));
+  var strip = document.querySelector('.contents');
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  /* which section you are in, worked out from the scroll position rather than
+     from an IntersectionObserver band. A band is thin, and a flick on a phone
+     can clear it between frames, which left the marker stuck on the wrong
+     section. This cannot stick: it is recomputed from where the page is. */
+  var marked = -1;
+  function spy(){
+    var line = scrollY + innerHeight * 0.34, at = -1;
+    targets.forEach(function(t, i){ if(t && t.getBoundingClientRect().top + scrollY <= line) at = i; });
+    if(at === marked) return;
+    marked = at;
+    links.forEach(function(a, j){ a.setAttribute('aria-current', j === at ? 'true' : 'false'); });
+    /* the strip is wider than a phone screen, so bring the current item back
+       into view — the strip only, never the page */
+    if(at > -1 && strip && strip.scrollWidth > strip.clientWidth + 1){
+      var a = links[at], to = a.offsetLeft - (strip.clientWidth - a.offsetWidth) / 2;
+      strip.scrollTo({left: Math.max(0, to), behavior: still ? 'auto' : 'smooth'});
+    }
+  }
+  addEventListener('scroll', spy, {passive:true});
+  addEventListener('resize', spy);
+  spy();
+
+  /* in-page links scroll to their section without writing #note-n into the
+     address bar, so a reload starts the page again from the top rather than
+     jumping back to whichever section was last clicked. scrollIntoView with
+     no behaviour follows the CSS: smooth, or instant under reduced motion,
+     and it honours each section's scroll-margin. */
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var t = document.getElementById(a.getAttribute('href').slice(1));
+    if(!t) return;
+    e.preventDefault();
+    t.scrollIntoView({block:'start'});
+    if(location.hash) history.replaceState(null, '', location.pathname + location.search);
+    /* keyboard users keep their place: focus moves to the section they chose */
+    if(e.detail === 0){ if(!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+                        t.focus({preventScroll:true}); }
+  });
+
+  /* ── pointer: button sheen, hero key light, torch ──────────────── */
+  document.querySelectorAll('.btn').forEach(function(b){
+    b.addEventListener('pointermove', function(e){
+      var r = b.getBoundingClientRect();
+      b.style.setProperty('--bx', ((e.clientX - r.left) / r.width  * 100) + '%');
+      b.style.setProperty('--by', ((e.clientY - r.top)  / r.height * 100) + '%');
+    });
+  });
+
+  (function(){
+    var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if(!fine || still) return;
+
+    var hero = document.querySelector('.hero'),
+        wrap = document.querySelector('.torchwrap');
+    if(!hero || !wrap) return;
+
+    var REST_X = 38, REST_Y = 44,
+        ttx = REST_X, tty = REST_Y, tcx = REST_X, tcy = REST_Y,
+        htx = 50, hty = 42, hcx = 50, hcy = 42, raf = 0;
+
+    addEventListener('pointermove', function(e){
+      var hr = hero.getBoundingClientRect();
+      htx = (e.clientX - hr.left) / hr.width  * 100;
+      hty = (e.clientY - hr.top)  / hr.height * 100;
+
+      /* torch is measured against the headline, not the hero, so the
+         highlight sits under the cursor rather than near it */
+      var wr = wrap.getBoundingClientRect();
+      ttx = (e.clientX - wr.left) / wr.width  * 100;
+      tty = (e.clientY - wr.top)  / wr.height * 100;
+
+    });
+
+    document.addEventListener('pointerleave', rest);
+    addEventListener('blur', rest);
+    function rest(){ ttx = REST_X; tty = REST_Y; }
+
+    function loop(){
+      hcx += (htx - hcx) * 0.075; hcy += (hty - hcy) * 0.075;
+      tcx += (ttx - tcx) * 0.14;  tcy += (tty - tcy) * 0.14;
+      hero.style.setProperty('--mx', hcx.toFixed(2) + '%');
+      hero.style.setProperty('--my', hcy.toFixed(2) + '%');
+      wrap.style.setProperty('--tx', tcx.toFixed(2) + '%');
+      wrap.style.setProperty('--ty', tcy.toFixed(2) + '%');
+      raf = requestAnimationFrame(loop);
+    }
+
+    /* requestAnimationFrame is suspended entirely while the document is
+       hidden — minimised, occluded, or on a background tab. start/stop are
+       idempotent, and coming back forces a fresh frame rather than trusting
+       the engine to resume a callback queued before the page was hidden. */
+    function start(){ if(!raf) raf = requestAnimationFrame(loop); }
+    function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
+    function wake(){ stop(); start(); }
+
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden) stop(); else wake();
+    });
+    addEventListener('pageshow', wake);   /* bfcache restore */
+    addEventListener('focus', wake);      /* window refocused without a visibility change */
+    start();
+  })();
+
+  var form = document.getElementById('enquiry-form');
+  function check(f){
+    var c = f.querySelector('input,select,textarea');
+    var ok = c.checkValidity() && c.value.trim() !== '';
+    f.setAttribute('data-invalid', ok ? 'false' : 'true');
+    c.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    c.setAttribute('aria-describedby', ok ? '' : c.id + '-err');
+    return ok;
+  }
+  form.querySelectorAll('[data-field]').forEach(function(f){
+    var c = f.querySelector('input,select,textarea');
+    c.addEventListener('blur', function(){ if(c.value.trim() !== '' || f.getAttribute('data-invalid')==='true') check(f); });
+    c.addEventListener('input', function(){ if(f.getAttribute('data-invalid')==='true') check(f); });
+  });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var bad = null;
+    form.querySelectorAll('[data-field]').forEach(function(f){ if(!check(f) && !bad) bad = f; });
+    if(bad){ bad.querySelector('input,select,textarea').focus(); return; }
+    form.setAttribute('data-sent','true');
+    form.querySelector('.sent').focus && form.querySelector('.sent').setAttribute('tabindex','-1');
+  });
+})();
+</script>
+<script>
+(function(){
+  var cfg = {"pull": 20, "pullDocked": 11, "reach": 70, "dockAt": 0.45};
+  var root = document.documentElement, hero = document.querySelector('.hero'),
+      nav = document.querySelector('.sn');
+  if(!nav) return;
+  var links = [].slice.call(nav.querySelectorAll('a')),
+      map = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }),
+      items = links.map(function(a){
+        return { li:a.closest('li'), el:a.querySelector('.pull'), link:a, focus:false, t:0, c:0 };
+      });
+  var still = matchMedia('(prefers-reduced-motion:reduce)').matches,
+      fine  = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ── which section you are in ─────────────────────────────────── */
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var i = map.indexOf(e.target);
+      links.forEach(function(a,j){ a.setAttribute('aria-current', j===i ? 'true' : 'false'); });
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  map.forEach(function(t){ if(t) spy.observe(t); });
+
+  /* ── the pull ─────────────────────────────────────────────────────
+     distance is measured to the label's RESTING box (its live rect plus
+     the pull already applied), so moving it never changes the reading.
+     the curve starts gently and firms up as the cursor closes in. */
+  var px = -1e5, py = -1e5, raf = 0;
+  function maxPull(){ return (root.classList.contains('past-hero') && cfg.pullDocked) ? cfg.pullDocked : cfg.pull; }
+  function targets(){
+    var M = maxPull(), best = -1, bestD = Infinity;
+    items.forEach(function(it, i){
+      var r = it.el.getBoundingClientRect(),
+          L = r.left + it.c, R = r.right + it.c,
+          dx = Math.max(L - px, 0, px - R),
+          dy = Math.max(r.top - py, 0, py - r.bottom),
+          d  = Math.sqrt(dx*dx + dy*dy);
+      it.d = d;
+      if(d < bestD){ bestD = d; best = i; }
+    });
+    /* rows sit close together, so several are "near" at once; only the
+       nearest one answers, otherwise its neighbours twitch alongside it */
+    items.forEach(function(it, i){
+      if(it.focus){ it.t = M; return; }
+      it.t = (i === best && it.d < cfg.reach) ? M * Math.pow(1 - it.d / cfg.reach, 1.6) : 0;
+    });
+  }
+  function frame(){
+    var moving = false, M = maxPull() || 1;
+    items.forEach(function(it){
+      var rate = it.t > it.c ? 0.2 : 0.3;          /* returns a touch faster than it leaves */
+      it.c += (it.t - it.c) * rate;
+      if(Math.abs(it.t - it.c) < 0.03) it.c = it.t; else moving = true;
+      it.li.style.setProperty('--p', it.c.toFixed(2));
+      it.li.style.setProperty('--k', Math.min(1, it.c / M).toFixed(3));
+    });
+    raf = moving ? requestAnimationFrame(frame) : 0;   /* runs only while something is moving */
+  }
+  function kick(){ if(!raf) raf = requestAnimationFrame(frame); }
+  function release(){ px = py = -1e5; targets(); kick(); }
+
+  if(fine && !still){
+    addEventListener('pointermove', function(e){ px = e.clientX; py = e.clientY; targets(); kick(); }, {passive:true});
+    document.addEventListener('mouseleave', release);
+    addEventListener('blur', release);
+  }
+  if(!still){
+    items.forEach(function(it){
+      it.link.addEventListener('focus', function(){ it.focus = it.link.matches(':focus-visible'); targets(); kick(); });
+      it.link.addEventListener('blur',  function(){ it.focus = false; targets(); kick(); });
+    });
+  }
+
+  /* ── scroll: docking past the hero, and re-measuring ─────────────── */
+  var first = map[0], ticking = false;
+  function onScroll(){
+    ticking = false;
+    if(hero) root.classList.toggle('past-hero', scrollY > hero.offsetTop + hero.offsetHeight * cfg.dockAt);
+    if(first && scrollY + innerHeight * 0.45 < first.getBoundingClientRect().top + scrollY)
+      links.forEach(function(a){ a.setAttribute('aria-current', 'false'); });
+    if(px > -1e4){ targets(); kick(); }
+  }
+  addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+  addEventListener('resize', onScroll);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(onScroll);
+  onScroll();
+})();
+</script>
+
+<script id="intro-play">
+(function(){
+  var root  = document.documentElement, ov = document.getElementById('intro');
+  /* the gate at the top of the body decides whether this visit gets the intro */
+  if(!ov || !root.classList.contains('intro-on')){ if(ov) ov.setAttribute('hidden',''); return; }
+  var ghost = ov.querySelector('.intro__mk'),
+      svg   = ghost.querySelector('svg'),
+      face  = ghost.querySelector('.plate__face'),
+      deep  = ghost.querySelector('.plate__deep'),
+      rule  = face.querySelector('path'),
+      sub   = face.querySelector('.sub'),
+      real  = document.querySelector('.room__card .mk'),
+      still = matchMedia('(prefers-reduced-motion:reduce)').matches,
+      EASE  = 'cubic-bezier(.16,1,.3,1)',
+      runs  = [], over = false;
+
+  function anim(el, frames, ms, delay, ease, fill){
+    var a = el.animate(frames, {duration:ms, delay:delay||0, easing:ease||EASE, fill:fill||'both'});
+    runs.push(a); return a;
+  }
+  function end(){
+    if(over) return; over = true;
+    root.classList.remove('intro-on'); ov.setAttribute('hidden','');
+    runs.forEach(function(a){ a.cancel(); });
+    ['pointerdown','keydown','wheel','touchstart'].forEach(function(t){ removeEventListener(t, skip, true); });
+  }
+  /* anyone who acts during the intro gets the page at once */
+  function skip(){ end(); }
+
+  /* the flight: a FLIP onto the real mark, sampled rather than tweened so it
+     can travel an arc. x decelerates hard, y eases in and out, so the mark
+     moves across before it settles down — a hand setting something down,
+     not a slide. filled forwards only: a backwards fill would pin the mark
+     to its first frame through the delay and flatten anything before it. */
+  function travel(ms, delay){
+    var a = ghost.getBoundingClientRect(), b = real.getBoundingClientRect(),
+        dx = b.left - a.left, dy = b.top - a.top, S = b.width / a.width, f = [];
+    for(var k = 0; k <= 24; k++){
+      var p = k / 24, ox = 1 - Math.pow(1 - p, 4), oy = p < .5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2) / 2;
+      f.push({transform:'translate(' + (dx*ox).toFixed(2) + 'px,' + (dy*oy).toFixed(2) + 'px) scale('
+             + (1 + (S - 1)*ox).toFixed(4) + ')'});
+    }
+    /* lifted while it moves: the shadow rises and settles back to nothing */
+    anim(svg, [{filter:'drop-shadow(0 0 0 rgba(16,42,64,0))'},
+               {filter:'drop-shadow(0 16px 18px rgba(16,42,64,.2))', offset:.35},
+               {filter:'drop-shadow(0 0 0 rgba(16,42,64,0))'}], ms, delay, 'ease-in-out', 'forwards');
+    return anim(ghost, f, ms, delay, 'linear', 'forwards');
+  }
+
+  function run(){
+    setTimeout(end, 6000);                /* never leave the page covered */
+    if(!real){ end(); return; }
+    /* the intro always starts at the top. scroll restoration is off (see the
+       gate), but a browser that still lands part-way down is put back first */
+    if(scrollY){ var sb = root.style.scrollBehavior; root.style.scrollBehavior = 'auto';
+      scrollTo(0, 0); root.style.scrollBehavior = sb; }
+    ['pointerdown','keydown','wheel','touchstart'].forEach(function(t){ addEventListener(t, skip, true); });
+    if(still){
+      /* reduced motion: no travel at all. the mark is already in place and
+         the cover simply dissolves off the page. */
+      root.classList.remove('intro-on'); ghost.style.visibility = 'hidden';
+      anim(ov, [{opacity:1},{opacity:0}], 420, 120, 'ease-out').finished.then(end);
+      return;
+    }
+
+    /* On a phone the intro is the only thing between someone and the site,
+       often on mobile data. Same choreography, about a third quicker. */
+    var P = innerWidth < 720 ? .62 : 1;
+    var sheet = ov.querySelector('.intro__paper'),
+        MERGE = Math.round(1500 * P), START = Math.round(120 * P), HIT = START + MERGE;
+    rule.style.transformBox = 'fill-box'; rule.style.transformOrigin = '50% 50%';
+    svg.style.transformOrigin = '50% 50%';
+    /* two layers of the plate come in along its own axis — the shadow sits
+       down and right of the face, so they close on that diagonal — easing in
+       and out so they are visibly closing right up to the moment they meet */
+    /* they close with a little momentum left, so the press is caused by the
+       meeting rather than starting from a standstill after it */
+    var MERGE_EASE = 'cubic-bezier(.45,0,.38,.97)';
+    anim(deep, [{transform:'translate(-104px,-58px)',opacity:0},
+                {transform:'translate(-92px,-51px)', opacity:.9,offset:.16},
+                {transform:'none',opacity:1}], MERGE, START, MERGE_EASE);
+    anim(face, [{transform:'translate(110px,62px)',opacity:0},
+                {transform:'translate(97px,55px)',  opacity:.9,offset:.16},
+                {transform:'none',opacity:1}], MERGE, START, MERGE_EASE);
+    /* the rule and the subline are held back: they are what the strike prints */
+    anim(rule, [{transform:'scaleX(0)'},{transform:'scaleX(0)'}], 1, 0);
+    anim(sub,  [{opacity:0},{opacity:0}], 1, 0);
+
+    /* the click: one damped spring, sampled, so the press, the rebound and
+       the settle are a single continuous curve with no corners in it.
+       displacement d(t) = e^(-z w t) sin(wd t), normalised to its first lobe:
+       a 2.2% press at ~150ms, a barely-there rebound (~0.35%), settled by 820ms. */
+    var SPRING = Math.round(820 * P), DEPTH = .022, SQUEEZE = 2,
+        W = 2 * Math.PI * 1.6, Z = .5, WD = W * Math.sqrt(1 - Z*Z), N = 40,
+        raw = [], peak = 0, press = [], shadow = [];
+    for(var k = 0; k <= N; k++){
+      var t = k / N * SPRING / 1000, d = Math.exp(-Z*W*t) * Math.sin(WD*t);
+      raw.push(d); if(d > peak) peak = d;
+    }
+    raw[N] = 0;
+    raw.forEach(function(d, k){
+      var n = d / peak;
+      press.push({transform:'scale(' + (1 - DEPTH*n).toFixed(5) + ')', offset:k/N});
+      /* depth, not zoom: the shadow closes in under the face as the plate is
+         pressed flat to the paper, and eases back out as it lifts */
+      shadow.push({transform:'translate(' + (-SQUEEZE*n).toFixed(3) + 'px,'
+                                         + (-SQUEEZE*n).toFixed(3) + 'px)', offset:k/N});
+    });
+    /* forwards only: a backwards fill would hold these at rest through their
+       delay and flatten the merge animations underneath them */
+    anim(svg,  press,  SPRING, HIT, 'linear', 'forwards');
+    anim(deep, shadow, SPRING, HIT, 'linear', 'forwards');
+
+    /* ...and what it prints: the rule spreads from the centre from the
+       deepest point of the press, the subline comes up as the plate lifts */
+    anim(rule, [{transform:'scaleX(0)'},{transform:'scaleX(1)'}], Math.round(860 * P), HIT + Math.round(110 * P));
+    anim(sub,  [{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'none'}], Math.round(680 * P), HIT + Math.round(300 * P));
+    var LIFT = HIT + Math.round(1000 * P);
+    anim(sheet, [{opacity:1},{opacity:0}], Math.round(720 * P), LIFT + 60, 'cubic-bezier(.4,0,.6,1)');
+    travel(Math.round(860 * P), LIFT).finished.then(end);
+
+  }
+
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  else addEventListener('load', run);
+})();
+</script>
+
+<script src="../shared/review.js"></script>
+</body></html>
