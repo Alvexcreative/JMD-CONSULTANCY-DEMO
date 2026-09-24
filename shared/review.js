@@ -31,7 +31,8 @@ window.jmdSettleScroll = function () {
   var CONCEPTS = [
     { n: '02', slug: '02-montfort.html',      name: 'Montfort' },
     { n: '06', slug: '06-pathforgrowth.html', name: 'Path for Growth' },
-    { n: '08', slug: '08-chalk.html',         name: 'Chalk' }
+    { n: '08', slug: '08-chalk.html',         name: 'Chalk' },
+    { n: '09', slug: '09-joe.html',           name: 'Joe' }
   ];
 
   function build() {

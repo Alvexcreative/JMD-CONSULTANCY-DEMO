@@ -274,35 +274,52 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
   color: rgba(255,254,245,.6);
 }
 
-/* On a phone the photograph keeps the same axis it has on a laptop: the
-   wash runs left to right and clears a column on the right for the
-   picture. That only works if the copy stops before the clear zone, so
-   the text is held to a column of its own rather than running the full
-   width — smaller display size and a narrower measure, with the buttons
-   stacked because they no longer have the width to sit side by side. */
+/* ── Phone hero: three styles ─────────────────────────────────────────
+   Desktop is settled and untouched. On a phone the picture has three
+   plausible homes, and they are genuinely different ideas rather than
+   three strengths of the same one — so they are switchable rather than
+   argued about. Shared geometry first, then what each one changes. */
 @media (max-width: 860px) {
   .hero { min-height: 100svh; padding-bottom: 0; }
-  .hero-photo { inset: 0; width: 100%; height: 100%; object-position: 76% 56%; }
+  .hero-photo { inset: 0; width: 100%; height: 100%; }
   .hero .container { padding-block: 30px 0; }
-
-  .hero-copy { gap: 18px; max-width: 63%; }
-  .hero h1 { font-size: 1.95rem; line-height: 1.0; }
-  .hero .lead-xl { font-size: .88rem; line-height: 1.5; max-width: none; }
-
-  .hero-actions { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
+  .hero h1 { font-size: 2.2rem; line-height: .98; }
+  .hero .lead-xl { font-size: .95rem; line-height: 1.52; }
   .hero-actions .btn {
-    height: 48px; padding: 0 14px;
-    font-size: .76rem; letter-spacing: .06em; white-space: nowrap;
+    height: 48px; font-size: .76rem; letter-spacing: .05em; white-space: nowrap;
   }
-  /* The outline button is the one piece of copy that reaches the thinning
-     edge of the wash, where its tan drops to 3.49:1. It gets its own cream
-     fill: invisible where the wash is opaque, and legible where the
-     photograph starts coming through. */
+  /* the outline button is the one control that can end up over the
+     photograph in every style, so it keeps its own ground throughout */
   .hero-actions .btn-outline { background: var(--cream); }
-
   .strip { margin-top: clamp(36px, 7vh, 72px); }
+  .mhero { display: flex; }
 
-  .hero-wash {
+  /* ── A · FULL — the photograph covers the whole background ──────────
+     A cream veil over all of it rather than a wash that clears to one
+     side, easing off below the buttons where nothing has to stay legible. */
+  [data-mhero="full"] .hero-photo { object-position: 62% 54%; }
+  [data-mhero="full"] .hero-copy { max-width: none; gap: 20px; }
+  [data-mhero="full"] .hero-actions { flex-wrap: nowrap; gap: 10px; width: 100%; }
+  [data-mhero="full"] .hero-actions .btn { flex: 1 1 0; min-width: 0; padding: 0 10px; }
+  [data-mhero="full"] .hero-wash {
+    background: linear-gradient(to bottom,
+      rgba(255,254,245,.90) 0px,
+      rgba(255,254,245,.90) 460px,
+      rgba(255,254,245,.74) 560px,
+      rgba(255,254,245,.56) 660px,
+      rgba(255,254,245,.56) 100%);
+  }
+
+  /* ── B · COLUMN — the laptop axis, kept ────────────────────────────
+     Wash runs left to right and clears a column on the right, so the copy
+     is held to a column of its own and the buttons stack. */
+  [data-mhero="column"] .hero-photo { object-position: 76% 56%; }
+  [data-mhero="column"] .hero-copy { max-width: 63%; gap: 18px; }
+  [data-mhero="column"] .hero h1 { font-size: 1.95rem; line-height: 1; }
+  [data-mhero="column"] .hero .lead-xl { font-size: .88rem; line-height: 1.5; }
+  [data-mhero="column"] .hero-actions { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
+  [data-mhero="column"] .hero-actions .btn { padding: 0 14px; }
+  [data-mhero="column"] .hero-wash {
     background: linear-gradient(to right,
       rgba(255,254,245,.98) 0%,
       rgba(255,254,245,.97) 60%,
@@ -311,24 +328,50 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
       rgba(255,254,245,0) 88%,
       rgba(255,254,245,0) 100%);
   }
-}
 
-/* Only on genuinely small handsets (≤340px) does the 63% column drop to a
-   26-character measure, which is too tight for a serif paragraph. There
-   the column widens and the wash moves with it — the photograph keeps a
-   clear edge, just a narrower one. 360 and 375 keep the wider picture. */
-@media (max-width: 340px) {
-  .hero-copy { max-width: 72%; }
-  .hero-wash {
-    background: linear-gradient(to right,
-      rgba(255,254,245,.98) 0%,
-      rgba(255,254,245,.97) 70%,
-      rgba(255,254,245,.58) 79%,
-      rgba(255,254,245,.12) 87%,
-      rgba(255,254,245,0) 93%,
-      rgba(255,254,245,0) 100%);
+  /* ── C · BAND — the photograph sits below the words, still in view ──
+     Nothing is set over the picture at all, so it runs at full colour.
+     The credential strip is pushed past the fold to make room, otherwise
+     the band lands below the first screen and may as well not exist. */
+  [data-mhero="band"] .hero-photo { object-position: 62% 56%; }
+  [data-mhero="band"] .hero-copy { max-width: none; gap: 20px; }
+  [data-mhero="band"] .hero-actions { flex-wrap: nowrap; gap: 10px; width: 100%; }
+  [data-mhero="band"] .hero-actions .btn { flex: 1 1 0; min-width: 0; padding: 0 10px; }
+  [data-mhero="band"] .strip { margin-top: clamp(260px, 41vh, 380px); }
+  [data-mhero="band"] .hero-wash {
+    background: linear-gradient(to bottom,
+      rgba(255,254,245,.98) 0px,
+      rgba(255,254,245,.97) 490px,
+      rgba(255,254,245,.50) 550px,
+      rgba(255,254,245,0) 615px,
+      rgba(255,254,245,0) 760px,
+      var(--cream) 815px,
+      var(--cream) 100%);
   }
 }
+
+/* ── Style picker — review chrome, phone only ───────────────────────── */
+.mhero {
+  position: fixed; top: 96px; right: clamp(12px, 3vw, 28px); z-index: 70;
+  display: none; align-items: center; gap: 4px;
+  padding: 5px;
+  background: rgba(14,14,16,.84);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  backdrop-filter: blur(16px);
+  font-family: 'Oswald', sans-serif;
+}
+.mhero button {
+  min-height: 32px; padding: 0 12px;
+  border: 0; border-radius: 999px; background: transparent;
+  color: rgba(255,255,255,.62);
+  font-family: inherit; font-size: .66rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+.mhero button:hover { color: #fff; }
+.mhero button[aria-pressed="true"] { background: #fff; color: #16181B; }
+.mhero button:focus-visible { outline: 2px solid #7DA7FF; outline-offset: 2px; }
 
 @media (max-width: 1000px) {
   .three, .cards, .creds, .footer-grid { grid-template-columns: 1fr; }
@@ -356,7 +399,7 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 </style>
 </head>
-<body>
+<body data-mhero="full">
 
 <header class="site-header">
   <div class="container">
@@ -375,6 +418,12 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
     </nav>
   </div>
 </header>
+
+<div class="mhero" role="group" aria-label="Mobile hero style">
+  <button type="button" data-m="full"   aria-pressed="true">Full</button>
+  <button type="button" data-m="column" aria-pressed="false">Column</button>
+  <button type="button" data-m="band"   aria-pressed="false">Band</button>
+</div>
 
 <main>
   <!-- ── Hero ─────────────────────────────────────────────────────── -->
@@ -568,6 +617,32 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="../shared/review.js"></script>
 <script>
+/* Phone hero style picker. Phone only — desktop is settled. */
+(function () {
+  var KEY = 'jmd-06-mhero', body = document.body;
+  function get() { try { return localStorage.getItem(KEY) || 'full'; } catch (e) { return 'full'; } }
+  function set(v) {
+    body.dataset.mhero = v;
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+    document.querySelectorAll('.mhero button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.m === v));
+    });
+  }
+  set(get());
+  document.querySelectorAll('.mhero button').forEach(function (b) {
+    b.addEventListener('click', function () { set(b.dataset.m); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (e.key.toLowerCase() === 'm') {
+      var order = ['full', 'column', 'band'];
+      set(order[(order.indexOf(body.dataset.mhero) + 1) % 3]);
+    }
+  });
+})();
+
 /* Motion matched to the source: a quiet staged hero, then short rise-and-fade
    reveals as each block enters. Nothing showy — the template's confidence is
    in its type and its spacing, not its movement. */
