@@ -191,10 +191,195 @@ a { color: inherit; text-decoration: none; }
   color: var(--slate);
 }
 
+/* ── The rest of the site ─────────────────────────────────────────────
+   Everything below the services carries the same three moves: hairline
+   rules, tracked micro-caps for labels, and extra-light Jost for anything
+   meant to be read as a statement. Sections alternate white and mist so
+   the page reads as weather changing, never as coloured bands. */
+:root {
+  --hair: color-mix(in srgb, var(--slate) 26%, transparent);
+  --hair-soft: color-mix(in srgb, var(--slate) 13%, transparent);
+  --body: color-mix(in srgb, var(--slate-deep) 84%, var(--white));
+}
+.caps {
+  font-size: clamp(9px, .78vw, 11px);
+  font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
+}
+.band { padding: clamp(80px, 13vh, 150px) var(--pad); border-top: 1px solid var(--hair); scroll-margin-top: 0; }
+.band--mist { background: var(--mist); border-top-color: transparent; }
+.eyebrow { display: flex; align-items: center; gap: 14px; margin: 0 0 clamp(22px, 3vh, 34px); color: var(--slate-soft); }
+.eyebrow::before { content: ''; width: 34px; height: 1px; background: currentColor; }
+.band h2 {
+  margin: 0;
+  max-width: 20ch;
+  font-size: clamp(1.5rem, 3.4vw, 2.9rem);
+  font-weight: 200; line-height: 1.22; letter-spacing: .01em;
+  color: var(--slate);
+}
+.band .intro {
+  margin: clamp(20px, 3vh, 30px) 0 0; max-width: 58ch;
+  font-size: clamp(.9rem, 1.05vw, 1.02rem); line-height: 1.8; color: var(--body);
+}
+
+/* scope under each service */
+.scope { list-style: none; margin: 24px 0 0; padding: 0; color: var(--slate); }
+.scope li { padding: 11px 0; border-top: 1px solid var(--hair-soft); }
+
+/* Jason's statement */
+.statement {
+  margin: clamp(64px, 10vh, 120px) 0 0;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 3vw, 52px);
+  align-items: start;
+}
+.statement .rule { height: clamp(60px, 7vw, 96px); margin-top: 8px; }
+.statement blockquote {
+  margin: 0; max-width: 34ch;
+  font-size: clamp(1.25rem, 2.3vw, 2rem); font-weight: 200; line-height: 1.45;
+  color: var(--slate);
+}
+.statement figcaption { margin-top: 24px; color: var(--slate-soft); }
+
+/* systems */
+.sys-grid {
+  margin-top: clamp(40px, 6vh, 70px);
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(40px, 6vw, 110px); align-items: start;
+}
+.sys-cap { margin: 0 0 14px; color: var(--slate-soft); }
+.sys { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.sys li {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 18px 0; border-bottom: 1px solid var(--hair-soft);
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem); font-weight: 200; letter-spacing: .04em;
+  color: var(--slate-deep);
+}
+.sys .idx { flex: none; width: 2.4em; color: var(--slate-soft); }
+.claims { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.claims li {
+  padding: clamp(18px, 2.4vh, 26px) 0; border-bottom: 1px solid var(--hair-soft);
+  font-size: clamp(1rem, 1.35vw, 1.22rem); font-weight: 300; line-height: 1.6;
+  color: var(--body);
+}
+
+/* reach */
+.reach { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 110px); align-items: end; }
+.facts { margin: 0; display: grid; grid-template-columns: auto 1fr; border-top: 1px solid var(--hair); }
+.facts dt, .facts dd { padding: 18px 0; border-bottom: 1px solid var(--hair-soft); margin: 0; }
+.facts dt { padding-right: clamp(20px, 3vw, 48px); color: var(--slate-soft); padding-top: 22px; }
+.facts dd { font-size: clamp(.95rem, 1.15vw, 1.1rem); font-weight: 300; line-height: 1.6; color: var(--slate-deep); }
+
+/* evidence — held open, not faked */
+.slots { margin-top: clamp(40px, 6vh, 64px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); }
+.slot {
+  margin: 0; min-height: 220px; padding: clamp(22px, 2.4vw, 32px);
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: var(--mist); border: 1px solid var(--hair-soft);
+}
+.slot p { margin: 0; font-size: clamp(1.05rem, 1.4vw, 1.3rem); font-weight: 200; line-height: 1.4; color: var(--slate); }
+.slot figcaption { padding-top: 16px; border-top: 1px solid var(--hair); color: var(--slate-soft); }
+
+/* enquiry */
+.enquiry { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(48px, 7vw, 130px); align-items: start; }
+.contact-lines { margin: clamp(34px, 5vh, 52px) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--hair); }
+.contact-lines li { padding: 16px 0; border-bottom: 1px solid var(--hair-soft); color: var(--slate-deep); }
+.contact-lines a { display: inline-flex; align-items: center; min-height: 24px; transition: opacity .2s ease; }
+.contact-lines a:hover { opacity: .6; }
+.form { display: grid; gap: clamp(22px, 3vh, 30px); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(22px, 3vw, 40px); }
+.field { display: grid; gap: 6px; }
+.field label { color: var(--slate-soft); }
+.field input, .field select, .field textarea {
+  width: 100%; min-height: 48px; padding: 10px 0;
+  border: 0; border-bottom: 1px solid var(--hair); border-radius: 0;
+  background: transparent; color: var(--slate-deep);
+  font: 300 1rem/1.5 'Jost', system-ui, sans-serif;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.field textarea { min-height: 120px; resize: vertical; }
+.field select {
+  appearance: none; cursor: pointer; padding-right: 28px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%236E839E' stroke-width='1.2'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E") no-repeat right 2px center / 11px;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--slate-soft); opacity: .8; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 0; border-bottom-color: var(--slate-deep); box-shadow: 0 1px 0 var(--slate-deep);
+}
+.field[data-invalid="true"] input, .field[data-invalid="true"] select, .field[data-invalid="true"] textarea {
+  border-bottom-color: #A23C2C; box-shadow: 0 1px 0 #A23C2C;
+}
+.err { display: none; margin: 0; color: #A23C2C; }
+.field[data-invalid="true"] .err { display: block; }
+.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; margin-top: 6px; }
+.send {
+  display: inline-flex; align-items: center; gap: 16px;
+  min-height: 52px; padding: 0 34px;
+  border: 1px solid var(--slate-deep); border-radius: 0; background: transparent;
+  color: var(--slate-deep); font-family: inherit; cursor: pointer;
+  transition: background .3s ease, color .3s ease;
+}
+.send:hover { background: var(--slate-deep); color: #fff; }
+.send .line { display: block; width: 26px; height: 1px; background: currentColor; }
+.form-note { margin: 0; color: var(--slate-soft); }
+.sent { display: none; padding: 26px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.sent p { margin: 0; font-size: clamp(1.05rem, 1.4vw, 1.3rem); font-weight: 200; color: var(--slate); }
+.sent span { display: block; margin-top: 12px; }
+.form[data-sent="true"] > :not(.sent) { display: none; }
+.form[data-sent="true"] .sent { display: block; }
+
+/* footer */
+.site-foot { padding: clamp(64px, 10vh, 110px) var(--pad) clamp(110px, 14vh, 140px); border-top: 1px solid var(--hair); }
+.foot-mark { display: flex; align-items: center; gap: 18px; margin-bottom: clamp(44px, 7vh, 72px); }
+.foot-mark .mark { width: 30px; }
+.foot-mark .rule { height: 34px; }
+.foot-mark span:last-child { font-size: 1.5rem; font-weight: 200; letter-spacing: .22em; color: var(--slate); }
+.foot-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px clamp(24px, 3vw, 56px); }
+.foot-cols h3 { margin: 0 0 18px; color: var(--slate-soft); }
+.foot-cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: .92rem; line-height: 1.5; color: var(--slate-deep); }
+.foot-cols a { transition: opacity .2s ease; }
+.foot-cols a:hover { opacity: .6; }
+.foot-base {
+  margin-top: clamp(48px, 7vh, 80px); padding-top: 22px; border-top: 1px solid var(--hair-soft);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; color: var(--slate-soft);
+}
+
+/* menu — the masthead's Menu button opens the whole site as one list */
+.menu-panel {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; flex-direction: column;
+  padding: clamp(24px, 3.6vw, 44px) var(--pad) clamp(100px, 13vh, 130px);
+  background: color-mix(in srgb, var(--white) 96%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s;
+}
+.menu-panel[data-open="true"] { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+.menu-top { display: flex; justify-content: flex-end; }
+.menu-close {
+  display: flex; align-items: center; gap: 12px; min-height: 44px;
+  background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit; color: var(--slate-deep);
+}
+.menu-close .x { position: relative; width: 16px; height: 16px; }
+.menu-close .x::before, .menu-close .x::after { content: ''; position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: currentColor; }
+.menu-close .x::before { transform: rotate(45deg); }
+.menu-close .x::after { transform: rotate(-45deg); }
+.menu-list { list-style: none; margin: auto 0; padding: 0; }
+.menu-list a {
+  display: flex; align-items: baseline; gap: clamp(16px, 2.4vw, 34px);
+  padding: clamp(8px, 1.4vh, 14px) 0;
+  font-size: clamp(1.8rem, 4.6vw, 4rem); font-weight: 200; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--slate); transition: color .25s ease, letter-spacing .5s cubic-bezier(.16,1,.3,1);
+}
+.menu-list a:hover { color: var(--slate-deep); letter-spacing: .16em; }
+.menu-list .caps { color: var(--slate-soft); width: 3em; flex: none; }
+html.menu-open { overflow: hidden; }
+
 @media (max-width: 980px) {
   .grid { grid-template-columns: 1fr; gap: 30px; }
   .divisions { display: none; }
   .name { letter-spacing: .14em; }
+  .sys-grid, .reach, .enquiry { grid-template-columns: 1fr; }
+  .slots { grid-template-columns: 1fr; }
+  .slot { min-height: 150px; }
+  .foot-cols { grid-template-columns: 1fr 1fr; }
 }
 /* ── Phone ────────────────────────────────────────────────────────────
    The tracked micro-caps that carry this design bottom out at 9px once
@@ -209,7 +394,23 @@ a { color: inherit; text-decoration: none; }
   .ledger { font-size: 12px; gap: 18px 24px; }
   .scroll-cue { min-height: 44px; }
   .hero-foot { padding-bottom: clamp(96px, 14vh, 124px); }
-  .services { padding-bottom: clamp(112px, 16vh, 168px); }
+  .caps { font-size: 12px; }
+  /* four ruled rows per service cost a screen and a half on a phone;
+     they read better as one wrapped line */
+  .scope { display: flex; flex-wrap: wrap; gap: 8px 0; margin-top: 18px; }
+  .scope li { padding: 0; border: 0; display: inline-flex; align-items: center; }
+  .scope li + li::before { content: ''; width: 3px; height: 3px; border-radius: 50%; background: var(--slate-soft); margin: 0 10px; }
+  .pair { grid-template-columns: 1fr; }
+  .foot-cols { grid-template-columns: 1fr; }
+  .foot-cols ul { gap: 0; }
+  .foot-cols a, .contact-lines a { min-height: 44px; display: inline-flex; align-items: center; }
+  .foot-cols li { min-height: 44px; display: flex; align-items: center; }
+  .send { width: 100%; justify-content: center; }
+  .facts { grid-template-columns: 1fr; }
+  .facts dt { padding-bottom: 0; border-bottom: 0; }
+  .facts dd { padding-top: 8px; }
+  .statement { grid-template-columns: 1fr; }
+  .statement .rule { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; } }
@@ -229,11 +430,11 @@ a { color: inherit; text-decoration: none; }
       <a href="#services">Project Management</a>
       <a href="#services">Systems Implementation</a>
       <a href="#services">ETL &amp; BI</a>
-      <a href="#ledger">CODA / Unit4</a>
+      <a href="#systems">CODA / Unit4</a>
     </nav>
     <div class="utility">
       <a href="#ledger">Clients <span class="badge">100</span></a>
-      <button type="button">Menu <span class="dots"><i></i><i></i></span></button>
+      <button type="button" id="menu-open" aria-controls="menu" aria-expanded="false">Menu <span class="dots"><i></i><i></i></span></button>
     </div>
   </div>
 
@@ -270,16 +471,42 @@ a { color: inherit; text-decoration: none; }
       <article class="svc" data-svc>
         <h3>Project Management</h3>
         <p>Providing project management services to clients including project planning, resource management, risk analysis, and tracking and monitoring budgets.</p>
+        <ul class="scope caps">
+          <li>Project planning</li>
+          <li>Resource management</li>
+          <li>Risk analysis</li>
+          <li>Budget tracking</li>
+        </ul>
       </article>
       <article class="svc" data-svc>
         <h3>Systems Implementation</h3>
         <p>Offering experience of ERP Implementations with a proven track record of delivering complex multi-currency, multi-company and multi-site ERP financial reporting systems.</p>
+        <ul class="scope caps">
+          <li>ERP implementation</li>
+          <li>Multi-currency</li>
+          <li>Multi-company</li>
+          <li>Multi-site reporting</li>
+        </ul>
       </article>
       <article class="svc" data-svc>
         <h3>ETL &amp; Business Intelligence</h3>
         <p>Servicing clients in Europe, throughout the USA and Canada with business intelligence expertise, developing complex financial reports and KPIs. Migrating financial data from legacy systems, data analysis, development of SQL scripts and stored procedures.</p>
+        <ul class="scope caps">
+          <li>Financial reports &amp; KPIs</li>
+          <li>Legacy data migration</li>
+          <li>Data analysis</li>
+          <li>SQL &amp; stored procedures</li>
+        </ul>
       </article>
     </div>
+
+    <figure class="statement" data-rise>
+      <span class="rule" aria-hidden="true"></span>
+      <div>
+        <blockquote>We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive delivers a solution. In short, a &lsquo;Solution Service&rsquo;.</blockquote>
+        <figcaption class="caps">Jason Dodd &middot; Managing Director</figcaption>
+      </div>
+    </figure>
 
     <div class="ledger" id="ledger">
       <span>CODA / Unit4 Financials® since 1990</span>
@@ -288,7 +515,183 @@ a { color: inherit; text-decoration: none; }
       <span>+44 (0) 1423 884000</span>
     </div>
   </section>
+
+  <section class="band" id="systems">
+    <p class="eyebrow caps" data-rise>Systems</p>
+    <h2 data-rise>Practised systems</h2>
+    <div class="sys-grid">
+      <div data-rise>
+        <p class="sys-cap caps">Systems worked with in delivery</p>
+        <ul class="sys">
+          <li><span class="idx caps">01</span>CODA / Unit4 Financials®</li>
+          <li><span class="idx caps">02</span>NetSuite®</li>
+          <li><span class="idx caps">03</span>Microsoft SQL Server®</li>
+          <li><span class="idx caps">04</span>Oracle®</li>
+        </ul>
+      </div>
+      <ul class="claims" data-rise>
+        <li>We specialise in the delivery of consultancy services and systems integration solutions.</li>
+        <li>Thanks to our clients and business partnerships we can deliver solutions using the latest technologies and ideas.</li>
+        <li>With our proven experience we are well placed to provide a high quality service to our clients and at competitive rates.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--mist" id="reach">
+    <div class="reach">
+      <div data-rise>
+        <p class="eyebrow caps">Reach</p>
+        <h2>Harrogate is our base</h2>
+        <p class="intro">The practice sits in North Yorkshire at the gateway to the Dales — twenty minutes from Leeds Bradford airport, thirty from York station. Where a site visit is not wanted, the work runs remotely into your servers or desktops.</p>
+      </div>
+      <dl class="facts" data-rise>
+        <dt class="caps">Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
+        <dt class="caps">Base</dt><dd>Harrogate, North Yorkshire</dd>
+        <dt class="caps">Formed</dt><dd>January 2000</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="band" id="evidence">
+    <p class="eyebrow caps" data-rise>Client evidence</p>
+    <h2 data-rise>Held open for the clients&rsquo; own words.</h2>
+    <p class="intro" data-rise>This practice does not publish a client list it has not been given permission to publish, and does not write its own testimonials. Three slots sit here for the real ones.</p>
+    <div class="slots">
+      <figure class="slot" data-rise><p>Client testimonial to be supplied</p><figcaption class="caps">Slot 01 &middot; awaiting content</figcaption></figure>
+      <figure class="slot" data-rise><p>Client testimonial to be supplied</p><figcaption class="caps">Slot 02 &middot; awaiting content</figcaption></figure>
+      <figure class="slot" data-rise><p>Case study to be supplied</p><figcaption class="caps">Slot 03 &middot; awaiting content</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="band band--mist" id="enquiry">
+    <div class="enquiry">
+      <div data-rise>
+        <p class="eyebrow caps">Enquiry</p>
+        <h2>Tell me what the system is doing.</h2>
+        <p class="intro">The more precise you are about the system and the symptom, the more useful the first reply will be. Every enquiry is read by Jason.</p>
+        <ul class="contact-lines caps">
+          <li><a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></li>
+          <li><a href="tel:+441423884000">+44 (0) 1423 884000</a></li>
+          <li>Harrogate, North Yorkshire, United Kingdom</li>
+        </ul>
+      </div>
+
+      <form class="form" id="enquiry-form" novalidate data-rise>
+        <div class="pair">
+          <div class="field" data-field>
+            <label class="caps" for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <p class="err caps">Enter your name</p>
+          </div>
+          <div class="field" data-field>
+            <label class="caps" for="f-org">Organisation</label>
+            <input id="f-org" name="organisation" type="text" autocomplete="organization" required>
+            <p class="err caps">Enter your organisation</p>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="field" data-field>
+            <label class="caps" for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <p class="err caps">Enter a valid email address</p>
+          </div>
+          <div class="field" data-field>
+            <label class="caps" for="f-sys">Finance system</label>
+            <select id="f-sys" name="system" required>
+              <option value="">Select&hellip;</option>
+              <option>CODA / Unit4 Financials</option>
+              <option>NetSuite</option>
+              <option>Another ERP</option>
+              <option>Not sure yet</option>
+            </select>
+            <p class="err caps">Choose a system</p>
+          </div>
+        </div>
+        <div class="field" data-field>
+          <label class="caps" for="f-detail">What is happening</label>
+          <textarea id="f-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger&hellip;"></textarea>
+          <p class="err caps">Tell me briefly what is happening</p>
+        </div>
+        <div class="form-foot">
+          <button class="send caps" type="submit">Send enquiry <span class="line" aria-hidden="true"></span></button>
+          <p class="form-note caps">Replies come from Jason directly, usually the same working day.</p>
+        </div>
+        <div class="sent" role="status" tabindex="-1">
+          <p>Enquiry recorded.</p>
+          <span class="caps">Demonstration only — this concept is not yet wired to a mailbox.</span>
+        </div>
+      </form>
+    </div>
+  </section>
 </main>
+
+<footer class="site-foot">
+  <div class="foot-mark" aria-label="JMD Consulting">
+    <svg class="mark" viewBox="0 0 32 36" aria-hidden="true">
+      <circle cx="16" cy="4"  r="1.7"/>
+      <circle cx="11" cy="9"  r="1.7"/><circle cx="16" cy="9"  r="1.7"/><circle cx="21" cy="9"  r="1.7"/>
+      <circle cx="6"  cy="14" r="1.7"/><circle cx="11" cy="14" r="1.7"/><circle cx="16" cy="14" r="1.7"/><circle cx="21" cy="14" r="1.7"/><circle cx="26" cy="14" r="1.7"/>
+      <circle cx="6"  cy="19" r="1.7"/><circle cx="11" cy="19" r="1.7"/><circle cx="16" cy="19" r="1.7"/><circle cx="21" cy="19" r="1.7"/><circle cx="26" cy="19" r="1.7"/>
+      <circle cx="11" cy="24" r="1.7"/><circle cx="16" cy="24" r="1.7"/><circle cx="21" cy="24" r="1.7"/>
+      <line x1="16" y1="26" x2="16" y2="34"/>
+    </svg>
+    <span class="rule"></span>
+    <span>JMD</span>
+  </div>
+  <div class="foot-cols">
+    <div>
+      <h3 class="caps">Practice</h3>
+      <ul>
+        <li>JMD Consulting</li>
+        <li>Jason Dodd, Managing Director</li>
+        <li>Formed January 2000</li>
+        <li>CODA consultancy since 1990</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="caps">Services</h3>
+      <ul>
+        <li><a href="#services">Project management</a></li>
+        <li><a href="#services">Systems implementation</a></li>
+        <li><a href="#services">ETL &amp; business intelligence</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="caps">Systems</h3>
+      <ul>
+        <li>CODA / Unit4 Financials®</li>
+        <li>NetSuite®</li>
+        <li>Microsoft SQL Server®</li>
+        <li>Oracle®</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="caps">Contact</h3>
+      <ul>
+        <li><a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></li>
+        <li><a href="tel:+441423884000">+44 (0) 1423 884000</a></li>
+        <li>Harrogate, North Yorkshire</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-base caps">
+    <span>&copy; 2000&ndash;2026 JMD Consulting</span>
+    <span>CODA and Unit4 Financials are trademarks of their respective owners</span>
+  </div>
+</footer>
+
+<div class="menu-panel" id="menu" role="dialog" aria-modal="true" aria-label="Site menu" data-open="false">
+  <div class="menu-top">
+    <button class="menu-close caps" type="button" id="menu-close">Close <span class="x" aria-hidden="true"></span></button>
+  </div>
+  <ol class="menu-list">
+    <li><a href="#services"><span class="caps">01</span>Services</a></li>
+    <li><a href="#systems"><span class="caps">02</span>Systems</a></li>
+    <li><a href="#reach"><span class="caps">03</span>Reach</a></li>
+    <li><a href="#evidence"><span class="caps">04</span>Evidence</a></li>
+    <li><a href="#enquiry"><span class="caps">05</span>Enquiry</a></li>
+  </ol>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -335,12 +738,70 @@ a { color: inherit; text-decoration: none; }
     });
   });
 
+  /* The rest of the page arrives the same way, a little quieter. */
+  gsap.utils.toArray('[data-rise]').forEach(function (el) {
+    gsap.from(el, {
+      y: 22, opacity: 0, duration: 1.2, ease: 'expo.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
   document.getElementById('cue').addEventListener('click', function () {
     document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
   });
 
   gsap.to('.scroll-cue .line', { scaleX: .35, duration: 1.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
   jmdSettleScroll();
+})();
+
+/* Menu. Works with or without GSAP and under reduced motion. */
+(function () {
+  var panel = document.getElementById('menu'),
+      open = document.getElementById('menu-open'),
+      close = document.getElementById('menu-close');
+  function set(on) {
+    panel.dataset.open = String(on);
+    open.setAttribute('aria-expanded', String(on));
+    document.documentElement.classList.toggle('menu-open', on);
+    if (on) close.focus(); else open.focus({ preventScroll: true });
+  }
+  open.addEventListener('click', function () { set(true); });
+  close.addEventListener('click', function () { set(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && panel.dataset.open === 'true') set(false);
+  });
+  panel.querySelectorAll('.menu-list a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      set(false);
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+})();
+
+/* Enquiry form — validates in place; not wired to a mailbox yet. */
+(function () {
+  var form = document.getElementById('enquiry-form');
+  function check(f) {
+    var c = f.querySelector('input,select,textarea');
+    var ok = c.value.trim() !== '' && (c.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.value.trim()));
+    f.dataset.invalid = String(!ok);
+    c.setAttribute('aria-invalid', String(!ok));
+    return ok;
+  }
+  form.querySelectorAll('[data-field]').forEach(function (f) {
+    var c = f.querySelector('input,select,textarea');
+    c.addEventListener('blur', function () { if (c.value.trim() !== '' || f.dataset.invalid === 'true') check(f); });
+    c.addEventListener('input', function () { if (f.dataset.invalid === 'true') check(f); });
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    form.querySelectorAll('[data-field]').forEach(function (f) { if (!check(f) && !bad) bad = f; });
+    if (bad) { bad.querySelector('input,select,textarea').focus(); return; }
+    form.dataset.sent = 'true';
+    form.querySelector('.sent').focus();
+  });
 })();
 </script>
 </body>

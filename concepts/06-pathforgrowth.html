@@ -257,9 +257,113 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
 }
 .cred p { margin: 0; }
 
+/* ── Scope under each service card ─────────────────────────────────── */
+.scope { list-style: none; margin: 4px 0 0; padding: 0; border-top: 1px solid var(--border); }
+.scope li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-family: 'Oswald', sans-serif; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted-fg);
+}
+.scope li::before { content: ''; width: 6px; height: 6px; background: var(--tan); flex: none; }
+
+/* ── Systems ───────────────────────────────────────────────────────── */
+.systems { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(36px, 6vw, 96px); align-items: start; }
+.sys-cap { font-family: 'Oswald', sans-serif; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-fg); margin: 0 0 14px; }
+.sys { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--tan); }
+.sys li {
+  display: flex; align-items: baseline; gap: 20px;
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+  font-family: 'Oswald', sans-serif; font-weight: 500; text-transform: uppercase;
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem); letter-spacing: .02em;
+}
+.sys .n { font-weight: 400; font-size: .9rem; color: var(--tan-text); width: 2ch; flex: none; }
+.claims { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.claims li {
+  background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--tan);
+  padding: clamp(18px, 2vw, 26px) clamp(20px, 2.4vw, 30px);
+  font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.6;
+}
+
+/* ── Reach ─────────────────────────────────────────────────────────── */
+.reach { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.reach-photo { aspect-ratio: 4 / 3; overflow: hidden; }
+.reach-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 55%; }
+.reach h2 { margin-bottom: 20px; }
+.reach .body { margin: 0; }
+.facts { margin: 28px 0 0; display: grid; grid-template-columns: auto 1fr; border-top: 3px solid var(--tan); }
+.facts dt, .facts dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.facts dt {
+  padding-right: 28px;
+  font-family: 'Oswald', sans-serif; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--tan-text); padding-top: 17px;
+}
+.facts dd { line-height: 1.6; }
+
+/* ── Evidence — held open, never faked ────────────────────────────── */
+.slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.slot {
+  margin: 0; min-height: 220px; padding: clamp(24px, 2.6vw, 34px);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
+  border: 1px dashed #BDB6AD;
+  background: repeating-linear-gradient(135deg, transparent 0 11px, rgba(138,107,71,.06) 11px 12px), #fff;
+}
+.slot .q { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 3.2rem; line-height: .6; color: var(--tan-bright); opacity: .5; }
+.slot p { margin: 0; font-style: italic; font-size: 1.1rem; line-height: 1.5; color: var(--muted-fg); }
+.slot figcaption { font-family: 'Oswald', sans-serif; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-fg); }
+
+/* ── Contact + enquiry ─────────────────────────────────────────────── */
+.contact { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(36px, 5vw, 80px); align-items: start; }
+.contact h2 { margin-bottom: 20px; }
+.contact .lead { margin: 0 0 16px; }
+.contact .body { margin: 0 0 28px; }
+.contact-lines { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid rgba(255,254,245,.3); }
+.contact-lines li { border-bottom: 1px solid rgba(255,254,245,.3); }
+.contact-lines a, .contact-lines span {
+  display: flex; align-items: center; min-height: 52px;
+  font-family: 'Oswald', sans-serif; font-size: .95rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--cream); text-decoration: none;
+}
+.contact-lines a:hover { text-decoration: underline; }
+.form-card { background: var(--cream); color: var(--ink); padding: clamp(24px, 3vw, 44px); }
+.block-tan .form-card .body { color: var(--muted-fg); }
+/* anchor jumps clear the 80px sticky header */
+section[id] { scroll-margin-top: 80px; }
+.form-card h3 { margin: 0 0 24px; font-weight: 700; }
+.form { display: grid; gap: 20px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.field { display: grid; gap: 8px; }
+.field label { font-family: 'Oswald', sans-serif; font-size: .8rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.field label i { font-style: normal; color: var(--tan-text); }
+.field input, .field select, .field textarea {
+  width: 100%; min-height: 52px; padding: 12px 14px;
+  border: 1px solid var(--border); border-radius: 0; background: #fff; color: var(--ink);
+  font: 400 1rem/1.5 'Lora', Georgia, serif;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field textarea { min-height: 132px; resize: vertical; }
+.field select {
+  appearance: none; cursor: pointer; padding-right: 40px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%237E6241' stroke-width='1.6'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E") no-repeat right 14px center / 12px;
+}
+.field input::placeholder, .field textarea::placeholder { color: #8C877F; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-color: var(--tan); box-shadow: inset 0 0 0 1px var(--tan); }
+.field[data-invalid="true"] input, .field[data-invalid="true"] select, .field[data-invalid="true"] textarea { border-color: #A2381F; box-shadow: inset 0 0 0 1px #A2381F; }
+.err { display: none; margin: 0; font-family: 'Oswald', sans-serif; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: #A2381F; }
+.field[data-invalid="true"] .err { display: block; }
+.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.form-foot .btn { border: 0; }
+.form-note { margin: 0; font-size: .92rem; color: var(--muted-fg); }
+.sent { display: none; padding: 22px 24px; border-left: 3px solid var(--tan); background: #fff; }
+.sent p { margin: 0; }
+.sent .ossy { font-weight: 700; font-size: 1.3rem; margin-bottom: 6px; }
+.form[data-sent="true"] > :not(.sent) { display: none; }
+.form[data-sent="true"] .sent { display: block; }
+
 /* ── Footer ────────────────────────────────────────────────────────── */
 .site-footer { background: var(--ink); color: var(--cream); padding-block: clamp(48px, 6vw, 72px) 120px; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(28px, 4vw, 64px); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(28px, 4vw, 64px); }
+.site-footer li:not(:has(a)) { font-size: .95rem; color: rgba(255,254,245,.72); }
 .site-footer .brand-name { color: var(--cream); }
 .site-footer h3 { font-size: .82rem; letter-spacing: .12em; margin-bottom: 16px; color: rgba(255,254,245,.62); }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -374,7 +478,8 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
 .mhero button:focus-visible { outline: 2px solid #7DA7FF; outline-offset: 2px; }
 
 @media (max-width: 1000px) {
-  .three, .cards, .creds, .footer-grid { grid-template-columns: 1fr; }
+  .three, .cards, .creds, .footer-grid, .systems, .reach, .slots, .contact { grid-template-columns: 1fr; }
+  .slot { min-height: 160px; }
   .three { gap: 34px; }
   .founder { grid-template-columns: 1fr; }
   .plate { max-width: 340px; }
@@ -394,6 +499,10 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
   .site-footer ul a { display: inline-flex; align-items: center; min-height: 44px; }
   .plate-note { font-size: 12px; }
   .strip-label { font-size: 12px; }
+  .pair { grid-template-columns: 1fr; }
+  .form-foot .btn { width: 100%; }
+  .slot figcaption, .sys-cap { font-size: 12px; }
+  .site-footer li:not(:has(a)) { min-height: 44px; display: flex; align-items: center; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
@@ -412,7 +521,8 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
     </a>
     <nav class="site-nav">
       <a class="nav-link" href="#services">Services</a>
-      <a class="nav-link" href="#approach">Approach</a>
+      <a class="nav-link" href="#systems">Systems</a>
+      <a class="nav-link" href="#reach">Harrogate</a>
       <a class="nav-link" href="#credentials">Credentials</a>
       <a class="btn btn-primary btn-sm" href="#contact">Contact Us</a>
     </nav>
@@ -516,6 +626,12 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
         <article class="card" data-rise>
           <h3>Project Management</h3>
           <p class="body">Providing project management services to clients including project planning, resource management, risk analysis, and tracking and monitoring budgets.</p>
+          <ul class="scope">
+            <li>Project planning</li>
+            <li>Resource management</li>
+            <li>Risk analysis</li>
+            <li>Budget tracking</li>
+          </ul>
           <a class="more" href="#contact">Learn more
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
           </a>
@@ -523,6 +639,12 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
         <article class="card" data-rise>
           <h3>Systems Implementation</h3>
           <p class="body">Offering experience of ERP Implementations with a proven track record of delivering complex multi-currency, multi-company and multi-site ERP financial reporting systems.</p>
+          <ul class="scope">
+            <li>ERP implementation</li>
+            <li>Multi-currency</li>
+            <li>Multi-company</li>
+            <li>Multi-site reporting</li>
+          </ul>
           <a class="more" href="#contact">Learn more
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
           </a>
@@ -530,6 +652,12 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
         <article class="card" data-rise>
           <h3>ETL &amp; Business Intelligence</h3>
           <p class="body">Business intelligence expertise, developing complex financial reports and KPIs. Migrating financial data from legacy systems, data analysis, development of SQL scripts and stored procedures.</p>
+          <ul class="scope">
+            <li>Financial reports &amp; KPIs</li>
+            <li>Legacy data migration</li>
+            <li>Data analysis</li>
+            <li>SQL &amp; stored procedures</li>
+          </ul>
           <a class="more" href="#contact">Learn more
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 6.5h10M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
           </a>
@@ -545,14 +673,47 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
     </div>
   </section>
 
-  <!-- ── Centred CTA ──────────────────────────────────────────────── -->
-  <section class="block block-tan" id="contact">
+  <!-- ── Systems ──────────────────────────────────────────────────── -->
+  <section class="block" id="systems">
     <div class="container">
-      <div class="cta" data-rise>
-        <h2>Working with you</h2>
-        <p class="lead">Tell us where the system is failing and we will tell you what it takes to fix it. We work on site across the UK and internationally, or connect remotely to your servers and desktop devices.</p>
-        <a class="btn btn-light" href="tel:+441423884000">Call +44 (0) 1423 884000</a>
-        <p class="sub">Or email <a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></p>
+      <div class="section-head" data-rise>
+        <h2>Practised systems</h2>
+      </div>
+      <div class="systems">
+        <div data-rise>
+          <p class="sys-cap">Systems worked with in delivery</p>
+          <ul class="sys">
+            <li><span class="n">01</span>CODA / Unit4 Financials®</li>
+            <li><span class="n">02</span>NetSuite®</li>
+            <li><span class="n">03</span>Microsoft SQL Server®</li>
+            <li><span class="n">04</span>Oracle®</li>
+          </ul>
+        </div>
+        <ul class="claims" data-rise>
+          <li>We specialise in the delivery of consultancy services and systems integration solutions.</li>
+          <li>Thanks to our clients and business partnerships we can deliver solutions using the latest technologies and ideas.</li>
+          <li>With our proven experience we are well placed to provide a high quality service to our clients and at competitive rates.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Reach ────────────────────────────────────────────────────── -->
+  <section class="block block-muted" id="reach">
+    <div class="container">
+      <div class="reach">
+        <div class="reach-photo" data-rise>
+          <img src="../assets/harrogate/harrogate-03.jpg" alt="Harrogate: trees in blossom across an open common, with sandstone terraces and a church spire behind." loading="lazy">
+        </div>
+        <div data-rise>
+          <h2>Harrogate is our base</h2>
+          <p class="body">The practice sits in North Yorkshire at the gateway to the Dales — twenty minutes from Leeds Bradford airport, thirty from York station. Where a site visit is not wanted, the work runs remotely into your servers or desktops.</p>
+          <dl class="facts">
+            <dt>Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
+            <dt>Base</dt><dd>Harrogate, North Yorkshire</dd>
+            <dt>Formed</dt><dd>January 2000</dd>
+          </dl>
+        </div>
       </div>
     </div>
   </section>
@@ -579,6 +740,88 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
       </div>
     </div>
   </section>
+
+  <!-- ── Evidence — slots for real testimonials ───────────────────── -->
+  <section class="block block-muted" id="evidence">
+    <div class="container">
+      <div class="section-head" data-rise>
+        <h2>Held open for the clients&rsquo; own words</h2>
+        <p class="lead body">This practice does not publish a client list it has not been given permission to publish, and does not write its own testimonials. Three slots sit here for the real ones.</p>
+      </div>
+      <div class="slots">
+        <figure class="slot" data-rise><span class="q" aria-hidden="true">&ldquo;</span><p>Client testimonial to be supplied</p><figcaption>Slot 01 · Awaiting content</figcaption></figure>
+        <figure class="slot" data-rise><span class="q" aria-hidden="true">&ldquo;</span><p>Client testimonial to be supplied</p><figcaption>Slot 02 · Awaiting content</figcaption></figure>
+        <figure class="slot" data-rise><span class="q" aria-hidden="true">&ldquo;</span><p>Case study to be supplied</p><figcaption>Slot 03 · Awaiting content</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact + enquiry ────────────────────────────────────────── -->
+  <section class="block block-tan" id="contact">
+    <div class="container">
+      <div class="contact">
+        <div data-rise>
+          <h2>Working with you</h2>
+          <p class="lead">Tell us where the system is failing and we will tell you what it takes to fix it. We work on site across the UK and internationally, or connect remotely to your servers and desktop devices.</p>
+          <p class="body">The more precise you are about the system and the symptom, the more useful the first reply will be. Every enquiry is read by Jason.</p>
+          <a class="btn btn-light" href="tel:+441423884000">Call +44 (0) 1423 884000</a>
+          <ul class="contact-lines">
+            <li><a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></li>
+            <li><span>Harrogate, North Yorkshire, United Kingdom</span></li>
+          </ul>
+        </div>
+
+        <div class="form-card" data-rise>
+          <h3>Tell us what the system is doing</h3>
+          <form class="form" id="enquiry-form" novalidate>
+            <div class="pair">
+              <div class="field" data-field>
+                <label for="f-name">Name <i aria-hidden="true">*</i></label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required>
+                <p class="err">Enter your name</p>
+              </div>
+              <div class="field" data-field>
+                <label for="f-org">Organisation <i aria-hidden="true">*</i></label>
+                <input id="f-org" name="organisation" type="text" autocomplete="organization" required>
+                <p class="err">Enter your organisation</p>
+              </div>
+            </div>
+            <div class="pair">
+              <div class="field" data-field>
+                <label for="f-email">Email <i aria-hidden="true">*</i></label>
+                <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+                <p class="err">Enter a valid email address</p>
+              </div>
+              <div class="field" data-field>
+                <label for="f-sys">Finance system <i aria-hidden="true">*</i></label>
+                <select id="f-sys" name="system" required>
+                  <option value="">Select&hellip;</option>
+                  <option>CODA / Unit4 Financials</option>
+                  <option>NetSuite</option>
+                  <option>Another ERP</option>
+                  <option>Not sure yet</option>
+                </select>
+                <p class="err">Choose a system</p>
+              </div>
+            </div>
+            <div class="field" data-field>
+              <label for="f-detail">What is happening <i aria-hidden="true">*</i></label>
+              <textarea id="f-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger&hellip;"></textarea>
+              <p class="err">Tell us briefly what is happening</p>
+            </div>
+            <div class="form-foot">
+              <button class="btn btn-primary" type="submit">Send enquiry</button>
+              <p class="form-note">Replies come from Jason directly, usually the same working day.</p>
+            </div>
+            <div class="sent" role="status" tabindex="-1">
+              <p class="ossy">Enquiry recorded</p>
+              <p class="body">Demonstration only — this concept is not yet wired to a mailbox.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -587,6 +830,7 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
       <div>
         <span class="brand-name">JMD Consulting</span>
         <p class="footer-blurb">Financial systems and integration consulting services. Based in Harrogate, North Yorkshire, working with clients across the globe.</p>
+        <p class="footer-blurb">Jason Dodd, Managing Director. Formed January 2000; CODA consultancy since 1990.</p>
       </div>
       <div>
         <h3 class="ossy">Services</h3>
@@ -598,17 +842,27 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
         </ul>
       </div>
       <div>
+        <h3 class="ossy">Systems</h3>
+        <ul>
+          <li>CODA / Unit4 Financials®</li>
+          <li>NetSuite®</li>
+          <li>Microsoft SQL Server®</li>
+          <li>Oracle®</li>
+        </ul>
+      </div>
+      <div>
         <h3 class="ossy">Contact</h3>
         <ul>
           <li><a href="tel:+441423884000">+44 (0) 1423 884000</a></li>
           <li><a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a></li>
           <li><a href="https://www.jmdconsulting.co.uk">www.jmdconsulting.co.uk</a></li>
+          <li>Harrogate, North Yorkshire</li>
         </ul>
       </div>
     </div>
     <div class="footer-base">
       <span>© 2000–2026 JMD Consulting. All rights reserved.</span>
-      <span>Harrogate · North Yorkshire</span>
+      <span>CODA and Unit4 Financials are trademarks of their respective owners</span>
     </div>
   </div>
 </footer>
@@ -676,6 +930,31 @@ section.block { padding-block: clamp(56px, 8vw, 96px); }
   });
 
   jmdSettleScroll();
+})();
+
+/* Enquiry form — validates in place; not wired to a mailbox yet. */
+(function () {
+  var form = document.getElementById('enquiry-form');
+  function check(f) {
+    var c = f.querySelector('input,select,textarea');
+    var ok = c.value.trim() !== '' && (c.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.value.trim()));
+    f.dataset.invalid = String(!ok);
+    c.setAttribute('aria-invalid', String(!ok));
+    return ok;
+  }
+  form.querySelectorAll('[data-field]').forEach(function (f) {
+    var c = f.querySelector('input,select,textarea');
+    c.addEventListener('blur', function () { if (c.value.trim() !== '' || f.dataset.invalid === 'true') check(f); });
+    c.addEventListener('input', function () { if (f.dataset.invalid === 'true') check(f); });
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    form.querySelectorAll('[data-field]').forEach(function (f) { if (!check(f) && !bad) bad = f; });
+    if (bad) { bad.querySelector('input,select,textarea').focus(); return; }
+    form.dataset.sent = 'true';
+    form.querySelector('.sent').focus();
+  });
 })();
 </script>
 </body>

@@ -4,8 +4,10 @@ Three homepage directions for **JMD Consulting**, an independent finance-systems
 consultancy in Harrogate, North Yorkshire (founded 2000; CODA/Unit4 Financials®
 and NetSuite® on MS SQL Server® or Oracle®).
 
-Each concept is a hero plus one content section — enough to settle a visual
-direction before a full site is built.
+Concepts 02 and 06 are now full single-page sites. Each carries all of concept
+08's content (services with scope lists, Jason's statement, systems, Harrogate
+and reach, held-open testimonial slots, the enquiry form, and the full footer)
+in its own design language.
 
 ## Run it
 
