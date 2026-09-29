@@ -47,9 +47,12 @@ cues literally:
 | 06 | Path for Growth | Oswald + Lora, cream and tan, square corners, Harrogate hero |
 | 08 | Chalk | Supplied by the client — Spectral + Martian Mono, chalk blue, navy, ochre |
 
+`09 Joe` also exists as a scratch page and is not a concept.
+
 Concepts 01 (Son Daven), 03 (ERA), 04 (Yolkk), 05 (Immersive Garden) and
 the 07 Harrogate image picker were reviewed and dropped; they are kept in
-`_archive/` with their assets.
+`_archive/` with their assets, along with the cloud plates from a rolling-cloud
+intro for 02 that was built and then reverted.
 
 No DESIGN.md: competing worlds is the point of the exercise. Whichever is
 chosen becomes it.
@@ -67,6 +70,9 @@ source typos are corrected. No invented claims, clients, metrics or testimonials
   moves between concepts in the same tab.
 - One hero image per concept. The Land/Genre comparison was resolved and the
   switching machinery removed.
+- Concept 06's phone hero is the one open decision: three styles (Full, Column,
+  Band) ship behind a phone-only picker. Desktop is settled. The losing two and
+  the picker come out once a style is chosen.
 - Full motion: GSAP, scroll behaviour, authored intros. `prefers-reduced-motion`
   respected everywhere.
 - Phone: no horizontal scroll at 320px, every control at least 44px, no text
