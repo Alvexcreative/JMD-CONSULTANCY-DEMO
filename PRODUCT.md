@@ -24,6 +24,13 @@ Three services: Project Management · Systems Implementation · ETL & BI.
 
 Positioning: clients want solutions, not reports. "Solution Services."
 
+**Present JMD as a practice, not a person.** The live site names Jason Dodd as
+Managing Director and signs its central quote with his name. The client has
+asked that this be removed so the business reads as a firm with staff. Keep the
+quote verbatim, attribute it to JMD Consulting, and write in the plural — which
+their own copy already does ("our consultancy", "our team", "we specialise").
+Do not invent team size, offices or named staff.
+
 ## Audience
 
 Finance directors, financial controllers and IT leads at mid-to-large companies

@@ -41,6 +41,19 @@ picked from a phone-only control at the top right or by pressing `M`:
 All three are review scaffolding. Once one is chosen, the other two and the
 picker should come out.
 
+## Positioning
+
+The site presents JMD as a practice, not an individual. The live site names
+Jason Dodd as Managing Director and attributes its central quote to him; that
+framing has been **deliberately removed** at the client's direction so the
+business reads as a firm with staff. The quote is kept verbatim but attributed
+to JMD Consulting, and first-person singular ("tell me", "replies come from
+Jason") is now plural throughout.
+
+This is supported by JMD's own wording, which is already plural — "our
+consultancy", "our team", "we specialise", "we are able to travel". No claim
+about team size, offices or named staff has been invented.
+
 ## Content
 
 All copy is JMD's own, taken from the live site — see `CONTENT-SOURCE.md` for the
@@ -56,8 +69,9 @@ Hero and background images were generated, not photographed. They read as
 Harrogate but are **not** documentary — no specific building is accurate. A live
 build wants licensed stock or a commissioned photographer.
 
-Concept 06's founder block needs a real photograph of Jason Dodd; it currently
-uses a monogram plate labelled as a placeholder.
+Concept 06's practice block uses a monogram plate over a room photograph. If a
+real image is wanted there, it should show the team or the working environment
+rather than an individual.
 
 ## Verified
 

@@ -79,7 +79,7 @@ the template's main rhythmic device.
 | Hero lead | "Solution Services" positioning paragraph | verbatim |
 | "Trusted by" client logos | platform strip: CODA/Unit4, NetSuite, MS SQL Server, Oracle | verbatim from About |
 | Problem / Guide / Success | same three headings, JMD framing | see note below |
-| Alex Judd, Founder & CEO + quote | Jason Dodd, Managing Director + his quote | verbatim |
+| Alex Judd, Founder & CEO + quote | "Our practice" + the same quote, attributed to JMD Consulting | quote verbatim, person removed |
 | Choose Your Path (5 cards) | Our Services (4 cards: 3 services + CODA/Unit4) | verbatim |
 | Community CTA | "Working with you" + contact | verbatim tagline |
 | Testimonials | **replaced** — credentials strip | JMD has no testimonials |
@@ -96,5 +96,6 @@ in the concept file and must be approved or replaced before any real build:
 2. **Testimonials** — the entire section is replaced with verifiable facts,
    because inventing client quotes is not an option.
 
-A real photograph of Jason Dodd is also required for the founder slot; concept
-06 uses a monogram plate in that position as a placeholder.
+The founder slot has been repurposed: JMD is presented as a practice rather
+than an individual, so the portrait position holds a monogram plate over a room
+photograph instead of a person.
