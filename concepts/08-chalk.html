@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="1">
 <!-- Concept 08 — supplied as "JMD Consulting.zip" on 2026-09-22 and added to the
      review set unchanged, apart from: the logo path (now ../assets/), and the
      shared review harness appended at the end so the concept switcher appears.
@@ -192,6 +192,214 @@ p{margin:0}
 html.past-hero .sn--dock ol{gap:0}
 html.past-hero .sn--dock a{min-height:38px;padding-left:22px}
 html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
+
+/* ── Photographic hero (October 2026, under review) ─────────────────────
+      The client's note was that the page read as too plain for an
+      established firm. The chalk room stays, and a photograph now sits
+      under it: a veil of the same chalk holds the left of the frame, where
+      the mark and the headline live, and clears across the right so the
+      picture runs true behind the contents rail. The copy column is
+      stacked (mark over headline) so it owns the left and nothing of the
+      picture has to be read through. Each option carries its own focal
+      point and veil strength in data attributes; see HERO_OPTIONS below. */
+.hero__media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#D6E2EA}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:var(--fx,70%) var(--fy,50%);opacity:0;transform:scale(1.035);
+  transition:opacity .9s var(--ease),transform 1.6s var(--ease)}
+.hero__img.is-on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.hero__img{transition:opacity .2s linear;transform:none}}
+/* the veil: chalk, not white, so the picture is pulled into the palette
+   rather than bleached. --veil scales it per image (busier frames get more). */
+.hero__veil{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(220,230,237,.55) 0,rgba(220,230,237,0) 18%),
+    linear-gradient(90deg,
+      rgba(232,239,244,calc(.95 * var(--veil,1))) 0%,
+      rgba(232,239,244,calc(.92 * var(--veil,1))) 30%,
+      rgba(228,236,242,calc(.80 * var(--veil,1))) 42%,
+      rgba(224,233,240,calc(.46 * var(--veil,1))) 54%,
+      rgba(220,230,237,calc(.12 * var(--veil,1))) 66%,
+      rgba(220,230,237,0) 76%),
+    linear-gradient(0deg,rgba(214,226,234,.5) 0,rgba(214,226,234,0) 22%)}
+.hero--photo{background:transparent}
+.hero--photo::before{background:linear-gradient(112deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,0) 40%)}
+.hero--photo::after{background:radial-gradient(560px 480px at var(--mx) var(--my),rgba(255,255,255,.38),transparent 62%)}
+/* a hairline of ochre under the header ties the picture to the plate's rule */
+.hero--photo .hero__rule{position:absolute;left:0;right:0;bottom:0;height:2px;z-index:2;
+  background:linear-gradient(90deg,var(--ochre) 0,var(--ochre) 18%,rgba(185,130,42,0) 60%)}
+@media(min-width:960px){
+  .hero--photo .room{width:100%;grid-template-columns:minmax(0,min(620px,44vw));gap:clamp(28px,3.4vw,44px)}
+  .hero--photo .room__obj{justify-self:start}
+  .hero--photo .mk{width:clamp(200px,20vw,300px)}
+  .hero--photo .torchwrap .rh{max-width:15ch}
+}
+@media(min-width:1100px){
+  .hero--photo .wrap{padding-right:var(--gut)}
+  /* while it stands over the picture the contents rail gets its own frosted
+     chalk ground; past the hero it docks onto paper and the plate goes */
+  html:not(.past-hero) .hero-photo-on .sn--dock::before{content:"";position:absolute;z-index:-1;
+    inset:-22px -40px -22px -8px;border-radius:2px;
+    background:rgba(232,239,244,.8);
+    -webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);
+    box-shadow:0 0 0 1px rgba(20,50,71,.1),0 24px 48px -28px rgba(20,50,71,.35)}
+  .hero-photo-on .sn--dock::after{right:-16px}
+  .hero-photo-on .sn--dock a{color:var(--on-ink)}
+  .hero-photo-on .sn--dock a .t{opacity:.82}
+  .hero-photo-on .sn--dock a:hover .t,.hero-photo-on .sn--dock a[aria-current="true"] .t{opacity:1}
+}
+/* phone and tablet: the copy sits at the top of the screen and the picture
+   is given the lower part, clear of any text, so the veil runs top-down */
+@media(max-width:959px){
+  .hero--photo .hero__img{object-position:var(--mx-fx,var(--fx,70%)) var(--mx-fy,60%)}
+  .hero--photo .hero__veil{background:
+    linear-gradient(180deg,
+      rgba(232,239,244,calc(.95 * var(--veil,1))) 0%,
+      rgba(232,239,244,calc(.92 * var(--veil,1))) 46%,
+      rgba(226,234,240,calc(.62 * var(--veil,1))) 58%,
+      rgba(220,230,237,calc(.12 * var(--veil,1))) 72%,
+      rgba(220,230,237,0) 82%)}
+  .hero.hero--photo{min-height:calc(100svh - 71px);display:grid;align-content:start;
+    padding-top:clamp(32px,6vh,64px)}
+}
+@media(max-width:720px) and (min-height:560px){
+  .hero.hero--photo{min-height:calc(100svh - var(--hdr));align-content:start;padding-top:clamp(28px,5vh,52px)}
+}
+
+/* ── Hero review picker — review chrome, not part of the design ─────────
+      Same neutral chrome as the concept switcher. Sits top-right under the
+      header, clear of the copy, the contents rail and the switcher at the
+      bottom. Arrow keys step through; ?hero=N links to one option. */
+.hp{position:fixed;z-index:9998;right:20px;top:86px;display:flex;align-items:center;gap:4px;
+  padding:6px;border-radius:999px;background:rgba(14,14,16,.84);border:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%);
+  box-shadow:0 8px 32px -8px rgba(0,0,0,.6);
+  font:500 12px/1 ui-sans-serif,-apple-system,"Segoe UI",system-ui,sans-serif;color:#fff;
+  transition:opacity .3s ease}
+.hp button{display:grid;place-items:center;min-width:44px;min-height:44px;padding:0 10px;border:0;border-radius:999px;
+  background:transparent;color:rgba(255,255,255,.62);font:inherit;cursor:pointer;
+  transition:background .18s ease,color .18s ease}
+.hp button:hover{background:rgba(255,255,255,.08);color:#fff}
+.hp button:focus-visible{outline:2px solid #7DA7FF;outline-offset:2px}
+.hp button svg{width:14px;height:14px}
+.hp__label{display:flex;flex-direction:column;gap:5px;min-width:15.5em;padding:0 10px;white-space:nowrap}
+.hp__n{font-variant-numeric:tabular-nums;letter-spacing:.08em;color:rgba(255,255,255,.55);font-size:11px}
+.hp__name{font-size:13px;letter-spacing:-.005em}
+.hp__dots{display:flex;gap:2px}
+.hp__dots button{min-width:20px;padding:0}
+.hp__dots .hp__gap{margin-left:12px}
+.hp__dots button span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .2s,transform .2s}
+.hp__dots button[aria-current="true"] span{background:#fff;transform:scale(1.25)}
+html.past-hero .hp{opacity:.35}
+html.past-hero .hp:hover,html.past-hero .hp:focus-within{opacity:1}
+html.intro-on .hp{opacity:0}
+@media(max-width:1100px){.hp__dots{display:none}}
+@media(max-width:720px){
+  /* on a phone the copy fills the top, so the picker stacks just above the
+     concept switcher, over the picture */
+  .hp{right:auto;top:auto;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%)}
+  .hp__label{min-width:0;padding:0 4px}
+  .hp__name{display:none}
+  .hp__n{font-size:12px;color:#fff}
+}
+
+/* ── Two layouts under review (data-look on <body>) ─────────────────────
+      1 Editorial — full-bleed hero under the chalk veil; Note 2 opens on a
+        wide framed plate. (A1)
+      3 Duotone — both pictures re-printed in the palette itself, chalk
+        highlights and navy shadows; Note 2 opens on a full-bleed band. (B3)
+      Everything is driven by the attribute, so the markup is shared. */
+
+/* duotone: grey image multiplied onto chalk (highlights become chalk), then
+   navy lightened in underneath (blacks lift to navy, never to black) */
+.duo{background:#C8DAE6;isolation:isolate}
+.duo img{filter:grayscale(1) contrast(1.06) brightness(1.12);mix-blend-mode:multiply}
+.duo::after{content:"";position:absolute;inset:0;pointer-events:none;background:#143247;mix-blend-mode:lighten}
+
+/* ── Note 2 plate ──────────────────────────────────────────────────────── */
+.n2-plate{grid-area:photo;margin:0;position:relative;overflow:hidden;background:var(--ink-2)}
+.n2-plate img{display:block;width:100%;height:100%;object-fit:cover;object-position:68% 42%}
+/* a light cool grade so the warm skin and timber sit inside the chalk palette */
+.n2-plate img{filter:saturate(.8) brightness(1.03) contrast(1.02)}
+.n2-plate::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(201,217,227,.16);mix-blend-mode:multiply}
+.n2-plate::before{content:"";position:absolute;left:0;bottom:0;z-index:2;width:clamp(80px,22%,220px);height:2px;background:var(--ochre)}
+.n2-band{display:none;position:relative;overflow:hidden;
+  height:clamp(240px,40vh,440px);margin-inline:0;margin-top:calc(-1 * clamp(56px,8vw,104px));margin-bottom:clamp(44px,6vw,80px)}
+.n2-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:66% 40%}
+.n2-band__veil{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,rgba(250,250,247,.9) 0,rgba(250,250,247,.55) 22%,rgba(250,250,247,0) 46%),
+             linear-gradient(0deg,var(--paper) 0,rgba(250,250,247,0) 30%)}
+.n2-band__rule{position:absolute;left:0;top:0;z-index:3;height:2px;width:min(40%,520px);background:var(--ochre)}
+
+/* 1 · Editorial */
+[data-look="1"] .sysgrid{grid-template-areas:"photo" "cap" "list" "claims"}
+[data-look="1"] .n2-plate{aspect-ratio:21/9;margin-bottom:clamp(30px,3.6vw,48px)}
+@media(min-width:960px){[data-look="1"] .sysgrid{grid-template-areas:"photo photo" "cap ." "list claims"}}
+
+/* ── Note 3: the team, two ways (data-n3 on <body>, under review) ───────
+      1 Portrait — the copy keeps the left, the team stands beside it.
+      2 Full bleed — the picture is the whole note, under the same chalk
+        veil as the A1 hero, with the copy held to the left.
+      Under the B3 hero the picture is re-printed in duotone to match. */
+.n3{display:grid;gap:clamp(32px,4vw,56px)}
+.n3-photo,.n3-edge{margin:0;position:relative;overflow:hidden;background:var(--ink-2)}
+.n3-photo img,.n3-edge img{display:block;width:100%;height:100%;object-fit:cover;object-position:58% 50%;
+  filter:saturate(.8) brightness(1.03)}
+.n3-photo::after,.n3-edge::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(201,217,227,.16);mix-blend-mode:multiply}
+.n3-photo::before{content:"";position:absolute;left:0;bottom:0;z-index:2;width:clamp(80px,22%,200px);height:2px;background:var(--ochre)}
+.n3-edge{display:none}
+[data-look="3"] .n3-photo,[data-look="3"] .n3-edge{background:#C8DAE6;isolation:isolate}
+[data-look="3"] .n3-photo img,[data-look="3"] .n3-edge img{filter:grayscale(1) contrast(1.06) brightness(1.12);mix-blend-mode:multiply}
+[data-look="3"] .n3-photo::after,[data-look="3"] .n3-edge::after{background:#143247;mix-blend-mode:lighten}
+
+/* 1 · Portrait */
+[data-n3="1"] .n3-photo{aspect-ratio:4/3}
+@media(min-width:960px){
+  [data-n3="1"] .n3{grid-template-columns:minmax(0,1fr) minmax(0,.78fr);align-items:start}
+  [data-n3="1"] .n3 .reach{grid-template-columns:1fr}
+  [data-n3="1"] .n3-photo{aspect-ratio:4/5}
+}
+
+/* 2 · Full bleed — the picture is the whole note, under the hero's veil */
+[data-n3="2"] #note-3{position:relative;overflow:hidden;border-top-color:transparent}
+[data-n3="2"] #note-3 > .wrap{position:relative;z-index:1;width:100%}
+[data-n3="2"] .n3-photo{display:none}
+[data-n3="2"] .n3-edge{display:block;position:absolute;inset:0;z-index:0}
+[data-n3="2"] .n3-edge img{object-position:66% 70%}
+[data-n3="2"] .n3-edge::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(250,250,247,.97) 0,rgba(250,250,247,.94) 60%,rgba(250,250,247,.5) 74%,rgba(250,250,247,0) 88%)}
+@media(min-width:960px){
+  /* the team stands across the middle of the frame, so the picture is held
+     to the right of the copy and dissolves into the paper on its left edge */
+  [data-n3="2"] #note-3{min-height:clamp(560px,80vh,760px);display:grid;align-content:center}
+  [data-n3="2"] .n3-edge{left:44%}
+  [data-n3="2"] .n3__text{max-width:480px}
+  [data-n3="2"] .n3 .reach{grid-template-columns:1fr}
+  [data-n3="2"] .n3-edge img{object-position:44% 45%}
+  [data-n3="2"] .n3-edge::before{background:
+    linear-gradient(90deg,var(--paper) 0,rgba(250,250,247,.85) 8%,rgba(250,250,247,.35) 22%,rgba(250,250,247,0) 34%),
+    linear-gradient(180deg,rgba(250,250,247,.55) 0,rgba(250,250,247,0) 16%,rgba(250,250,247,0) 84%,rgba(250,250,247,.55) 100%)}
+}
+@media(min-width:1100px){
+  [data-n3="2"] .n3-edge::before{background:
+    linear-gradient(90deg,var(--paper) 0,rgba(250,250,247,.85) 8%,rgba(250,250,247,.35) 22%,rgba(250,250,247,0) 34%,rgba(250,250,247,0) 78%,rgba(250,250,247,.72) 100%),
+    linear-gradient(180deg,rgba(250,250,247,.55) 0,rgba(250,250,247,0) 16%,rgba(250,250,247,0) 84%,rgba(250,250,247,.55) 100%)}
+}
+
+/* on a phone there is no room beside the copy, so the picture follows it */
+@media(max-width:959px){
+  [data-n3="2"] .n3-edge{display:none}
+  [data-n3="2"] .n3-photo{display:block;aspect-ratio:4/3}
+}
+
+/* 3 · Duotone */
+[data-look="3"] .n2-plate{display:none}
+[data-look="3"] .n2-band{display:block}
+@media(min-width:1100px){
+  [data-look="3"] .n2-band__veil{background:
+    linear-gradient(90deg,rgba(250,250,247,.9) 0,rgba(250,250,247,.55) 22%,rgba(250,250,247,0) 46%,rgba(250,250,247,0) 74%,rgba(250,250,247,.75) 100%),
+    linear-gradient(0deg,var(--paper) 0,rgba(250,250,247,0) 30%)}
+}
+[data-look="3"] .hero__veil{--veil:.9}
 
 
 /* ── Note 1: Solutions & Services — the three disciplines as a ruled schedule.
@@ -534,7 +742,12 @@ html.intro-on .room__card .mk{visibility:hidden}
 
 <main id="top">
 
-  <section class="hero">
+  <section class="hero hero--photo" id="hero">
+    <div class="hero__media" id="hero-media" aria-hidden="true">
+      <img class="hero__img is-on" src="../assets/heroes/08-options/hero-01.jpg" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
+      <div class="hero__veil"></div>
+    </div>
+    <span class="hero__rule" aria-hidden="true"></span>
     <div class="wrap room">
       <div class="room__obj">
         <span class="room__card">
@@ -620,11 +833,18 @@ html.intro-on .room__card .mk{visibility:hidden}
   </section>
 
   <section class="note" id="note-2">
+    <figure class="n2-band duo" aria-hidden="true">
+      <img src="../assets/heroes/08-options/hero-08.jpg" alt="" width="2400" height="1339" loading="lazy" decoding="async">
+      <span class="n2-band__veil"></span><span class="n2-band__rule"></span>
+    </figure>
     <div class="wrap note__grid reveal">
       <p class="mono note__ref"><b>Note 2</b>Systems</p>
       <div>
         <h2>Practiced System&rsquo;s</h2>
         <div class="sysgrid">
+          <figure class="n2-plate">
+            <img src="../assets/heroes/08-options/hero-08.jpg" alt="Two colleagues shaking hands across a meeting table in a bright office." width="2400" height="1339" loading="lazy" decoding="async">
+          </figure>
           <p class="mono sys__cap">Systems worked with in delivery</p>
           <ul class="sys">
             <li>CODA / Unit4 Financials</li>
@@ -643,22 +863,30 @@ html.intro-on .room__card .mk{visibility:hidden}
   </section>
 
   <section class="note" id="note-3">
+    <figure class="n3-edge" aria-hidden="true">
+      <img src="../assets/heroes/08-options/hero-15.jpg" alt="" width="2400" height="1339" loading="lazy" decoding="async">
+    </figure>
     <div class="wrap note__grid reveal">
       <p class="mono note__ref"><b>Note 3</b>Reach</p>
-      <div>
-        <h2>Harrogate is our base</h2>
-        <div class="note__body measure">
-          <p>The practice sits in North Yorkshire at the gateway to the Dales — twenty minutes from Leeds Bradford airport, thirty from York station. Where a site visit is not wanted, the work runs remotely into your servers or desktops.</p>
+      <div class="n3">
+        <div class="n3__text">
+          <h2>Harrogate is our base</h2>
+          <div class="note__body measure">
+            <p>The practice sits in North Yorkshire at the gateway to the Dales — twenty minutes from Leeds Bradford airport, thirty from York station. Where a site visit is not wanted, the work runs remotely into your servers or desktops.</p>
+          </div>
+          <div class="reach">
+            <dl>
+              <dt class="mono">Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
+              <dt class="mono">Base</dt><dd>Harrogate, North Yorkshire</dd>
+            </dl>
+            <dl>
+              <dt class="mono">Formed</dt><dd>January 2000</dd>
+            </dl>
+          </div>
         </div>
-        <div class="reach">
-          <dl>
-            <dt class="mono">Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
-            <dt class="mono">Base</dt><dd>Harrogate, North Yorkshire</dd>
-          </dl>
-          <dl>
-            <dt class="mono">Formed</dt><dd>January 2000</dd>
-          </dl>
-        </div>
+        <figure class="n3-photo">
+          <img src="../assets/heroes/08-options/hero-15.jpg" alt="Three colleagues reviewing charts together in a bright meeting room." width="2400" height="1339" loading="lazy" decoding="async">
+        </figure>
       </div>
     </div>
   </section>
@@ -1146,6 +1374,126 @@ html.intro-on .room__card .mk{visibility:hidden}
 
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(run);
   else addEventListener('load', run);
+})();
+</script>
+
+<script id="hero-review">
+/* ── Layout review — scaffolding, not design ─────────────────────────────
+   Hero shortlist: A1 (single tower, Editorial) and B3 (converging towers,
+   Duotone), with the handshake in Note 2. Note 3 carries the team picture
+   (hero-15) in two ways, chosen independently of the hero. Step with the
+   picker or the arrow keys; ?view=B3&n3=2 opens on a combination.
+   Once chosen: keep the hero image in the markup, set data-look and
+   data-n3 on <body> (or fold those rules into the base styles), and delete this
+   script, the .hp styles and the options not taken. */
+(function(){
+  var HEROES = {
+    A: {file:'hero-01.jpg', name:'Single glass tower',         fx:'72%', fy:'50%', mfx:'66%', mfy:'45%', veil:1},
+    B: {file:'hero-02.jpg', name:'Towers converging overhead', fx:'60%', fy:'50%', mfx:'56%', mfy:'60%', veil:1.06}
+  };
+  var LOOKS = {1:'Editorial', 3:'Duotone'};
+  var N3 = {1:'Portrait beside the text', 2:'Full bleed under the veil'};
+  var VIEWS = [
+    {id:'A1', kind:'hero', hero:'A', look:1},
+    {id:'B3', kind:'hero', hero:'B', look:3},
+    {id:'N3-1', kind:'n3', n:1},
+    {id:'N3-2', kind:'n3', n:2}
+  ];
+
+  var BASE = '../assets/heroes/08-options/', KEY = 'jmd-08-view', KEY3 = 'jmd-08-n3';
+  var media = document.getElementById('hero-media');
+  if(!media) return;
+  var hero = media.parentNode, veil = media.querySelector('.hero__veil'),
+      imgs = [].slice.call(media.querySelectorAll('.hero__img'));
+  document.body.classList.add('hero-photo-on');
+
+  function img(file){
+    var found = imgs.filter(function(m){ return m.getAttribute('src').indexOf(file) > -1; })[0];
+    if(found) return found;
+    var m = document.createElement('img');
+    m.className = 'hero__img'; m.alt = ''; m.decoding = 'async'; m.width = 2400; m.height = 1339;
+    m.src = BASE + file; media.insertBefore(m, veil); imgs.push(m);
+    return m;
+  }
+
+  /* the hero and Note 3 are chosen independently: a hero entry changes the
+     hero, a Note 3 entry changes Note 3 and jumps to it */
+  var heroId = 'A1', n3 = 1, cur = -1, num, label, dots = [];
+  function setHero(v){
+    var h = HEROES[v.hero], next = img(h.file);
+    heroId = v.id;
+    document.body.dataset.look = String(v.look);
+    [['--fx',h.fx],['--fy',h.fy],['--mx-fx',h.mfx],['--mx-fy',h.mfy],['--veil',h.veil]]
+      .forEach(function(p){ hero.style.setProperty(p[0], p[1]); });
+    media.classList.toggle('duo', v.look === 3);
+    function swap(){ imgs.forEach(function(m){ m.classList.toggle('is-on', m === next); }); }
+    if(next.complete) swap(); else next.addEventListener('load', swap, {once:true});
+  }
+  function show(i, jump){
+    i = (i + VIEWS.length) % VIEWS.length;
+    var v = VIEWS[i];
+    if(v.kind === 'hero') setHero(v);
+    else { n3 = v.n; document.body.dataset.n3 = String(n3); }
+    cur = i;
+    try{ localStorage.setItem(KEY, heroId); localStorage.setItem(KEY3, String(n3)); }catch(e){}
+    var q = new URLSearchParams(location.search); q.delete('hero'); q.set('view', heroId); q.delete('n2'); q.set('n3', String(n3)); q.delete('mk');
+    history.replaceState(null, '', location.pathname + '?' + q.toString());
+    var hv = VIEWS.filter(function(x){ return x.id === heroId; })[0];
+    if(v.kind === 'hero'){
+      num.textContent = 'Hero ' + v.id + ' · ' + (i + 1) + ' / ' + VIEWS.length;
+      label.textContent = HEROES[v.hero].name + ' — ' + LOOKS[v.look];
+    } else {
+      num.textContent = 'Note 3 · option ' + v.n + ' · ' + (i + 1) + ' / ' + VIEWS.length + ' · with hero ' + heroId;
+      label.textContent = N3[v.n];
+    }
+    dots.forEach(function(d, j){ d.setAttribute('aria-current', String(j === i)); });
+    if(window.ScrollTrigger) ScrollTrigger.refresh();
+    if(jump){
+      if(v.kind === 'n3') document.getElementById('note-3').scrollIntoView({block:'start'});
+      else if(scrollY > innerHeight) scrollTo({top:0});
+    }
+  }
+
+  var arrow = function(d){ return '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>'; };
+  var bar = document.createElement('div');
+  bar.className = 'hp'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Layout options');
+  bar.innerHTML =
+    '<button type="button" data-step="-1" aria-label="Previous option">' + arrow('M10 3 5 8l5 5') + '</button>' +
+    '<span class="hp__label" aria-live="polite"><span class="hp__n"></span><span class="hp__name"></span></span>' +
+    '<span class="hp__dots"></span>' +
+    '<button type="button" data-step="1" aria-label="Next option">' + arrow('M6 3l5 5-5 5') + '</button>';
+  num = bar.querySelector('.hp__n'); label = bar.querySelector('.hp__name');
+  VIEWS.forEach(function(v, j){
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.setAttribute('aria-label', v.kind === 'hero' ? 'Hero ' + v.id + ': ' + HEROES[v.hero].name + ', ' + LOOKS[v.look]
+                                                   : 'Note 3, option ' + v.n + ': ' + N3[v.n]);
+    if(j === 2) d.className = 'hp__gap';
+    d.innerHTML = '<span></span>';
+    d.addEventListener('click', function(){ show(j, true); });
+    bar.querySelector('.hp__dots').appendChild(d); dots.push(d);
+  });
+  bar.querySelectorAll('[data-step]').forEach(function(b){
+    b.addEventListener('click', function(){ show(cur + Number(b.dataset.step), true); });
+  });
+  document.body.appendChild(bar);
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+    var t = e.target;
+    if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+    if(e.key === 'ArrowRight'){ e.preventDefault(); show(cur + 1, true); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); show(cur - 1, true); }
+  });
+
+  var q0 = new URLSearchParams(location.search), ids = VIEWS.map(function(v){ return v.id; });
+  var want = (q0.get('view') || '').toUpperCase(), want3 = parseInt(q0.get('n3'), 10);
+  if(['A1','B3'].indexOf(want) < 0){ try{ want = localStorage.getItem(KEY) || 'A1'; }catch(e){ want = 'A1'; } }
+  if(['A1','B3'].indexOf(want) < 0) want = 'A1';
+  if(!(want3 >= 1 && want3 <= 2)){ try{ want3 = parseInt(localStorage.getItem(KEY3), 10); }catch(e){} }
+  if(!(want3 >= 1 && want3 <= 2)) want3 = 1;
+  show(ids.indexOf('N3-' + want3));
+  show(ids.indexOf(want));
 })();
 </script>
 

@@ -1,5 +1,11 @@
 # PRODUCT.md — JMD Consulting
 
+<!-- impeccable:product-schema 1 -->
+
+## Platform
+
+web
+
 ## What this project is
 
 Five competing homepage concepts for **JMD Consulting**, built to choose a visual
@@ -61,8 +67,25 @@ the 07 Harrogate image picker were reviewed and dropped; they are kept in
 `_archive/` with their assets, along with the cloud plates from a rolling-cloud
 intro for 02 that was built and then reverted.
 
-No DESIGN.md: competing worlds is the point of the exercise. Whichever is
-chosen becomes it.
+**Decision (October 2026): the client has chosen concept 08, Chalk.** 02 and 06
+stay in the repo for reference but are no longer in contention. 08's world —
+Spectral + Martian Mono, chalk blue, navy, ochre accent — is now the visual
+authority; a DESIGN.md should be written from it once the hero is settled.
+
+Client feedback on 08: it reads too plain and simple; it should look like a
+proper, established business site. The open work is a photographic hero:
+
+- Subjects the client asked to see: city towers shot from street level looking
+  up (one or several); a scenic view from inside an office; people working
+  together in a business setting; a handshake.
+- Keep it light — the image has to sit inside 08's existing chalk palette, not
+  bring a new one.
+- People in imagery support the "practice, not a person" positioning: the site
+  should read as a firm with several staff. Imagery may show a team; copy still
+  may not claim a team size or name staff.
+- Hero imagery is generated for review. A live build wants licensed stock or a
+  commissioned shoot, and no image may be presented as JMD's own office or
+  staff.
 
 ## Copy rules
 
@@ -75,8 +98,13 @@ source typos are corrected. No invented claims, clients, metrics or testimonials
 
 - Static HTML per concept, one file each, no build step. A persistent switcher bar
   moves between concepts in the same tab.
-- One hero image per concept. The Land/Genre comparison was resolved and the
-  switching machinery removed.
+- One hero image per concept. Concept 08's hero is down to a shortlist of
+  two: A1 (single tower, Editorial) and B3 (converging towers, Duotone), both
+  with the handshake in Note 2, behind a review picker that comes out once
+  one is chosen.
+- Image 15 (a team reviewing charts around a screen) sits in Note 3, in three
+  treatments under review, and is also earmarked for the section pages of
+  the full site.
 - Concept 06's phone hero is the one open decision: three styles (Full, Column,
   Band) ship behind a phone-only picker. Desktop is settled. The losing two and
   the picker come out once a style is chosen.
