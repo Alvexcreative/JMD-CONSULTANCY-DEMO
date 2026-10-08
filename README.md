@@ -76,21 +76,17 @@ entries jump straight to it; `?view=A1&n3=2` opens on a combination.
 
 Under the B3 hero, the Note 3 picture is re-printed in duotone to match.
 
-**Logo** — the JMD mark in the hero comes in four variations (`?mk=1–4`),
-chosen independently of the rest; option 2 follows the client's "Macaron"
-reference and 3–4 build on it. The rule is re-measured to each word.
+**Logo** — the JMD mark in the hero is down to two options (`?mk=3` or
+`?mk=4`), both in Instrument Serif after the client's "Macaron" reference:
 
 | Logo | Treatment |
 |---|---|
-| 1 | **Current**: Spectral 600, blue-to-navy ink, chalk shadow, ochre rule |
-| 2 | **Condensed** (after "Macaron"): Instrument Serif, tall and narrow, slate navy, subline spaced wide |
-| 3 | **Spaced capitals**: the condensed serif set smaller and tracked wide, over an ochre hairline |
-| 4 | **Side lockup**: the condensed serif with CONSULTING set beside it across a vertical ochre hairline |
+| A (`mk=3`, default) | **Spaced capitals**: the condensed serif tracked wide over an ochre hairline |
+| B (`mk=4`) | **Side lockup**: the condensed serif with CONSULTING beside it across a vertical ochre hairline |
 
-Options 2–4 share one extra face (Instrument Serif), loaded for the review;
-drop the second Google Fonts link if option 1 is chosen. They are directions, not finished artwork:
-a chosen one should be drawn up as a proper logo file and the header logo
-updated to match.
+The original Spectral mark is no longer shown in the hero. The header still
+uses the existing JMD image logo, and the chosen mark should be drawn up as
+a proper logo file to replace it.
 
 **Note 2** (Systems) carries the handshake (`hero-08`) as paired with the
 hero: a wide framed plate under A1, a full-bleed duotone band under B3.
