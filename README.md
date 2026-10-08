@@ -57,6 +57,14 @@ picker (top right; above the switcher on a phone) or the ← → keys.
 
 Both use `hero-08` (the handshake) in Note 2.
 
+**Moving reflections.** Soft clouds of different sizes drift slowly across
+the buildings' glass in either hero (the `hero-reflections` script). The
+glass is found from the photograph itself — the window grid is textured,
+the sky is smooth — so it follows whichever image is showing, and the
+clouds are screened so they only lift the darker panes. A crossing takes
+roughly 1.5–3 minutes. It pauses off screen and in a hidden tab, and does
+not run at all under `prefers-reduced-motion`.
+
 `hero-15` (a team reviewing charts around a screen) now sits in **Note 3**
 (Reach), in two versions chosen independently of the hero. The picker's Note 3
 entries jump straight to it; `?view=A1&n3=2` opens on a combination.
@@ -68,6 +76,22 @@ entries jump straight to it; `?view=A1&n3=2` opens on a combination.
 
 Under the B3 hero, the Note 3 picture is re-printed in duotone to match.
 
+**Logo** — the JMD mark in the hero comes in four variations (`?mk=1–4`),
+chosen independently of the rest; option 2 follows the client's "Macaron"
+reference and 3–4 build on it. The rule is re-measured to each word.
+
+| Logo | Treatment |
+|---|---|
+| 1 | **Current**: Spectral 600, blue-to-navy ink, chalk shadow, ochre rule |
+| 2 | **Condensed** (after "Macaron"): Instrument Serif, tall and narrow, slate navy, subline spaced wide |
+| 3 | **Spaced capitals**: the condensed serif set smaller and tracked wide, between two ochre hairlines |
+| 4 | **Side lockup**: the condensed serif with CONSULTING set beside it across a vertical ochre hairline |
+
+Options 2–4 share one extra face (Instrument Serif), loaded for the review;
+drop the second Google Fonts link if option 1 is chosen. They are directions, not finished artwork:
+a chosen one should be drawn up as a proper logo file and the header logo
+updated to match.
+
 **Note 2** (Systems) carries the handshake (`hero-08`) as paired with the
 hero: a wide framed plate under A1, a full-bleed duotone band under B3.
 
@@ -75,7 +99,7 @@ Everything is in `assets/heroes/08-options/`. The other generated options
 and the dropped layouts' images are in `_archive/heroes/08-options-dropped/`.
 
 Once a hero is chosen: keep its image in the markup, set its `data-look` on
-`<body>`, set `data-n3` likewise, and delete the `hero-review` script, the
+`<body>`, set `data-n3` and `data-mk` likewise, and delete the `hero-review` script, the
 `.hp` styles and the options not taken.
 
 ## Positioning

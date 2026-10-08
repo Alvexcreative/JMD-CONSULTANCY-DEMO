@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="1">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="1" data-mk="1">
 <!-- Concept 08 — supplied as "JMD Consulting.zip" on 2026-09-22 and added to the
      review set unchanged, apart from: the logo path (now ../assets/), and the
      shared review harness appended at the end so the concept switcher appears.
@@ -6,6 +6,8 @@
 <title>JMD Consulting</title>
 <link rel="stylesheet" href="../shared/review.css">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- review only: faces for the logo variations (data-mk 2–5) -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:light}
 
@@ -210,6 +212,14 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
 @media (prefers-reduced-motion:reduce){.hero__img{transition:opacity .2s linear;transform:none}}
 /* the veil: chalk, not white, so the picture is pulled into the palette
    rather than bleached. --veil scales it per image (busier frames get more). */
+/* moving reflections: clouds drifting across the glass only. drawn by the
+   hero-reflections script into a canvas between the picture and the veil,
+   screened so they only ever lift the darker glass and never the sky or the
+   white mullions. absent under reduced motion. */
+.hero__clouds{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;
+  mix-blend-mode:screen;opacity:0;transition:opacity 2.4s var(--ease)}
+.hero__clouds.is-live{opacity:var(--cloud-o,.5)}
+.hero__veil{z-index:2}
 .hero__veil{position:absolute;inset:0;pointer-events:none;
   background:
     linear-gradient(180deg,rgba(220,230,237,.55) 0,rgba(220,230,237,0) 18%),
@@ -235,17 +245,27 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
 }
 @media(min-width:1100px){
   .hero--photo .wrap{padding-right:var(--gut)}
-  /* while it stands over the picture the contents rail gets its own frosted
-     chalk ground; past the hero it docks onto paper and the plate goes */
-  html:not(.past-hero) .hero-photo-on .sn--dock::before{content:"";position:absolute;z-index:-1;
-    inset:-22px -40px -22px -8px;border-radius:2px;
-    background:rgba(232,239,244,.8);
-    -webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);
-    box-shadow:0 0 0 1px rgba(20,50,71,.1),0 24px 48px -28px rgba(20,50,71,.35)}
-  .hero-photo-on .sn--dock::after{right:-16px}
+  /* the contents rail sits straight on the picture, with no box. it stays
+     clear two ways: the veil gains a soft lift along the right edge, behind
+     the rail, and each label carries a faint chalk halo that keeps it crisp
+     where it crosses busy glass. past the hero it docks onto paper as before. */
+  .hero-photo-on .hero__veil{background:
+    linear-gradient(270deg,rgba(232,239,244,calc(.74 * var(--veil,1))) 0,rgba(232,239,244,calc(.64 * var(--veil,1))) 10%,rgba(232,239,244,calc(.5 * var(--veil,1))) 21%,rgba(232,239,244,calc(.2 * var(--veil,1))) 28%,rgba(232,239,244,0) 35%),
+    linear-gradient(180deg,rgba(220,230,237,.55) 0,rgba(220,230,237,0) 18%),
+    linear-gradient(90deg,
+      rgba(232,239,244,calc(.95 * var(--veil,1))) 0%,
+      rgba(232,239,244,calc(.92 * var(--veil,1))) 30%,
+      rgba(228,236,242,calc(.80 * var(--veil,1))) 42%,
+      rgba(224,233,240,calc(.46 * var(--veil,1))) 54%,
+      rgba(220,230,237,calc(.12 * var(--veil,1))) 66%,
+      rgba(220,230,237,0) 76%),
+    linear-gradient(0deg,rgba(214,226,234,.5) 0,rgba(214,226,234,0) 22%)}
   .hero-photo-on .sn--dock a{color:var(--on-ink)}
-  .hero-photo-on .sn--dock a .t{opacity:.82}
-  .hero-photo-on .sn--dock a:hover .t,.hero-photo-on .sn--dock a[aria-current="true"] .t{opacity:1}
+  html:not(.past-hero) .hero-photo-on .sn--dock .t,
+  html:not(.past-hero) .hero-photo-on .sn--dock .n{
+    text-shadow:0 0 1px rgba(236,242,246,.95),0 0 10px rgba(236,242,246,.9),0 0 22px rgba(236,242,246,.6)}
+  html:not(.past-hero) .hero-photo-on .sn--dock .n{color:var(--on-ink)}
+  html:not(.past-hero) .hero-photo-on .sn--dock a[aria-current="true"] .n{color:var(--bronze)}
 }
 /* phone and tablet: the copy sits at the top of the screen and the picture
    is given the lower part, clear of any text, so the veil runs top-down */
@@ -334,6 +354,37 @@ html.intro-on .hp{opacity:0}
 [data-look="1"] .sysgrid{grid-template-areas:"photo" "cap" "list" "claims"}
 [data-look="1"] .n2-plate{aspect-ratio:21/9;margin-bottom:clamp(30px,3.6vw,48px)}
 @media(min-width:960px){[data-look="1"] .sysgrid{grid-template-areas:"photo photo" "cap ." "list claims"}}
+
+/* ── Logo variations on the hero (data-mk on <body>, under review) ───────
+      1 Current — Spectral 600, blue-to-navy ink, chalk shadow, ochre rule.
+      2 Condensed — Instrument Serif, tall and narrow, in slate navy; the
+        subline spaced wide (after the client's "Macaron" reference).
+      3 Spaced capitals — the same condensed serif set smaller and tracked
+        wide, held between two ochre hairlines like a hallmark.
+      4 Side lockup — the condensed serif with CONSULTING set beside it rather
+        than beneath, across a vertical ochre hairline.
+      The rule (and for 3, the top hairline; for 4, the vertical rule and the
+      subline's position) is measured to the word by the review script. */
+.mk .mk-top{display:none}
+
+[data-mk="2"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.005em;font-size:158px}
+[data-mk="2"] .mk .plate__face .serifmark{fill:#2A4258}
+[data-mk="2"] .mk .plate__deep{display:none}
+[data-mk="2"] .mk .plate__face path{stroke:#2A4258;stroke-width:1}
+[data-mk="2"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:14px;letter-spacing:.62em;fill:#46627A}
+
+[data-mk="3"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.2em;font-size:112px}
+[data-mk="3"] .mk .plate__face .serifmark{fill:#143247}
+[data-mk="3"] .mk .plate__deep{display:none}
+[data-mk="3"] .mk .mk-top{display:inline}
+[data-mk="3"] .mk .plate__face path{stroke:#B9822A;stroke-width:1}
+[data-mk="3"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:14px;letter-spacing:.7em;fill:#143247}
+
+[data-mk="4"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.005em;font-size:122px}
+[data-mk="4"] .mk .plate__face .serifmark{fill:#2A4258}
+[data-mk="4"] .mk .plate__deep{display:none}
+[data-mk="4"] .mk .plate__face path:not(.mk-top){stroke:#B9822A;stroke-width:1.2}
+[data-mk="4"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:19px;letter-spacing:.34em;fill:#2A4258}
 
 /* ── Note 3: the team, two ways (data-n3 on <body>, under review) ───────
       1 Portrait — the copy keeps the left, the team stands beside it.
@@ -707,6 +758,7 @@ html.intro-on .room__card .mk{visibility:hidden}
             </g>
             <g class="plate__face">
               <text class="serifmark" x="0" y="112" font-size="128" fill="url(#ink-intro)">JMD</text>
+              <path class="mk-top" d="M2 18 H250" stroke="#B9822A" stroke-width="1"/>
               <path d="M2 133 H250" stroke="#B9822A" stroke-width="2"/>
               <text class="sub" x="2" y="162">CONSULTING</text>
             </g>
@@ -763,6 +815,7 @@ html.intro-on .room__card .mk{visibility:hidden}
             </g>
             <g class="plate__face">
               <text class="serifmark" x="0" y="112" font-size="128" fill="url(#ink)">JMD</text>
+              <path class="mk-top" d="M2 18 H250" stroke="#B9822A" stroke-width="1"/>
               <path d="M2 133 H250" stroke="#B9822A" stroke-width="2"/>
               <text class="sub" x="2" y="162">CONSULTING</text>
             </g>
@@ -1258,7 +1311,7 @@ html.intro-on .room__card .mk{visibility:hidden}
       svg   = ghost.querySelector('svg'),
       face  = ghost.querySelector('.plate__face'),
       deep  = ghost.querySelector('.plate__deep'),
-      rule  = face.querySelector('path'),
+      rule  = face.querySelector('path:not(.mk-top)'),
       sub   = face.querySelector('.sub'),
       real  = document.querySelector('.room__card .mk'),
       still = matchMedia('(prefers-reduced-motion:reduce)').matches,
@@ -1377,14 +1430,195 @@ html.intro-on .room__card .mk{visibility:hidden}
 })();
 </script>
 
+<script id="hero-reflections">
+/* ── Cloud reflections in the hero glass ─────────────────────────────────
+   A few soft clouds of different sizes drift slowly across the building's
+   glass, with clear glass between them,
+   as if the sky behind the camera were moving. Only the glass shows them:
+   the mask is worked out from the photograph itself (the window grid is
+   busy with fine detail, sky is smooth), so it follows whichever hero image
+   is showing. The layer is screened, so it lifts the darker panes and has
+   no effect on the white mullions or the pale sky.
+   Runs at ~30fps at half resolution; pauses off screen, in a hidden tab,
+   and never starts under prefers-reduced-motion. */
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var media = document.getElementById('hero-media');
+  if(!media || !window.HTMLCanvasElement) return;
+  var veil = media.querySelector('.hero__veil');
+  var cv = document.createElement('canvas');
+  cv.className = 'hero__clouds'; cv.setAttribute('aria-hidden', 'true');
+  media.insertBefore(cv, veil);
+  var ctx = cv.getContext('2d');
+  var RES = .5;                     /* the clouds are soft: half resolution is plenty */
+
+  /* ── the mask ──────────────────────────────────────────────────────── */
+  var masks = {};
+  function blur(A, W, H, r){
+    var B = new Float32Array(W*H), C = new Float32Array(W*H), x, y, s, n = 2*r + 1;
+    for(y = 0; y < H; y++){ s = 0;
+      for(x = -r; x <= r; x++) s += A[y*W + Math.min(W-1, Math.max(0, x))];
+      for(x = 0; x < W; x++){ B[y*W+x] = s/n; s += A[y*W + Math.min(W-1, x+r+1)] - A[y*W + Math.max(0, x-r)]; } }
+    for(x = 0; x < W; x++){ s = 0;
+      for(y = -r; y <= r; y++) s += B[Math.min(H-1, Math.max(0, y))*W + x];
+      for(y = 0; y < H; y++){ C[y*W+x] = s/n; s += B[Math.min(H-1, y+r+1)*W + x] - B[Math.max(0, y-r)*W + x]; } }
+    return C;
+  }
+  function maskFor(img){
+    var key = img.currentSrc || img.src;
+    if(masks[key]) return masks[key];
+    var W = 480, H = Math.round(W * img.naturalHeight / img.naturalWidth);
+    var c = document.createElement('canvas'); c.width = W; c.height = H;
+    var x = c.getContext('2d', {willReadFrequently:true});
+    x.drawImage(img, 0, 0, W, H);
+    var d = x.getImageData(0, 0, W, H).data, L = new Float32Array(W*H), G = new Float32Array(W*H), i, X, Y;
+    for(i = 0; i < W*H; i++) L[i] = .299*d[i*4] + .587*d[i*4+1] + .114*d[i*4+2];
+    for(Y = 1; Y < H-1; Y++) for(X = 1; X < W-1; X++){ i = Y*W + X;
+      G[i] = Math.abs(L[i+1] - L[i-1]) + Math.abs(L[i+W] - L[i-W]); }
+    /* texture -> glass; then close the holes left by large smooth panes
+       and soften the edge so the reflection never ends on a hard line */
+    var E = blur(G, W, H, 5), M = new Float32Array(W*H);
+    for(i = 0; i < W*H; i++) M[i] = Math.max(0, Math.min(1, (E[i] - 6) / 10));
+    M = blur(M, W, H, 9);
+    var out = x.createImageData(W, H);
+    for(i = 0; i < W*H; i++){
+      var v = Math.max(0, Math.min(1, (M[i] - .22) / .4));
+      out.data[i*4] = out.data[i*4+1] = out.data[i*4+2] = 255; out.data[i*4+3] = v * 255;
+    }
+    x.putImageData(out, 0, 0);
+    return (masks[key] = c);
+  }
+
+  /* ── the clouds ────────────────────────────────────────────────────── */
+  var seed = 20261008;
+  function rnd(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+  function puff(x, px, py, rx, ry, a, firm){
+    x.save(); x.translate(px, py); x.scale(1, ry / rx);
+    var g = x.createRadialGradient(0, 0, 0, 0, 0, rx);
+    g.addColorStop(0, 'rgba(255,255,255,' + a + ')');
+    g.addColorStop(firm ? .62 : .45, 'rgba(255,255,255,' + (a * (firm ? .78 : .5)) + ')');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(0, 0, rx, 0, Math.PI * 2); x.fill(); x.restore();
+  }
+  /* a cumulus: a soft body heaped on a flat base, a crown of small firm
+     puffs along the top, and a cooler, darker underside so it has form */
+  function cumulus(w){
+    var h = w * .55, c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d'), base = h * .76, i, t, env, r;
+    var lean = .35 + .3 * rnd();                    /* where the cloud is tallest */
+    function envelope(t){ return Math.pow(Math.max(0, Math.sin(Math.PI * Math.pow(t, lean / .5 * .5 + .25))), .8); }
+    for(i = 0; i < 34; i++){
+      t = rnd(); env = envelope(t); r = h * (.07 + .17 * env * (.6 + .4 * rnd()));
+      puff(x, w * (.08 + .84 * t), base - env * h * .36 * (.55 + .45 * rnd()), r * 1.1, r, .2 + .22 * rnd());
+    }
+    for(i = 0; i < 30; i++){
+      t = .1 + .8 * rnd(); env = envelope(t); r = h * (.05 + .07 * rnd());
+      puff(x, w * (.08 + .84 * t), base - env * h * .48 * (.8 + .2 * rnd()), r * 1.15, r, .26 + .2 * rnd());
+    }
+    for(i = 0; i < 9; i++) puff(x, w * (.1 + .8 * rnd()), base, w * (.05 + .06 * rnd()), h * .045, .2);
+    x.globalCompositeOperation = 'source-atop';
+    var g = x.createLinearGradient(0, base - h * .34, 0, base + h * .06);
+    g.addColorStop(0, 'rgba(160,180,200,0)'); g.addColorStop(1, 'rgba(118,142,166,.55)');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    return c;
+  }
+  /* a wisp: thin strands combed along a gentle curve, like high cloud */
+  function wisp(w){
+    var h = w * .2, c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d'), bend = (rnd() - .5) * h * .9, strands = 3 + (rnd() * 3 | 0);
+    for(var k = 0; k < strands; k++){
+      var off = (rnd() - .5) * h * .4, len = .55 + .4 * rnd(), start = rnd() * (1 - len);
+      for(var i = 0; i < 30; i++){
+        var t = i / 29, u = start + len * t, px = w * (.04 + .92 * u);
+        var py = h * .5 + off + Math.sin(u * Math.PI) * bend + (rnd() - .5) * h * .14;
+        var a = Math.sin(t * Math.PI) * (.1 + .12 * rnd());
+        puff(x, px, py, w * (.045 + .05 * rnd()), h * (.07 + .07 * rnd()), a);
+      }
+    }
+    return c;
+  }
+
+  var clouds = [], W = 0, H = 0;
+  function spawn(c, anywhere){
+    var big = rnd();
+    c.kind = big < .2 ? 'wisp' : 'cumulus';
+    c.w = W * (c.kind === 'wisp' ? .3 + .25 * rnd() : .1 + .2 * big);
+    c.img = c.kind === 'wisp' ? wisp(Math.max(60, c.w | 0)) : cumulus(Math.max(60, c.w | 0));
+    c.h = c.img.height;
+    c.y = H * (-.1 + 1.0 * rnd());
+    c.x = anywhere ? -c.w + (W + c.w) * rnd() : -c.w - W * .1 * rnd();
+    /* a crossing takes roughly 1.5-3 minutes; larger clouds move a touch faster */
+    c.v = W / (95 + 80 * rnd()) * (.8 + .4 * (c.w / W));
+    c.a = .45 + .35 * rnd();
+    c.dy = (rnd() - .5) * c.v * .08;     /* a little drift, not a straight rail */
+  }
+  function size(){
+    var r = media.getBoundingClientRect(), w = Math.max(2, Math.round(r.width * RES)), h = Math.max(2, Math.round(r.height * RES));
+    if(w === cv.width && h === cv.height) return false;
+    cv.width = w; cv.height = h; W = w; H = h;
+    clouds = []; for(var i = 0; i < 5; i++){ var c = {}; spawn(c, true); clouds.push(c); }
+    return true;
+  }
+
+  /* the mask is drawn with the same cover geometry as the photograph */
+  function cover(img){
+    var pos = getComputedStyle(img).objectPosition.split(' ');
+    var fx = parseFloat(pos[0]) / 100, fy = parseFloat(pos[1] || '50%') / 100;
+    var s = Math.max(W / img.naturalWidth, H / img.naturalHeight), dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+    return [(W - dw) * (isNaN(fx) ? .5 : fx), (H - dh) * (isNaN(fy) ? .5 : fy), dw, dh];
+  }
+
+  var running = false, visible = true, last = 0, acc = 0, raf = 0, active = null;
+  function frame(t){
+    raf = 0;
+    if(!running) return;
+    var dt = last ? Math.min(.1, (t - last) / 1000) : 0; last = t; acc += dt;
+    raf = requestAnimationFrame(frame);
+    if(acc < 1/30) return;               /* ~30fps is plenty for clouds this slow */
+    var step = acc; acc = 0;
+    draw(step);
+  }
+  function draw(step){
+    var img = media.querySelector('.hero__img.is-on');
+    if(!img || !img.complete || !img.naturalWidth) return;
+    if(img !== active){ active = img; cv.classList.add('is-live'); }
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.clearRect(0, 0, W, H);
+    clouds.forEach(function(c){
+      c.x += c.v * step; c.y += c.dy * step;
+      if(c.x > W + 4) spawn(c, false);
+      ctx.globalAlpha = c.a;
+      ctx.drawImage(c.img, c.x, c.y, c.w, c.h);
+    });
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'destination-in';
+    var g = cover(img); ctx.drawImage(maskFor(img), g[0], g[1], g[2], g[3]);
+  }
+  /* inspection only: draw the layer as it would be `sec` seconds on, for
+     checking in a browser that is not painting frames */
+  cv.jmdPreview = function(sec){ size(); draw(sec || 0); };
+  function update(){
+    var go = visible && !document.hidden;
+    if(go && !running){ running = true; last = 0; size(); raf = requestAnimationFrame(frame); }
+    if(!go && running){ running = false; if(raf) cancelAnimationFrame(raf); raf = 0; }
+  }
+  new IntersectionObserver(function(es){ visible = es[0].isIntersecting; update(); }).observe(media);
+  document.addEventListener('visibilitychange', update);
+  addEventListener('resize', function(){ if(running) size(); });
+  update();
+})();
+</script>
+
 <script id="hero-review">
 /* ── Layout review — scaffolding, not design ─────────────────────────────
    Hero shortlist: A1 (single tower, Editorial) and B3 (converging towers,
    Duotone), with the handshake in Note 2. Note 3 carries the team picture
-   (hero-15) in two ways, chosen independently of the hero. Step with the
-   picker or the arrow keys; ?view=B3&n3=2 opens on a combination.
-   Once chosen: keep the hero image in the markup, set data-look and
-   data-n3 on <body> (or fold those rules into the base styles), and delete this
+   (hero-15) in two ways, and the hero's JMD mark comes in four variations;
+   each is chosen independently. Step with the picker or the arrow keys;
+   ?view=B3&n3=2&mk=4 opens on a combination.
+   Once chosen: keep the hero image in the markup, set data-look,
+   data-n3 and data-mk on <body> (or fold those rules into the base styles), and delete this
    script, the .hp styles and the options not taken. */
 (function(){
   var HEROES = {
@@ -1393,14 +1627,20 @@ html.intro-on .room__card .mk{visibility:hidden}
   };
   var LOOKS = {1:'Editorial', 3:'Duotone'};
   var N3 = {1:'Portrait beside the text', 2:'Full bleed under the veil'};
+  var MK = {1:'Current — Spectral, blue to navy', 2:'Condensed — Instrument Serif, slate navy', 3:'Spaced capitals — between ochre hairlines',
+            4:'Side lockup — CONSULTING beside the mark'};
   var VIEWS = [
     {id:'A1', kind:'hero', hero:'A', look:1},
     {id:'B3', kind:'hero', hero:'B', look:3},
     {id:'N3-1', kind:'n3', n:1},
-    {id:'N3-2', kind:'n3', n:2}
+    {id:'N3-2', kind:'n3', n:2},
+    {id:'L1', kind:'mk', n:1},
+    {id:'L2', kind:'mk', n:2},
+    {id:'L3', kind:'mk', n:3},
+    {id:'L4', kind:'mk', n:4}
   ];
 
-  var BASE = '../assets/heroes/08-options/', KEY = 'jmd-08-view', KEY3 = 'jmd-08-n3';
+  var BASE = '../assets/heroes/08-options/', KEY = 'jmd-08-view', KEY3 = 'jmd-08-n3', KEYM = 'jmd-08-mk';
   var media = document.getElementById('hero-media');
   if(!media) return;
   var hero = media.parentNode, veil = media.querySelector('.hero__veil'),
@@ -1418,7 +1658,7 @@ html.intro-on .room__card .mk{visibility:hidden}
 
   /* the hero and Note 3 are chosen independently: a hero entry changes the
      hero, a Note 3 entry changes Note 3 and jumps to it */
-  var heroId = 'A1', n3 = 1, cur = -1, num, label, dots = [];
+  var heroId = 'A1', n3 = 1, mk = 1, cur = -1, num, label, dots = [];
   function setHero(v){
     var h = HEROES[v.hero], next = img(h.file);
     heroId = v.id;
@@ -1429,19 +1669,55 @@ html.intro-on .room__card .mk{visibility:hidden}
     function swap(){ imgs.forEach(function(m){ m.classList.toggle('is-on', m === next); }); }
     if(next.complete) swap(); else next.addEventListener('load', swap, {once:true});
   }
+  /* the ochre rule under the word is drawn to the word (and for the script,
+     curved into a swash): re-measured once the variation's face has loaded.
+     variation 1 keeps 08's original rule. */
+  function fitRule(){
+    document.querySelectorAll('.mk').forEach(function(svg){
+      var word = svg.querySelector('.plate__face .serifmark'), rule = svg.querySelector('.plate__face path:not(.mk-top)'),
+          top = svg.querySelector('.mk-top'), sub = svg.querySelector('.plate__face .sub');
+      if(!word || !rule) return;
+      if(sub) sub.removeAttribute('transform');
+      if(mk === 1){ rule.setAttribute('d', 'M2 133 H250'); return; }
+      var b; try{ b = word.getBBox(); }catch(e){ return; }
+      if(!(b.width > 40)) return;
+      /* tracked capitals carry their spacing after the last letter: trim it */
+      var trail = mk === 3 ? parseFloat(getComputedStyle(word).letterSpacing) || 0 : 0;
+      var x0 = Math.max(2, b.x + 2), x1 = b.x + b.width - trail;
+      if(mk === 4){
+        /* side lockup: a vertical hairline after the word, the subline beside it */
+        var rx = x1 + 22;
+        rule.setAttribute('d', 'M' + rx.toFixed(1) + ' 34 V114');
+        if(sub) sub.setAttribute('transform', 'translate(' + (rx + 20 - 2).toFixed(1) + ' ' + (81 - 162) + ')');
+        return;
+      }
+      rule.setAttribute('d', 'M' + x0.toFixed(1) + ' 133 H' + x1.toFixed(1));
+      if(top) top.setAttribute('d', 'M' + x0.toFixed(1) + ' 22 H' + x1.toFixed(1));
+    });
+  }
+  function setMark(n){
+    mk = n; document.body.dataset.mk = String(n);
+    fitRule();
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitRule);
+    setTimeout(fitRule, 700);
+  }
   function show(i, jump){
     i = (i + VIEWS.length) % VIEWS.length;
     var v = VIEWS[i];
     if(v.kind === 'hero') setHero(v);
+    else if(v.kind === 'mk') setMark(v.n);
     else { n3 = v.n; document.body.dataset.n3 = String(n3); }
     cur = i;
-    try{ localStorage.setItem(KEY, heroId); localStorage.setItem(KEY3, String(n3)); }catch(e){}
-    var q = new URLSearchParams(location.search); q.delete('hero'); q.set('view', heroId); q.delete('n2'); q.set('n3', String(n3)); q.delete('mk');
+    try{ localStorage.setItem(KEY, heroId); localStorage.setItem(KEY3, String(n3)); localStorage.setItem(KEYM, String(mk)); }catch(e){}
+    var q = new URLSearchParams(location.search); q.delete('hero'); q.set('view', heroId); q.delete('n2'); q.set('n3', String(n3)); q.set('mk', String(mk));
     history.replaceState(null, '', location.pathname + '?' + q.toString());
     var hv = VIEWS.filter(function(x){ return x.id === heroId; })[0];
     if(v.kind === 'hero'){
       num.textContent = 'Hero ' + v.id + ' · ' + (i + 1) + ' / ' + VIEWS.length;
       label.textContent = HEROES[v.hero].name + ' — ' + LOOKS[v.look];
+    } else if(v.kind === 'mk'){
+      num.textContent = 'Logo · option ' + v.n + ' · ' + (i + 1) + ' / ' + VIEWS.length;
+      label.textContent = MK[v.n];
     } else {
       num.textContent = 'Note 3 · option ' + v.n + ' · ' + (i + 1) + ' / ' + VIEWS.length + ' · with hero ' + heroId;
       label.textContent = N3[v.n];
@@ -1449,7 +1725,8 @@ html.intro-on .room__card .mk{visibility:hidden}
     dots.forEach(function(d, j){ d.setAttribute('aria-current', String(j === i)); });
     if(window.ScrollTrigger) ScrollTrigger.refresh();
     if(jump){
-      if(v.kind === 'n3') document.getElementById('note-3').scrollIntoView({block:'start'});
+      if(v.kind === 'mk'){ if(scrollY > 40) scrollTo({top:0}); }
+      else if(v.kind === 'n3') document.getElementById('note-3').scrollIntoView({block:'start'});
       else if(scrollY > innerHeight) scrollTo({top:0});
     }
   }
@@ -1467,8 +1744,9 @@ html.intro-on .room__card .mk{visibility:hidden}
     var d = document.createElement('button');
     d.type = 'button';
     d.setAttribute('aria-label', v.kind === 'hero' ? 'Hero ' + v.id + ': ' + HEROES[v.hero].name + ', ' + LOOKS[v.look]
+                               : v.kind === 'mk'   ? 'Logo, option ' + v.n + ': ' + MK[v.n]
                                                    : 'Note 3, option ' + v.n + ': ' + N3[v.n]);
-    if(j === 2) d.className = 'hp__gap';
+    if(j === 2 || j === 4) d.className = 'hp__gap';
     d.innerHTML = '<span></span>';
     d.addEventListener('click', function(){ show(j, true); });
     bar.querySelector('.hp__dots').appendChild(d); dots.push(d);
@@ -1487,11 +1765,14 @@ html.intro-on .room__card .mk{visibility:hidden}
   });
 
   var q0 = new URLSearchParams(location.search), ids = VIEWS.map(function(v){ return v.id; });
-  var want = (q0.get('view') || '').toUpperCase(), want3 = parseInt(q0.get('n3'), 10);
+  var want = (q0.get('view') || '').toUpperCase(), want3 = parseInt(q0.get('n3'), 10), wantM = parseInt(q0.get('mk'), 10);
   if(['A1','B3'].indexOf(want) < 0){ try{ want = localStorage.getItem(KEY) || 'A1'; }catch(e){ want = 'A1'; } }
   if(['A1','B3'].indexOf(want) < 0) want = 'A1';
   if(!(want3 >= 1 && want3 <= 2)){ try{ want3 = parseInt(localStorage.getItem(KEY3), 10); }catch(e){} }
   if(!(want3 >= 1 && want3 <= 2)) want3 = 1;
+  if(!(wantM >= 1 && wantM <= 4)){ try{ wantM = parseInt(localStorage.getItem(KEYM), 10); }catch(e){} }
+  if(!(wantM >= 1 && wantM <= 4)) wantM = 1;
+  show(ids.indexOf('L' + wantM));
   show(ids.indexOf('N3-' + want3));
   show(ids.indexOf(want));
 })();
