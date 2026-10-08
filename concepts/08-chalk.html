@@ -360,12 +360,11 @@ html.intro-on .hp{opacity:0}
       2 Condensed — Instrument Serif, tall and narrow, in slate navy; the
         subline spaced wide (after the client's "Macaron" reference).
       3 Spaced capitals — the same condensed serif set smaller and tracked
-        wide, held between two ochre hairlines like a hallmark.
+        wide over an ochre hairline.
       4 Side lockup — the condensed serif with CONSULTING set beside it rather
         than beneath, across a vertical ochre hairline.
-      The rule (and for 3, the top hairline; for 4, the vertical rule and the
-      subline's position) is measured to the word by the review script. */
-.mk .mk-top{display:none}
+      The rule (and for 4, the vertical rule and the subline's position) is
+      measured to the word by the review script. */
 
 [data-mk="2"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.005em;font-size:158px}
 [data-mk="2"] .mk .plate__face .serifmark{fill:#2A4258}
@@ -376,14 +375,13 @@ html.intro-on .hp{opacity:0}
 [data-mk="3"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.2em;font-size:112px}
 [data-mk="3"] .mk .plate__face .serifmark{fill:#143247}
 [data-mk="3"] .mk .plate__deep{display:none}
-[data-mk="3"] .mk .mk-top{display:inline}
 [data-mk="3"] .mk .plate__face path{stroke:#B9822A;stroke-width:1}
 [data-mk="3"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:14px;letter-spacing:.7em;fill:#143247}
 
 [data-mk="4"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.005em;font-size:122px}
 [data-mk="4"] .mk .plate__face .serifmark{fill:#2A4258}
 [data-mk="4"] .mk .plate__deep{display:none}
-[data-mk="4"] .mk .plate__face path:not(.mk-top){stroke:#B9822A;stroke-width:1.2}
+[data-mk="4"] .mk .plate__face path{stroke:#B9822A;stroke-width:1.2}
 [data-mk="4"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:19px;letter-spacing:.34em;fill:#2A4258}
 
 /* ── Note 3: the team, two ways (data-n3 on <body>, under review) ───────
@@ -758,7 +756,6 @@ html.intro-on .room__card .mk{visibility:hidden}
             </g>
             <g class="plate__face">
               <text class="serifmark" x="0" y="112" font-size="128" fill="url(#ink-intro)">JMD</text>
-              <path class="mk-top" d="M2 18 H250" stroke="#B9822A" stroke-width="1"/>
               <path d="M2 133 H250" stroke="#B9822A" stroke-width="2"/>
               <text class="sub" x="2" y="162">CONSULTING</text>
             </g>
@@ -815,7 +812,6 @@ html.intro-on .room__card .mk{visibility:hidden}
             </g>
             <g class="plate__face">
               <text class="serifmark" x="0" y="112" font-size="128" fill="url(#ink)">JMD</text>
-              <path class="mk-top" d="M2 18 H250" stroke="#B9822A" stroke-width="1"/>
               <path d="M2 133 H250" stroke="#B9822A" stroke-width="2"/>
               <text class="sub" x="2" y="162">CONSULTING</text>
             </g>
@@ -1311,7 +1307,7 @@ html.intro-on .room__card .mk{visibility:hidden}
       svg   = ghost.querySelector('svg'),
       face  = ghost.querySelector('.plate__face'),
       deep  = ghost.querySelector('.plate__deep'),
-      rule  = face.querySelector('path:not(.mk-top)'),
+      rule  = face.querySelector('path'),
       sub   = face.querySelector('.sub'),
       real  = document.querySelector('.room__card .mk'),
       still = matchMedia('(prefers-reduced-motion:reduce)').matches,
@@ -1627,7 +1623,7 @@ html.intro-on .room__card .mk{visibility:hidden}
   };
   var LOOKS = {1:'Editorial', 3:'Duotone'};
   var N3 = {1:'Portrait beside the text', 2:'Full bleed under the veil'};
-  var MK = {1:'Current — Spectral, blue to navy', 2:'Condensed — Instrument Serif, slate navy', 3:'Spaced capitals — between ochre hairlines',
+  var MK = {1:'Current — Spectral, blue to navy', 2:'Condensed — Instrument Serif, slate navy', 3:'Spaced capitals — over an ochre hairline',
             4:'Side lockup — CONSULTING beside the mark'};
   var VIEWS = [
     {id:'A1', kind:'hero', hero:'A', look:1},
@@ -1674,10 +1670,12 @@ html.intro-on .room__card .mk{visibility:hidden}
      variation 1 keeps 08's original rule. */
   function fitRule(){
     document.querySelectorAll('.mk').forEach(function(svg){
-      var word = svg.querySelector('.plate__face .serifmark'), rule = svg.querySelector('.plate__face path:not(.mk-top)'),
-          top = svg.querySelector('.mk-top'), sub = svg.querySelector('.plate__face .sub');
+      var word = svg.querySelector('.plate__face .serifmark'), rule = svg.querySelector('.plate__face path'),
+          sub = svg.querySelector('.plate__face .sub');
       if(!word || !rule) return;
-      if(sub) sub.removeAttribute('transform');
+      /* the subline is placed with x/y rather than a transform: the intro
+         animates its transform, which would carry it back under the rule */
+      if(sub){ sub.setAttribute('x', '2'); sub.setAttribute('y', '162'); }
       if(mk === 1){ rule.setAttribute('d', 'M2 133 H250'); return; }
       var b; try{ b = word.getBBox(); }catch(e){ return; }
       if(!(b.width > 40)) return;
@@ -1688,11 +1686,10 @@ html.intro-on .room__card .mk{visibility:hidden}
         /* side lockup: a vertical hairline after the word, the subline beside it */
         var rx = x1 + 22;
         rule.setAttribute('d', 'M' + rx.toFixed(1) + ' 34 V114');
-        if(sub) sub.setAttribute('transform', 'translate(' + (rx + 20 - 2).toFixed(1) + ' ' + (81 - 162) + ')');
+        if(sub){ sub.setAttribute('x', (rx + 20).toFixed(1)); sub.setAttribute('y', '81'); }
         return;
       }
       rule.setAttribute('d', 'M' + x0.toFixed(1) + ' 133 H' + x1.toFixed(1));
-      if(top) top.setAttribute('d', 'M' + x0.toFixed(1) + ' 22 H' + x1.toFixed(1));
     });
   }
   function setMark(n){

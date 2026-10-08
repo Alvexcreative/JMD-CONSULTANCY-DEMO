@@ -84,7 +84,7 @@ reference and 3–4 build on it. The rule is re-measured to each word.
 |---|---|
 | 1 | **Current**: Spectral 600, blue-to-navy ink, chalk shadow, ochre rule |
 | 2 | **Condensed** (after "Macaron"): Instrument Serif, tall and narrow, slate navy, subline spaced wide |
-| 3 | **Spaced capitals**: the condensed serif set smaller and tracked wide, between two ochre hairlines |
+| 3 | **Spaced capitals**: the condensed serif set smaller and tracked wide, over an ochre hairline |
 | 4 | **Side lockup**: the condensed serif with CONSULTING set beside it across a vertical ochre hairline |
 
 Options 2–4 share one extra face (Instrument Serif), loaded for the review;
