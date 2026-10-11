@@ -22,9 +22,10 @@
      --ochre keeps its name for continuity with the markup; it is the
      accent slot, and in every scheme below it holds a blue.
 
-     1 · Harrogate Blue — cool, clinical, blue-tinted surfaces (default)
-     2 · Stone         — warm stone surfaces, the blue doing all the work
-     3 · Graphite      — neutral grey surfaces, the quietest of the three
+     1 · Harrogate Blue — cool, blue-tinted surfaces, drawn from the mark
+     2 · Oxblood        — bone paper, near-black panels, oxblood accent
+     3 · Forest         — parchment and deep green with copper
+     4 · Obsidian       — the whole page dark, one cold accent
      ─────────────────────────────────────────────────────────────── */
 
   /* 1 · Harrogate Blue */
@@ -42,34 +43,77 @@
   --gut:clamp(20px,4.2vw,64px);
   --serif:"Spectral",Georgia,"Times New Roman",serif;
   --mono:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --field:rgba(255,255,255,.72); --field-hi:#FFFFFF; --mark-ink:#2A4258;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 
-/* 2 · Stone — the warmth sits in the paper and the panels, never in the
-   accent, so nothing competes with the mark. */
+/* ═══ Three further directions ═══════════════════════════════════════
+   Deliberately not derived from the mark — the brief asked for range, so
+   these go where the logo would not. Each is a complete world rather than
+   a hue swap: the surfaces, the paper and the accent all move together,
+   and in two of them the panels invert from light to dark.
+
+   2 · Oxblood    bone paper, near-black panels, oxblood accent.
+                  Counsel's chambers. Authority, not friendliness.
+   3 · Forest     parchment and deep green with copper. Land and estate —
+                  Yorkshire read as place rather than as weather.
+   4 · Obsidian   the whole page dark, one cold accent carrying every
+                  action. Instrumented and technical.
+   ════════════════════════════════════════════════════════════════ */
+
+/* 2 · Oxblood */
 [data-scheme="2"]{
-  --paper:#FAF8F4;   --paper-rgb:250,248,244;   --paper-2:#F1EDE5;
-  --ink:#E7E3DA;     --ink-rgb:231,227,218;     --ink-2:#DCD7CC; --ink-3:#D0CABD;
-  --on-ink:#1E3348;  --on-ink-rgb:30,51,72;
-  --on-ink-dim:#4C5766; --on-dim-rgb:76,87,102;
-  --on-paper:#1E3348; --on-paper-dim:#4C5766;
-  --blue:#2B5AA0;    --blue-rgb:43,90,160;      --blue-lift:#3F7CC9;
-  --ochre:#2B5AA0;   --ochre-lift:#4E85CC;      --bronze:#1F4A86;
-  --on-ochre:#FAF8F4;
+  --field:rgba(241,236,226,.07); --field-hi:rgba(241,236,226,.13); --mark-ink:#F1ECE2;
+  --paper:#F4F1EA;   --paper-rgb:244,241,234;   --paper-2:#E9E3D7;
+  --ink:#1E1B19;     --ink-rgb:30,27,25;        --ink-2:#272320; --ink-3:#332E2A;
+  --on-ink:#F1ECE2;  --on-ink-rgb:241,236,226;
+  --on-ink-dim:#B9AE9E; --on-dim-rgb:185,174,158;
+  --on-paper:#221F1C; --on-paper-dim:#5A534B;
+  --blue:#8C2F39;    --blue-rgb:140,47,57;      --blue-lift:#A8414B;
+  --ochre:#8C2F39;   --ochre-lift:#A8414B;      --bronze:#6E222B;
+  --on-ochre:#F7F4EE;
+  --rule-ink:rgba(var(--on-ink-rgb),.22);   --rule-ink-soft:rgba(var(--on-ink-rgb),.12);
+  --rule-paper:rgba(34,31,28,.22);          --rule-paper-soft:rgba(34,31,28,.10);
 }
 
-/* 3 · Graphite — neutral surfaces, so the only colour on the page is the
-   brand blue. The quietest and the most corporate of the three. */
+/* 3 · Forest */
 [data-scheme="3"]{
-  --paper:#F6F7F8;   --paper-rgb:246,247,248;   --paper-2:#EBEDEF;
-  --ink:#E3E6E9;     --ink-rgb:227,230,233;     --ink-2:#D8DCE0; --ink-3:#CBD1D6;
-  --on-ink:#1B2430;  --on-ink-rgb:27,36,48;
-  --on-ink-dim:#566270; --on-dim-rgb:86,98,112;
-  --on-paper:#1B2430; --on-paper-dim:#566270;
-  --blue:#2F6FB5;    --blue-rgb:47,111,181;     --blue-lift:#5392D4;
-  --ochre:#3060A8;   --ochre-lift:#4E85CC;      --bronze:#24497E;
-  --on-ochre:#FFFFFF;
+  --field:rgba(235,237,227,.07); --field-hi:rgba(235,237,227,.13); --mark-ink:#EBEDE3;
+  --paper:#F2EFE6;   --paper-rgb:242,239,230;   --paper-2:#E5DFD1;
+  --ink:#1C2B22;     --ink-rgb:28,43,34;        --ink-2:#24352A; --ink-3:#2E4234;
+  --on-ink:#EBEDE3;  --on-ink-rgb:235,237,227;
+  --on-ink-dim:#A9B5A5; --on-dim-rgb:169,181,165;
+  --on-paper:#1E2A22; --on-paper-dim:#505A4C;
+  --blue:#2F5F45;    --blue-rgb:47,95,69;       --blue-lift:#3E7A59;
+  --ochre:#8F5324;   --ochre-lift:#B06A33;      --bronze:#6F3F1B;
+  --on-ochre:#F6F3EA;
+  --rule-ink:rgba(var(--on-ink-rgb),.22);   --rule-ink-soft:rgba(var(--on-ink-rgb),.12);
+  --rule-paper:rgba(30,42,34,.22);          --rule-paper-soft:rgba(30,42,34,.10);
 }
+
+/* 4 · Obsidian — the only scheme where the page itself is dark, so the
+   image treatments have to be told to stop multiplying: multiply against
+   a near-black ground crushes every photograph to nothing. */
+[data-scheme="4"]{
+  --field:rgba(228,233,239,.08); --field-hi:rgba(228,233,239,.14); --mark-ink:#E4E9EF;
+  --paper:#0C0E11;   --paper-rgb:12,14,17;      --paper-2:#14181D;
+  --ink:#15191E;     --ink-rgb:21,25,30;        --ink-2:#1C2127; --ink-3:#252B33;
+  --on-ink:#E4E9EF;  --on-ink-rgb:228,233,239;
+  --on-ink-dim:#9AA6B4; --on-dim-rgb:154,166,180;
+  --on-paper:#E4E9EF; --on-paper-dim:#9AA6B4;
+  --blue:#7FB4E8;    --blue-rgb:127,180,232;    --blue-lift:#A3CBF2;
+  --ochre:#7BC4D6;   --ochre-lift:#9FD9E7;      --bronze:#55A2B6;
+  --on-ochre:#0C0E11;
+  --rule-ink:rgba(var(--on-ink-rgb),.20);   --rule-ink-soft:rgba(var(--on-ink-rgb),.10);
+  --rule-paper:rgba(var(--on-ink-rgb),.20); --rule-paper-soft:rgba(var(--on-ink-rgb),.10);
+}
+[data-scheme="4"] .n3-photo img, [data-scheme="4"] .n3-edge img,
+[data-scheme="4"] .hero__img{ mix-blend-mode:normal; filter:saturate(.72) brightness(.78) contrast(1.04); }
+[data-scheme="4"] .n3-photo::after, [data-scheme="4"] .n3-edge::after{ mix-blend-mode:normal; background:rgba(12,14,17,.34); }
+/* the logo keeps its white plate; on a dark page that reads as a mounted
+   label rather than an accident */
+[data-scheme="4"] .mk{ box-shadow:0 0 0 1px rgba(228,233,239,.18); }
+
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -412,10 +456,10 @@ html.intro-on .hp{opacity:0}
 
 
 [data-mk="4"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.005em;font-size:122px}
-[data-mk="4"] .mk .plate__face .serifmark{fill:#2A4258}
+[data-mk="4"] .mk .plate__face .serifmark{fill:var(--mark-ink)}
 [data-mk="4"] .mk .plate__deep{display:none}
 [data-mk="4"] .mk .plate__face path{stroke:var(--ochre);stroke-width:1.2}
-[data-mk="4"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:19px;letter-spacing:.34em;fill:#2A4258}
+[data-mk="4"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:19px;letter-spacing:.34em;fill:var(--mark-ink)}
 
 /* ── Note 3: the team, two ways (data-n3 on <body>, under review) ───────
       1 Portrait — the copy keeps the left, the team stands beside it.
@@ -605,7 +649,7 @@ form{display:grid;gap:18px}
 .field label i{font-style:normal;color:var(--ochre)}
 .field input,.field select,.field textarea{
   width:100%;min-height:50px;padding:13px 15px;border:0;border-radius:2px;
-  background-color:rgba(255,255,255,.72);color:var(--on-ink);
+  background-color:var(--field);color:var(--on-ink);
   box-shadow:inset 0 0 0 1px var(--rule-ink);
   font-family:var(--serif);font-weight:300;font-size:1rem;line-height:1.5;
   caret-color:var(--ochre);transition:box-shadow .2s var(--ease),background .2s var(--ease)}
@@ -615,8 +659,8 @@ form{display:grid;gap:18px}
   background-repeat:no-repeat;background-position:right 15px center;background-size:12px;padding-right:42px}
 .field select option{background:var(--ink-2);color:var(--on-ink)}
 .field input::placeholder,.field textarea::placeholder{color:var(--on-ink-dim)}
-.field input:hover,.field select:hover,.field textarea:hover{background-color:#fff}
-.field input:focus,.field select:focus,.field textarea:focus{outline:0;background-color:#fff;
+.field input:hover,.field select:hover,.field textarea:hover{background-color:var(--field-hi)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;background-color:var(--field-hi);
   box-shadow:inset 0 0 0 2px var(--blue)}
 .field[data-invalid="true"] input,.field[data-invalid="true"] select,.field[data-invalid="true"] textarea{
   box-shadow:inset 0 0 0 2px #B0412E}
@@ -1800,8 +1844,9 @@ html.intro-on .room__card .mk{visibility:hidden}
 <div class="sw" role="group" aria-label="Colour scheme">
   <span class="sw__t">Palette</span>
   <button type="button" data-s="1" aria-pressed="true">Harrogate&nbsp;Blue</button>
-  <button type="button" data-s="2" aria-pressed="false">Stone</button>
-  <button type="button" data-s="3" aria-pressed="false">Graphite</button>
+  <button type="button" data-s="2" aria-pressed="false">Oxblood</button>
+  <button type="button" data-s="3" aria-pressed="false">Forest</button>
+  <button type="button" data-s="4" aria-pressed="false">Obsidian</button>
 </div>
 <style>
 .sw{position:fixed;z-index:60;left:50%;bottom:72px;transform:translateX(-50%);
@@ -1831,14 +1876,14 @@ html.intro-on .room__card .mk{visibility:hidden}
     history.replaceState(null,'',location.pathname+'?'+q.toString());
   }
   var q=new URLSearchParams(location.search),w=q.get('scheme');
-  if(['1','2','3'].indexOf(w)<0){try{w=localStorage.getItem(K)}catch(e){}}
-  set(['1','2','3'].indexOf(w)>-1?w:'1');
+  if(['1','2','3','4'].indexOf(w)<0){try{w=localStorage.getItem(K)}catch(e){}}
+  set(['1','2','3','4'].indexOf(w)>-1?w:'1');
   document.querySelectorAll('.sw button').forEach(function(x){
     x.addEventListener('click',function(){set(x.dataset.s)});});
   document.addEventListener('keydown',function(e){
     if(e.metaKey||e.ctrlKey||e.altKey)return;
     var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
-    if(e.key.toLowerCase()==='p'){var o=['1','2','3'];set(o[(o.indexOf(b.dataset.scheme)+1)%3]);}
+    if(e.key.toLowerCase()==='p'){var o=['1','2','3','4'];set(o[(o.indexOf(b.dataset.scheme)+1)%3]);}
   });
 })();
 </script>
