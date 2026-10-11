@@ -541,23 +541,44 @@ form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] 
 .reveal.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
 @media (prefers-reduced-motion:reduce){.reveal,.reveal.pending,.reveal.in{opacity:1;transform:none;transition:none}}
 
-/* ── First-load intro: "Struck", adopted 21 September 2026 from
-      jmd-shortlist-lab. The two layers of the Plate mark close on their own
-      diagonal, strike with a soft damped click that prints the bronze rule
-      and CONSULTING, then the mark is flown onto the real one in the hero.
-      Plays on every load of the home page: the gate at the top of the body
-      sets html.intro-on unless the visit arrived on an anchor. Without that class the overlay never shows, so a
-      page without JavaScript simply loads. ── */
+/* ── First-load intro (under review: Draft or Aperture, html[data-intro]) ──
+      Home only, once a session, skipped by any input, absent under reduced
+      motion. Without html.intro-on the overlay never shows, so a page
+      without scripts simply loads. The ghost in the stage is a copy of the
+      hero's logo, made by the script, and it lands exactly on the real one.
+      Draft: the wordmark is drawn stroke by stroke, the figures ink in,
+        the sheet lifts away as the logo glides into place.
+      Aperture: the logo holds still while a hairline tracks the hero
+        photograph loading, then the sheet opens from the centre. */
 .intro{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}
 .intro[hidden],html:not(.intro-on) .intro{display:none}
-.intro__stage{position:absolute;inset:0;display:grid;place-items:center}
+.intro__paper{position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(112deg,#F5F8F9 0%,#E4EBF0 52%,#D3DFE7 100%);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,transparent var(--ap,0px),#000 calc(var(--ap,0px) + 1px));
+  mask-image:radial-gradient(circle at 50% 50%,transparent var(--ap,0px),#000 calc(var(--ap,0px) + 1px))}
+.intro__iris{position:absolute;inset:0;z-index:1;width:100%;height:100%;overflow:visible}
+.intro__iris circle{fill:none;stroke:var(--ochre);stroke-width:1;opacity:0}
+.intro__stage{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,2.4vw,28px)}
 .intro__mk{display:block;transform-origin:0 0}
 .intro__mk .mk{width:min(54vw,560px);overflow:visible}
 @media(max-width:720px){.intro__mk .mk{width:72vw}}
-.intro__paper{position:absolute;inset:0;
-  background-image:linear-gradient(112deg,#F5F8F9 0%,#E4EBF0 52%,#D3DFE7 100%)}
+.intro__bar{display:block;width:min(54vw,560px);height:1px;background:var(--rule-paper);overflow:hidden;opacity:0}
+@media(max-width:720px){.intro__bar{width:72vw}}
+.intro__bar i{display:block;height:100%;background:var(--ochre);transform:scaleX(0);transform-origin:left center}
+html[data-intro="aperture"] .intro__bar{opacity:1}
 html.intro-on{overflow:hidden}
 html.intro-on .room__card .mk{visibility:hidden}
+
+/* review only: the intro comparison switcher */
+.introsw{position:fixed;z-index:120;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:3px;padding:5px;
+  background:rgba(14,14,16,.86);border:1px solid rgba(255,255,255,.14);border-radius:999px;box-shadow:0 8px 32px -8px rgba(0,0,0,.55);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font:500 12px/1 ui-sans-serif,-apple-system,system-ui,sans-serif}
+.introsw__t{padding:0 8px 0 12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.12em;font-size:10px}
+.introsw a{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border-radius:999px;color:rgba(255,255,255,.6);
+  text-decoration:none;transition:background .18s ease,color .18s ease}
+.introsw a:hover{color:#fff;background:rgba(255,255,255,.09)}
+.introsw a[aria-current="true"]{background:#fff;color:#16181B}
+.introsw a:focus-visible{outline:2px solid #7DA7FF;outline-offset:2px}
 /* ── Phone, round 1: reach ─────────────────────────────────────────────
       On a phone the header strip is the whole navigation — the right-hand
       rail is desktop only — so everything in it has to be reachable and

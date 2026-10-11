@@ -27,15 +27,24 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
   {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
-  <!-- motion and the intro are decided before first paint: scripts on and
-       reduced motion off gives html.motion; the intro plays on the home
-       page once a session, and never when the visit arrives on an anchor -->
+  <!-- motion and the intro are decided before first paint. Scripts on and
+       reduced motion off gives html.motion. The intro plays on the home page
+       once a session, never on an anchored visit, never under reduced motion.
+       Review only: ?intro=draft|aperture picks an intro and replays it. -->
   <script is:inline define:vars={{ home }}>
     (function () {
       var r = document.documentElement;
-      if (!matchMedia('(prefers-reduced-motion:reduce)').matches) r.classList.add('motion');
-      if (!home || location.hash) return;
-      try { if (sessionStorage.getItem('jmd-intro')) return; sessionStorage.setItem('jmd-intro', '1'); } catch (e) {}
+      var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if (!still) r.classList.add('motion');
+      var q = new URLSearchParams(location.search).get('intro'), modes = ['draft', 'aperture'], mode = 'draft';
+      try { mode = localStorage.getItem('jmd-intro-mode') || mode; } catch (e) {}
+      if (modes.indexOf(q) > -1) { mode = q; try { localStorage.setItem('jmd-intro-mode', q); } catch (e) {} }
+      if (modes.indexOf(mode) < 0) mode = 'draft';
+      r.dataset.intro = mode;
+      if (!home || location.hash || still) return;
+      if (modes.indexOf(q) < 0) {
+        try { if (sessionStorage.getItem('jmd-intro')) return; sessionStorage.setItem('jmd-intro', '1'); } catch (e) {}
+      }
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       r.classList.add('intro-on');
     })();
@@ -43,11 +52,21 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
 </head>
 <body data-look="1" data-n3="2" class={heroImage ? 'hero-photo-on' : undefined}>
   {home && (
-    <div class="intro intro--struck" id="intro" aria-hidden="true">
+    <div class="intro" id="intro" aria-hidden="true">
       <div class="intro__paper"></div>
+      <svg class="intro__iris" aria-hidden="true"><circle cx="50%" cy="50%" r="0" /></svg>
       <p class="intro__skip" aria-hidden="true">Tap to skip</p>
-      <div class="intro__stage"><span class="intro__mk"></span></div>
+      <div class="intro__stage"><span class="intro__mk"></span><span class="intro__bar"><i></i></span></div>
     </div>
+  )}
+  {/* review only: compare the two intros. Each link replays its intro.
+      Delete this nav, its styles and the ?intro handling once one is chosen. */}
+  {home && (
+    <nav class="introsw" aria-label="Compare intros (review)">
+      <span class="introsw__t">Intro</span>
+      <a href="/?intro=draft" data-mode="draft">Draft</a>
+      <a href="/?intro=aperture" data-mode="aperture">Aperture</a>
+    </nav>
   )}
   <span class="progress" aria-hidden="true"></span>
 
