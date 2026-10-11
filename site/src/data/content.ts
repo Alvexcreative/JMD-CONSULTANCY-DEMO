@@ -18,7 +18,6 @@ export const site = {
   phone: '+44 (0) 1423 884000',
   phoneHref: 'tel:+441423884000',
   email: 'info@jmdconsulting.co.uk',
-  web: 'www.jmdconsulting.co.uk',
   formed: 'January 2000',
   codaSince: '1990',
   clients: 'Circa 100 clients worldwide',
@@ -26,11 +25,9 @@ export const site = {
 
 /* Taglines, all verbatim from the live site */
 export const taglines = {
-  moving: 'Moving business forward',
   evolve: 'Develop. Innovate. Evolve.',
   solution: 'Implementing Solution Services',
   specialists: 'We are implementation specialists',
-  working: 'Working with you',
   listen: 'We take the time to listen.',
 } as const;
 
@@ -100,21 +97,6 @@ export const systems = {
 export const credentials = {
   /* anchored to a date, not a count of years, so it never needs updating */
   heading: 'Delivering since 2000',
-  items: [
-    { big: 'Since 1990', body: 'CODA / Unit4 Financials® consultancy and support, first inside CODA® and independently since 2000.' },
-    { big: 'Circa 100 clients', body: 'Worldwide, across a broad range of vertical markets, since commencement in January 2000.' },
-    { big: 'Four continents', body: 'Servicing clients throughout the UK, Europe, the USA and Canada, and the Middle East.' },
-  ],
-} as const;
-
-export const evidence = {
-  heading: 'Held open for the clients’ own words',
-  body: 'This practice does not publish a client list it has not been given permission to publish, and does not write its own testimonials. Three slots sit here for the real ones.',
-  slots: [
-    { label: 'Slot 01 · Awaiting content', text: 'Client testimonial to be supplied' },
-    { label: 'Slot 02 · Awaiting content', text: 'Client testimonial to be supplied' },
-    { label: 'Slot 03 · Awaiting content', text: 'Case study to be supplied' },
-  ],
 } as const;
 
 export const contact = {

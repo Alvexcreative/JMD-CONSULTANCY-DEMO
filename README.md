@@ -25,8 +25,9 @@ scroll motion throughout and a branded loading screen.
 Services, Systems and Evidence close on the enquiry prompt with the button and the
 phone number, before the link to the next page.
 
-Reach and Notes were removed in October 2026 (old addresses redirect home), as
-was any specific mention of the Harrogate base.
+Reach and Notes were removed in October 2026, as was any specific mention of the
+Harrogate base. This is the only JMD site: earlier concepts, versions and their
+old-address redirects are gone (they remain in the git history).
 
 ## Motion
 
@@ -87,8 +88,8 @@ JMD's own wording from the live site — see `CONTENT-SOURCE.md` for the full
 inventory and the source typos that were corrected. No client names,
 testimonials, metrics or addresses are invented.
 
-A few headings, the Notes titles and standfirsts, and two section ledes had no
-source; each is marked *bridging* in a comment beside it and needs the client's
+A few headings, two section ledes, the condensed service descriptions on Home and
+the diagram's integration note had no source; each is marked *bridging* in a comment beside it and needs the client's
 approval.
 
 **Positioning.** The site presents JMD as a practice, not an individual. The live
@@ -104,9 +105,10 @@ state, but **send nothing** — each is marked as a demonstration on the page.
 ## Photography
 
 Images generated with Higgsfield (GPT Image 2.5, 1K, high) in
-`public/assets/chalk/gen/`, plus the three earlier hero images, all to one
-brief: daylight, chalk white, pale steel
-and navy, candid, no text or logos. They are for review; none is presented as
+`public/assets/chalk/gen/`, plus the three earlier hero images (each with a
+1200px copy for phones), all to one brief: daylight, chalk white, pale steel
+and navy, candid, no text or logos. Phones get their own portrait home hero,
+`gen/hero-mobile.jpg`, chosen from five made to follow the wide one. They are for review; none is presented as
 JMD's own office or staff, and a live build wants licensed stock or a
 commissioned shoot.
 

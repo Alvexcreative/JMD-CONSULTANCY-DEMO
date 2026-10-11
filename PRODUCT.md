@@ -8,9 +8,10 @@ web
 
 ## What this project is
 
-The JMD Consulting website, in the Chalk design: a ten-page Astro site in
-`site/` (Home, Services, Systems, Reach, Evidence, Notes with three articles,
-Enquiry), built to the scope of the Alvex "Sky Is The Limit" package.
+The JMD Consulting website, in the Chalk design: a five-page Astro site in
+`site/` (Home, Services, Systems, Evidence, Enquiry), built to the scope of the
+Alvex "Sky Is The Limit" package. It is the only JMD site: earlier concepts
+and versions were removed in October 2026.
 
 Content truth lives in `CONTENT-SOURCE.md`, scraped from the live site at
 jmdconsulting.co.uk. Nothing on the site may claim anything that file does not
