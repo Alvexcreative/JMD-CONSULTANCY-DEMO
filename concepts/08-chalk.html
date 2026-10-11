@@ -1,10 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="2" data-scheme="1">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="2" data-scheme="1" data-type="1">
 <!-- Concept 08 — supplied as "JMD Consulting.zip" on 2026-09-22 and added to the
      review set unchanged, apart from: the logo path (now ../assets/), and the
      shared review harness appended at the end so the concept switcher appears.
      The original is kept untouched at _archive/supplied/. -->
 <title>JMD Consulting</title>
 <link rel="stylesheet" href="../shared/review.css">
+<!-- review only: faces for the three hero type variations (data-type 1–3) -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,500;1,6..72,300&family=Geist:wght@300;500&family=Albert+Sans:wght@300;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:light}
@@ -141,7 +144,7 @@ p{margin:0}
    because base h1 styling balances and the overlay is a <p>. */
 .torchwrap{position:relative;--tx:38%;--ty:44%}
 .torchwrap .rh{margin:0;position:relative;z-index:1;
-  font-size:clamp(2.05rem,4.7vw,3.8rem);line-height:1.04;font-weight:300;
+  font-size:calc(var(--hx,1) * clamp(2.05rem,4.7vw,3.8rem));line-height:1.04;font-weight:300;
   letter-spacing:-.032em;max-width:16ch;text-wrap:wrap}
 .torchwrap .rh em{font-style:italic;color:var(--blue-lift)}
 .torchwrap .rh.torch{position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -153,6 +156,50 @@ p{margin:0}
 @media (hover:none){.torchwrap .rh.torch{display:none}}
 
 .hero__acts{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:clamp(26px,3.2vw,38px)}
+
+/* ── Hero type, three ways (data-type on <body>, under review) ─────────
+      0 Current — Spectral 300 with the italic clause, as supplied.
+      1 Editorial — Newsreader at its display optical size: a finer, sharper
+        transitional serif, light, the clause in its true italic. The button
+        drops the uppercase mono for the same face in sentence case.
+      2 Swiss — Geist 300, set tight and close-leaded; the clause stays
+        upright and is carried by colour alone. The button keeps small
+        tracked capitals, in Geist.
+      3 Paired — Albert Sans 300, whose round geometry sits closest to the
+        logo's wordmark, with the clause in Instrument Serif italic.
+      Sizes are matched by eye to Spectral's apparent size through --hx.
+      Only the hero is varied: the headline, its torch overlay (which shares
+      .rh) and the hero button. ── */
+[data-type="1"] .torchwrap .rh{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;
+  font-weight:300;letter-spacing:-.022em;line-height:1.06;--hx:1.05}
+[data-type="1"] .torchwrap .rh em{font-weight:300;letter-spacing:-.012em}
+[data-type="1"] .hero .btn{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;
+  font-size:1.04rem;font-weight:500;letter-spacing:.004em;text-transform:none;gap:14px}
+
+[data-type="2"] .torchwrap .rh{font-family:"Geist",ui-sans-serif,system-ui,sans-serif;
+  font-weight:300;letter-spacing:-.04em;line-height:1.03;--hx:.9}
+[data-type="2"] .torchwrap .rh em{font-style:normal}
+[data-type="2"] .hero .btn{font-family:"Geist",ui-sans-serif,system-ui,sans-serif;
+  font-size:.74rem;font-weight:500;letter-spacing:.14em}
+
+[data-type="3"] .torchwrap .rh{font-family:"Albert Sans",ui-sans-serif,system-ui,sans-serif;
+  font-weight:300;letter-spacing:-.034em;line-height:1.05;--hx:.93}
+[data-type="3"] .torchwrap .rh em{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+  font-size:1.12em;letter-spacing:-.008em}
+[data-type="3"] .hero .btn{font-family:"Albert Sans",ui-sans-serif,system-ui,sans-serif;
+  font-size:.94rem;font-weight:500;letter-spacing:.01em;text-transform:none;gap:14px}
+
+/* all three break by sense rather than by measure: one clause to a line,
+   so "One family of systems." is never split across two */
+[data-type="1"] .torchwrap .rh,[data-type="2"] .torchwrap .rh,[data-type="3"] .torchwrap .rh{max-width:none}
+[data-type="1"] .torchwrap .rh em,[data-type="2"] .torchwrap .rh em,[data-type="3"] .torchwrap .rh em{display:block;text-wrap:balance}
+[data-type="3"] .torchwrap .rh em{line-height:1.02}
+
+/* light type on the dark scheme reads thinner and tighter than it is:
+   a touch more tracking and leading to carry the same colour */
+[data-scheme="2"][data-type="1"] .torchwrap .rh{letter-spacing:-.016em;line-height:1.08}
+[data-scheme="2"][data-type="2"] .torchwrap .rh{letter-spacing:-.034em;line-height:1.05}
+[data-scheme="2"][data-type="3"] .torchwrap .rh{letter-spacing:-.028em;line-height:1.07}
 
 /* contents — the running nav in the header. the scroll-spy that marked the
    old hero rail is unchanged and still drives it. the strip scrolls sideways
@@ -228,12 +275,12 @@ p{margin:0}
 @media(min-width:1100px){
   .filing .contents{display:none}
   .wrap{padding-right:calc(var(--gut) + var(--rail))}
-  .torchwrap .rh{font-size:clamp(2.2rem,4.3vw,4.1rem)}
+  .torchwrap .rh{font-size:calc(var(--hx,1) * clamp(2.2rem,4.3vw,4.1rem))}
 }
 
 :root{--rail:210px}
 @media(min-width:1100px){.hero .wrap{padding-right:calc(var(--gut) + 290px)}
-  .torchwrap .rh{font-size:clamp(2.1rem,3.7vw,3.6rem)}}
+  .torchwrap .rh{font-size:calc(var(--hx,1) * clamp(2.1rem,3.7vw,3.6rem))}}
 .sn--dock{position:fixed;z-index:30;right:var(--gut);top:calc(50svh + 35px);transform:translateY(-50%)}
 .sn--dock ol{display:grid;justify-items:end;gap:clamp(4px,1.2vh,14px);transition:gap .6s var(--ease)}
 .sn--dock a{display:flex;align-items:center;min-height:48px;padding-left:44px}
@@ -1714,6 +1761,13 @@ html.intro-on .room__card .mk{visibility:hidden}
 
 <!-- review only: palette picker. Delete this block, the .sw styles and
      the two schemes not taken once one is chosen. -->
+<div class="sw sw--type" role="group" aria-label="Hero type">
+  <span class="sw__t">Type</span>
+  <button type="button" data-t="0" aria-pressed="false">Current</button>
+  <button type="button" data-t="1" aria-pressed="true">1&nbsp;Editorial</button>
+  <button type="button" data-t="2" aria-pressed="false">2&nbsp;Swiss</button>
+  <button type="button" data-t="3" aria-pressed="false">3&nbsp;Paired</button>
+</div>
 <div class="sw" role="group" aria-label="Colour scheme">
   <span class="sw__t">Palette</span>
   <button type="button" data-s="1" aria-pressed="true">Harrogate&nbsp;Blue</button>
@@ -1733,6 +1787,7 @@ html.intro-on .room__card .mk{visibility:hidden}
 .sw button:hover{color:#fff}
 .sw button[aria-pressed="true"]{background:#fff;color:#16181B}
 .sw button:focus-visible{outline:2px solid #7DA7FF;outline-offset:2px}
+.sw--type{bottom:122px}
 @media(max-width:620px){.sw__t{display:none}.sw button{padding:0 11px}}
 </style>
 <script>
@@ -1741,7 +1796,7 @@ html.intro-on .room__card .mk{visibility:hidden}
   function set(v){
     b.dataset.scheme=v;
     try{localStorage.setItem(K,v)}catch(e){}
-    document.querySelectorAll('.sw button').forEach(function(x){
+    document.querySelectorAll('.sw button[data-s]').forEach(function(x){
       x.setAttribute('aria-pressed',String(x.dataset.s===v));});
     var q=new URLSearchParams(location.search);q.set('scheme',v);
     history.replaceState(null,'',location.pathname+'?'+q.toString());
@@ -1749,12 +1804,37 @@ html.intro-on .room__card .mk{visibility:hidden}
   var q=new URLSearchParams(location.search),w=q.get('scheme');
   if(['1','2'].indexOf(w)<0){try{w=localStorage.getItem(K)}catch(e){}}
   set(['1','2'].indexOf(w)>-1?w:'1');
-  document.querySelectorAll('.sw button').forEach(function(x){
+  document.querySelectorAll('.sw button[data-s]').forEach(function(x){
     x.addEventListener('click',function(){set(x.dataset.s)});});
   document.addEventListener('keydown',function(e){
     if(e.metaKey||e.ctrlKey||e.altKey)return;
     var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
-    if(e.key.toLowerCase()==='p'){var o=['1','2'];set(o[(o.indexOf(b.dataset.scheme)+1)%3]);}
+    if(e.key.toLowerCase()==='p'){var o=['1','2'];set(o[(o.indexOf(b.dataset.scheme)+1)%o.length]);}
+  });
+})();
+</script>
+
+<script>
+/* hero type: T cycles, ?type= or the last choice opens on one */
+(function(){
+  var K='jmd-08-type',b=document.body,O=['0','1','2','3'];
+  function set(v){
+    b.dataset.type=v;
+    try{localStorage.setItem(K,v)}catch(e){}
+    document.querySelectorAll('.sw button[data-t]').forEach(function(x){
+      x.setAttribute('aria-pressed',String(x.dataset.t===v));});
+    var q=new URLSearchParams(location.search);q.set('type',v);
+    history.replaceState(null,'',location.pathname+'?'+q.toString());
+  }
+  var w=new URLSearchParams(location.search).get('type');
+  if(O.indexOf(w)<0){try{w=localStorage.getItem(K)}catch(e){}}
+  set(O.indexOf(w)>-1?w:'1');
+  document.querySelectorAll('.sw button[data-t]').forEach(function(x){
+    x.addEventListener('click',function(){set(x.dataset.t)});});
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable))return;
+    if(e.key.toLowerCase()==='t')set(O[(O.indexOf(b.dataset.type)+1)%O.length]);
   });
 })();
 </script>
