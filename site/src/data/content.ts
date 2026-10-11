@@ -118,7 +118,7 @@ export const evidence = {
 
 export const contact = {
   heading: 'Tell us what the system is doing',
-  lede: 'The more precise you are about the system and the symptom, the more useful the first reply will be. Every enquiry is read by a consultant.',
+  lede: 'The more precise you are about the system and the symptom, the more useful the first reply will be.',
   invitation: 'Tell us where the system is failing and we will tell you what it takes to fix it. We work on site across the UK and internationally, or connect remotely to your servers and desktop devices.',
   systems: ['CODA / Unit4 Financials', 'NetSuite', 'Another ERP', 'Not sure yet'],
   /* The form validates and shows a success state but sends nothing. */

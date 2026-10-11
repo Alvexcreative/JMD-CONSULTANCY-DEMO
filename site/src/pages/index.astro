@@ -1,16 +1,16 @@
 ---
 import Chalk from '../layouts/Chalk.astro';
 import Logo from '../components/chalk/Logo.astro';
-import { site } from '../data/content';
+import { contact, site } from '../data/content';
 import { href, IMG } from '../data/chalk';
 ---
-<Chalk page="home" title="Home" heroImage={`${IMG}/hero-01.jpg`}
+<Chalk page="home" title="Home" heroImage={`${IMG}/hero-01.jpg`} heroSrcset={`${IMG}/hero-01-1200.jpg 1200w, ${IMG}/hero-01.jpg 2400w`}
   description="JMD Consulting: independent finance-systems consultancy. CODA / Unit4 Financials and NetSuite, project management, systems implementation, ETL and business intelligence.">
 
 
   <section class="hero hero--photo" id="hero" data-hero style="--fx:72%;--fy:50%;--mx-fx:66%;--mx-fy:45%;--veil:1">
     <div class="hero__media" id="hero-media" aria-hidden="true">
-      <img class="hero__img is-on" src="/assets/chalk/hero-01.jpg" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
+      <img class="hero__img is-on" src="/assets/chalk/hero-01.jpg" srcset="/assets/chalk/hero-01-1200.jpg 1200w, /assets/chalk/hero-01.jpg 2400w" sizes="100vw" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
       <div class="hero__veil"></div>
     </div>
     <span class="hero__rule" aria-hidden="true"></span>
@@ -25,6 +25,12 @@ import { href, IMG } from '../data/chalk';
           <h1 class="rh">One specialism. <em>One family of systems.</em> Since&nbsp;2000.</h1>
           <p class="rh torch" aria-hidden="true">One specialism. <em>One family of systems.</em> Since&nbsp;2000.</p>
         </div>
+        {/* the headline above is bridging copy, for approval; the line below is
+            the live site's strapline, verbatim, and the systems are its own */}
+        <p class="hero__sub">{site.strapline}</p>
+        <ul class="hero__sys mono" aria-label="Systems">
+          <li>CODA / Unit4 Financials</li><li>NetSuite</li><li>SQL Server</li><li>Oracle</li>
+        </ul>
         <div class="hero__acts">
           <a class="btn" href={href('enquiry')} data-magnetic>
             Describe your situation
@@ -35,9 +41,9 @@ import { href, IMG } from '../data/chalk';
     </div>
   </section>
 
-  <section class="note note--solution" id="note-1">
+  <section class="note note--solution" id="note-1" data-rail="services">
     <div class="wrap note__grid">
-      <p class="mono note__ref"><b>Note 1</b>Solutions &amp; Services</p>
+      <p class="mono note__ref"><b>Note 1</b>Services</p>
       <div>
         <h2 data-split>Solutions &amp; Services</h2>
         <ol class="svcs reveal">
@@ -79,14 +85,14 @@ import { href, IMG } from '../data/chalk';
           <blockquote>We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive delivers a solution. In short, a &lsquo;Solution Service&rsquo;.</blockquote>
           <figcaption class="mono">JMD Consulting</figcaption>
         </figure>
-        <a class="more mono" href={href('services')}>All four services<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a class="more mono" href={href('services')}>All four services, with CODA / Unit4<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
     </div>
   </section>
 
-  <section class="note" id="note-2">
+  <section class="note" id="note-2" data-rail="systems">
     <figure class="n2-band duo" aria-hidden="true">
-      <img src="/assets/chalk/hero-08.jpg" alt="" width="2400" height="1339" loading="lazy" decoding="async">
+      <img src="/assets/chalk/hero-08.jpg" srcset="/assets/chalk/hero-08-1200.jpg 1200w, /assets/chalk/hero-08.jpg 2400w" sizes="100vw" alt="" width="2400" height="1339" loading="lazy" decoding="async">
       <span class="n2-band__veil"></span><span class="n2-band__rule"></span>
     </figure>
     <div class="wrap note__grid">
@@ -95,7 +101,7 @@ import { href, IMG } from '../data/chalk';
         <h2 data-split>Practised systems</h2>
         <div class="sysgrid">
           <figure class="n2-plate">
-            <img src="/assets/chalk/hero-08.jpg" alt="Two colleagues shaking hands across a meeting table in a bright office." width="2400" height="1339" loading="lazy" decoding="async">
+            <img src="/assets/chalk/hero-08.jpg" srcset="/assets/chalk/hero-08-1200.jpg 1200w, /assets/chalk/hero-08.jpg 2400w" sizes="(min-width:960px) 45vw, 100vw" alt="Two colleagues shaking hands across a meeting table in a bright office." width="2400" height="1339" loading="lazy" decoding="async">
           </figure>
           <p class="mono sys__cap">Systems worked with in delivery</p>
           <ul class="sys">
@@ -117,7 +123,7 @@ import { href, IMG } from '../data/chalk';
 
   <section class="note" id="note-3">
     <figure class="n3-edge" aria-hidden="true">
-      <img src="/assets/chalk/hero-15.jpg" alt="" width="2400" height="1339" loading="lazy" decoding="async">
+      <img src="/assets/chalk/hero-15.jpg" srcset="/assets/chalk/hero-15-1200.jpg 1200w, /assets/chalk/hero-15.jpg 2400w" sizes="100vw" alt="" width="2400" height="1339" loading="lazy" decoding="async">
     </figure>
     <div class="wrap note__grid">
       <p class="mono note__ref"><b>Note 3</b>Delivery</p>
@@ -131,41 +137,41 @@ import { href, IMG } from '../data/chalk';
             <dl>
               <dt class="mono">Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
             </dl>
-            <dl>
-              <dt class="mono">Formed</dt><dd>January 2000</dd>
-            </dl>
           </div>
         </div>
         <figure class="n3-photo">
-          <img src="/assets/chalk/hero-15.jpg" alt="Three colleagues reviewing charts together in a bright meeting room." width="2400" height="1339" loading="lazy" decoding="async">
+          <img src="/assets/chalk/hero-15.jpg" srcset="/assets/chalk/hero-15-1200.jpg 1200w, /assets/chalk/hero-15.jpg 2400w" sizes="(min-width:960px) 50vw, 100vw" alt="Three colleagues reviewing charts together in a bright meeting room." width="2400" height="1339" loading="lazy" decoding="async">
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="note" id="note-4">
+  <section class="note" id="note-4" data-rail="evidence">
     <div class="wrap note__grid">
-      <p class="mono note__ref"><b>Note 4</b>Client evidence</p>
+      <p class="mono note__ref"><b>Note 4</b>Track record</p>
       <div>
-        <h2 data-split>Held open for the clients&rsquo; own words.</h2>
+        {/* heading is bridging copy (as on Evidence), for approval; the body
+            and every figure are the live site's */}
+        <h2 data-split>The record, in four numbers</h2>
         <div class="note__body measure">
-          <p>This practice does not publish a client list it has not been given permission to publish, and does not write its own testimonials. Three slots sit here for the real ones.</p>
+          <p>JMD Consulting has been providing consulting services to a wide range of clients across a broad range of vertical markets since commencement in January 2000.</p>
         </div>
-        <div class="ghosts">
-          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Client testimonial to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.1 &middot; awaiting content</figcaption></figure>
-          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Client testimonial to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.2 &middot; awaiting content</figcaption></figure>
-          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Case study to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.3 &middot; awaiting content</figcaption></figure>
+        <div class="figs figs--note" data-rise>
+          <div class="fig"><p class="fig__v"><span data-odo>1990</span></p><p class="fig__l">CODA / Unit4 Financials&reg; consultancy and support since</p></div>
+          <div class="fig"><p class="fig__v"><span data-odo>2000</span></p><p class="fig__l">JMD Consulting formed, {site.formed}</p></div>
+          <div class="fig"><p class="fig__v"><small>c.</small><span data-odo>100</span></p><p class="fig__l">Clients worldwide since 2000</p></div>
+          <div class="fig"><p class="fig__v"><span data-odo>4</span></p><p class="fig__l">Regions served: UK, Europe, USA &amp; Canada, Middle East</p></div>
         </div>
         <a class="more mono" href={href('evidence')}>Credentials and track record<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
     </div>
   </section>
 
-  <section class="enq" id="enquiry">
+  <section class="enq" id="enquiry" data-rail="enquiry">
     <div class="wrap enq__in">
       <div data-rise>
         <h2>Tell us what the system is doing.</h2>
-        <p class="enq__lede">The more precise you are about the system and the symptom, the more useful the first reply will be. Every enquiry is read by a consultant.</p>
+        <p class="enq__lede">The more precise you are about the system and the symptom, the more useful the first reply will be.</p>
         <div class="enq__facts mono">
           <a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a>
           <a href={site.phoneHref}>{site.phone}</a>
@@ -211,10 +217,10 @@ import { href, IMG } from '../data/chalk';
         <button class="btn btn--send" type="submit"><span class="btn__l">Send enquiry
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span><svg class="btn__tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.6 10 17l8.5-9.5"/></svg>
         </button>
-        <p class="mono enq__note">Replies come from a consultant directly, usually the same working day.</p>
+        <p class="enq__note">{contact.demoNotice}</p>
         <div class="sent" role="status">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8.4 6.2 12l7.3-8"/></svg>
-          <p><b>Enquiry recorded.</b> <span>Demonstration only — this concept is not yet wired to a mailbox.</span></p>
+          <p><b>Enquiry recorded.</b> <span>Nothing has been sent: this form is a demonstration.</span></p>
         </div>
       </form>
     </div>

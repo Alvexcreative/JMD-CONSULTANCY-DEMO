@@ -49,9 +49,10 @@ body{
 a{color:inherit}
 h1,h2,h3{font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.018em}
 p{margin:0}
-.mono{font-family:var(--mono);font-weight:400;font-size:.715rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.5}
+.mono{font-family:var(--mono);font-weight:400;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.5}
 .wrap{max-width:1460px;margin-inline:auto;padding-inline:var(--gut)}
 .measure{max-width:64ch}
+figure{margin:0}
 
 /* ── Filing header ─────────────────────────────────────────── */
 .filing{position:sticky;top:0;z-index:40;background:var(--ink);color:var(--on-ink);
@@ -127,7 +128,7 @@ p{margin:0}
 /* ── Controls ──────────────────────────────────────────────── */
 .btn{display:inline-flex;align-items:center;gap:12px;min-height:50px;padding:0 26px;
   border:0;border-radius:2px;background:var(--ochre);color:var(--on-ochre);
-  font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
   text-decoration:none;cursor:pointer;transition:background .22s var(--ease),transform .22s var(--ease),box-shadow .34s var(--ease)}
 .btn:hover{background:var(--ochre-lift);transform:translateY(-1px)}
 .btn:active{transform:translateY(0) scale(.988)}
@@ -168,7 +169,7 @@ p{margin:0}
 /* --p (px) and --k (0..1) are written onto each <li> by the script; only
    the inner .pull moves, so the element being measured never moves */
 .sn .pull{display:inline-flex;transform:translate3d(calc(var(--p,0) * -1px),0,0);will-change:transform}
-.sn .n{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:var(--on-ink-dim);font-variant-numeric:tabular-nums}
+.sn .n{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--on-ink-dim);font-variant-numeric:tabular-nums}
 .sn a[aria-current="true"] .n{color:var(--bronze)}
 @media (prefers-reduced-motion:reduce){.sn .pull{transform:none!important}}
 
@@ -189,7 +190,7 @@ p{margin:0}
 .sn--dock ol{display:grid;justify-items:end;gap:clamp(4px,1.2vh,14px);transition:gap .6s var(--ease)}
 .sn--dock a{display:flex;align-items:center;min-height:48px;padding-left:44px}
 .sn--dock .pull{align-items:baseline;gap:14px}
-.sn--dock .t{font-size:clamp(1.3rem,1.95vw,1.95rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;
+.sn--dock .t{font-size:clamp(1.15rem,1.5vw,1.5rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;
   transition:font-size .6s var(--ease)}
 .sn--dock .n{width:2ch;text-align:right}
 .sn--dock::after{content:"";position:absolute;right:-20px;top:10px;bottom:10px;width:1px;background:var(--rule-ink)}
@@ -197,6 +198,16 @@ p{margin:0}
 html.past-hero .sn--dock ol{gap:0}
 html.past-hero .sn--dock a{min-height:38px;padding-left:22px}
 html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
+/* docked, it carries a chalk backing: invisible on paper, and it keeps the
+   labels legible where a photograph runs under the rail */
+.sn--dock::before{content:"";position:absolute;inset:-8px -12px -8px -6px;z-index:-1;border-radius:3px;pointer-events:none;
+  background:rgba(var(--paper-rgb),.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .5s var(--ease)}
+html.past-hero .sn--dock::before{opacity:1}
+/* on Home, the page the note being read leads to */
+.sn--dock li.is-near .t{color:var(--on-ink)}
+.sn--dock li.is-near .n{color:var(--bronze)}
+.sn--dock li.is-near::after{content:"";position:absolute;right:-24px;top:50%;width:9px;height:1px;background:var(--bronze);opacity:.6}
 
 /* ── Photographic hero (October 2026, under review) ─────────────────────
       The client's note was that the page read as too plain for an
@@ -396,7 +407,7 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
   letter-spacing:-.04em;color:var(--blue);font-variant-numeric:lining-nums;transition:color .35s var(--ease)}
 .svc__name{font-size:clamp(1.22rem,1.55vw,1.45rem);font-weight:400;line-height:1.2;letter-spacing:-.015em;margin-top:6px}
 .svc__desc{color:var(--on-paper-dim);font-size:.99rem;line-height:1.6;max-width:36ch}
-.svc__scope{list-style:none;margin:8px 0 0;padding:0;display:grid;font-size:.66rem;color:var(--on-paper-dim)}
+.svc__scope{list-style:none;margin:8px 0 0;padding:0;display:grid;font-size:.75rem;color:var(--on-paper-dim)}
 .svc__scope li{padding:9px 0;border-top:1px solid var(--rule-paper-soft)}
 .svc:hover::before{background:var(--bronze);--sy:1}
 .svc:hover .svc__n{color:var(--bronze)}
@@ -411,7 +422,10 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
 .note{border-top:1px solid var(--rule-paper);padding-block:clamp(56px,8vw,104px)}
 .note__grid{display:grid;gap:clamp(24px,3.2vw,48px)}
 @media(min-width:900px){.note__grid{grid-template-columns:172px minmax(0,1fr)}}
-.note__ref{color:var(--on-paper-dim);position:sticky;top:88px;align-self:start;height:max-content}
+.note__ref{color:var(--on-paper-dim);align-self:start;height:max-content}
+/* it sticks only where it has a column of its own: in one column it would
+   slide over the text it labels */
+@media(min-width:900px){.note__ref{position:sticky;top:88px}}
 .note__ref b{display:block;color:var(--bronze);font-weight:500;margin-bottom:5px}
 h2{font-size:clamp(1.7rem,3.1vw,2.7rem);line-height:1.1;font-weight:300;max-width:20ch;letter-spacing:-.024em}
 .note__body{margin-top:clamp(20px,2.4vw,30px);color:var(--on-paper-dim);font-size:1.03rem}
@@ -483,7 +497,8 @@ h2{font-size:clamp(1.7rem,3.1vw,2.7rem);line-height:1.1;font-weight:300;max-widt
 .enq h2{color:var(--on-ink)}
 .enq__lede{margin-top:22px;color:var(--on-ink-dim);max-width:44ch}
 .enq__facts{margin-top:clamp(28px,3.2vw,40px);border-top:1px solid var(--rule-ink);padding-top:18px;display:grid;gap:11px}
-.enq__facts a{color:var(--on-ink);text-decoration:none;border-bottom:1px solid var(--rule-ink);padding-bottom:2px}
+.enq__facts a{color:var(--on-ink);text-decoration:none;border-bottom:1px solid var(--rule-ink);padding-bottom:2px;
+  display:inline-flex;align-items:center;min-height:28px;justify-self:start}
 .enq__facts a:hover{border-color:var(--ochre)}
 
 form{display:grid;gap:18px}
@@ -491,7 +506,7 @@ form{display:grid;gap:18px}
 @media(min-width:620px){.f2{grid-template-columns:1fr 1fr}}
 .field{display:grid;gap:8px}
 .field label{color:var(--on-ink-dim);display:flex;gap:7px;align-items:baseline}
-.field label i{font-style:normal;color:var(--ochre)}
+.field label i{font-style:normal;color:var(--blue)}
 .field input,.field select,.field textarea{
   width:100%;min-height:50px;padding:13px 15px;border:0;border-radius:2px;
   background-color:var(--field);color:var(--on-ink);
@@ -544,7 +559,7 @@ form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] 
 .billing a{text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .billing a:hover{color:var(--on-ink);border-color:var(--rule-ink)}
 .billing__foot{margin-top:clamp(34px,4vw,52px);padding-top:18px;border-top:1px solid var(--rule-ink-soft);
-  display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;color:rgba(var(--on-dim-rgb),.8)}
+  display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;color:var(--on-ink-dim)}
 
 .reveal.pending{opacity:0;transform:translateY(18px)}
 .reveal.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -581,7 +596,7 @@ html.intro-on .room__card .mk{visibility:hidden}
       rail is desktop only — so everything in it has to be reachable and
       legible at arm's length. ── */
 /* the note numbers were rgba(var(--on-dim-rgb),.62): 2.64:1 at 9.6px, a fail */
-.contents__n{color:var(--on-ink-dim);font-size:.64rem}
+.contents__n{color:var(--on-ink-dim);font-size:.72rem}
 @media(max-width:1099px){
   .contents a{min-height:44px;align-items:center;padding-block:0}
   .contents__n{font-size:.75rem}
@@ -604,15 +619,15 @@ html.intro-on .room__card .mk{visibility:hidden}
 @media(max-width:720px){
   .mono,.note__ref,.ghost__lbl,.field label,.quote figcaption,.reach dt,
   .billing__foot,.sys__cap{font-size:.78rem}
-  .btn{font-size:.75rem;letter-spacing:.09em}
+  .btn{font-size:.82rem;letter-spacing:.09em}
   .svc__desc{font-size:1.02rem}
   .enq__note{font-size:.95rem}
   /* the four scope rows under each service cost about a screen and a half
      across the three. On a phone they read better as one wrapped line. */
-  .svc__scope{display:flex;flex-wrap:wrap;gap:7px 0;font-size:.78rem;margin-top:12px}
+  .svc__scope{display:flex;flex-wrap:wrap;gap:7px 16px;font-size:.78rem;margin-top:12px}
   .svc__scope li{border-top:0;padding:0;display:inline-flex;align-items:center}
-  .svc__scope li+li::before{content:"";width:3px;height:3px;border-radius:50%;
-    background:var(--bronze);opacity:.55;margin:0 10px}
+  .svc__scope li::before{content:"";flex:none;width:3px;height:3px;border-radius:50%;
+    background:var(--bronze);opacity:.55;margin-right:8px}
   /* the empty evidence slots were three 196px boxes: 712px of nothing */
   .ghost{min-height:132px;padding:18px}
   .ghosts{gap:10px}
@@ -664,15 +679,8 @@ html.intro-on .room__card .mk{visibility:hidden}
       clear of the sticky header. ── */
 @media(max-width:720px) and (min-height:560px){
   :root{--hdr:67px}
-  html.is-home{scroll-snap-type:y proximity;scroll-padding-top:var(--hdr)}
   .is-home .hero{min-height:calc(100vh - var(--hdr));min-height:calc(100svh - var(--hdr));
-    display:grid;align-content:center;scroll-snap-align:start}
-  .is-home .note,.is-home .enq{min-height:100vh;min-height:100svh;display:grid;align-content:center;
-    scroll-snap-align:start}
-  /* a note that is taller than the screen keeps its own top padding as the
-     breathing room; a short one centres instead */
-  .note>.wrap,.enq>.wrap{width:100%}
-  .is-home .billing{scroll-snap-align:start}
+    display:grid;align-content:center}
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -807,7 +815,7 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 .chap__scope li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rule-paper);
   transform:scaleX(var(--sx,1));transform-origin:left center}
 .ledger li{--sx:1}
-.chap__scope li span{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:var(--on-paper-dim);align-self:center}
+.chap__scope li span{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--on-paper-dim);align-self:center}
 .chap .ph{aspect-ratio:4/3}
 @media(min-width:1180px){.chap .ph{margin-top:8px}}
 
@@ -950,3 +958,30 @@ html.motion [data-split]:not(.is-split){visibility:hidden;animation:failsafe 0s 
   .ph img,.band img{transform:none!important}
   .next::before{transition:none}
 }
+
+/* ── Critique fixes (October 2026) ──────────────────────────────────────
+      What JMD does, said on the first screen in its own words; the header
+      logo steps aside while the hero's own logo is in view; the headline
+      keeps one clause per line at every desktop width; Enquiry stays in
+      reach in the phone header; the record sits in Note 4. ── */
+.hero__sub{margin-top:clamp(16px,1.8vw,22px);font-size:clamp(1.08rem,1.45vw,1.3rem);line-height:1.4;color:var(--on-ink);max-width:34ch}
+.hero__sys{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--on-ink-dim)}
+.hero__sys li{display:inline-flex;align-items:center}
+.hero__sys li::before{content:"";flex:none;width:3px;height:3px;border-radius:50%;background:var(--bronze);opacity:.6;margin-right:8px}
+.hero__sub + .hero__sys + .hero__acts,.hero__sys + .hero__acts{margin-top:clamp(22px,2.6vw,32px)}
+html.is-home .filing .mark{transition:opacity .45s var(--ease),visibility .45s}
+html.is-home:not(.past-hero) .filing .mark{opacity:0;visibility:hidden}
+@media(min-width:360px){
+  .hero--photo .torchwrap .rh{max-width:none}
+  .hero--photo .torchwrap .rh em,.intro__type em{white-space:nowrap}
+}
+@media(max-width:1099px){
+  .contents{-webkit-mask-image:none;mask-image:none}
+  .contents ol{width:max-content}
+  .contents li:last-child{position:sticky;right:0;z-index:1;padding-left:16px;background:var(--ink);
+    box-shadow:-18px 0 14px -6px var(--ink)}
+}
+.figs--note{margin-top:clamp(28px,3.4vw,44px)}
+@media(min-width:560px){.figs--note{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1280px){.figs--note{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.figs--note .fig__v{font-size:clamp(2.6rem,4.2vw,4rem)}

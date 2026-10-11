@@ -120,6 +120,19 @@ document.querySelectorAll('.btn').forEach((b) => {
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   addEventListener('resize', onScroll);
   onScroll();
+
+  /* on Home, while a note is being read, the page it leads to is marked in
+     the rail (Note 1 marks Services, the enquiry marks Enquiry...) */
+  const notes = document.querySelectorAll('[data-rail]');
+  if (notes.length) {
+    const li = new Map(items.map((it) => [it.link.getAttribute('href').replace(/\//g, ''), it.li]));
+    let cur = null;
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { const k = e.target.dataset.rail; if (e.isIntersecting) cur = k; else if (cur === k) cur = null; });
+      li.forEach((el, k) => el.classList.toggle('is-near', k === cur));
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    notes.forEach((n) => io.observe(n));
+  }
 })();
 
 /* ── Enquiry forms: validate on the way, confirm on send (demonstration:
