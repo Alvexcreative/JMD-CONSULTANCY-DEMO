@@ -7,6 +7,9 @@ const root = document.documentElement;
 const still = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
 
+/* ── The copyright's closing year is always this year ── */
+document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
+
 /* ── Reveals carried over from the home page (.reveal) ── */
 (function () {
   const io = new IntersectionObserver((es) => {

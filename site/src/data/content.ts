@@ -108,7 +108,8 @@ export const reach = {
 } as const;
 
 export const credentials = {
-  heading: 'Twenty-six years of delivery',
+  /* anchored to a date, not a count of years, so it never needs updating */
+  heading: 'Delivering since 2000',
   items: [
     { big: 'Since 1990', body: 'CODA / Unit4 Financials® consultancy and support, first inside CODA® and independently since 2000.' },
     { big: 'Circa 100 clients', body: 'Worldwide, across a broad range of vertical markets, since commencement in January 2000.' },

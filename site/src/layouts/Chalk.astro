@@ -128,7 +128,9 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
         </div>
       </div>
       <div class="mono billing__foot">
-        <span>&copy; 2000&ndash;2026 {site.name}</span>
+        {/* the closing year is the year the page is built, and the script below
+            keeps it current in the browser, so it never needs editing */}
+        <span>&copy; 2000&ndash;<span data-year>{new Date().getFullYear()}</span> {site.name}</span>
         <span>CODA and Unit4 Financials are trademarks of their respective owners</span>
       </div>
     </div>

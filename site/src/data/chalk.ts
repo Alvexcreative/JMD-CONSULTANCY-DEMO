@@ -22,7 +22,7 @@ export const pages = [
   { slug: 'services', n: 1, label: 'Services', title: 'Solutions for your business' },
   { slug: 'systems',  n: 2, label: 'Systems',  title: 'We are implementation specialists' },
   { slug: 'reach',    n: 3, label: 'Reach',    title: 'Working with you' },
-  { slug: 'evidence', n: 4, label: 'Evidence', title: 'Twenty-six years of delivery' },
+  { slug: 'evidence', n: 4, label: 'Evidence', title: 'Delivering since 2000' },
   { slug: 'notes',    n: 5, label: 'Notes',    title: 'Develop. Innovate. Evolve.' },
   { slug: 'enquiry',  n: 6, label: 'Enquiry',  title: 'We take the time to listen.' },
 ] as const;
