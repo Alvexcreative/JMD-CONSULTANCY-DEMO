@@ -43,10 +43,11 @@ export const intro = {
     'We specialise in the delivery of consultancy services and systems integration solutions. With a key focus on accounting & finance systems such as CODA/Unit4 Financials® or more recently NetSuite®, linked with MS SQL Server® or Oracle®, we are able to deliver our clients strategic and functional solutions.',
 } as const;
 
-/* The practice's own statement. Verbatim; on the live site it is signed by
-   the Managing Director, here it stands for the firm. */
+/* The practice's own statement. Verbatim but for the source's stray comma
+   ("receive, delivers"); on the live site it is signed by the Managing
+   Director, here it stands for the firm. */
 export const statement =
-  'We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive, delivers a solution. In short, a ‘Solution Service’.';
+  'We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive delivers a solution. In short, a ‘Solution Service’.';
 
 export const services = [
   {

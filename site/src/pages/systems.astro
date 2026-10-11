@@ -35,7 +35,6 @@ import { IMG } from '../data/chalk';
             </div>
           </div>
           <p class="wire__note" id="wire-note" aria-live="polite"><span class="mono wire__who">Trace a route</span><span class="wire__say">Select a system to see where it connects.</span></p>
-          <p class="mono wire__cap">Systems worked with in delivery</p>
           <script src="../scripts/chalk/wire.js"></script>
         </div>
       </div>
@@ -74,11 +73,11 @@ import { IMG } from '../data/chalk';
       </div>
       <div class="indent">
         <ul class="claims" data-rise>
-          {systems.notes.map((n) => <li class="claim">{n}</li>)}
+          {/* the first note opens the page lede above, so it is not repeated here */}
+          {systems.notes.slice(1).map((n) => <li class="claim">{n}</li>)}
         </ul>
       </div>
     </div>
   </section>
 
-  <div class="band" aria-hidden="true"><img src={`${IMG}/hero-08.jpg`} alt="" width="2400" height="1339" loading="lazy" decoding="async" /></div>
 </Chalk>

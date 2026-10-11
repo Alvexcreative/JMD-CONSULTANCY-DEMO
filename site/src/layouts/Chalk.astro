@@ -1,7 +1,7 @@
 ---
 import '../styles/chalk.css';
 import Logo from '../components/chalk/Logo.astro';
-import { site } from '../data/content';
+import { contact, site } from '../data/content';
 import { pages, href, nextOf, IMG } from '../data/chalk';
 
 interface Props {
@@ -15,6 +15,8 @@ const { title, description, page, heroImage, heroSrcset } = Astro.props;
 const home = page === 'home';
 const section = pages.find((p) => p.slug === page);
 const next = home ? null : nextOf(page);
+/* every page but Home and Enquiry closes on a way to get in touch */
+const ask = !home && page !== 'enquiry';
 const arrow = 'M2 8h11M9 4l4 4-4 4';
 ---
 <!doctype html>
@@ -25,6 +27,7 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   <title>{home ? `${site.name} — ${site.strapline}` : `${title} — ${site.name}`}</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#DCE6F2" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -52,6 +55,7 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   </script>
 </head>
 <body data-look="1" data-n3="2" class={heroImage ? 'hero-photo-on' : undefined}>
+  <a class="skip" href="#top">Skip to content</a>
   {home && (
     <div class="intro" id="intro" aria-hidden="true">
       <div class="intro__paper"></div>
@@ -90,6 +94,19 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
     <slot />
   </main>
 
+  {ask && (
+    <section class="ask" aria-labelledby="ask-h">
+      <div class="wrap ask__in">
+        <h2 id="ask-h">{contact.heading}.</h2>
+        <div class="ask__acts">
+          <a class="btn" href={href('enquiry')} data-magnetic>Describe your situation
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow} /></svg></a>
+          <a class="ask__tel" href={site.phoneHref}><span class="mono">Or call</span>{site.phone}</a>
+        </div>
+      </div>
+    </section>
+  )}
+
   {next && (
     <a class="next" href={href(next.slug)}>
       <div class="wrap">
@@ -118,16 +135,8 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
         <div>
           <h3 class="mono">Pages</h3>
           <ul>
+            <li><a href={href()}>Home</a></li>
             {pages.map((p) => <li><a href={href(p.slug)}>{p.label}</a></li>)}
-          </ul>
-        </div>
-        <div>
-          <h3 class="mono">Systems</h3>
-          <ul>
-            <li>CODA / Unit4 Financials</li>
-            <li>NetSuite</li>
-            <li>Microsoft SQL Server</li>
-            <li>Oracle</li>
           </ul>
         </div>
         <div>
@@ -142,7 +151,7 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
         {/* the closing year is the year the page is built, and the script below
             keeps it current in the browser, so it never needs editing */}
         <span>&copy; 2000&ndash;<span data-year>{new Date().getFullYear()}</span> {site.name}</span>
-        <span>CODA and Unit4 Financials are trademarks of their respective owners</span>
+        <span class="billing__tm">CODA, Unit4 Financials, NetSuite, SQL Server and Oracle are trademarks of their respective owners.</span>
       </div>
     </div>
   </footer>

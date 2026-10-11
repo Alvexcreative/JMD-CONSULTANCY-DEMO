@@ -11,16 +11,14 @@ const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-w
   <PageHead n={4} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-meeting.jpg`}
     fx="72%" fy="50%" mfx="76%" mfy="58%" lede={contact.invitation} />
 
-  <section class="enq" id="enquiry" aria-labelledby="enq-h">
+  <section class="enq enq--page" id="enquiry" aria-label="Enquiry">
     <div class="wrap enq__in">
       <div data-rise>
-        <h2 id="enq-h">{contact.heading}.</h2>
         <p class="enq__lede">{contact.lede}</p>
         <div class="contact enq__facts mono">
           <dl>
             <dt>Telephone</dt><dd><a class="lnk" href={site.phoneHref}>{site.phone}</a></dd>
             <dt>Email</dt><dd><a class="lnk" href={`mailto:${site.email}`}>{site.email}</a></dd>
-            <dt>Web</dt><dd>{site.web}</dd>
           </dl>
         </div>
         <figure class="ph" data-reveal>
@@ -67,7 +65,7 @@ const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-w
         <p class="enq__note">{contact.demoNotice}</p>
         <div class="sent" role="status">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="tick" d="M2.5 8.4 6.2 12l7.3-8"/></svg>
-          <p><b>Enquiry recorded.</b> <span>Nothing has been sent: this form is a demonstration.</span></p>
+          <p><b>Enquiry recorded.</b> <span>Nothing has been sent: this form is a demonstration. To reach JMD now, call <a class="lnk" href={site.phoneHref}>{site.phone}</a>.</span></p>
         </div>
       </form>
     </div>

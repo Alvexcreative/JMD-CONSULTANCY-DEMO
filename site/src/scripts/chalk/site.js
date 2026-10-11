@@ -61,9 +61,15 @@ document.querySelectorAll('.btn').forEach((b) => {
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
   addEventListener('resize', frame);
-  /* the strip is wider than a phone: bring the current page into view in it */
+  /* where the strip is wider than the screen, bring the current page into
+     view in it: centred in the part not covered by the pinned last item */
   const strip = document.querySelector('.contents'), cur = strip && strip.querySelector('[aria-current="page"]');
-  if (cur && strip.scrollWidth > strip.clientWidth + 1) strip.scrollLeft = Math.max(0, cur.offsetLeft - (strip.clientWidth - cur.offsetWidth) / 2);
+  if (cur && strip.scrollWidth > strip.clientWidth + 1) {
+    const pin = strip.querySelector('li:last-child');
+    const room = strip.clientWidth - (pin && !pin.contains(cur) ? pin.offsetWidth : 0);
+    const at = cur.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+    strip.scrollLeft = Math.max(0, at - (room - cur.offsetWidth) / 2);
+  }
   frame();
 })();
 
@@ -212,9 +218,12 @@ document.querySelectorAll('form[data-enquiry]').forEach((form) => {
       box.querySelectorAll('p > *').forEach((l, i) => l.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }],
         { duration: 620, delay: 520 + i * 120, easing: EASE, fill: 'backwards' }));
     }
-    const r = box.getBoundingClientRect();
-    const away = r.top < 70 || r.bottom > innerHeight;
+    /* once the form has closed up, make sure the confirmation is in view and
+       clear of the sticky header (its scroll-margin allows for it) */
     box.focus({ preventScroll: true });
-    if (away) box.scrollIntoView({ block: 'center', behavior: motion ? 'smooth' : 'auto' });
+    setTimeout(() => {
+      const r = box.getBoundingClientRect(), hdr = document.querySelector('.filing')?.getBoundingClientRect().bottom || 0;
+      if (r.top < hdr + 12 || r.bottom > innerHeight) box.scrollIntoView({ block: 'start', behavior: motion ? 'smooth' : 'auto' });
+    }, motion ? 560 : 0);
   }
 });

@@ -9,14 +9,15 @@ interface Props {
   title: string;
   lede?: string;
   image: string;
+  srcset?: string;   /* sizes of the photograph, when it has them */
   fx?: string; fy?: string; mfx?: string; mfy?: string; veil?: number;
 }
-const { n, label, title, lede, image, fx = '70%', fy = '50%', mfx, mfy = '60%', veil = 1 } = Astro.props;
+const { n, label, title, lede, image, srcset, fx = '70%', fy = '50%', mfx, mfy = '60%', veil = 1 } = Astro.props;
 const style = `--fx:${fx};--fy:${fy};--mx-fx:${mfx ?? fx};--mx-fy:${mfy};--veil:${veil}`;
 ---
 <section class="hero hero--photo phead" data-hero style={style}>
   <div class="hero__media" aria-hidden="true">
-    <img class="hero__img is-on" src={image} alt="" width="1344" height="752" fetchpriority="high" decoding="async" />
+    <img class="hero__img is-on" src={image} srcset={srcset} sizes={srcset ? '100vw' : undefined} alt="" width="1344" height="752" fetchpriority="high" decoding="async" />
     <div class="hero__veil"></div>
   </div>
   <span class="hero__rule" aria-hidden="true"></span>

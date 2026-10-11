@@ -46,10 +46,12 @@ import { href, IMG } from '../data/chalk';
       <p class="mono note__ref"><b>Note 1</b>Services</p>
       <div>
         <h2 data-split>Solutions &amp; Services</h2>
+        {/* the three descriptions are condensed from the Services page wording:
+            bridging copy, for approval */}
         <ol class="svcs reveal">
           <li class="svc" style="--i:0">
             <span class="svc__n" aria-hidden="true">1</span>
-            <h3 class="svc__name">Project management</h3>
+            <h3 class="svc__name">Project Management</h3>
             <p class="svc__desc">Finance-systems projects planned, resourced and controlled from start to finish, with risk analysed and budgets tracked and monitored throughout.</p>
             <ul class="svc__scope mono">
               <li>Project planning</li>
@@ -60,7 +62,7 @@ import { href, IMG } from '../data/chalk';
           </li>
           <li class="svc" style="--i:1">
             <span class="svc__n" aria-hidden="true">2</span>
-            <h3 class="svc__name">Systems implementation</h3>
+            <h3 class="svc__name">Systems Implementation</h3>
             <p class="svc__desc">ERP implementation with a proven track record of delivering complex multi&#8209;currency, multi&#8209;company and multi&#8209;site financial reporting systems.</p>
             <ul class="svc__scope mono">
               <li>ERP implementation</li>
@@ -71,7 +73,7 @@ import { href, IMG } from '../data/chalk';
           </li>
           <li class="svc" style="--i:2">
             <span class="svc__n" aria-hidden="true">3</span>
-            <h3 class="svc__name">ETL &amp; business intelligence</h3>
+            <h3 class="svc__name">ETL &amp; Business Intelligence</h3>
             <p class="svc__desc">Business intelligence for clients across Europe, the USA and Canada: complex financial reports and KPIs, and financial data migrated from legacy systems.</p>
             <ul class="svc__scope mono">
               <li>Financial reports &amp; KPIs</li>
@@ -85,7 +87,7 @@ import { href, IMG } from '../data/chalk';
           <blockquote>We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive delivers a solution. In short, a &lsquo;Solution Service&rsquo;.</blockquote>
           <figcaption class="mono">JMD Consulting</figcaption>
         </figure>
-        <a class="more mono" href={href('services')}>All four services, with CODA / Unit4<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a class="more mono" href={href('services')}>All four services, with CODA&nbsp;/&nbsp;Unit4<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
     </div>
   </section>
@@ -150,14 +152,13 @@ import { href, IMG } from '../data/chalk';
     <div class="wrap note__grid">
       <p class="mono note__ref"><b>Note 4</b>Track record</p>
       <div>
-        {/* heading is bridging copy (as on Evidence), for approval; the body
-            and every figure are the live site's */}
-        <h2 data-split>The record, in four numbers</h2>
+        {/* the heading, the body and every figure are the live site's */}
+        <h2 data-split>{site.clients}</h2>
         <div class="note__body measure">
           <p>JMD Consulting has been providing consulting services to a wide range of clients across a broad range of vertical markets since commencement in January 2000.</p>
         </div>
         <div class="figs figs--note" data-rise>
-          <div class="fig"><p class="fig__v"><span data-odo>1990</span></p><p class="fig__l">CODA / Unit4 Financials&reg; consultancy and support since</p></div>
+          <div class="fig"><p class="fig__v"><span data-odo>1990</span></p><p class="fig__l">CODA / Unit4 Financials&reg; consultancy begins</p></div>
           <div class="fig"><p class="fig__v"><span data-odo>2000</span></p><p class="fig__l">JMD Consulting formed, {site.formed}</p></div>
           <div class="fig"><p class="fig__v"><small>c.</small><span data-odo>100</span></p><p class="fig__l">Clients worldwide since 2000</p></div>
           <div class="fig"><p class="fig__v"><span data-odo>4</span></p><p class="fig__l">Regions served: UK, Europe, USA &amp; Canada, Middle East</p></div>
@@ -220,7 +221,7 @@ import { href, IMG } from '../data/chalk';
         <p class="enq__note">{contact.demoNotice}</p>
         <div class="sent" role="status">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8.4 6.2 12l7.3-8"/></svg>
-          <p><b>Enquiry recorded.</b> <span>Nothing has been sent: this form is a demonstration.</span></p>
+          <p><b>Enquiry recorded.</b> <span>Nothing has been sent: this form is a demonstration. To reach JMD now, call <a class="lnk" href={site.phoneHref}>{site.phone}</a>.</span></p>
         </div>
       </form>
     </div>

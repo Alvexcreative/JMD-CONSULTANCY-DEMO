@@ -288,10 +288,10 @@ html.past-hero .sn--dock::before{opacity:1}
   .hero--photo .hero__veil{background:
     linear-gradient(180deg,
       rgba(var(--ink-rgb),calc(.95 * var(--veil,1))) 0%,
-      rgba(var(--ink-rgb),calc(.92 * var(--veil,1))) 46%,
-      rgba(var(--veil-mid-rgb),calc(.62 * var(--veil,1))) 58%,
-      rgba(var(--ink-rgb),calc(.12 * var(--veil,1))) 72%,
-      rgba(var(--ink-rgb),0) 82%)}
+      rgba(var(--ink-rgb),calc(.92 * var(--veil,1))) var(--vs,62%),
+      rgba(var(--veil-mid-rgb),calc(.62 * var(--veil,1))) calc(var(--vs,62%) + 10%),
+      rgba(var(--ink-rgb),calc(.12 * var(--veil,1))) calc(var(--vs,62%) + 22%),
+      rgba(var(--ink-rgb),0) calc(var(--vs,62%) + 30%))}
   .hero.hero--photo{min-height:calc(100svh - 71px);display:grid;align-content:start;
     padding-top:clamp(32px,6vh,64px)}
 }
@@ -492,7 +492,7 @@ h2{font-size:clamp(1.7rem,3.1vw,2.7rem);line-height:1.1;font-weight:300;max-widt
 .enq{background:var(--ink);color:var(--on-ink);padding-block:clamp(60px,8vw,104px);position:relative;overflow:hidden}
 .enq::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(90% 120% at 12% 100%,rgba(255,255,255,.7),transparent 60%)}
-.enq__in{position:relative;display:grid;gap:clamp(34px,4.6vw,72px)}
+.enq__in{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(34px,4.6vw,72px)}
 @media(min-width:960px){.enq__in{grid-template-columns:minmax(0,.86fr) minmax(0,1fr)}}
 .enq h2{color:var(--on-ink)}
 .enq__lede{margin-top:22px;color:var(--on-ink-dim);max-width:44ch}
@@ -807,7 +807,7 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 .chap{display:grid;gap:clamp(22px,2.8vw,40px);padding-block:clamp(10px,2vw,24px) clamp(56px,7vw,110px)}
 .chap+.chap{border-top:1px solid var(--rule-paper);padding-top:clamp(48px,6vw,92px)}
 @media(min-width:1180px){.chap{grid-template-columns:minmax(0,1fr) minmax(0,.86fr);align-items:start}}
-.chap__n{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--bronze)}
+.chap__n{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--bronze)}
 .chap h2{margin-top:10px;font-size:clamp(1.9rem,3.4vw,3rem)}
 .chap__body{margin-top:clamp(18px,2vw,26px);color:var(--on-paper-dim);font-size:1.06rem;max-width:46ch}
 .chap__scope{list-style:none;margin:clamp(24px,2.8vw,34px) 0 0;padding:0;display:grid;max-width:30rem}
@@ -815,7 +815,7 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 .chap__scope li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rule-paper);
   transform:scaleX(var(--sx,1));transform-origin:left center}
 .ledger li{--sx:1}
-.chap__scope li span{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--on-paper-dim);align-self:center}
+.chap__scope li span{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--on-paper-dim);align-self:center}
 .chap .ph{aspect-ratio:4/3}
 @media(min-width:1180px){.chap .ph{margin-top:8px}}
 
@@ -870,10 +870,10 @@ button.node{width:100%;margin:0;border:0;border-radius:0;font:inherit;color:inhe
 .ledger li{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:4px 18px;padding:clamp(18px,2.2vw,28px) 0;
   border-bottom:1px solid var(--rule-paper-soft);position:relative}
 @media(min-width:820px){.ledger li{grid-template-columns:4rem minmax(0,1fr) minmax(0,1fr);align-items:baseline}}
-.ledger .n{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--bronze)}
+.ledger .n{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--bronze)}
 .ledger b{font-weight:400;font-size:clamp(1.2rem,2vw,1.7rem);letter-spacing:-.018em;line-height:1.2}
-.ledger span{color:var(--on-paper-dim);grid-column:2}
-@media(min-width:820px){.ledger span{grid-column:auto}}
+.ledger span:not(.n){color:var(--on-paper-dim);grid-column:2}
+@media(min-width:820px){.ledger span:not(.n){grid-column:auto}}
 .ledger li::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--blue);
   transform:scaleX(0);transform-origin:left center;transition:transform .6s var(--ease)}
 .ledger li:hover::after{transform:scaleX(1)}
@@ -908,7 +908,7 @@ button.node{width:100%;margin:0;border:0;border-radius:0;font:inherit;color:inhe
 .tl li::before{content:"";position:absolute;left:calc(-1 * clamp(30px,4vw,56px));top:.5em;width:11px;height:11px;
   border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 1px var(--ochre);transition:background .4s var(--ease),transform .4s var(--ease)}
 .tl li.on::before{background:var(--ochre);transform:scale(1.15)}
-.tl__y{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--bronze);text-transform:uppercase}
+.tl__y{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--bronze);text-transform:uppercase}
 .tl__t{margin-top:6px;font-size:clamp(1.25rem,2.2vw,1.8rem);font-weight:300;letter-spacing:-.02em;line-height:1.25;max-width:30ch}
 .tl__b{margin-top:8px;color:var(--on-paper-dim);max-width:52ch}
 .tl-grid{display:grid;gap:clamp(36px,5vw,80px)}
@@ -924,7 +924,7 @@ html.motion .ghost{animation:ghost 9s ease-in-out infinite}
 .contact a{color:var(--on-ink)}
 .contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px}
 .contact dt{color:var(--on-ink-dim)}
-.contact dd{margin:0}
+.contact dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .enq .ph{margin-top:clamp(28px,3vw,40px);aspect-ratio:4/3}
 
 /* ── Next section: the way on, at the foot of every page ── */
@@ -985,3 +985,62 @@ html.is-home:not(.past-hero) .filing .mark{opacity:0;visibility:hidden}
 @media(min-width:560px){.figs--note{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1280px){.figs--note{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .figs--note .fig__v{font-size:clamp(2.6rem,4.2vw,4rem)}
+
+/* ── Mobile critique, round 1 (October 2026) ──────────────────────────────
+      Filing references stay where they have a column of their own; on a
+      phone they would sit above each heading as a kicker. Errors and the
+      long footer line read in sentence case. The figures pair up; the
+      header strip fits; the footer is shorter; every inner page closes on
+      a way to get in touch. ── */
+.skip{position:absolute;left:12px;top:-60px;z-index:100;padding:12px 18px;background:var(--on-ink);color:var(--paper);
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:top .2s var(--ease)}
+.skip:focus{top:12px}
+.err{text-transform:none;letter-spacing:.02em}
+.billing__tm{text-transform:none;letter-spacing:.02em}
+.contents a[aria-current="page"] .contents__n,.contents a[aria-current="true"] .contents__n{color:var(--blue)}
+.ink blockquote{margin:0}
+.enq__facts a,.contact a{text-transform:none;letter-spacing:.02em}
+.sent{scroll-margin-top:96px}
+.sent a{color:var(--on-ink)}
+@media(max-width:699px){.figs{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}.fig__v{font-size:clamp(2.5rem,12vw,3rem)}.fig__l{max-width:none;font-size:.95rem}}
+@media(max-width:899px){
+  .sec__ref,.note__ref{display:none}
+  .sec__head{margin-bottom:clamp(26px,6vw,36px)}
+}
+@media(max-width:959px){
+  .enq--page .ph{display:none}
+  .torchwrap .rh em{color:var(--blue)}
+  .is-home .hero.hero--photo{--vs:66%}
+}
+@media(max-width:720px) and (min-height:560px){
+  .is-home .hero{align-content:start}
+}
+.torchwrap .rh{font-size:clamp(2.3rem,4.7vw,3.8rem)}
+@media(min-width:1100px){.torchwrap .rh{font-size:clamp(2.1rem,3.7vw,3.6rem)}}
+@media(max-width:400px){
+  /* all four pages fit from 360px up without scrolling the strip */
+  .filing__in{gap:12px}
+  .mark img{height:24px}
+  .contents__n{display:none}
+  .contents__t{font-size:.88rem}
+  .contents ol{gap:11px}
+  .contents li:last-child{padding-left:8px}
+}
+/* footer on a phone: Practice and Pages side by side, Contact beneath */
+@media(max-width:699px){
+  .billing__cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 18px}
+  .billing__cols > :last-child{grid-column:1 / -1}
+  .billing__mark{margin-bottom:24px}
+  .billing__foot{margin-top:28px}
+}
+@media(min-width:1040px){.billing__cols{grid-template-columns:repeat(3,1fr)}}
+/* the closing invitation on inner pages */
+.ask{background:var(--paper-2);border-top:1px solid var(--rule-paper);padding-block:clamp(48px,7vw,88px)}
+.ask__in{display:grid;gap:22px;align-items:end}
+@media(min-width:900px){.ask__in{grid-template-columns:minmax(0,1fr) auto;gap:48px}}
+.ask h2{max-width:18ch}
+.ask__acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.ask__tel{display:inline-grid;gap:2px;min-height:44px;align-content:center;color:var(--on-paper);text-decoration:none;font-size:1.05rem}
+.ask__tel .mono{color:var(--on-paper-dim)}
+.ask__tel:hover{color:var(--blue)}
+@media(max-width:619px){.ask .btn{width:100%;justify-content:center}}
