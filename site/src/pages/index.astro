@@ -3,6 +3,20 @@ import Chalk from '../layouts/Chalk.astro';
 import Logo from '../components/chalk/Logo.astro';
 import { contact, site } from '../data/content';
 import { href, IMG } from '../data/chalk';
+
+/* Phone-only hero photographs, for review: the current photograph first,
+   then five portrait versions generated to follow it (Higgsfield, GPT
+   Image 2.5, 1K, October 2026). On a phone the picture behind the hero
+   can be swiped sideways to compare them under the real words. Once one
+   is chosen, keep it as the phone hero and remove the rest. */
+const heroOptions = [
+  { src: `${IMG}/hero-01-1200.jpg`, label: 'Current photograph' },
+  { src: `${IMG}/gen/hero-m1.jpg`, label: 'The same tower, recomposed' },
+  { src: `${IMG}/gen/hero-m2.jpg`, label: 'Straight up the corner' },
+  { src: `${IMG}/gen/hero-m3.jpg`, label: 'Two towers, clouds in the glass' },
+  { src: `${IMG}/gen/hero-m4.jpg`, label: 'The glass, close' },
+  { src: `${IMG}/gen/hero-m5.jpg`, label: 'One tower, open sky' },
+];
 ---
 <Chalk page="home" title="Home" heroImage={`${IMG}/hero-01.jpg`} heroSrcset={`${IMG}/hero-01-1200.jpg 1200w, ${IMG}/hero-01.jpg 2400w`}
   description="JMD Consulting: independent finance-systems consultancy. CODA / Unit4 Financials and NetSuite, project management, systems implementation, ETL and business intelligence.">
@@ -11,8 +25,12 @@ import { href, IMG } from '../data/chalk';
   <section class="hero hero--photo" id="hero" data-hero style="--fx:72%;--fy:50%;--mx-fx:66%;--mx-fy:45%;--veil:1">
     <div class="hero__media" id="hero-media" aria-hidden="true">
       <img class="hero__img is-on" src="/assets/chalk/hero-01.jpg" srcset="/assets/chalk/hero-01-1200.jpg 1200w, /assets/chalk/hero-01.jpg 2400w" sizes="100vw" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
+      <div class="hero__opts" data-hero-opts>
+        {heroOptions.map((o) => <img class="hero__opt" src={o.src} alt="" width="752" height="1344" loading="lazy" decoding="async" data-label={o.label} />)}
+      </div>
       <div class="hero__veil"></div>
     </div>
+    <p class="hero__optlbl mono" data-hero-optlbl aria-hidden="true"><b>1 / {heroOptions.length}</b><span>{heroOptions[0].label}</span><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h20M6 2 2 6l4 4M18 2l4 4-4 4"/></svg></p>
     <span class="hero__rule" aria-hidden="true"></span>
     <div class="wrap room">
       <div class="room__obj">

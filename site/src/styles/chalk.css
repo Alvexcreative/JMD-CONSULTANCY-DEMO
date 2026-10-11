@@ -1129,3 +1129,28 @@ p,li,dd,figcaption{text-wrap:pretty}
 @media(max-width:499px){.mark{margin-right:12px}}
 @media(max-width:359px){.mark{margin-right:6px}}
 @media(max-width:720px) and (prefers-reduced-motion:reduce){.dock,.mark{transition:none}}
+
+/* ── Phone hero review (temporary): swipe between photographs ───────────
+      Shown only on phones. The words above let a sideways swipe through to
+      the picture; the label sits at the top of the picture. Remove with the
+      options once one is chosen. ── */
+.hero__opts,.hero__optlbl{display:none}
+@media(max-width:720px){
+  .is-home .hero__opts{display:flex;position:absolute;inset:0;z-index:0;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .is-home .hero__opts::-webkit-scrollbar{display:none}
+  .hero__opt{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:50% 50%;scroll-snap-align:start;scroll-snap-stop:always}
+  .hero__opt:first-child{object-position:var(--mx-fx,72%) var(--mx-fy,45%)}
+  .is-home .hero--photo .hero__img,.is-home .hero__clouds{display:none}
+  /* the veil and the words let the swipe through to the picture */
+  .is-home .hero__veil{pointer-events:none}
+  .is-home .hero .room{pointer-events:none}
+  .is-home .hero__optlbl{display:flex;position:absolute;z-index:4;top:12px;left:50%;transform:translateX(-50%);
+    align-items:center;gap:8px;margin:0;padding:6px 12px;border-radius:999px;white-space:nowrap;pointer-events:none;
+    background:rgba(var(--paper-rgb),.86);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    box-shadow:0 6px 18px -12px rgba(var(--on-ink-rgb),.5);color:var(--on-ink-dim);font-size:.7rem;letter-spacing:.06em}
+  .hero__optlbl b{color:var(--blue);font-weight:500}
+  .is-home .hero__optlbl{max-width:calc(100% - 32px)}
+  .hero__optlbl span{min-width:0;overflow:hidden;text-overflow:ellipsis;color:var(--on-ink);text-transform:none;letter-spacing:.01em;font-family:var(--serif);font-size:.85rem}
+  .hero__optlbl svg{flex:none;width:18px;height:9px;color:var(--blue);opacity:.8}
+}

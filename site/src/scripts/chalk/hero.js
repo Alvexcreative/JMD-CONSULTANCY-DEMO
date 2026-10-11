@@ -236,3 +236,22 @@
   addEventListener('resize', function(){ if(running) size(); });
   update();
 })();
+
+/* ── Phone hero review: the picture swipes sideways between the options,
+      under the words, and the label says which one is showing. ── */
+(function(){
+  var track = document.querySelector('[data-hero-opts]'), lbl = document.querySelector('[data-hero-optlbl]');
+  if(!track || !lbl) return;
+  var slides = track.querySelectorAll('.hero__opt'), n = slides.length, cur = -1, tick = 0;
+  function update(){
+    tick = 0;
+    var i = Math.max(0, Math.min(n - 1, Math.round(track.scrollLeft / Math.max(1, track.clientWidth))));
+    if(i === cur) return; cur = i;
+    lbl.querySelector('b').textContent = (i + 1) + ' / ' + n;
+    lbl.querySelector('span').textContent = slides[i].dataset.label;
+  }
+  track.addEventListener('scroll', function(){ if(!tick) tick = requestAnimationFrame(update); }, {passive:true});
+  /* a hidden tab freezes animation frames: settle on scroll end as well */
+  track.addEventListener('scrollend', update);
+  update();
+})();
