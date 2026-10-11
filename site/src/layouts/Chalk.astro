@@ -10,8 +10,9 @@ interface Props {
   page: string;          /* 'home' or a page slug */
   heroImage?: string;    /* preloaded */
   heroSrcset?: string;   /* its sizes, when it has them: the preload then picks the same one */
+  heroMobile?: string;   /* a phone's own photograph (720px and below), preloaded there instead */
 }
-const { title, description, page, heroImage, heroSrcset } = Astro.props;
+const { title, description, page, heroImage, heroSrcset, heroMobile } = Astro.props;
 const home = page === 'home';
 const section = pages.find((p) => p.slug === page);
 const next = home ? null : nextOf(page);
@@ -33,7 +34,8 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  {heroImage && <link rel="preload" as="image" href={heroImage} imagesrcset={heroSrcset} imagesizes={heroSrcset ? '100vw' : undefined} fetchpriority="high" />}
+  {heroImage && <link rel="preload" as="image" href={heroImage} imagesrcset={heroSrcset} imagesizes={heroSrcset ? '100vw' : undefined} media={heroMobile ? '(min-width:721px)' : undefined} fetchpriority="high" />}
+  {heroMobile && <link rel="preload" as="image" href={heroMobile} media="(max-width:720px)" fetchpriority="high" />}
   <!-- motion and the intro are decided before first paint. Scripts on and
        reduced motion off gives html.motion. The intro plays on the home page
        on every reload and every arrival from outside the site; it skips a
