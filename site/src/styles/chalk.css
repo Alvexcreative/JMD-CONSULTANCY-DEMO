@@ -542,7 +542,8 @@ form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] 
 @media (prefers-reduced-motion:reduce){.reveal,.reveal.pending,.reveal.in{opacity:1;transform:none;transition:none}}
 
 /* ── First-load intro: "Typeset" ───────────────────────────────────────
-      Home only, once a session, skipped by any input, absent under reduced
+      Home only, on every reload and every arrival from outside the site
+      (not on a move to Home within it), skipped by any input, absent under reduced
       motion. Without html.intro-on the overlay never shows, so a page
       without scripts simply loads. The headline is set line by line on the
       chalk, glides into its place on the hero, the logo (a copy of the

@@ -33,8 +33,9 @@ GSAP 3.15 (ScrollTrigger, SplitText, MotionPath), in
 - *Intro* — "Typeset": the hero headline is set on a chalk cover at its true
   size and line breaks, each line written in left to right behind a feathered
   wipe; it glides into its exact place, the logo drops in above it, and the
-  cover fades away to the page (about 4.2s; 2.9s on a phone). Home only, once
-  a session (`sessionStorage`), never on an anchored visit; `?intro` replays it.
+  cover fades away to the page (about 4.2s; 2.9s on a phone). Home only, on every reload and every arrival from outside the site (not on a
+  move to Home from another page), never on an anchored visit; `?intro` always
+  plays it.
 - *Between pages* — native cross-document View Transitions: the header and the
   rail hold still, the old page lifts and softens away, the new one rises, and
   its heading sets itself line by line. Chrome, Edge and Safari 18.2+; other

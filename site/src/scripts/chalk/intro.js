@@ -1,7 +1,8 @@
 /* ── First-load intro: "Typeset" ─────────────────────────────────────────
    The gate in the layout's <head> decides whether it plays: the home page,
-   once a session, never on an anchored visit, never under reduced motion.
-   (?intro on the address replays it, for review.)
+   on every reload and every arrival from outside the site, but not on a
+   move to Home from another page, an anchored visit, or reduced motion.
+   (?intro on the address always plays it.)
 
    The hero's headline is set on a clean chalk page at its true size and
    line breaks. Each line is written in left to right behind a soft-edged
