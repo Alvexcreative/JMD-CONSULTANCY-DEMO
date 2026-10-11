@@ -133,17 +133,14 @@ entries jump straight to it; `?view=A1&n3=2` opens on a combination.
 
 Under the B3 hero, the Note 3 picture is re-printed in duotone to match.
 
-**Logo** — the JMD mark in the hero is down to two options (`?mk=3` or
-`?mk=4`), both in Instrument Serif after the client's "Macaron" reference:
-
-| Logo | Treatment |
-|---|---|
-| A (`mk=3`, default) | **Spaced capitals**: the condensed serif tracked wide over an ochre hairline |
-| B (`mk=4`) | **Side lockup**: the condensed serif with CONSULTING beside it across a vertical ochre hairline |
-
-The original Spectral mark is no longer shown in the hero. The header still
-uses the existing JMD image logo, and the chosen mark should be drawn up as
-a proper logo file to replace it.
+**Logo** — the hero, header and footer all carry the client's own logo
+(`assets/jmd-logo.svg`), traced from the 307×125 JPEG on jmdconsulting.co.uk
+with its inks unchanged (blue `#306AB3`, grey `#D0D0D0`) and no white
+background, so it sits straight on the page in both colour schemes. The SVG
+keeps the logo's three parts as separate groups (grey figure, blue figure,
+wordmark), which the first-load intro assembles before flying the logo into
+the hero. The original JPEG stays in `assets/` for the untouched
+`08-chalk-original.html`.
 
 **Note 2** (Systems) carries the handshake (`hero-08`) as paired with the
 hero: a wide framed plate under A1, a full-bleed duotone band under B3.
