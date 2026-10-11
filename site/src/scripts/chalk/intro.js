@@ -141,7 +141,7 @@ const ov = document.getElementById('intro');
   const maxW = Math.max(...widths);
   let at = 0.25 * Q;
   lines.forEach((line, i) => {
-    const dur = (0.36 + 0.42 * widths[i] / maxW) * Q;     /* longer lines take longer: an even hand */
+    const dur = (0.26 + 0.32 * widths[i] / maxW) * Q;     /* longer lines take longer: an even hand */
     gsap.set(line, { '--p': '-18%' });
     tl.to(line, { '--p': '100%', duration: dur, ease: 'sine.inOut' }, at);
     at += dur * 0.8;                                      /* the next line starts as this one finishes */
@@ -150,11 +150,13 @@ const ov = document.getElementById('intro');
   const written = at + 0.2 * Q - 0.1;
 
   /* ── the logo comes up above the finished headline ───────────────── */
-  tl.fromTo(svg, { opacity: 0, yPercent: 14 }, { opacity: 1, yPercent: 0, duration: 0.75 * Q, ease: 'expo.out', immediateRender: false }, written - 0.15 * Q);
+  /* a slow, settled rise: the logo is given time to be seen arriving */
+  const RISE = 1.3 * Q;
+  tl.fromTo(svg, { opacity: 0, yPercent: 18 }, { opacity: 1, yPercent: 0, duration: RISE, ease: 'power3.out', immediateRender: false }, written - 0.15 * Q);
 
   /* ── the pair moves home together: one curve, one duration, each landing
      measured as the move begins ─────────────────────────────────────── */
-  const go = written + 0.5 * Q;
+  const go = written - 0.15 * Q + RISE * 0.85;     /* once the logo has all but settled */
   let m, g;
   tl.call(() => { m = null; g = null; }, null, go - 0.001)
     .to(t, {
