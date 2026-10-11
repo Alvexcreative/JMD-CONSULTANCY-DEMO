@@ -61,9 +61,12 @@ document.querySelectorAll('.btn').forEach((b) => {
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
   addEventListener('resize', frame);
-  /* where the strip is wider than the screen, bring the current page into
-     view in it: centred in the part not covered by the pinned last item */
+  /* where the strip is wider than the screen, its last item (Enquiry) is
+     pinned at the right and the current page brought into view, centred in
+     the part not covered by the pin */
   const strip = document.querySelector('.contents'), cur = strip && strip.querySelector('[aria-current="page"]');
+  const over = () => strip && strip.classList.toggle('is-over', strip.scrollWidth > strip.clientWidth + 1);
+  over(); addEventListener('resize', over);
   if (cur && strip.scrollWidth > strip.clientWidth + 1) {
     const pin = strip.querySelector('li:last-child');
     const room = strip.clientWidth - (pin && !pin.contains(cur) ? pin.offsetWidth : 0);

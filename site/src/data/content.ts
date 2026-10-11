@@ -40,7 +40,7 @@ export const intro = {
     'Formed in 2000, our consultancy has provided services to a global client base. We believe that clients ultimately want solutions and not just reports after engaging the services of consultants. They want and should demand a service that goes one step further.',
   /* verbatim, About */
   specialise:
-    'We specialise in the delivery of consultancy services and systems integration solutions. With a key focus on accounting & finance systems such as CODA/Unit4 Financials® or more recently NetSuite®, linked with MS SQL Server® or Oracle®, we are able to deliver our clients strategic and functional solutions.',
+    'We specialise in the delivery of consultancy services and systems integration solutions. With a key focus on accounting & finance systems such as CODA / Unit4 Financials® or more recently NetSuite®, linked with MS SQL Server® or Oracle®, we are able to deliver our clients strategic and functional solutions.',
 } as const;
 
 /* The practice's own statement. Verbatim but for the source's stray comma
@@ -85,7 +85,7 @@ export const systems = {
   kicker: 'Systems worked with in delivery',
   list: [
     { n: '01', name: 'CODA / Unit4 Financials®', note: 'Consultancy and support since 1990.' },
-    { n: '02', name: 'NetSuite®', note: 'More recent focus alongside CODA/Unit4.' },
+    { n: '02', name: 'NetSuite®', note: 'More recent focus alongside CODA / Unit4.' },
     { n: '03', name: 'Microsoft SQL Server®', note: 'Reporting, SQL scripts and stored procedures.' },
     { n: '04', name: 'Oracle®', note: 'Finance systems linked to Oracle databases.' },
   ],

@@ -29,7 +29,8 @@ import { IMG } from '../data/chalk';
             <div class="wire__row wire__row--top">
               {systems.list.slice(0, 2).map((s) => <button type="button" class="node" data-note={s.note} aria-pressed="false"><span class="mono">Finance system</span><b>{s.name}</b></button>)}
             </div>
-            <div class="wire__hub"><button type="button" class="node" data-note={systems.notes[0]} aria-pressed="false"><span class="mono">JMD Consulting</span><b>Systems integration</b></button></div>
+            <div class="wire__hub">{/* bridging copy, for approval: restates the section lede above */}
+              <button type="button" class="node" data-note="The integration between the finance systems and their databases is the work." aria-pressed="false"><span class="mono">JMD Consulting</span><b>Systems integration</b></button></div>
             <div class="wire__row wire__row--bot">
               {systems.list.slice(2).map((s) => <button type="button" class="node" data-note={s.note} aria-pressed="false"><span class="mono">Database</span><b>{s.name}</b></button>)}
             </div>

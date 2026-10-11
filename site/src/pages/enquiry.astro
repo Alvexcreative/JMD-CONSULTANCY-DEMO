@@ -11,9 +11,10 @@ const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-w
   <PageHead n={4} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-meeting.jpg`}
     fx="72%" fy="50%" mfx="76%" mfy="58%" lede={contact.invitation} />
 
-  <section class="enq enq--page" id="enquiry" aria-label="Enquiry">
+  <section class="enq enq--page" id="enquiry" aria-labelledby="enq-h">
     <div class="wrap enq__in">
       <div data-rise>
+        <h2 id="enq-h" class="vh">{contact.heading}</h2>
         <p class="enq__lede">{contact.lede}</p>
         <div class="contact enq__facts mono">
           <dl>
