@@ -68,6 +68,7 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
 
   <nav class="sn sn--dock" aria-label="Site">
     <ol>
+      <li><a href={href()} aria-current={home ? 'page' : undefined}><span class="pull"><span class="t">Home</span><span class="n">0</span></span></a></li>
       {pages.map((p) => (
         <li><a href={href(p.slug)} aria-current={p.slug === page ? 'page' : undefined}><span class="pull"><span class="t">{p.label}</span><span class="n">{p.n}</span></span></a></li>
       ))}
