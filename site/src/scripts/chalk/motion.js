@@ -80,11 +80,27 @@ function rises() {
 /* ── photographs: uncovered by a rising mask, settling as they arrive,
       then drifting a touch against the scroll ─────────────────────── */
 function photos() {
-  document.querySelectorAll('.ph[data-reveal]').forEach((ph) => {
+  const all = [...document.querySelectorAll('.ph[data-reveal]')];
+  /* every photograph starts downloading once the page itself has loaded,
+     rather than when the browser's lazy loading decides it is close: the
+     first screen is not slowed, and nothing is still arriving as it is
+     revealed */
+  const fetchAll = () => all.forEach((ph) => { const img = ph.querySelector('img'); if (img.loading === 'lazy') img.loading = 'eager'; });
+  if (document.readyState === 'complete') fetchAll(); else addEventListener('load', fetchAll, { once: true });
+
+  all.forEach((ph) => {
     const img = ph.querySelector('img');
-    gsap.timeline({ scrollTrigger: { trigger: ph, start: 'top 88%', once: true } })
-      .fromTo(ph, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' })
-      .fromTo(img, { scale: 1.22 }, { scale: 1.06, duration: 2, ease: 'power3.out' }, 0);
+    const reveal = gsap.timeline({ paused: true })
+      .to(ph, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'power3.out' })
+      .fromTo(img, { scale: 1.18 }, { scale: 1.06, duration: 1.6, ease: 'power3.out' }, 0);
+    gsap.set(ph, { clipPath: 'inset(100% 0% 0% 0%)' });
+    /* the reveal starts as the photograph's top edge enters the window; if
+       its file has not arrived yet, it waits for it, so a blank frame is
+       never what is uncovered */
+    ScrollTrigger.create({ trigger: ph, start: 'top bottom', once: true, onEnter: () => {
+      if (img.complete && img.naturalWidth) reveal.play();
+      else { img.loading = 'eager'; img.addEventListener('load', () => reveal.play(), { once: true }); img.addEventListener('error', () => reveal.play(), { once: true }); }
+    } });
     gsap.fromTo(img, { yPercent: -3 }, { yPercent: 3, ease: 'none',
       scrollTrigger: { trigger: ph, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
