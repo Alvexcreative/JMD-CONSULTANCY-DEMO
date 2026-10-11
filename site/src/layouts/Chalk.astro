@@ -30,19 +30,13 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   <!-- motion and the intro are decided before first paint. Scripts on and
        reduced motion off gives html.motion. The intro plays on the home page
        once a session, never on an anchored visit, never under reduced motion.
-       Review only: ?intro=<design> picks an intro and replays it; plain
-       ?intro replays the last one picked. -->
+       ?intro on the address replays it, for review. -->
   <script is:inline define:vars={{ home }}>
     (function () {
       var r = document.documentElement;
       var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
       if (!still) r.classList.add('motion');
-      var qs = new URLSearchParams(location.search), replay = qs.has('intro'), want = qs.get('intro');
-      var modes = ['draft', 'signature', 'ledger', 'develop', 'typeset', 'blueprint'], mode = 'draft';
-      try { mode = localStorage.getItem('jmd-intro-mode') || mode; } catch (e) {}
-      if (modes.indexOf(want) > -1) { mode = want; try { localStorage.setItem('jmd-intro-mode', want); } catch (e) {} }
-      if (modes.indexOf(mode) < 0) mode = 'draft';
-      r.dataset.intro = mode;
+      var replay = new URLSearchParams(location.search).has('intro');
       if (!home || location.hash || still) return;
       if (!replay) {
         try { if (sessionStorage.getItem('jmd-intro')) return; sessionStorage.setItem('jmd-intro', '1'); } catch (e) {}
@@ -59,22 +53,6 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
       <p class="intro__skip" aria-hidden="true">Tap to skip</p>
       <div class="intro__layer" aria-hidden="true"></div>
       <div class="intro__stage"><span class="intro__mk"></span></div>
-    </div>
-  )}
-  {/* review only: the intro picker wheel. Delete it, its styles, wheel.js
-      and the ?intro=<design> handling once a design is chosen. */}
-  {home && (
-    <div class="iwheel" role="group" aria-label="Choose an intro to replay (review)">
-      <p class="iwheel__t">Intro</p>
-      <div class="iwheel__drum" tabindex="0" role="listbox" aria-label="Intro designs">
-        <ul>
-          {[['draft', 'Draft'], ['signature', 'Signature'], ['ledger', 'Ledger'], ['develop', 'Develop'], ['typeset', 'Typeset'], ['blueprint', 'Blueprint']].map(([id, name]) => (
-            <li role="option" data-mode={id}><a href={`/?intro=${id}`} tabindex="-1">{name}</a></li>
-          ))}
-        </ul>
-      </div>
-      <a class="iwheel__play" href="/?intro=draft">Play
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg></a>
     </div>
   )}
   <span class="progress" aria-hidden="true"></span>
@@ -169,6 +147,5 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   <script src="../scripts/chalk/motion.js"></script>
   <script src="../scripts/chalk/intro.js"></script>
   <script src="../scripts/chalk/hero.js"></script>
-  <script src="../scripts/chalk/wheel.js"></script>
 </body>
 </html>

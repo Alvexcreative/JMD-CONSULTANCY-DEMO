@@ -541,34 +541,25 @@ form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] 
 .reveal.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
 @media (prefers-reduced-motion:reduce){.reveal,.reveal.pending,.reveal.in{opacity:1;transform:none;transition:none}}
 
-/* ── First-load intro: "Draft" ─────────────────────────────────────────
+/* ── First-load intro: "Typeset" ───────────────────────────────────────
       Home only, once a session, skipped by any input, absent under reduced
       motion. Without html.intro-on the overlay never shows, so a page
-      without scripts simply loads. The ghost in the stage is a copy of the
-      hero's logo, made by the script, and it lands exactly on the real one:
-      its wordmark is drawn stroke by stroke, the figures ink in, and the
-      sheet lifts away as the logo glides into place. */
+      without scripts simply loads. The headline is set line by line on the
+      chalk, glides into its place on the hero, the logo (a copy of the
+      hero's, made by the script) drops in above it, and the cover fades. */
 .intro{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}
 .intro[hidden],html:not(.intro-on) .intro{display:none}
 .intro__paper{position:absolute;inset:0;z-index:0;
   background-image:linear-gradient(112deg,#F5F8F9 0%,#E4EBF0 52%,#D3DFE7 100%)}
 .intro__stage{position:absolute;inset:0;z-index:2;display:grid;place-items:center;align-content:center;gap:clamp(14px,2vw,22px)}
-/* the layer each design draws into (rules, lines, the drawing, the type) */
+/* the headline is set here, one block per line, each line written in
+   behind a feathered wipe whose edge (--p) the script moves left to right */
 .intro__layer{position:absolute;inset:0;z-index:1;pointer-events:none}
-.intro__rule{position:absolute;left:0;right:0;height:1px;background:rgba(var(--blue-rgb),.16);transform-origin:left center}
-.intro__margin{position:absolute;top:0;bottom:0;width:4px;border-left:1px solid rgba(var(--blue-rgb),.38);
-  border-right:1px solid rgba(var(--blue-rgb),.38);transform-origin:top center}
-.intro__develop{position:absolute}
-.intro__type{position:absolute;margin:0;text-wrap:wrap}
+.intro__type{position:absolute;margin:0}
 .intro__type em{font-style:italic;color:var(--blue-lift)}
-.intro__type .w{display:inline-block}
-.intro__bp{position:absolute;background:var(--ochre);opacity:.6}
-.intro__bp--h{left:0;right:0;height:1px;transform-origin:left center}
-.intro__bp--v{width:1px;transform-origin:top center}
-.intro__sig{position:relative;font-family:var(--serif);font-style:italic;font-weight:300;
-  font-size:clamp(1.3rem,2.6vw,2rem);letter-spacing:.01em;color:var(--blue);padding:0 4px 6px}
-.intro__sig i{position:absolute;bottom:.42em;width:7px;height:7px;border-radius:50%;background:#306AB3;
-  box-shadow:0 0 0 8px rgba(48,106,179,.14);transform:translateX(-50%)}
+.intro__line{display:block;white-space:nowrap;
+  -webkit-mask-image:linear-gradient(90deg,#000 var(--p,100%),transparent calc(var(--p,100%) + 18%));
+  mask-image:linear-gradient(90deg,#000 var(--p,100%),transparent calc(var(--p,100%) + 18%))}
 html.intro-typeset .torchwrap{visibility:hidden}
 .intro__mk{display:block;transform-origin:0 0}
 .intro__mk .mk{width:min(54vw,560px);overflow:visible}
@@ -928,26 +919,3 @@ html.motion [data-split]:not(.is-split){visibility:hidden;animation:failsafe 0s 
   .ph img,.band img{transform:none!important}
   .next::before{transition:none}
 }
-
-/* ── Review only: the intro picker wheel (home page) ── */
-.iwheel{position:fixed;z-index:130;left:18px;bottom:18px;display:grid;justify-items:center;gap:4px;width:168px;padding:10px 8px 8px;
-  background:rgba(14,14,16,.88);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 10px 36px -10px rgba(0,0,0,.6);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);font:500 13px/1 ui-sans-serif,-apple-system,system-ui,sans-serif;color:#fff}
-.iwheel__t{margin:0;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-.iwheel__drum{position:relative;width:100%;height:132px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;
-  overscroll-behavior:contain;perspective:320px;border-radius:12px;outline:none;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent 100%)}
-.iwheel__drum::-webkit-scrollbar{display:none}
-.iwheel__drum::before{content:"";position:sticky;display:block;top:44px;height:44px;margin-bottom:-44px;border-radius:10px;
-  background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
-.iwheel__drum:focus-visible::before{box-shadow:inset 0 0 0 2px #7DA7FF}
-.iwheel__drum ul{list-style:none;margin:0;padding:44px 0;transform-style:preserve-3d}
-.iwheel__drum li{height:44px;scroll-snap-align:center;transform-origin:50% 50%;backface-visibility:hidden}
-.iwheel__drum a{display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,.7);text-decoration:none}
-.iwheel__drum li[aria-selected="true"] a{color:#fff;font-weight:600}
-.iwheel__play{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;border-radius:14px;
-  background:#fff;color:#16181B;text-decoration:none;font-weight:600}
-.iwheel__play svg{width:11px;height:11px}
-.iwheel__play:focus-visible{outline:2px solid #7DA7FF;outline-offset:2px}
-@media(max-width:560px){.iwheel{left:10px;bottom:10px;width:150px}}

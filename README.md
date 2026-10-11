@@ -11,28 +11,30 @@ Then open <http://localhost:8750>.
 
 ## Pages
 
-Built to the scope of the Alvex "Sky Is The Limit" package: unlimited pages, a
-bespoke system, scroll motion throughout, a branded loading screen, and a news
-section.
+Built to the scope of the Alvex "Sky Is The Limit" package: a bespoke system,
+scroll motion throughout and a branded loading screen.
 
 | Page | Carries |
 |---|---|
-| Home `/` | Hero with the logo; services, systems, reach and evidence in brief, each leading on to its own page; the enquiry form |
+| Home `/` | Hero with the logo; services, systems, delivery and evidence in brief, each leading on to its page; the enquiry form |
 | 1 Services | The four services as chapters beside a pinned numeral and progress spine; the practice's statement |
 | 2 Systems | The integration diagram (finance systems → integration → databases); the systems ledger; the three claims |
-| 3 Reach | Distance from Harrogate as rings; travel; the base |
-| 4 Evidence | Odometer figures (1990, 2000, c.100, 4 regions); the track-record timeline; the held-open testimonial slots |
-| 5 Notes | Three practice notes (`/notes/…`), bodies verbatim from the live site |
-| 6 Enquiry | The enquiry form (demonstration only), contact details, finding the practice |
+| 3 Evidence | Odometer figures (1990, 2000, c.100, 4 regions); the track-record timeline; the held-open testimonial slots |
+| 4 Enquiry | The enquiry form (demonstration only) and contact details |
+
+Reach and Notes were removed in October 2026 (old addresses redirect home), as
+was any specific mention of the Harrogate base.
 
 ## Motion
 
 GSAP 3.15 (ScrollTrigger, SplitText, MotionPath), in
 `src/scripts/chalk/motion.js`:
 
-- *Intro* — the "Struck" loading screen: the two figures of the logo close and
-  meet, the wordmark prints, the logo flies into the hero. Home only, once a
-  session (`sessionStorage`), never on an anchored visit.
+- *Intro* — "Typeset": the hero headline is set on a chalk cover at its true
+  size and line breaks, each line written in left to right behind a feathered
+  wipe; it glides into its exact place, the logo drops in above it, and the
+  cover fades away to the page (about 4.2s; 2.9s on a phone). Home only, once
+  a session (`sessionStorage`), never on an anchored visit; `?intro` replays it.
 - *Between pages* — native cross-document View Transitions: the header and the
   rail hold still, the old page lifts and softens away, the new one rises, and
   its heading sets itself line by line. Chrome, Edge and Safari 18.2+; other
@@ -88,16 +90,16 @@ state, but **send nothing** — each is marked as a demonstration on the page.
 
 ## Photography
 
-Eighteen images generated with Higgsfield (GPT Image 2.5, 1K, high) in
-`public/assets/chalk/gen/`, two to three per page, plus the three earlier hero
-images and a Harrogate view, all to one brief: daylight, chalk white, pale steel
+Images generated with Higgsfield (GPT Image 2.5, 1K, high) in
+`public/assets/chalk/gen/`, plus the three earlier hero images, all to one
+brief: daylight, chalk white, pale steel
 and navy, candid, no text or logos. They are for review; none is presented as
 JMD's own office or staff, and a live build wants licensed stock or a
 commissioned shoot.
 
 ## Verified
 
-- Ten pages build clean; zero broken internal links or images; one `h1`, a
+- Five pages build clean; zero broken internal links or images; one `h1`, a
   title, a description and a `main` landmark on every page.
 - Every scroll scene ends in its final, fully visible state.
 - No horizontal scroll at 375px or 1440px; every control at least 44px; no text
