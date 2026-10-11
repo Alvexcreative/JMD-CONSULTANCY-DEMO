@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="1" data-mk="3">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-look="1" data-n3="2" data-mk="4">
 <!-- Concept 08 — supplied as "JMD Consulting.zip" on 2026-09-22 and added to the
      review set unchanged, apart from: the logo path (now ../assets/), and the
      shared review harness appended at the end so the concept switcher appears.
@@ -366,11 +366,6 @@ html.intro-on .hp{opacity:0}
       The rule (and for 4, the vertical rule and the subline's position) is
       measured to the word by the review script. */
 
-[data-mk="3"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.2em;font-size:112px}
-[data-mk="3"] .mk .plate__face .serifmark{fill:#143247}
-[data-mk="3"] .mk .plate__deep{display:none}
-[data-mk="3"] .mk .plate__face path{stroke:#B9822A;stroke-width:1}
-[data-mk="3"] .mk .sub{font-family:"Spectral",Georgia,serif;font-weight:500;font-size:14px;letter-spacing:.7em;fill:#143247}
 
 [data-mk="4"] .mk .serifmark{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:.005em;font-size:122px}
 [data-mk="4"] .mk .plate__face .serifmark{fill:#2A4258}
@@ -395,11 +390,7 @@ html.intro-on .hp{opacity:0}
 [data-look="3"] .n3-photo::after,[data-look="3"] .n3-edge::after{background:#143247;mix-blend-mode:lighten}
 
 /* 1 · Portrait */
-[data-n3="1"] .n3-photo{aspect-ratio:4/3}
 @media(min-width:960px){
-  [data-n3="1"] .n3{grid-template-columns:minmax(0,1fr) minmax(0,.78fr);align-items:start}
-  [data-n3="1"] .n3 .reach{grid-template-columns:1fr}
-  [data-n3="1"] .n3-photo{aspect-ratio:4/5}
 }
 
 /* 2 · Full bleed — the picture is the whole note, under the hero's veil */
@@ -1602,14 +1593,15 @@ html.intro-on .room__card .mk{visibility:hidden}
 
 <script id="hero-review">
 /* ── Layout review — scaffolding, not design ─────────────────────────────
-   Hero shortlist: A1 (single tower, Editorial) and B3 (converging towers,
-   Duotone), with the handshake in Note 2. Note 3 carries the team picture
-   (hero-15) in two ways, and the hero's JMD mark comes in two variations;
-   each is chosen independently. Step with the picker or the arrow keys;
-   ?view=B3&n3=2&mk=4 opens on a combination.
-   Once chosen: keep the hero image in the markup, set data-look,
-   data-n3 and data-mk on <body> (or fold those rules into the base styles), and delete this
-   script, the .hp styles and the options not taken. */
+   Hero shortlist, now down to two: A1 (single tower, Editorial) and B3
+   (converging towers, Duotone). Step with the picker or the arrow keys;
+   ?view=B3 opens on one.
+
+   Note 3 and the mark are decided — option 2 (full bleed under the veil)
+   and option 4 (side lockup). Both are fixed on <body> and the rules for
+   the options not taken have been removed.
+   Once a hero is chosen: keep that image in the markup, set data-look on
+   <body>, and delete this script and the .hp styles. */
 (function(){
   var HEROES = {
     A: {file:'hero-01.jpg', name:'Single glass tower',         fx:'72%', fy:'50%', mfx:'66%', mfy:'45%', veil:1},
@@ -1618,13 +1610,12 @@ html.intro-on .room__card .mk{visibility:hidden}
   var LOOKS = {1:'Editorial', 3:'Duotone'};
   var N3 = {1:'Portrait beside the text', 2:'Full bleed under the veil'};
   var MK = {3:'Spaced capitals — over an ochre hairline', 4:'Side lockup — CONSULTING beside the mark'};
+  /* Narrowed to the hero pair. Note 3 is settled on option 2 (full bleed
+     under the veil) and the mark on option 4 (side lockup); both are now
+     fixed on <body> and their losing rules are gone from the stylesheet. */
   var VIEWS = [
     {id:'A1', kind:'hero', hero:'A', look:1},
-    {id:'B3', kind:'hero', hero:'B', look:3},
-    {id:'N3-1', kind:'n3', n:1},
-    {id:'N3-2', kind:'n3', n:2},
-    {id:'L3', kind:'mk', n:3},
-    {id:'L4', kind:'mk', n:4}
+    {id:'B3', kind:'hero', hero:'B', look:3}
   ];
 
   var BASE = '../assets/heroes/08-options/', KEY = 'jmd-08-view', KEY3 = 'jmd-08-n3', KEYM = 'jmd-08-mk';
@@ -1645,7 +1636,7 @@ html.intro-on .room__card .mk{visibility:hidden}
 
   /* the hero and Note 3 are chosen independently: a hero entry changes the
      hero, a Note 3 entry changes Note 3 and jumps to it */
-  var heroId = 'A1', n3 = 1, mk = 3, cur = -1, num, label, dots = [];
+  var heroId = 'A1', n3 = 2, mk = 4, cur = -1, num, label, dots = [];
   function setHero(v){
     var h = HEROES[v.hero], next = img(h.file);
     heroId = v.id;
@@ -1752,15 +1743,9 @@ html.intro-on .room__card .mk{visibility:hidden}
   });
 
   var q0 = new URLSearchParams(location.search), ids = VIEWS.map(function(v){ return v.id; });
-  var want = (q0.get('view') || '').toUpperCase(), want3 = parseInt(q0.get('n3'), 10), wantM = parseInt(q0.get('mk'), 10);
+  var want = (q0.get('view') || '').toUpperCase();
   if(['A1','B3'].indexOf(want) < 0){ try{ want = localStorage.getItem(KEY) || 'A1'; }catch(e){ want = 'A1'; } }
   if(['A1','B3'].indexOf(want) < 0) want = 'A1';
-  if(!(want3 >= 1 && want3 <= 2)){ try{ want3 = parseInt(localStorage.getItem(KEY3), 10); }catch(e){} }
-  if(!(want3 >= 1 && want3 <= 2)) want3 = 1;
-  if(!(wantM >= 3 && wantM <= 4)){ try{ wantM = parseInt(localStorage.getItem(KEYM), 10); }catch(e){} }
-  if(!(wantM >= 3 && wantM <= 4)) wantM = 3;
-  show(ids.indexOf('L' + wantM));
-  show(ids.indexOf('N3-' + want3));
   show(ids.indexOf(want));
 })();
 </script>
