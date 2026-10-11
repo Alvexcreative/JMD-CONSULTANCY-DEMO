@@ -7,8 +7,10 @@
    The hero's headline is set on a clean chalk page at its true size and
    line breaks. Each line is written in left to right behind a soft-edged
    wipe, the next line starting as the one above finishes, at an even pace.
-   The set headline then glides into its exact place on the hero, the logo
-   drops in above it, and the chalk cover fades away to reveal the page.
+   The headline is written where it sits beside the logo on the hero, the
+   pair centred as one. When the writing is complete the logo comes up
+   above it; then logo and headline move home together, and the chalk
+   cover fades away to reveal the page.
 
    Any pointer, key, wheel or touch ends it at once; it ends six seconds
    after the setting begins (nine at the very most, if the font is slow);
@@ -75,9 +77,20 @@ const ov = document.getElementById('intro');
   t.className = 'intro__type';
   t.innerHTML = h.innerHTML;
   for (const k of ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'color']) t.style[k] = cs[k];
+  /* the logo and headline are composed as they are on the hero: the pair
+     is centred as one group, so the headline is written where it belongs
+     in that group and the logo's space is waiting above it */
+  const L = real.getBoundingClientRect();
+  const gl = Math.min(L.left, r.left), gt = Math.min(L.top, r.top);
+  const gw = Math.max(L.right, r.right) - gl, gh = Math.max(L.bottom, r.bottom) - gt;
+  const shift = { x: (innerWidth - gw) / 2 - gl, y: (innerHeight - gh) / 2 - gt };
   t.style.width = `${r.width}px`;
-  t.style.left = `${(innerWidth - r.width) / 2}px`;
-  t.style.top = `${(innerHeight - r.height) / 2}px`;
+  t.style.left = `${r.left + shift.x}px`;
+  t.style.top = `${r.top + shift.y}px`;
+  /* the logo, seated above it at its hero size and spacing (the ghost's
+     own resting box is centred, so it is moved from there) */
+  const rest = ghost.getBoundingClientRect();
+  gsap.set(ghost, { x: L.left + shift.x - rest.left, y: L.top + shift.y - rest.top, scale: L.width / rest.width });
   layer.appendChild(t);
 
   /* find the lines exactly as the browser breaks them: split on ordinary
@@ -133,31 +146,35 @@ const ov = document.getElementById('intro');
     tl.to(line, { '--p': '100%', duration: dur, ease: 'sine.inOut' }, at);
     at += dur * 0.8;                                      /* the next line starts as this one finishes */
   });
-  /* the pauses between stages were each trimmed by 0.1s on review (0.3s in all) */
+  /* the pauses between stages were each trimmed by 0.1s on review */
   const written = at + 0.2 * Q - 0.1;
 
-  /* ── into place: the headline glides home, the logo drops in above ── */
-  let m;
-  tl.call(() => { m = null; }, null, written - 0.001)
+  /* ── the logo comes up above the finished headline ───────────────── */
+  tl.fromTo(svg, { opacity: 0, yPercent: 14 }, { opacity: 1, yPercent: 0, duration: 0.75 * Q, ease: 'expo.out', immediateRender: false }, written - 0.15 * Q);
+
+  /* ── the pair moves home together: one curve, one duration, each landing
+     measured as the move begins ─────────────────────────────────────── */
+  const go = written + 0.5 * Q;
+  let m, g;
+  tl.call(() => { m = null; g = null; }, null, go - 0.001)
     .to(t, {
       x: () => (m ||= offset(t, h)).x, y: () => (m ||= offset(t, h)).y,
-      duration: 0.9 * Q, ease: 'expo.inOut',
-    }, written);
-  const seated = written + 0.5 * Q - 0.1;
-  let g;
-  tl.call(() => { g = null; }, null, seated - 0.001)
+      duration: 1.0 * Q, ease: 'expo.inOut',
+    }, go)
     .to(ghost, {
-      x: () => (g ||= place()).x, y: () => (g ||= place()).y, scale: () => (g ||= place()).s,
-      duration: 0.001,
-    }, seated)
-    .fromTo(svg, { opacity: 0, yPercent: -8 }, { opacity: 1, yPercent: 0, duration: 0.7 * Q, ease: 'expo.out', immediateRender: false }, seated + 0.05);
+      x: () => (g ||= home()).x, y: () => (g ||= home()).y, scale: () => (g ||= home()).s,
+      duration: 1.0 * Q, ease: 'expo.inOut',
+    }, go);
 
-  /* ── the reveal: the chalk cover fades away to the page beneath ───── */
-  tl.to(paper, { opacity: 0, duration: 0.9 * Q, ease: 'power2.inOut' }, seated + 0.25 * Q - 0.1);
+  /* ── the reveal: the chalk cover fades away as they arrive ─────────── */
+  tl.to(paper, { opacity: 0, duration: 0.9 * Q, ease: 'power2.inOut' }, go + 0.45 * Q);
 
   tl.play();
   }
 
   function offset(a, b) { const p = a.getBoundingClientRect(), q = b.getBoundingClientRect(); return { x: q.left - p.left, y: q.top - p.top }; }
-  function place() { const p = ghost.getBoundingClientRect(), q = real.getBoundingClientRect(); return { x: q.left - p.left, y: q.top - p.top, s: q.width / p.width }; }
+  /* where the ghost must be moved, from its own resting box, to sit on the
+     real logo (measured now: the hero may have settled since) */
+  function home() { const q = real.getBoundingClientRect(), p = restBox(); return { x: q.left - p.left, y: q.top - p.top, s: q.width / p.width }; }
+  function restBox() { const keep = ghost.style.transform; ghost.style.transform = 'none'; const b = ghost.getBoundingClientRect(); ghost.style.transform = keep; return b; }
 })();

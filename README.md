@@ -30,12 +30,14 @@ was any specific mention of the Harrogate base.
 GSAP 3.15 (ScrollTrigger, SplitText, MotionPath), in
 `src/scripts/chalk/motion.js`:
 
-- *Intro* — "Typeset": the hero headline is set on a chalk cover at its true
-  size and line breaks, each line written in left to right behind a feathered
-  wipe; it glides into its exact place, the logo drops in above it, and the
-  cover fades away to the page (about 3.9s; 2.6s on a phone). Home only, on every reload and every arrival from outside the site (not on a
-  move to Home from another page), never on an anchored visit; `?intro` always
-  plays it.
+- *Intro* — "Typeset": the hero headline is written on a chalk cover at its
+  true size and line breaks, each line left to right behind a feathered wipe,
+  placed where it sits beside the logo on the hero (the pair centred as one).
+  As the writing completes the logo comes up above it; logo and headline then
+  move home together on one curve, and the cover fades away to the page
+  (about 4.3s; 2.9s on a phone). Home only, on every reload and every arrival
+  from outside the site (not on a move to Home from another page), never on an
+  anchored visit; `?intro` always plays it.
 - *Between pages* — native cross-document View Transitions: the header and the
   rail hold still, the old page lifts and softens away, the new one rises, and
   its heading sets itself line by line. Chrome, Edge and Safari 18.2+; other
