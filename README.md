@@ -19,8 +19,11 @@ scroll motion throughout and a branded loading screen.
 | Home `/` | Hero with the logo, the strapline and the four systems; services, systems, delivery and the track record in figures, each leading on to its page; the enquiry form |
 | 1 Services | The four services as chapters beside a pinned numeral and progress spine; the practice's statement |
 | 2 Systems | The integration diagram (finance systems → integration → databases); the systems ledger; the three claims |
-| 3 Evidence | Odometer figures (1990, 2000, c.100, 4 regions); the track-record timeline; the held-open testimonial slots |
+| 3 Evidence | Odometer figures (1990, 2000, c.100, 4 regions); the track-record timeline. The held-open testimonial slots are withheld until the client supplies real quotes (restore point marked in `evidence.astro`) |
 | 4 Enquiry | The enquiry form (demonstration only) and contact details |
+
+Services, Systems and Evidence close on the enquiry prompt with the button and the
+phone number, before the link to the next page.
 
 Reach and Notes were removed in October 2026 (old addresses redirect home), as
 was any specific mention of the Harrogate base.
@@ -115,3 +118,9 @@ commissioned shoot.
 - No horizontal scroll at 375px or 1440px; every control at least 44px; no text
   below 12px.
 - `prefers-reduced-motion` gives a static site.
+- Mobile (October 2026): a full critique of all five pages, then three rounds
+  of fixing and independent testing at 320, 360, 375 and 414px (plus 481-720
+  and a 1440px check). Every page link fits the header strip from 320px up;
+  nothing overflows, overlaps, falls under 12px or 44px, or fails contrast,
+  including text over photographs; both forms place their confirmation clear
+  of the header at every width.

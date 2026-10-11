@@ -227,7 +227,9 @@ document.querySelectorAll('form[data-enquiry]').forEach((form) => {
     /* a smooth scroll started while the form is still closing up is cut
        short, so it waits for every animation in the form to finish */
     Promise.all(form.getAnimations ? form.getAnimations({ subtree: true }).map((a) => a.finished.catch(() => {})) : []).then(() => {
-      const r = box.getBoundingClientRect(), hdr = document.querySelector('.filing')?.getBoundingClientRect().bottom || 0;
+      /* the header's height, not where it is now: it may be stepped aside,
+         and the scroll back up brings it back over the box */
+      const r = box.getBoundingClientRect(), hdr = document.querySelector('.filing')?.offsetHeight || 0;
       if (r.top < hdr + 12 || r.bottom > innerHeight) scrollTo({ top: r.top + scrollY - hdr - 16, behavior: motion ? 'smooth' : 'auto' });
     });
   }

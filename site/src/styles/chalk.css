@@ -1064,7 +1064,7 @@ p,li,dd,figcaption{text-wrap:pretty}
    the last word rather than out at the edge */
 .more{display:inline-block;line-height:24px;padding-block:10px}
 .more svg{display:inline-block;vertical-align:-1px;margin-left:10px}
-.indent > .claims{grid-area:auto;margin-top:0}
+.indent .claims{grid-area:auto;margin-top:0}
 .contact a{white-space:nowrap}
 .contact dt{align-self:center}
 @media(max-width:959px){.hero__sys{color:var(--on-ink)}}

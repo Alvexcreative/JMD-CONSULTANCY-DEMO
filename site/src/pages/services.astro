@@ -43,7 +43,7 @@ const art: Record<string, { src: string; alt: string }> = {
             <article class="chap" id={s.slug} data-label={s.title}>
               <div>
                 <p class="chap__n">{s.n} &middot; Service</p>
-                <h2 data-split>{s.title}</h2>
+                <h2 data-split set:html={s.title.replace(`CODA${'\u00a0'}/${'\u00a0'}Unit4`, '<span class="nw">CODA / Unit4</span>')} />
                 <p class="chap__body" data-rise>{s.body}</p>
                 <ul class="chap__scope" data-rules>
                   {s.points.map((p, i) => <li>{p}<span>{s.n}.{i + 1}</span></li>)}
