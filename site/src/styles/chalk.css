@@ -1097,14 +1097,19 @@ p,li,dd,figcaption{text-wrap:pretty}
   .contents{flex:1 1 auto}
   .contents:not(.is-over) ol{width:100%;justify-content:space-evenly}
 
-  .is-home .hero.hero--photo{align-content:end;padding-bottom:calc(var(--bar) + clamp(18px,4vh,32px))}
+  /* the words sit in the middle of the picture, between the header and
+     the enquiry button; the veil is deepest behind them and thins towards
+     both edges, so the photograph shows above and below */
+  .is-home .hero.hero--photo{align-content:safe center;padding-top:clamp(20px,4vh,36px);padding-bottom:calc(var(--bar) + clamp(20px,4vh,36px))}
+  /* a light wash, so the photograph reads clearly behind the words */
   .is-home .hero--photo .hero__veil{background:
-    linear-gradient(0deg,
-      rgba(var(--ink-rgb),.95) 0%,
-      rgba(var(--ink-rgb),.92) 64%,
-      rgba(var(--veil-mid-rgb),.62) 74%,
-      rgba(var(--ink-rgb),.12) 86%,
-      rgba(var(--ink-rgb),0) 94%)}
+    linear-gradient(180deg,
+      rgba(var(--ink-rgb),0) 0%,
+      rgba(var(--ink-rgb),.3) 12%,
+      rgba(var(--ink-rgb),.52) 24%,
+      rgba(var(--ink-rgb),.52) 72%,
+      rgba(var(--ink-rgb),.3) 86%,
+      rgba(var(--ink-rgb),0) 100%)}
   .is-home .hero__acts,.phead__acts{display:none}
   /* the words centred under the logo */
   .is-home .hero--photo .room > :last-child{text-align:center}
