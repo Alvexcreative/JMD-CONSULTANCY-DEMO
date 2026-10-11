@@ -1,5 +1,6 @@
 ---
 import { site, nav } from '../data/content';
+import VersionSwitch from '../components/VersionSwitch.astro';
 import '../styles/growth.css';
 
 interface Props { title: string; description: string; page: string; }
@@ -69,6 +70,8 @@ const href = (h: string) => (h ? `${base}/${h}` : `${base}/`);
       </div>
     </div>
   </footer>
+
+  <VersionSwitch />
 
   <script>
     const btn = document.querySelector('.nav-toggle');

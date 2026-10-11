@@ -14,6 +14,12 @@ cd site && npm install && npm run dev
 Then open <http://localhost:4800>. The root is a picker; the two builds are at
 `/montfort/` and `/growth/`.
 
+A switcher sits at the foot of every page and links to **the same page in the
+other build** — Services to Services, Contact to Contact — so comparison is like
+for like rather than dropping you back on a homepage. `V` flips between them. It
+is review chrome, deliberately neutral, and comes out with
+`src/components/VersionSwitch.astro` once a direction is chosen.
+
 | Page | Carries |
 |---|---|
 | Home | Hero, the problem/guide/success framing, services summary, the practice's statement, credentials |
