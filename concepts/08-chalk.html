@@ -44,6 +44,9 @@
   --serif:"Spectral",Georgia,"Times New Roman",serif;
   --mono:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --field:rgba(255,255,255,.72); --field-hi:#FFFFFF; --mark-ink:#2A4258;
+  /* image tints, deliberately NOT re-stated per scheme: the photographs
+     should look identical whichever palette is on */
+  --img-tint-rgb:220,230,242; --duo-ink:#13283F;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 
@@ -61,40 +64,10 @@
                   action. Instrumented and technical.
    ════════════════════════════════════════════════════════════════ */
 
-/* 2 · Oxblood */
-[data-scheme="2"]{
-  --field:rgba(241,236,226,.07); --field-hi:rgba(241,236,226,.13); --mark-ink:#F1ECE2;
-  --paper:#F4F1EA;   --paper-rgb:244,241,234;   --paper-2:#E9E3D7;
-  --ink:#1E1B19;     --ink-rgb:30,27,25;        --ink-2:#272320; --ink-3:#332E2A;
-  --on-ink:#F1ECE2;  --on-ink-rgb:241,236,226;
-  --on-ink-dim:#B9AE9E; --on-dim-rgb:185,174,158;
-  --on-paper:#221F1C; --on-paper-dim:#5A534B;
-  --blue:#8C2F39;    --blue-rgb:140,47,57;      --blue-lift:#A8414B;
-  --ochre:#8C2F39;   --ochre-lift:#A8414B;      --bronze:#6E222B;
-  --on-ochre:#F7F4EE;
-  --rule-ink:rgba(var(--on-ink-rgb),.22);   --rule-ink-soft:rgba(var(--on-ink-rgb),.12);
-  --rule-paper:rgba(34,31,28,.22);          --rule-paper-soft:rgba(34,31,28,.10);
-}
-
-/* 3 · Forest */
-[data-scheme="3"]{
-  --field:rgba(235,237,227,.07); --field-hi:rgba(235,237,227,.13); --mark-ink:#EBEDE3;
-  --paper:#F2EFE6;   --paper-rgb:242,239,230;   --paper-2:#E5DFD1;
-  --ink:#1C2B22;     --ink-rgb:28,43,34;        --ink-2:#24352A; --ink-3:#2E4234;
-  --on-ink:#EBEDE3;  --on-ink-rgb:235,237,227;
-  --on-ink-dim:#A9B5A5; --on-dim-rgb:169,181,165;
-  --on-paper:#1E2A22; --on-paper-dim:#505A4C;
-  --blue:#2F5F45;    --blue-rgb:47,95,69;       --blue-lift:#3E7A59;
-  --ochre:#8F5324;   --ochre-lift:#B06A33;      --bronze:#6F3F1B;
-  --on-ochre:#F6F3EA;
-  --rule-ink:rgba(var(--on-ink-rgb),.22);   --rule-ink-soft:rgba(var(--on-ink-rgb),.12);
-  --rule-paper:rgba(30,42,34,.22);          --rule-paper-soft:rgba(30,42,34,.10);
-}
-
-/* 4 · Obsidian — the only scheme where the page itself is dark, so the
+/* 2 · Obsidian — the only scheme where the page itself is dark, so the
    image treatments have to be told to stop multiplying: multiply against
    a near-black ground crushes every photograph to nothing. */
-[data-scheme="4"]{
+[data-scheme="2"]{
   --field:rgba(228,233,239,.08); --field-hi:rgba(228,233,239,.14); --mark-ink:#E4E9EF;
   --paper:#0C0E11;   --paper-rgb:12,14,17;      --paper-2:#14181D;
   --ink:#15191E;     --ink-rgb:21,25,30;        --ink-2:#1C2127; --ink-3:#252B33;
@@ -107,12 +80,9 @@
   --rule-ink:rgba(var(--on-ink-rgb),.20);   --rule-ink-soft:rgba(var(--on-ink-rgb),.10);
   --rule-paper:rgba(var(--on-ink-rgb),.20); --rule-paper-soft:rgba(var(--on-ink-rgb),.10);
 }
-[data-scheme="4"] .n3-photo img, [data-scheme="4"] .n3-edge img,
-[data-scheme="4"] .hero__img{ mix-blend-mode:normal; filter:saturate(.72) brightness(.78) contrast(1.04); }
-[data-scheme="4"] .n3-photo::after, [data-scheme="4"] .n3-edge::after{ mix-blend-mode:normal; background:rgba(12,14,17,.34); }
 /* the logo keeps its white plate; on a dark page that reads as a mounted
    label rather than an accident */
-[data-scheme="4"] .mk{ box-shadow:0 0 0 1px rgba(228,233,239,.18); }
+[data-scheme="2"] .mk{ box-shadow:0 0 0 1px rgba(228,233,239,.18); }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -421,14 +391,14 @@ html.intro-on .hp{opacity:0}
    navy lightened in underneath (blacks lift to navy, never to black) */
 .duo{background:var(--ink-2);isolation:isolate}
 .duo img{filter:grayscale(1) contrast(1.06) brightness(1.12);mix-blend-mode:multiply}
-.duo::after{content:"";position:absolute;inset:0;pointer-events:none;background:var(--on-ink);mix-blend-mode:lighten}
+.duo::after{content:"";position:absolute;inset:0;pointer-events:none;background:var(--duo-ink);mix-blend-mode:lighten}
 
 /* ── Note 2 plate ──────────────────────────────────────────────────────── */
 .n2-plate{grid-area:photo;margin:0;position:relative;overflow:hidden;background:var(--ink-2)}
 .n2-plate img{display:block;width:100%;height:100%;object-fit:cover;object-position:68% 42%}
 /* a light cool grade so the warm skin and timber sit inside the chalk palette */
 .n2-plate img{filter:saturate(.8) brightness(1.03) contrast(1.02)}
-.n2-plate::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(var(--ink-rgb),.16);mix-blend-mode:multiply}
+.n2-plate::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(var(--img-tint-rgb),.16);mix-blend-mode:multiply}
 .n2-plate::before{content:"";position:absolute;left:0;bottom:0;z-index:2;width:clamp(80px,22%,220px);height:2px;background:var(--ochre)}
 .n2-band{display:none;position:relative;overflow:hidden;
   height:clamp(240px,40vh,440px);margin-inline:0;margin-top:calc(-1 * clamp(56px,8vw,104px));margin-bottom:clamp(44px,6vw,80px)}
@@ -470,12 +440,12 @@ html.intro-on .hp{opacity:0}
 .n3-photo,.n3-edge{margin:0;position:relative;overflow:hidden;background:var(--ink-2)}
 .n3-photo img,.n3-edge img{display:block;width:100%;height:100%;object-fit:cover;object-position:58% 50%;
   filter:saturate(.8) brightness(1.03)}
-.n3-photo::after,.n3-edge::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(var(--ink-rgb),.16);mix-blend-mode:multiply}
+.n3-photo::after,.n3-edge::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(var(--img-tint-rgb),.16);mix-blend-mode:multiply}
 .n3-photo::before{content:"";position:absolute;left:0;bottom:0;z-index:2;width:clamp(80px,22%,200px);height:2px;background:var(--ochre)}
 .n3-edge{display:none}
 [data-look="3"] .n3-photo,[data-look="3"] .n3-edge{background:var(--ink-2);isolation:isolate}
 [data-look="3"] .n3-photo img,[data-look="3"] .n3-edge img{filter:grayscale(1) contrast(1.06) brightness(1.12);mix-blend-mode:multiply}
-[data-look="3"] .n3-photo::after,[data-look="3"] .n3-edge::after{background:var(--on-ink);mix-blend-mode:lighten}
+[data-look="3"] .n3-photo::after,[data-look="3"] .n3-edge::after{background:var(--duo-ink);mix-blend-mode:lighten}
 
 /* 1 · Portrait */
 @media(min-width:960px){
@@ -1844,9 +1814,7 @@ html.intro-on .room__card .mk{visibility:hidden}
 <div class="sw" role="group" aria-label="Colour scheme">
   <span class="sw__t">Palette</span>
   <button type="button" data-s="1" aria-pressed="true">Harrogate&nbsp;Blue</button>
-  <button type="button" data-s="2" aria-pressed="false">Oxblood</button>
-  <button type="button" data-s="3" aria-pressed="false">Forest</button>
-  <button type="button" data-s="4" aria-pressed="false">Obsidian</button>
+  <button type="button" data-s="2" aria-pressed="false">Obsidian</button>
 </div>
 <style>
 .sw{position:fixed;z-index:60;left:50%;bottom:72px;transform:translateX(-50%);
@@ -1876,14 +1844,14 @@ html.intro-on .room__card .mk{visibility:hidden}
     history.replaceState(null,'',location.pathname+'?'+q.toString());
   }
   var q=new URLSearchParams(location.search),w=q.get('scheme');
-  if(['1','2','3','4'].indexOf(w)<0){try{w=localStorage.getItem(K)}catch(e){}}
-  set(['1','2','3','4'].indexOf(w)>-1?w:'1');
+  if(['1','2'].indexOf(w)<0){try{w=localStorage.getItem(K)}catch(e){}}
+  set(['1','2'].indexOf(w)>-1?w:'1');
   document.querySelectorAll('.sw button').forEach(function(x){
     x.addEventListener('click',function(){set(x.dataset.s)});});
   document.addEventListener('keydown',function(e){
     if(e.metaKey||e.ctrlKey||e.altKey)return;
     var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
-    if(e.key.toLowerCase()==='p'){var o=['1','2','3','4'];set(o[(o.indexOf(b.dataset.scheme)+1)%3]);}
+    if(e.key.toLowerCase()==='p'){var o=['1','2'];set(o[(o.indexOf(b.dataset.scheme)+1)%3]);}
   });
 })();
 </script>
