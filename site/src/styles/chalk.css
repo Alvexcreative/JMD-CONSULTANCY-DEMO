@@ -520,6 +520,15 @@ form{display:grid;gap:18px}
 .sent svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--blue-lift)}
 form[data-sent="true"] .sent{display:flex}
 form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] .btn,form[data-sent="true"] .enq__note{display:none}
+.sent p b{display:block;font-weight:400;color:var(--on-ink)}
+.sent p span{display:block;margin-top:3px;color:var(--on-ink-dim)}
+.sent .tick{stroke-dasharray:20}
+/* the send button closes to a circle and draws a tick */
+.btn__l{display:inline-flex;align-items:center;gap:12px;white-space:nowrap}
+.btn__tick{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;opacity:0;pointer-events:none}
+.btn__tick path{stroke-dasharray:20;stroke-dashoffset:20}
+.btn--send.is-sending{padding:0;pointer-events:none;overflow:hidden}
+.btn--send.is-sending::before{opacity:0}
 
 /* ── Billing block ─────────────────────────────────────────── */
 .billing{background:var(--ink-2);color:var(--on-ink-dim);padding-block:clamp(40px,5vw,62px) 34px;
@@ -529,7 +538,7 @@ form[data-sent="true"] .f2,form[data-sent="true"] .field,form[data-sent="true"] 
 @media(min-width:1040px){.billing__cols{grid-template-columns:repeat(4,1fr)}}
 .billing__mark{display:inline-flex;align-items:center;
   margin-bottom:clamp(28px,3.4vw,40px)}
-.billing__mark img{display:block;height:42px;width:auto}
+.billing__mark .mk{display:block;height:clamp(64px,6.4vw,92px);width:auto;aspect-ratio:2364/916;overflow:visible}
 .billing h3{color:var(--on-ink);margin-bottom:13px}
 .billing ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.93rem}
 .billing a{text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
@@ -826,6 +835,27 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 .wire__svg path.live{stroke:var(--blue);stroke-width:1.4}
 .wire__svg circle{fill:var(--ochre)}
 .wire__cap{margin-top:clamp(22px,2.6vw,32px);color:var(--on-paper-dim)}
+/* each card is a control: selecting one traces its route, steps back the
+   cards it does not reach, and quotes its line beneath the diagram */
+button.node{width:100%;margin:0;border:0;border-radius:0;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:box-shadow .4s var(--ease),transform .5s var(--ease),opacity .4s var(--ease)}
+.wire__hub button.node{text-align:center}
+.node:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+@media (hover:hover){button.node:hover{transform:translateY(-2px)}}
+.wire.is-tracing .node:not(.is-on){opacity:.42}
+.node.is-on{box-shadow:inset 0 0 0 1px var(--blue),0 18px 40px -28px rgba(var(--blue-rgb),.6)}
+.node.is-sel{box-shadow:inset 0 0 0 2px var(--blue),0 24px 46px -24px rgba(var(--blue-rgb),.75);transform:translateY(-2px)}
+.wire__svg path{transition:opacity .4s var(--ease)}
+.wire.is-tracing .wire__svg path:not(.trace){opacity:.3}
+.wire__svg path.trace{stroke:var(--blue);stroke-width:2.2;stroke-linecap:round}
+.wire__svg circle.run{fill:var(--blue);filter:drop-shadow(0 0 5px rgba(var(--blue-rgb),.55))}
+.wire.is-tracing .wire__svg circle:not(.run){opacity:0!important}
+.wire__note{margin-top:clamp(22px,2.6vw,32px);padding-top:16px;border-top:1px solid var(--rule-paper);
+  display:grid;gap:6px;min-height:5.4em;align-content:start}
+.wire__who{color:var(--blue)}
+.wire__say{font-size:clamp(1.05rem,1.4vw,1.22rem);line-height:1.45;max-width:46ch}
+.wire__note + .wire__cap{margin-top:14px}
+@media (prefers-reduced-motion:reduce){button.node,.wire__svg path{transition:none}button.node:hover,.node.is-sel{transform:none}}
 
 /* systems ledger: each system a row, numbered, with its note */
 .ledger{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-paper)}

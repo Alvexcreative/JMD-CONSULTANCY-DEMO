@@ -31,6 +31,8 @@ if (!still) {
   });
   ready.then(() => { splitAll(); scenes(); introDone.then(entrance); });
   addEventListener('load', () => ScrollTrigger.refresh());
+  /* a sent enquiry shortens the page: everything below it is re-measured */
+  document.addEventListener('enquiry:sent', () => setTimeout(() => ScrollTrigger.refresh(), 700));
 }
 
 /* ── headings: each line rises out of its own mask ──────────────────── */
@@ -65,7 +67,7 @@ function entrance() {
 }
 
 function scenes() {
-  rises(); photos(); bands(); rules(); ink(); chapters(); wires(); odometers(); timeline(); magnets(); homeHero();
+  rises(); photos(); bands(); rules(); ink(); chapters(); odometers(); signature(); timeline(); magnets(); homeHero();
 }
 
 /* ── groups that arrive together, in reading order ─────────────────── */
@@ -148,56 +150,6 @@ function chapters() {
     scrollTrigger: { trigger: list, start: 'top 55%', end: 'bottom 70%', scrub: true } });
 }
 
-/* ── Systems: the finance systems wire into the integration, and the
-      integration into the databases. Paths are measured from the cards,
-      drawn with the scroll, and carry packets while on screen. ─────── */
-function wires() {
-  document.querySelectorAll('.wire').forEach((w) => {
-    const svg = w.querySelector('.wire__svg');
-    const tops = [...w.querySelectorAll('.wire__row--top .node')];
-    const hub = w.querySelector('.wire__hub .node');
-    const bots = [...w.querySelectorAll('.wire__row--bot .node')];
-    let paths = [], packets = [], tl, loop;
-    function build() {
-      const R = w.getBoundingClientRect();
-      const pt = (el, edge) => { const r = el.getBoundingClientRect();
-        return [r.left - R.left + r.width / 2, edge === 'b' ? r.bottom - R.top : r.top - R.top]; };
-      const curve = (a, b) => { const my = (a[1] + b[1]) / 2; return `M${a[0]} ${a[1]} C${a[0]} ${my} ${b[0]} ${my} ${b[0]} ${b[1]}`; };
-      svg.setAttribute('viewBox', `0 0 ${R.width} ${R.height}`);
-      svg.innerHTML = '';
-      const ds = [...tops.map((t) => curve(pt(t, 'b'), pt(hub, 't'))), ...bots.map((b) => curve(pt(hub, 'b'), pt(b, 't')))];
-      paths = ds.map((d) => { const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', d); svg.appendChild(p);
-        const live = p.cloneNode(); live.classList.add('live'); svg.appendChild(live); return live; });
-      packets = paths.map(() => { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', '3.2'); c.style.opacity = 0; svg.appendChild(c); return c; });
-    }
-    function animate() {
-      if (tl) { tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill(); }
-      if (loop) loop.kill();
-      paths.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
-      /* the wiring completes while the whole diagram is still in view: it
-         starts as the diagram comes up the screen and is finished by the
-         time its top edge reaches the upper third */
-      tl = gsap.timeline({ scrollTrigger: { trigger: w, start: 'top 85%', end: 'top 30%', scrub: 0.6 } });
-      tl.add(() => tops.forEach((n) => n.classList.toggle('is-lit', tl.scrollTrigger.direction > 0)), 0.02);
-      paths.slice(0, tops.length).forEach((p, i) => tl.to(p, { strokeDashoffset: 0, ease: 'none', duration: 1 }, i * 0.15));
-      tl.add(() => hub.classList.toggle('is-lit', tl.scrollTrigger.direction > 0), 1.1);
-      paths.slice(tops.length).forEach((p, i) => tl.to(p, { strokeDashoffset: 0, ease: 'none', duration: 1 }, 1.2 + i * 0.15));
-      tl.add(() => bots.forEach((n) => n.classList.toggle('is-lit', tl.scrollTrigger.direction > 0)), 2.4);
-      /* packets travel the finished wires, top to bottom, only on screen */
-      loop = gsap.timeline({ repeat: -1, paused: true });
-      paths.forEach((p, i) => {
-        loop.fromTo(packets[i], { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, i * 0.45 + (i >= tops.length ? 0.9 : 0))
-          .to(packets[i], { motionPath: { path: p, align: p, alignOrigin: [0.5, 0.5] }, duration: 1.6, ease: 'sine.inOut' }, '<')
-          .to(packets[i], { opacity: 0, duration: 0.25, ease: 'none' }, '>-0.25');
-      });
-      ScrollTrigger.create({ trigger: w, start: 'top 30%', end: 'bottom top',
-        onToggle: (st) => (st.isActive ? loop.play() : loop.pause()) });
-    }
-    build(); animate();
-    let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { build(); animate(); ScrollTrigger.refresh(); }, 180); });
-  });
-}
-
 /* ── figures wind up to their value, a digit column each ──────────── */
 function odometers() {
   document.querySelectorAll('[data-odo]').forEach((el) => {
@@ -216,6 +168,78 @@ function odometers() {
     cols.forEach((c) => gsap.set(c.strip, { yPercent: 0 }));
     gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 88%', once: true } })
       .add(cols.map((c, j) => gsap.to(c.strip, { yPercent: -c.v * 10, duration: 1.6 + (cols.length - j) * 0.18, ease: 'expo.out' })), 0);
+  });
+}
+
+/* ── the footer: the wordmark is signed off by one pen ──────────────
+      As the footer comes up, the figures ink in and one pen writes every
+      stroke of the wordmark in reading order at a steady pace, lifting
+      between letters so the hand never stops (the intro's earlier "Draft"
+      writing, at footer scale). Once a page. The logo is complete until
+      this arms it, and under reduced motion it is never armed. */
+function signature() {
+  document.querySelectorAll('[data-sign] svg').forEach((svg) => {
+    const fj = svg.querySelector('.lg-j'), fm = svg.querySelector('.lg-md'), word = svg.querySelector('.lg-word');
+    if (!word) return;
+    /* each letter stroke becomes its own path, its clip kept */
+    const strokes = [];
+    [...word.querySelectorAll('path')].forEach((p) => {
+      p.getAttribute('d').split(/(?=M)/).filter(Boolean).forEach((d) => {
+        const q = p.cloneNode(false); q.setAttribute('d', d); word.insertBefore(q, p); strokes.push({ el: q, d });
+      });
+      p.remove();
+    });
+    /* which way a hand writes each stroke: zig-zags (M, N) from the bottom
+       left, upright strokes from the top, the rest from the left; closed
+       letters keep their own start. A backwards stroke is drawn from its
+       far end by running the dash the other way. */
+    strokes.forEach((s) => {
+      const L = s.el.getTotalLength(), a = s.el.getPointAtLength(0), b = s.el.getPointAtLength(L);
+      const closed = /Z\s*$/i.test(s.d), zig = !closed && /^M[^C]*$/.test(s.d) && (s.d.match(/L/g) || []).length >= 3;
+      let rev = false;
+      if (!closed) {
+        if (zig) rev = b.y > a.y + 1 || (Math.abs(b.y - a.y) <= 1 && b.x < a.x);
+        else if (Math.abs(b.y - a.y) > Math.abs(b.x - a.x)) rev = b.y < a.y;
+        else rev = b.x < a.x;
+      }
+      Object.assign(s, { L, rev, from: rev ? b : a, to: rev ? a : b, left: s.el.getBBox().x });
+    });
+    strokes.sort((m, n) => m.left - n.left);
+    /* the pen's journey: strokes at writing speed, the lifted pen crossing
+       to the next start a little faster */
+    const LIFT = 2.4, legs = [];
+    let cost = 0, prev = null;
+    strokes.forEach((s) => {
+      if (prev) { const d = Math.hypot(s.from.x - prev.x, s.from.y - prev.y) / LIFT; legs.push({ write: false, a: prev, b: s.from, c0: cost, c1: cost + d }); cost += d; }
+      legs.push({ write: true, s, c0: cost, c1: cost + s.L }); cost += s.L;
+      prev = s.to;
+    });
+    /* the nib, sized in screen pixels whatever the logo's size */
+    const NS = 'http://www.w3.org/2000/svg', upp = 2364 / Math.max(1, svg.getBoundingClientRect().width);
+    const halo = document.createElementNS(NS, 'circle'), nib = document.createElementNS(NS, 'circle');
+    for (const [c, r] of [[halo, 5.5], [nib, 1.9]]) { c.setAttribute('r', String(r * upp)); c.setAttribute('fill', '#306AB3'); c.setAttribute('opacity', '0'); }
+    svg.append(halo, nib);
+    const place = (pt) => { for (const c of [halo, nib]) { c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); } };
+    const pen = { c: 0 };
+    function render() {
+      const c = pen.c;
+      for (const g of legs) if (g.write) { const done = Math.min(g.s.L, Math.max(0, c - g.c0)); g.s.el.style.strokeDashoffset = g.s.rev ? -(g.s.L - done) : g.s.L - done; }
+      const g = legs.find((l) => c <= l.c1) || legs[legs.length - 1];
+      if (g.write) { const done = Math.min(g.s.L, Math.max(0, c - g.c0)); place(g.s.el.getPointAtLength(g.s.rev ? g.s.L - done : done)); halo.setAttribute('r', String(5.5 * upp)); }
+      else { const t = (c - g.c0) / Math.max(1e-6, g.c1 - g.c0); place({ x: g.a.x + (g.b.x - g.a.x) * t, y: g.a.y + (g.b.y - g.a.y) * t });
+        halo.setAttribute('r', String((5.5 + 2.5 * Math.sin(Math.PI * t)) * upp)); }   /* the pen lifts */
+    }
+    /* armed: the word unwritten, the figures waiting */
+    strokes.forEach((s) => { s.el.style.strokeDasharray = `${s.L} ${s.L}`; s.el.style.strokeDashoffset = s.rev ? -s.L : s.L; });
+    place(strokes[0].from);
+    gsap.set([fj, fm], { opacity: 0, y: 46 });
+    const W = 1.7;
+    gsap.timeline({ paused: true, scrollTrigger: { trigger: svg, start: 'top 92%', once: true } })
+      .to(fj, { opacity: 1, y: 0, duration: 0.8, ease: EASE }, 0)
+      .to(fm, { opacity: 1, y: 0, duration: 0.8, ease: EASE }, 0.12)
+      .to([nib, halo], { attr: { opacity: (i) => (i ? 0.16 : 1) }, duration: 0.2, ease: 'none' }, 0.22)
+      .to(pen, { c: cost, duration: W, ease: 'none', onUpdate: render }, 0.3)
+      .to([nib, halo], { attr: { opacity: 0 }, duration: 0.3, ease: 'none' }, 0.3 + W);
   });
 }
 

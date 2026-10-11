@@ -1,5 +1,6 @@
 ---
 import '../styles/chalk.css';
+import Logo from '../components/chalk/Logo.astro';
 import { site } from '../data/content';
 import { pages, href, nextOf, IMG } from '../data/chalk';
 
@@ -101,7 +102,8 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
 
   <footer class="billing">
     <div class="wrap">
-      <a class="billing__mark" href={href()} aria-label="JMD Consulting, home"><img src={`${IMG}/jmd-logo.svg`} width="296" height="115" alt="JMD Consulting" loading="lazy" /></a>
+      {/* inline, so the pen can sign it off as the footer arrives */}
+      <a class="billing__mark" href={href()} aria-label="JMD Consulting, home" data-sign><Logo id="foot" class="mk" decorative /></a>
       <div class="billing__cols">
         <div>
           <h3 class="mono">Practice</h3>

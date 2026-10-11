@@ -61,13 +61,13 @@ const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-w
           <textarea id="e-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger…"></textarea>
           <p class="err mono" id="e-detail-err"><Fragment set:html={err} />Tell us briefly what is happening</p>
         </div>
-        <button class="btn" type="submit" data-magnetic>Send enquiry
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        <button class="btn btn--send" type="submit" data-magnetic><span class="btn__l">Send enquiry
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span><svg class="btn__tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.6 10 17l8.5-9.5"/></svg>
         </button>
         <p class="mono enq__note">Replies come from a consultant directly, usually the same working day.</p>
         <div class="sent" role="status">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="tick" d="M2.5 8.4 6.2 12l7.3-8"/></svg>
-          <p>Enquiry recorded. <span style="color:var(--on-ink-dim)">{contact.demoNotice}</span></p>
+          <p><b>Enquiry recorded.</b> <span>{contact.demoNotice}</span></p>
         </div>
       </form>
     </div>

@@ -208,14 +208,13 @@ import { href, IMG } from '../data/chalk';
           <textarea id="a-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger&hellip;"></textarea>
           <p class="err mono" id="a-detail-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Tell us briefly what is happening</p>
         </div>
-        <button class="btn" type="submit">
-          Send enquiry
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        <button class="btn btn--send" type="submit"><span class="btn__l">Send enquiry
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span><svg class="btn__tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.6 10 17l8.5-9.5"/></svg>
         </button>
         <p class="mono enq__note">Replies come from a consultant directly, usually the same working day.</p>
         <div class="sent" role="status">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8.4 6.2 12l7.3-8"/></svg>
-          <p>Enquiry recorded. <span style="color:var(--on-ink-dim)">Demonstration only — this concept is not yet wired to a mailbox.</span></p>
+          <p><b>Enquiry recorded.</b> <span>Demonstration only — this concept is not yet wired to a mailbox.</span></p>
         </div>
       </form>
     </div>

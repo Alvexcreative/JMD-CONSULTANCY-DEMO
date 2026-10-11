@@ -22,19 +22,21 @@ import { IMG } from '../data/chalk';
       </div>
       <div class="indent">
         <div>
-          <div class="wire" role="img" aria-label="CODA / Unit4 Financials and NetSuite connect through systems integration to Microsoft SQL Server and Oracle.">
+          {/* each system can be selected (hover, focus or tap) to trace its
+              route through the integration; its line is quoted below */}
+          <div class="wire" role="group" aria-labelledby="fit-h" aria-describedby="wire-note">
             <svg class="wire__svg" aria-hidden="true"></svg>
             <div class="wire__row wire__row--top">
-              <div class="node"><span class="mono">Finance system</span><b>CODA / Unit4 Financials&reg;</b></div>
-              <div class="node"><span class="mono">Finance system</span><b>NetSuite&reg;</b></div>
+              {systems.list.slice(0, 2).map((s) => <button type="button" class="node" data-note={s.note} aria-pressed="false"><span class="mono">Finance system</span><b>{s.name}</b></button>)}
             </div>
-            <div class="wire__hub"><div class="node"><span class="mono">JMD Consulting</span><b>Systems integration</b></div></div>
+            <div class="wire__hub"><button type="button" class="node" data-note={systems.notes[0]} aria-pressed="false"><span class="mono">JMD Consulting</span><b>Systems integration</b></button></div>
             <div class="wire__row wire__row--bot">
-              <div class="node"><span class="mono">Database</span><b>Microsoft SQL Server&reg;</b></div>
-              <div class="node"><span class="mono">Database</span><b>Oracle&reg;</b></div>
+              {systems.list.slice(2).map((s) => <button type="button" class="node" data-note={s.note} aria-pressed="false"><span class="mono">Database</span><b>{s.name}</b></button>)}
             </div>
           </div>
+          <p class="wire__note" id="wire-note" aria-live="polite"><span class="mono wire__who">Trace a route</span><span class="wire__say">Select a system to see where it connects.</span></p>
           <p class="mono wire__cap">Systems worked with in delivery</p>
+          <script src="../scripts/chalk/wire.js"></script>
         </div>
       </div>
     </div>

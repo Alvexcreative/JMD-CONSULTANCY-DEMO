@@ -1,6 +1,6 @@
 # JMD Consulting
 
-The JMD Consulting website: the Chalk design, built as a ten-page Astro site in
+The JMD Consulting website: the Chalk design, built as a five-page Astro site in
 `site/`.
 
 ```bash
@@ -45,9 +45,16 @@ GSAP 3.15 (ScrollTrigger, SplitText, MotionPath), in
 - *On scroll* — headings rise line by line from their own masks; photographs are
   uncovered by a rising mask and drift against the scroll; hairlines draw; the
   Services numeral and spine track the chapter; the statement inks in word by
-  word; the systems diagram wires itself up and carries data packets; the reach
-  rings expand from Harrogate; the figures wind up on odometers; the timeline
-  draws and lights each year.
+  word; the systems diagram wires itself up and carries data packets; the
+  figures wind up on odometers; the timeline draws and lights each year; as the
+  footer arrives, one pen signs the wordmark off, stroke by stroke.
+- *Systems diagram* (`src/scripts/chalk/wire.js`) — each card can be selected
+  (hover, keyboard focus, or a tap that holds it): its route is traced outward
+  through the integration, a packet runs it while held, the cards it does not
+  reach step back, and its line from the live site is quoted beneath.
+- *Enquiry* — a wrong field's message slides in and, on a send, the wrong
+  fields shake; a good send closes the button to a tick, then the form gives
+  way to the confirmation, line by line.
 - *Feedback* — the docking rail's magnetic pull, button sheen, magnetic calls to
   action, underlines that draw, a reading-progress hairline, a header that steps
   aside on the way down.

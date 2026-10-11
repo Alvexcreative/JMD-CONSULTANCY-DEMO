@@ -123,14 +123,23 @@ document.querySelectorAll('.btn').forEach((b) => {
 })();
 
 /* ── Enquiry forms: validate on the way, confirm on send (demonstration:
-      nothing leaves the page) ── */
+      nothing leaves the page). A field that becomes wrong has its message
+      slide in; a send with wrong fields gives each of them a small shake.
+      A good send turns the button into a tick, then the form gives way to
+      the confirmation, line by line. Under reduced motion all of it is
+      instant. ── */
 document.querySelectorAll('form[data-enquiry]').forEach((form) => {
+  const motion = !still && typeof form.animate === 'function';
+  const EASE = 'cubic-bezier(.16,1,.3,1)', SWAY = 'cubic-bezier(.65,0,.35,1)';
+  let busy = false;
   function check(f) {
     const c = f.querySelector('input,select,textarea');
     const ok = c.checkValidity() && c.value.trim() !== '';
+    const was = f.getAttribute('data-invalid') === 'true';
     f.setAttribute('data-invalid', ok ? 'false' : 'true');
     c.setAttribute('aria-invalid', ok ? 'false' : 'true');
     if (ok) c.removeAttribute('aria-describedby'); else c.setAttribute('aria-describedby', c.id + '-err');
+    if (!ok && !was && motion) f.querySelector('.err')?.animate([{ opacity: 0, transform: 'translateY(-5px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: EASE });
     return ok;
   }
   form.querySelectorAll('[data-field]').forEach((f) => {
@@ -140,12 +149,59 @@ document.querySelectorAll('form[data-enquiry]').forEach((form) => {
   });
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    let bad = null;
-    form.querySelectorAll('[data-field]').forEach((f) => { if (!check(f) && !bad) bad = f; });
-    if (bad) { bad.querySelector('input,select,textarea').focus(); return; }
-    form.setAttribute('data-sent', 'true');
-    const sent = form.querySelector('.sent');
-    if (sent) { sent.setAttribute('tabindex', '-1'); sent.focus({ preventScroll: true }); }
-    form.dispatchEvent(new CustomEvent('enquiry:sent', { bubbles: true }));
+    if (busy) return;
+    const bad = [...form.querySelectorAll('[data-field]')].filter((f) => !check(f));
+    if (bad.length) {
+      if (motion) bad.forEach((f) => f.querySelector('input,select,textarea').animate(
+        [{ transform: 'none' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(-3px)' }, { transform: 'translateX(1.5px)' }, { transform: 'none' }],
+        { duration: 420, easing: 'ease-out' }));
+      bad[0].querySelector('input,select,textarea').focus();
+      return;
+    }
+    busy = true;
+    (motion ? sending() : Promise.resolve()).then(sent);
   });
+
+  /* the button closes to a circle and a tick is drawn in it */
+  async function sending() {
+    const btn = form.querySelector('.btn--send');
+    if (!btn) return;
+    const lbl = btn.querySelector('.btn__l'), tick = btn.querySelector('.btn__tick');
+    const w = btn.offsetWidth, h = btn.offsetHeight;
+    btn.setAttribute('aria-disabled', 'true');
+    btn.classList.add('is-sending');
+    btn.style.justifySelf = Math.abs(w - form.clientWidth) < 2 ? 'center' : 'start';   /* full width on a phone: close to the middle */
+    lbl.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(10px)' }], { duration: 220, easing: 'ease-in', fill: 'forwards' });
+    await btn.animate([{ width: `${w}px`, borderRadius: '2px' }, { width: `${h}px`, borderRadius: `${h / 2}px` }],
+      { duration: 560, delay: 140, easing: SWAY, fill: 'forwards' }).finished;
+    tick.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, fill: 'forwards' });
+    await tick.querySelector('path').animate([{ strokeDashoffset: 20 }, { strokeDashoffset: 0 }], { duration: 440, easing: SWAY, fill: 'forwards' }).finished;
+    await new Promise((r) => setTimeout(r, 380));
+    /* the form steps away */
+    const rest = [...form.children].filter((c) => !c.classList.contains('sent'));
+    await Promise.all(rest.map((c, i) => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
+      { duration: 280, delay: i * 30, easing: 'ease-in', fill: 'forwards' }).finished));
+  }
+
+  /* the confirmation takes the form's place, line by line */
+  function sent() {
+    const h0 = form.offsetHeight;
+    form.setAttribute('data-sent', 'true');
+    form.dispatchEvent(new CustomEvent('enquiry:sent', { bubbles: true }));
+    const box = form.querySelector('.sent');
+    if (!box) return;
+    box.setAttribute('tabindex', '-1');
+    if (motion) {
+      const h1 = form.offsetHeight;
+      form.animate([{ height: `${h0}px` }, { height: `${h1}px` }], { duration: 520, easing: SWAY });
+      box.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 260, easing: EASE, fill: 'backwards' });
+      box.querySelector('.tick')?.animate([{ strokeDashoffset: 20 }, { strokeDashoffset: 0 }], { duration: 480, delay: 480, easing: SWAY, fill: 'backwards' });
+      box.querySelectorAll('p > *').forEach((l, i) => l.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }],
+        { duration: 620, delay: 520 + i * 120, easing: EASE, fill: 'backwards' }));
+    }
+    const r = box.getBoundingClientRect();
+    const away = r.top < 70 || r.bottom > innerHeight;
+    box.focus({ preventScroll: true });
+    if (away) box.scrollIntoView({ block: 'center', behavior: motion ? 'smooth' : 'auto' });
+  }
 });
