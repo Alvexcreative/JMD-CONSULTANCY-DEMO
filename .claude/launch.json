@@ -12,6 +12,17 @@
       "url": "http://localhost:8750"
     },
     {
+      "name": "chalk-original",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "chalk-dev.py",
+        "8755",
+        "08-chalk-original.html"
+      ],
+      "port": 8755,
+      "url": "http://localhost:8755"
+    },
+    {
       "name": "jmd-site",
       "runtimeExecutable": "npm",
       "runtimeArgs": [

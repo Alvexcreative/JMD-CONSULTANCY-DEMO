@@ -46,7 +46,9 @@
   --field:rgba(255,255,255,.72); --field-hi:#FFFFFF; --mark-ink:#2A4258;
   /* image tints, deliberately NOT re-stated per scheme: the photographs
      should look identical whichever palette is on */
-  --img-tint-rgb:220,230,242; --duo-ink:#13283F;
+  --img-tint-rgb:220,230,242;
+  /* the veil's own mid-stop, and how strongly the light sheen reads */
+  --veil-mid-rgb:224,233,240; --sheen-a:1; --veil-k:1;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 
@@ -68,6 +70,7 @@
    image treatments have to be told to stop multiplying: multiply against
    a near-black ground crushes every photograph to nothing. */
 [data-scheme="2"]{
+  --veil-mid-rgb:24,29,36; --sheen-a:1; --veil-k:.74;
   --field:rgba(228,233,239,.08); --field-hi:rgba(228,233,239,.14); --mark-ink:#E4E9EF;
   --paper:#0C0E11;   --paper-rgb:12,14,17;      --paper-2:#14181D;
   --ink:#15191E;     --ink-rgb:21,25,30;        --ink-2:#1C2127; --ink-3:#252B33;
@@ -123,11 +126,11 @@ p{margin:0}
 .hero{position:relative;background:var(--ink);color:var(--on-ink);overflow:hidden;
   padding-block:clamp(62px,11vh,132px) clamp(60px,10vh,120px);--mx:50%;--my:42%}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(112deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.26) 28%,transparent 56%)}
+  background:linear-gradient(112deg,rgba(255,255,255,calc(.78 * var(--sheen-a,1))) 0%,rgba(255,255,255,calc(.26 * var(--sheen-a,1))) 28%,transparent 56%)}
 .hero::after{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:1;
   background:
-    radial-gradient(640px 540px at var(--mx) var(--my),rgba(255,255,255,.7),transparent 62%),
-    linear-gradient(112deg,transparent 58%,rgba(120,150,172,.22) 100%)}
+    radial-gradient(640px 540px at var(--mx) var(--my),rgba(255,255,255,calc(.7 * var(--sheen-a,1))),transparent 62%),
+    linear-gradient(112deg,transparent 58%,rgba(120,150,172,calc(.22 * var(--sheen-a,1))) 100%)}
 .room{position:relative;z-index:3;display:grid;gap:clamp(40px,6vw,86px);align-items:center}
 @media(min-width:960px){.room{grid-template-columns:minmax(0,.92fr) minmax(0,1fr)}}
 .room__obj{justify-self:center}
@@ -280,21 +283,21 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
 .hero__veil{z-index:2}
 .hero__veil{position:absolute;inset:0;pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(var(--ink-rgb),.55) 0,rgba(var(--ink-rgb),0) 18%),
+    linear-gradient(180deg,rgba(var(--ink-rgb),calc(.55 * var(--veil-k,1))) 0,rgba(var(--ink-rgb),0) 18%),
     linear-gradient(90deg,
-      rgba(var(--ink-rgb),calc(.95 * var(--veil,1))) 0%,
-      rgba(var(--ink-rgb),calc(.92 * var(--veil,1))) 30%,
-      rgba(var(--ink-rgb),calc(.80 * var(--veil,1))) 42%,
-      rgba(224,233,240,calc(.46 * var(--veil,1))) 54%,
-      rgba(var(--ink-rgb),calc(.12 * var(--veil,1))) 66%,
+      rgba(var(--ink-rgb),calc(.95 * var(--veil,1) * var(--veil-k,1))) 0%,
+      rgba(var(--ink-rgb),calc(.92 * var(--veil,1) * var(--veil-k,1))) 30%,
+      rgba(var(--ink-rgb),calc(.80 * var(--veil,1) * var(--veil-k,1))) 42%,
+      rgba(var(--veil-mid-rgb),calc(.46 * var(--veil,1) * var(--veil-k,1))) 54%,
+      rgba(var(--ink-rgb),calc(.12 * var(--veil,1) * var(--veil-k,1))) 66%,
       rgba(var(--ink-rgb),0) 76%),
-    linear-gradient(0deg,rgba(var(--ink-rgb),.5) 0,rgba(var(--ink-rgb),0) 22%)}
+    linear-gradient(0deg,rgba(var(--ink-rgb),calc(.5 * var(--veil-k,1))) 0,rgba(var(--ink-rgb),0) 22%)}
 .hero--photo{background:transparent}
-.hero--photo::before{background:linear-gradient(112deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,0) 40%)}
-.hero--photo::after{background:radial-gradient(560px 480px at var(--mx) var(--my),rgba(255,255,255,.38),transparent 62%)}
+.hero--photo::before{background:linear-gradient(112deg,rgba(255,255,255,calc(.34 * var(--sheen-a,1))) 0%,rgba(255,255,255,0) 40%)}
+.hero--photo::after{background:radial-gradient(560px 480px at var(--mx) var(--my),rgba(255,255,255,calc(.38 * var(--sheen-a,1))),transparent 62%)}
 /* a hairline of ochre under the header ties the picture to the plate's rule */
 .hero--photo .hero__rule{position:absolute;left:0;right:0;bottom:0;height:2px;z-index:2;
-  background:linear-gradient(90deg,var(--ochre) 0,var(--ochre) 18%,rgba(185,130,42,0) 60%)}
+  background:linear-gradient(90deg,var(--ochre) 0,var(--ochre) 18%,transparent 60%)}
 @media(min-width:960px){
   .hero--photo .room{width:100%;grid-template-columns:minmax(0,min(620px,44vw));gap:clamp(28px,3.4vw,44px)}
   .hero--photo .room__obj{justify-self:start}
@@ -308,16 +311,16 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
      the rail, and each label carries a faint chalk halo that keeps it crisp
      where it crosses busy glass. past the hero it docks onto paper as before. */
   .hero-photo-on .hero__veil{background:
-    linear-gradient(270deg,rgba(var(--ink-rgb),calc(.74 * var(--veil,1))) 0,rgba(var(--ink-rgb),calc(.64 * var(--veil,1))) 10%,rgba(var(--ink-rgb),calc(.5 * var(--veil,1))) 21%,rgba(var(--ink-rgb),calc(.2 * var(--veil,1))) 28%,rgba(var(--ink-rgb),0) 35%),
-    linear-gradient(180deg,rgba(var(--ink-rgb),.55) 0,rgba(var(--ink-rgb),0) 18%),
+    linear-gradient(270deg,rgba(var(--ink-rgb),calc(.74 * var(--veil,1) * var(--veil-k,1))) 0,rgba(var(--ink-rgb),calc(.64 * var(--veil,1) * var(--veil-k,1))) 10%,rgba(var(--ink-rgb),calc(.5 * var(--veil,1) * var(--veil-k,1))) 21%,rgba(var(--ink-rgb),calc(.2 * var(--veil,1) * var(--veil-k,1))) 28%,rgba(var(--ink-rgb),0) 35%),
+    linear-gradient(180deg,rgba(var(--ink-rgb),calc(.55 * var(--veil-k,1))) 0,rgba(var(--ink-rgb),0) 18%),
     linear-gradient(90deg,
-      rgba(var(--ink-rgb),calc(.95 * var(--veil,1))) 0%,
-      rgba(var(--ink-rgb),calc(.92 * var(--veil,1))) 30%,
-      rgba(var(--ink-rgb),calc(.80 * var(--veil,1))) 42%,
-      rgba(224,233,240,calc(.46 * var(--veil,1))) 54%,
-      rgba(var(--ink-rgb),calc(.12 * var(--veil,1))) 66%,
+      rgba(var(--ink-rgb),calc(.95 * var(--veil,1) * var(--veil-k,1))) 0%,
+      rgba(var(--ink-rgb),calc(.92 * var(--veil,1) * var(--veil-k,1))) 30%,
+      rgba(var(--ink-rgb),calc(.80 * var(--veil,1) * var(--veil-k,1))) 42%,
+      rgba(var(--veil-mid-rgb),calc(.46 * var(--veil,1) * var(--veil-k,1))) 54%,
+      rgba(var(--ink-rgb),calc(.12 * var(--veil,1) * var(--veil-k,1))) 66%,
       rgba(var(--ink-rgb),0) 76%),
-    linear-gradient(0deg,rgba(var(--ink-rgb),.5) 0,rgba(var(--ink-rgb),0) 22%)}
+    linear-gradient(0deg,rgba(var(--ink-rgb),calc(.5 * var(--veil-k,1))) 0,rgba(var(--ink-rgb),0) 22%)}
   .hero-photo-on .sn--dock a{color:var(--on-ink)}
   html:not(.past-hero) .hero-photo-on .sn--dock .t,
   html:not(.past-hero) .hero-photo-on .sn--dock .n{
@@ -331,10 +334,10 @@ html.past-hero .sn--dock .t{font-size:.95rem;letter-spacing:0}
   .hero--photo .hero__img{object-position:var(--mx-fx,var(--fx,70%)) var(--mx-fy,60%)}
   .hero--photo .hero__veil{background:
     linear-gradient(180deg,
-      rgba(var(--ink-rgb),calc(.95 * var(--veil,1))) 0%,
-      rgba(var(--ink-rgb),calc(.92 * var(--veil,1))) 46%,
-      rgba(226,234,240,calc(.62 * var(--veil,1))) 58%,
-      rgba(var(--ink-rgb),calc(.12 * var(--veil,1))) 72%,
+      rgba(var(--ink-rgb),calc(.95 * var(--veil,1) * var(--veil-k,1))) 0%,
+      rgba(var(--ink-rgb),calc(.92 * var(--veil,1) * var(--veil-k,1))) 46%,
+      rgba(226,234,240,calc(.62 * var(--veil,1) * var(--veil-k,1))) 58%,
+      rgba(var(--ink-rgb),calc(.12 * var(--veil,1) * var(--veil-k,1))) 72%,
       rgba(var(--ink-rgb),0) 82%)}
   .hero.hero--photo{min-height:calc(100svh - 71px);display:grid;align-content:start;
     padding-top:clamp(32px,6vh,64px)}
@@ -389,9 +392,6 @@ html.intro-on .hp{opacity:0}
 
 /* duotone: grey image multiplied onto chalk (highlights become chalk), then
    navy lightened in underneath (blacks lift to navy, never to black) */
-.duo{background:var(--ink-2);isolation:isolate}
-.duo img{filter:grayscale(1) contrast(1.06) brightness(1.12);mix-blend-mode:multiply}
-.duo::after{content:"";position:absolute;inset:0;pointer-events:none;background:var(--duo-ink);mix-blend-mode:lighten}
 
 /* ── Note 2 plate ──────────────────────────────────────────────────────── */
 .n2-plate{grid-area:photo;margin:0;position:relative;overflow:hidden;background:var(--ink-2)}
@@ -443,9 +443,6 @@ html.intro-on .hp{opacity:0}
 .n3-photo::after,.n3-edge::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(var(--img-tint-rgb),.16);mix-blend-mode:multiply}
 .n3-photo::before{content:"";position:absolute;left:0;bottom:0;z-index:2;width:clamp(80px,22%,200px);height:2px;background:var(--ochre)}
 .n3-edge{display:none}
-[data-look="3"] .n3-photo,[data-look="3"] .n3-edge{background:var(--ink-2);isolation:isolate}
-[data-look="3"] .n3-photo img,[data-look="3"] .n3-edge img{filter:grayscale(1) contrast(1.06) brightness(1.12);mix-blend-mode:multiply}
-[data-look="3"] .n3-photo::after,[data-look="3"] .n3-edge::after{background:var(--duo-ink);mix-blend-mode:lighten}
 
 /* 1 · Portrait */
 @media(min-width:960px){
@@ -484,14 +481,10 @@ html.intro-on .hp{opacity:0}
 }
 
 /* 3 · Duotone */
-[data-look="3"] .n2-plate{display:none}
-[data-look="3"] .n2-band{display:block}
 @media(min-width:1100px){
-  [data-look="3"] .n2-band__veil{background:
     linear-gradient(90deg,rgba(var(--paper-rgb),.9) 0,rgba(var(--paper-rgb),.55) 22%,rgba(var(--paper-rgb),0) 46%,rgba(var(--paper-rgb),0) 74%,rgba(var(--paper-rgb),.75) 100%),
     linear-gradient(0deg,var(--paper) 0,rgba(var(--paper-rgb),0) 30%)}
 }
-[data-look="3"] .hero__veil{--veil:.9}
 
 
 /* ── Note 1: Solutions & Services — the three disciplines as a ruled schedule.
@@ -1662,8 +1655,7 @@ html.intro-on .room__card .mk{visibility:hidden}
    <body>, and delete this script and the .hp styles. */
 (function(){
   var HEROES = {
-    A: {file:'hero-01.jpg', name:'Single glass tower',         fx:'72%', fy:'50%', mfx:'66%', mfy:'45%', veil:1},
-    B: {file:'hero-02.jpg', name:'Towers converging overhead', fx:'60%', fy:'50%', mfx:'56%', mfy:'60%', veil:1.06}
+    A: {file:'hero-01.jpg', name:'Single glass tower', fx:'72%', fy:'50%', mfx:'66%', mfy:'45%', veil:1}
   };
   var LOOKS = {1:'Editorial', 3:'Duotone'};
   var N3 = {1:'Portrait beside the text', 2:'Full bleed under the veil'};
@@ -1672,8 +1664,7 @@ html.intro-on .room__card .mk{visibility:hidden}
      under the veil) and the mark on option 4 (side lockup); both are now
      fixed on <body> and their losing rules are gone from the stylesheet. */
   var VIEWS = [
-    {id:'A1', kind:'hero', hero:'A', look:1},
-    {id:'B3', kind:'hero', hero:'B', look:3}
+    {id:'A1', kind:'hero', hero:'A', look:1}
   ];
 
   var BASE = '../assets/heroes/08-options/', KEY = 'jmd-08-view', KEY3 = 'jmd-08-n3', KEYM = 'jmd-08-mk';
@@ -1769,6 +1760,9 @@ html.intro-on .room__card .mk{visibility:hidden}
 
   var arrow = function(d){ return '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>'; };
   var bar = document.createElement('div');
+  /* With a single hero there is nothing to step through, so the picker is
+     not built at all. It returns the moment another view is added back. */
+  if (VIEWS.length < 2) return;
   bar.className = 'hp'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Layout options');
   bar.innerHTML =
     '<button type="button" data-step="-1" aria-label="Previous option">' + arrow('M10 3 5 8l5 5') + '</button>' +
@@ -1802,8 +1796,7 @@ html.intro-on .room__card .mk{visibility:hidden}
 
   var q0 = new URLSearchParams(location.search), ids = VIEWS.map(function(v){ return v.id; });
   var want = (q0.get('view') || '').toUpperCase();
-  if(['A1','B3'].indexOf(want) < 0){ try{ want = localStorage.getItem(KEY) || 'A1'; }catch(e){ want = 'A1'; } }
-  if(['A1','B3'].indexOf(want) < 0) want = 'A1';
+  want = 'A1';
   show(ids.indexOf(want));
 })();
 </script>

@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
-"""Dev server for concept 08 (Chalk), on its own port.
+"""Dev server for a single concept, on its own port.
 
-Serves the real file — concepts/08-chalk.html — not a copy, so changes
-here are changes to the concept itself. Watches that file and the shared
-assets it depends on, and reloads the browser when any of them change.
+Serves the real file rather than a copy, so changes here are changes to
+the concept itself. Watches that file plus the shared assets it depends
+on and reloads the browser when any of them change.
 
-    python3 chalk-dev.py [port]        default 8750
+    python3 chalk-dev.py [port] [file]
+
+    python3 chalk-dev.py                       8750, 08-chalk.html
+    python3 chalk-dev.py 8755 08-chalk-original.html
 """
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import json, sys, threading, time
 
 ROOT = Path(__file__).parent.resolve()
-ENTRY = "/concepts/08-chalk.html"
+ENTRY = "/concepts/" + (sys.argv[2] if len(sys.argv) > 2 else "08-chalk.html")
 
 # Only these are watched; the other concepts are irrelevant to this server.
 WATCH = [
-    ROOT / "concepts/08-chalk.html",
+    ROOT / ENTRY.lstrip("/"),
     ROOT / "shared/review.css",
     ROOT / "shared/review.js",
 ]
@@ -63,7 +66,7 @@ class Handler(SimpleHTTPRequestHandler):
 
         # Serve the entry page with the reload listener appended.
         if self.path.split("?")[0] in (ENTRY, "/", "/index.html"):
-            target = ROOT / "concepts/08-chalk.html"
+            target = ROOT / ENTRY.lstrip("/")
             if target.exists():
                 body = target.read_bytes()
                 # The concept switcher belongs to the multi-concept server;
@@ -100,7 +103,7 @@ if __name__ == "__main__":
         print("  warning — not found, so not watched: " + ", ".join(missing))
     srv = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     srv.daemon_threads = True
-    print(f"Chalk dev server  ->  http://localhost:{port}/")
-    print(f"  serving          {ROOT / 'concepts/08-chalk.html'}")
+    print(f"Dev server  ->  http://localhost:{port}/   ({ENTRY})")
+    print(f"  serving          {ROOT / ENTRY.lstrip(chr(47))}")
     print(f"  live reload on   {', '.join(str(p.relative_to(ROOT)) for p in WATCH if p.exists())}")
     srv.serve_forever()
