@@ -53,13 +53,13 @@ function entrance() {
   if (!head) return;
   const tl = gsap.timeline({ defaults: { ease: EASE } });
   const img = head.querySelector('.hero__img');
-  if (img) tl.fromTo(img, { scale: 1.14, filter: 'blur(6px)' }, { scale: 1, filter: 'blur(0px)', duration: 2.2, ease: 'power3.out' }, 0);
+  if (img) tl.fromTo(img, { scale: 1.06 }, { scale: 1, duration: 1.4, ease: 'power3.out' }, 0);
   const bar = head.querySelector('.phead__ref .bar');
-  if (bar) tl.from(bar, { scaleX: 0, duration: 0.9 }, 0.1);
-  tl.from(head.querySelectorAll('.phead__ref > :not(.bar)'), { opacity: 0, x: -8, duration: 0.8, stagger: 0.06 }, 0.18);
+  if (bar) tl.from(bar, { scaleX: 0, duration: 0.6 }, 0);
+  tl.from(head.querySelectorAll('.phead__ref > :not(.bar)'), { opacity: 0, x: -6, duration: 0.5, stagger: 0.04 }, 0.02);
   const h = head.querySelector('[data-split]');
-  if (h && h._split) tl.to(h._split.lines, { yPercent: 0, duration: 1.25, stagger: 0.1 }, 0.25);
-  tl.from(head.querySelectorAll('.phead__lede, .phead__acts'), { opacity: 0, y: 18, duration: 1, stagger: 0.12 }, 0.6);
+  if (h && h._split) tl.to(h._split.lines, { yPercent: 0, duration: 0.75, stagger: 0.05 }, 0.02);
+  tl.from(head.querySelectorAll('.phead__lede, .phead__acts'), { opacity: 0, y: 10, duration: 0.6, stagger: 0.06 }, 0.12);
   /* afterwards the photograph drifts slower than the page */
   if (img) gsap.to(img, { yPercent: 9, ease: 'none', scrollTrigger: { trigger: head, start: 'top top', end: 'bottom top', scrub: true } });
 }

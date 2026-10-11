@@ -677,11 +677,12 @@ html.intro-on .room__card .mk{visibility:hidden}
 .filing{view-transition-name:filing}
 .sn--dock{view-transition-name:rail}
 .progress{view-transition-name:progress}
-::view-transition-group(filing),::view-transition-group(rail),::view-transition-group(progress){animation-duration:.5s}
-::view-transition-old(root){animation:vt-out .34s cubic-bezier(.55,0,1,.45) both}
-::view-transition-new(root){animation:vt-in .7s var(--ease) .12s both}
-@keyframes vt-out{to{opacity:0;transform:translateY(-18px) scale(.992);filter:blur(5px)}}
-@keyframes vt-in{from{opacity:0;transform:translateY(22px)}}
+/* routine navigation: quick and overlapping, so a click answers at once */
+::view-transition-group(filing),::view-transition-group(rail),::view-transition-group(progress){animation-duration:.25s}
+::view-transition-old(root){animation:vt-out .18s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vt-in .32s var(--ease) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-8px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
 }

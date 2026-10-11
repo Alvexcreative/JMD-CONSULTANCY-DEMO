@@ -4,6 +4,8 @@ export default defineConfig({
   site: 'https://www.jmdconsulting.co.uk',
   compressHTML: false,
   devToolbar: { enabled: false },
+  /* every internal link prefetches its page on hover or focus */
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   /* addresses from before the site moved to the root keep working */
   redirects: {
     '/chalk': '/',
