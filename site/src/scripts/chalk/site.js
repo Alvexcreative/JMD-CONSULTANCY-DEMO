@@ -144,6 +144,22 @@ document.querySelectorAll('.btn').forEach((b) => {
   }
 })();
 
+/* ── The phone's permanent enquiry button steps aside only where the page
+      already offers the same action in full: the closing invitation on an
+      inner page, and the enquiry form at the foot of Home. ── */
+(function () {
+  const dock = document.querySelector('[data-dock]');
+  if (!dock) return;
+  const covers = [...document.querySelectorAll('.ask, .is-home #enquiry')];
+  if (!covers.length) return;
+  const seen = new Set();
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)));
+    dock.classList.toggle('is-away', seen.size > 0);
+  }, { threshold: 0.12 });
+  covers.forEach((c) => io.observe(c));
+})();
+
 /* ── Enquiry forms: validate on the way, confirm on send (demonstration:
       nothing leaves the page). A field that becomes wrong has its message
       slide in; a send with wrong fields gives each of them a small shake.

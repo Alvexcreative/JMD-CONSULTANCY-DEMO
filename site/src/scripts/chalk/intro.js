@@ -76,7 +76,7 @@ const ov = document.getElementById('intro');
   const t = document.createElement('div');
   t.className = 'intro__type';
   t.innerHTML = h.innerHTML;
-  for (const k of ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'color']) t.style[k] = cs[k];
+  for (const k of ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'color', 'textAlign']) t.style[k] = cs[k];
   /* the logo and headline are composed as they are on the hero: the pair
      is centred as one group, so the headline is written where it belongs
      in that group and the logo's space is waiting above it */

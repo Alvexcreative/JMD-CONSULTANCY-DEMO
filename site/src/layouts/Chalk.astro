@@ -17,6 +17,8 @@ const section = pages.find((p) => p.slug === page);
 const next = home ? null : nextOf(page);
 /* every page but Home and Enquiry closes on a way to get in touch */
 const ask = !home && page !== 'enquiry';
+/* on a phone the enquiry call is always to hand, except on Enquiry itself */
+const dock = page !== 'enquiry';
 const arrow = 'M2 8h11M9 4l4 4-4 4';
 ---
 <!doctype html>
@@ -155,6 +157,13 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
       </div>
     </div>
   </footer>
+
+  {dock && (
+    <div class="dock" data-dock>
+      <a class="btn dock__btn" href={href('enquiry')}>Describe your situation
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow} /></svg></a>
+    </div>
+  )}
 
   <!-- intro.js and hero.js stand down on pages without the intro or the
        home hero, so all four load everywhere and are cached once -->

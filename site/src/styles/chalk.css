@@ -1078,3 +1078,49 @@ p,li,dd,figcaption{text-wrap:pretty}
 .nw{white-space:nowrap}
 .hero > .wrap{width:100%}
 @media(max-width:1099px){.billing__cols > :first-child li{padding-block:6px}}
+
+/* ── Phone header, hero and enquiry dock ────────────────────────────────
+      The page links share the header evenly, centred in the space beside
+      the logo (on Home, until the hero's own logo has scrolled away, in
+      the whole bar). The home hero's words sit at the foot of the picture,
+      and "Describe your situation" is always to hand at the bottom of the
+      screen, stepping aside only where the page shows the same action in
+      full. ── */
+.dock{display:none}
+@media(max-width:720px){
+  :root{--bar:calc(74px + env(safe-area-inset-bottom,0px))}
+
+  .filing__in{gap:0}
+  .mark{margin-right:16px;max-width:140px;overflow:hidden;flex:none;
+    transition:max-width .5s var(--ease),margin .5s var(--ease),opacity .45s var(--ease),visibility .45s}
+  html.is-home:not(.past-hero) .filing .mark{max-width:0;margin-right:0}
+  .contents{flex:1 1 auto}
+  .contents:not(.is-over) ol{width:100%;justify-content:space-evenly}
+
+  .is-home .hero.hero--photo{align-content:end;padding-bottom:calc(var(--bar) + clamp(18px,4vh,32px))}
+  .is-home .hero--photo .hero__veil{background:
+    linear-gradient(0deg,
+      rgba(var(--ink-rgb),.95) 0%,
+      rgba(var(--ink-rgb),.92) 64%,
+      rgba(var(--veil-mid-rgb),.62) 74%,
+      rgba(var(--ink-rgb),.12) 86%,
+      rgba(var(--ink-rgb),0) 94%)}
+  .is-home .hero__acts,.phead__acts{display:none}
+  /* the words centred under the logo */
+  .is-home .hero--photo .room > :last-child{text-align:center}
+  .is-home .hero--photo .torchwrap .rh{margin-inline:auto}
+  .is-home .hero__sub{margin-inline:auto}
+  .is-home .hero__sys{justify-content:center}
+
+  .dock{display:block;position:fixed;left:0;right:0;bottom:0;z-index:45;view-transition-name:dock;
+    padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px));
+    background:rgba(var(--paper-rgb),.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-top:1px solid var(--rule-paper);box-shadow:0 -12px 28px -22px rgba(var(--on-ink-rgb),.45);
+    transition:transform .5s var(--ease),opacity .35s var(--ease)}
+  .dock .btn{width:100%;justify-content:center}
+  html.intro-on .dock,.dock.is-away{transform:translateY(110%);opacity:0;pointer-events:none}
+  body:has(.dock) .billing{padding-bottom:calc(34px + var(--bar))}
+}
+@media(max-width:499px){.mark{margin-right:12px}}
+@media(max-width:359px){.mark{margin-right:6px}}
+@media(max-width:720px) and (prefers-reduced-motion:reduce){.dock,.mark{transition:none}}
