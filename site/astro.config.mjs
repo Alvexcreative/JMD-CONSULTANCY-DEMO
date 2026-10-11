@@ -11,14 +11,17 @@ export default defineConfig({
     '/chalk': '/',
     '/chalk/services': '/services/',
     '/chalk/systems': '/systems/',
-    '/chalk/reach': '/reach/',
     '/chalk/evidence': '/evidence/',
-    '/chalk/notes': '/notes/',
     '/chalk/enquiry': '/enquiry/',
-    '/chalk/notes/solution-services': '/notes/solution-services/',
-    '/chalk/notes/coda-unit4-since-1990': '/notes/coda-unit4-since-1990/',
-    '/chalk/notes/harrogate-and-beyond': '/notes/harrogate-and-beyond/',
     '/concepts/08-chalk.html': '/',
+    /* Reach and Notes were removed in October 2026 */
+    '/reach': '/',
+    '/notes': '/',
+    '/notes/solution-services': '/',
+    '/notes/coda-unit4-since-1990': '/',
+    '/notes/harrogate-and-beyond': '/',
+    '/chalk/reach': '/',
+    '/chalk/notes': '/',
   },
   server: {
     // 4321 is the Alvex site, 4700 is the Valmoret demo — stay clear of both

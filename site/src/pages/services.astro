@@ -4,13 +4,12 @@ import PageHead from '../components/chalk/PageHead.astro';
 import { intro, statement, services, taglines } from '../data/content';
 import { href, IMG } from '../data/chalk';
 
-/* one photograph per chapter; the CODA chapter takes the ledgers, the
-   practice's history in one still life */
+/* one photograph per chapter */
 const art: Record<string, { src: string; alt: string }> = {
   'project-management': { src: 'gen/services-planning.jpg', alt: 'Two colleagues planning against a wall of printed project timelines.' },
   'systems-implementation': { src: 'gen/services-implementation.jpg', alt: 'A consultant at two monitors showing financial reporting dashboards.' },
   'etl-business-intelligence': { src: 'gen/services-bi.jpg', alt: 'Charts on a laptop beside printed financial reports and a pen.' },
-  'coda-unit4': { src: 'gen/evidence-ledgers.jpg', alt: 'Leather-bound ledgers stacked beside a modern laptop.' },
+  'coda-unit4': { src: 'gen/services-coda.jpg', alt: 'A consultant and a finance manager reviewing financial reporting on a monitor.' },
 };
 ---
 <Chalk page="services" title="Services" heroImage={`${IMG}/hero-15.jpg`}

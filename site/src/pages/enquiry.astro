@@ -5,11 +5,11 @@ import { contact, site, taglines } from '../data/content';
 import { IMG } from '../data/chalk';
 const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>';
 ---
-<Chalk page="enquiry" title="Enquiry" heroImage={`${IMG}/gen/enquiry-window.jpg`}
+<Chalk page="enquiry" title="Enquiry" heroImage={`${IMG}/gen/enquiry-meeting.jpg`}
   description="Tell JMD Consulting what your finance system is doing. Telephone +44 (0) 1423 884000 or email info@jmdconsulting.co.uk.">
 
-  <PageHead n={6} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-window.jpg`}
-    fx="66%" fy="50%" mfx="64%" mfy="62%" lede={contact.invitation} />
+  <PageHead n={4} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-meeting.jpg`}
+    fx="72%" fy="50%" mfx="76%" mfy="58%" lede={contact.invitation} />
 
   <section class="enq" id="enquiry" aria-labelledby="enq-h">
     <div class="wrap enq__in">
@@ -21,7 +21,6 @@ const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-w
             <dt>Telephone</dt><dd><a class="lnk" href={site.phoneHref}>{site.phone}</a></dd>
             <dt>Email</dt><dd><a class="lnk" href={`mailto:${site.email}`}>{site.email}</a></dd>
             <dt>Web</dt><dd>{site.web}</dd>
-            <dt>Base</dt><dd>{site.base}</dd>
           </dl>
         </div>
         <figure class="ph" data-reveal>
@@ -74,20 +73,4 @@ const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-w
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="find-h">
-    <div class="wrap">
-      <div class="sec__head">
-        <p class="mono sec__ref"><b>6.2</b>Find us</p>
-        <div>
-          <h2 id="find-h" data-split>Can do attitude.</h2>
-          <p class="sec__lede" data-rise>Based in Harrogate, North Yorkshire at the gateway to the Yorkshire Dales, we are a 20 minute drive from Leeds Bradford International Airport and 30 minutes from York railway station.</p>
-        </div>
-      </div>
-      <div class="indent">
-        <figure class="ph ph--wide" data-reveal>
-          <img src={`${IMG}/harrogate-03.jpg`} alt="Harrogate in morning light." width="2400" height="1339" loading="lazy" decoding="async" />
-        </figure>
-      </div>
-    </div>
-  </section>
 </Chalk>

@@ -852,28 +852,6 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 .pair{display:grid;gap:clamp(16px,2.4vw,32px);margin-top:clamp(40px,5vw,72px)}
 @media(min-width:760px){.pair{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
   .pair>:nth-child(2){margin-top:clamp(60px,9vw,140px)}}
-.trio{display:grid;gap:clamp(14px,2vw,26px);margin-top:clamp(40px,5vw,72px)}
-@media(min-width:760px){.trio{grid-template-columns:1.1fr .8fr 1fr;align-items:end}
-  .trio>:nth-child(2){margin-bottom:clamp(40px,6vw,96px)}}
-
-/* ── Reach: distance from Harrogate, as rings ── */
-.rings{display:grid;gap:clamp(30px,4vw,64px);align-items:center}
-@media(min-width:900px){.rings{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
-.rings__svg{width:100%;max-width:560px;aspect-ratio:1;justify-self:center;overflow:visible}
-.rings__svg circle.r{fill:none;stroke:var(--rule-paper);stroke-width:1.2;transform-box:fill-box;transform-origin:center}
-.rings__svg circle.r.dash{stroke-dasharray:3 7}
-.rings__svg circle.r.on{stroke:var(--blue)}
-.rings__svg .core{fill:var(--ochre)}
-.rings__svg .pulse{fill:none;stroke:var(--ochre);stroke-width:1;transform-box:fill-box;transform-origin:center}
-.rings__svg text{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;fill:var(--on-paper-dim)}
-.rings__svg text.hq{font-family:var(--serif);font-size:24px;letter-spacing:-.01em;text-transform:none;fill:var(--on-paper)}
-.legs{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-paper)}
-.legs li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:16px;padding:clamp(14px,1.8vw,20px) 0;
-  border-bottom:1px solid var(--rule-paper-soft);transition:color .4s var(--ease)}
-.legs li .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--on-paper-dim);padding-top:4px;text-transform:uppercase}
-.legs li .v{font-size:clamp(1.05rem,1.4vw,1.25rem);letter-spacing:-.01em}
-.legs.armed li{color:rgba(var(--on-ink-rgb),.38)}
-.legs.armed li.on{color:var(--on-paper)}
 
 /* ── Evidence: figures that roll into place, and a timeline that draws ── */
 .figs{display:grid;gap:clamp(26px,3vw,40px)}
@@ -911,32 +889,6 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 @keyframes ghost{0%,100%{background-position:0 0}50%{background-position:20px 0}}
 html.motion .ghost{animation:ghost 9s ease-in-out infinite}
 
-/* ── Notes ── */
-.cards{display:grid;gap:clamp(30px,3.4vw,48px)}
-@media(min-width:760px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(min-width:1180px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.card{display:grid;align-content:start;gap:14px;text-decoration:none;color:inherit}
-.card .ph{aspect-ratio:4/3}
-.card .ph img{transition:transform 1.1s var(--ease),filter .6s var(--ease)}
-.card:hover .ph img,.card:focus-visible .ph img{transform:scale(1.045)}
-.card__n{color:var(--bronze)}
-.card__t{font-size:clamp(1.3rem,2vw,1.65rem);font-weight:300;letter-spacing:-.02em;line-height:1.2}
-.card__t span{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .5s var(--ease)}
-.card:hover .card__t span,.card:focus-visible .card__t span{background-size:100% 1px}
-.card__s{color:var(--on-paper-dim);max-width:40ch}
-.card__go{display:inline-flex;gap:10px;align-items:center;color:var(--on-paper)}
-.card__go svg{width:13px;height:13px;transition:transform .45s var(--ease)}
-.card:hover .card__go svg{transform:translateX(5px)}
-
-.article{padding-block:clamp(56px,7vw,104px)}
-.article__body{display:grid;gap:1.1em;font-size:clamp(1.06rem,1.25vw,1.2rem);line-height:1.72;max-width:62ch}
-.article__body p:first-child::first-line{font-variant:small-caps;letter-spacing:.04em}
-.article .quote{max-width:40ch}
-.pn{display:grid;gap:18px;margin-top:clamp(48px,6vw,84px);border-top:1px solid var(--rule-paper);padding-top:24px}
-@media(min-width:760px){.pn{grid-template-columns:1fr 1fr}.pn a:last-child{text-align:right}}
-.pn a{text-decoration:none;display:grid;gap:6px}
-.pn a span:last-child{font-size:1.15rem;letter-spacing:-.01em}
-
 /* ── Enquiry page ── */
 .contact{display:grid;gap:18px}
 .contact a{color:var(--on-ink)}
@@ -973,7 +925,7 @@ html.motion [data-split]:not(.is-split){visibility:hidden;animation:failsafe 0s 
 
 /* ── Things that only move with motion on ── */
 @media (prefers-reduced-motion:reduce){
-  .ph img,.card .ph img,.band img{transform:none!important}
+  .ph img,.band img{transform:none!important}
   .next::before{transition:none}
 }
 

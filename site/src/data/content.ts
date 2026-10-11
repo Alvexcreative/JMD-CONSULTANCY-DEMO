@@ -19,7 +19,6 @@ export const site = {
   phoneHref: 'tel:+441423884000',
   email: 'info@jmdconsulting.co.uk',
   web: 'www.jmdconsulting.co.uk',
-  base: 'Harrogate, North Yorkshire',
   formed: 'January 2000',
   codaSince: '1990',
   clients: 'Circa 100 clients worldwide',
@@ -94,16 +93,6 @@ export const systems = {
     'We specialise in the delivery of consultancy services and systems integration solutions.',
     'Thanks to our knowledge and business partnerships we can deliver solutions using the latest technologies and ideas.',
     'With our proven experience we are well placed to provide a high quality service to our clients and at competitive rates.',
-  ],
-} as const;
-
-export const reach = {
-  heading: 'Harrogate is our base',
-  body: 'Based in Harrogate in the North Yorkshire countryside, at the gateway to the Yorkshire Dales, we are a twenty minute drive from Leeds Bradford International Airport and thirty minutes from York railway station. We are able to travel to clients anywhere across the globe. If you don’t wish to see us and are happy to make use of cloud based applications then we can connect remotely to your servers or desktop devices.',
-  facts: [
-    { label: 'Regions', value: 'United Kingdom, Europe, USA & Canada, Middle East' },
-    { label: 'Base', value: 'Harrogate, North Yorkshire' },
-    { label: 'Formed', value: 'January 2000' },
   ],
 } as const;
 

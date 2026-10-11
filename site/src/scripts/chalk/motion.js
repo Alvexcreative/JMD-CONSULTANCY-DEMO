@@ -65,7 +65,7 @@ function entrance() {
 }
 
 function scenes() {
-  rises(); photos(); bands(); rules(); ink(); chapters(); wires(); rings(); odometers(); timeline(); magnets(); homeHero();
+  rises(); photos(); bands(); rules(); ink(); chapters(); wires(); odometers(); timeline(); magnets(); homeHero();
 }
 
 /* ── groups that arrive together, in reading order ─────────────────── */
@@ -158,7 +158,10 @@ function wires() {
       if (tl) { tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill(); }
       if (loop) loop.kill();
       paths.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
-      tl = gsap.timeline({ scrollTrigger: { trigger: w, start: 'top 72%', end: 'bottom 62%', scrub: 0.8 } });
+      /* the wiring completes while the whole diagram is still in view: it
+         starts as the diagram comes up the screen and is finished by the
+         time its top edge reaches the upper third */
+      tl = gsap.timeline({ scrollTrigger: { trigger: w, start: 'top 85%', end: 'top 30%', scrub: 0.6 } });
       tl.add(() => tops.forEach((n) => n.classList.toggle('is-lit', tl.scrollTrigger.direction > 0)), 0.02);
       paths.slice(0, tops.length).forEach((p, i) => tl.to(p, { strokeDashoffset: 0, ease: 'none', duration: 1 }, i * 0.15));
       tl.add(() => hub.classList.toggle('is-lit', tl.scrollTrigger.direction > 0), 1.1);
@@ -171,33 +174,11 @@ function wires() {
           .to(packets[i], { motionPath: { path: p, align: p, alignOrigin: [0.5, 0.5] }, duration: 1.6, ease: 'sine.inOut' }, '<')
           .to(packets[i], { opacity: 0, duration: 0.25, ease: 'none' }, '>-0.25');
       });
-      ScrollTrigger.create({ trigger: w, start: 'bottom 70%', end: 'bottom top',
+      ScrollTrigger.create({ trigger: w, start: 'top 30%', end: 'bottom top',
         onToggle: (st) => (st.isActive ? loop.play() : loop.pause()) });
     }
     build(); animate();
     let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { build(); animate(); ScrollTrigger.refresh(); }, 180); });
-  });
-}
-
-/* ── Reach: distance from Harrogate, ring by ring ───────────────────── */
-function rings() {
-  document.querySelectorAll('.rings').forEach((r) => {
-    const rs = [...r.querySelectorAll('circle.r')], legs = [...r.querySelectorAll('.legs li')];
-    const labels = [...r.querySelectorAll('.rings__svg text:not(.hq)')];
-    r.querySelector('.legs')?.classList.add('armed');
-    gsap.set(rs, { scale: 0, opacity: 0 }); gsap.set(labels, { opacity: 0 });
-    const tl = gsap.timeline({ scrollTrigger: { trigger: r, start: 'top 70%', end: 'bottom 55%', scrub: 0.8 } });
-    rs.forEach((c, i) => {
-      tl.to(c, { scale: 1, opacity: 1, duration: 1, ease: 'power2.out' }, i * 0.7)
-        .to(labels.filter((l) => l.dataset.ring === String(i)), { opacity: 1, duration: 0.4, ease: 'none' }, i * 0.7 + 0.6)
-        .add(() => { legs.forEach((l) => { if (l.dataset.ring === String(i)) l.classList.toggle('on', tl.scrollTrigger.direction > 0); }); }, i * 0.7 + 0.5)
-        .add(() => c.classList.toggle('on', tl.scrollTrigger.direction > 0), i * 0.7 + 0.5);
-    });
-    const pulse = r.querySelector('.pulse');
-    if (pulse) {
-      const p = gsap.fromTo(pulse, { scale: 1, opacity: 0.7 }, { scale: 5, opacity: 0, duration: 2.8, ease: 'power2.out', repeat: -1, paused: true });
-      ScrollTrigger.create({ trigger: r, start: 'top bottom', end: 'bottom top', onToggle: (st) => (st.isActive ? p.play() : p.pause()) });
-    }
   });
 }
 
