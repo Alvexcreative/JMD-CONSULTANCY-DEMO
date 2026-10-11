@@ -74,7 +74,7 @@ function scenes() {
 function rises() {
   document.querySelectorAll('[data-rise]').forEach((g) => {
     const kids = g.children.length ? [...g.children] : [g];
-    gsap.from(kids, { opacity: 0, y: 26, duration: 1.1, stagger: 0.08,
+    gsap.from(kids, { opacity: 0, y: 26, duration: 1.1, stagger: 0.08, clearProps: 'opacity,transform',
       scrollTrigger: { trigger: g, start: 'top 86%', once: true } });
   });
 }

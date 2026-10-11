@@ -19,7 +19,7 @@ export const site = {
   phoneHref: 'tel:+441423884000',
   email: 'info@jmdconsulting.co.uk',
   web: 'www.jmdconsulting.co.uk',
-  formed: 'January 2000',
+  formed: 'January 2000',
   codaSince: '1990',
   clients: 'Circa 100 clients worldwide',
 } as const;
@@ -40,7 +40,7 @@ export const intro = {
     'Formed in 2000, our consultancy has provided services to a global client base. We believe that clients ultimately want solutions and not just reports after engaging the services of consultants. They want and should demand a service that goes one step further.',
   /* verbatim, About */
   specialise:
-    'We specialise in the delivery of consultancy services and systems integration solutions. With a key focus on accounting & finance systems such as CODA / Unit4 Financials® or more recently NetSuite®, linked with MS SQL Server® or Oracle®, we are able to deliver our clients strategic and functional solutions.',
+    'We specialise in the delivery of consultancy services and systems integration solutions. With a key focus on accounting & finance systems such as CODA / Unit4 Financials® or more recently NetSuite®, linked with MS SQL Server® or Oracle®, we are able to deliver our clients strategic and functional solutions.',
 } as const;
 
 /* The practice's own statement. Verbatim but for the source's stray comma
@@ -74,7 +74,7 @@ export const services = [
   {
     slug: 'coda-unit4',
     n: '04',
-    title: 'CODA / Unit4 Financials®',
+    title: 'CODA / Unit4 Financials®',
     body: 'Consultancy and support since 1990. Knowledge and experience gained from providing real world consultancy whilst employed by CODA®, followed by independent consultancy since 2000 to circa 100 clients worldwide.',
     points: ['Implementation', 'Upgrade & migration', 'Reporting', 'Ongoing support'],
   },
@@ -84,8 +84,8 @@ export const systems = {
   heading: 'Practised systems',
   kicker: 'Systems worked with in delivery',
   list: [
-    { n: '01', name: 'CODA / Unit4 Financials®', note: 'Consultancy and support since 1990.' },
-    { n: '02', name: 'NetSuite®', note: 'More recent focus alongside CODA / Unit4.' },
+    { n: '01', name: 'CODA / Unit4 Financials®', note: 'Consultancy and support since 1990.' },
+    { n: '02', name: 'NetSuite®', note: 'More recent focus alongside CODA / Unit4.' },
     { n: '03', name: 'Microsoft SQL Server®', note: 'Reporting, SQL scripts and stored procedures.' },
     { n: '04', name: 'Oracle®', note: 'Finance systems linked to Oracle databases.' },
   ],
@@ -101,7 +101,7 @@ export const credentials = {
   /* anchored to a date, not a count of years, so it never needs updating */
   heading: 'Delivering since 2000',
   items: [
-    { big: 'Since 1990', body: 'CODA / Unit4 Financials® consultancy and support, first inside CODA® and independently since 2000.' },
+    { big: 'Since 1990', body: 'CODA / Unit4 Financials® consultancy and support, first inside CODA® and independently since 2000.' },
     { big: 'Circa 100 clients', body: 'Worldwide, across a broad range of vertical markets, since commencement in January 2000.' },
     { big: 'Four continents', body: 'Servicing clients throughout the UK, Europe, the USA and Canada, and the Middle East.' },
   ],
@@ -121,7 +121,7 @@ export const contact = {
   heading: 'Tell us what the system is doing',
   lede: 'The more precise you are about the system and the symptom, the more useful the first reply will be.',
   invitation: 'Tell us where the system is failing and we will tell you what it takes to fix it. We work on site across the UK and internationally, or connect remotely to your servers and desktop devices.',
-  systems: ['CODA / Unit4 Financials', 'NetSuite', 'Another ERP', 'Not sure yet'],
+  systems: ['CODA / Unit4 Financials', 'NetSuite', 'Another ERP', 'Not sure yet'],
   /* The form validates and shows a success state but sends nothing. */
   demoNotice: 'Demonstration only — this form is not yet wired to a mailbox.',
 } as const;

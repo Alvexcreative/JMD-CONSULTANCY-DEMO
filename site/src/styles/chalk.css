@@ -1017,7 +1017,7 @@ html.is-home:not(.past-hero) .filing .mark{opacity:0;visibility:hidden}
 }
 .torchwrap .rh{font-size:clamp(2.3rem,4.7vw,3.8rem)}
 @media(min-width:1100px){.torchwrap .rh{font-size:clamp(2.1rem,3.7vw,3.6rem)}}
-@media(max-width:480px){
+@media(max-width:499px){
   /* all four pages fit from 320px up without scrolling the strip */
   .filing__in{gap:12px}
   .mark img{height:24px}
@@ -1028,11 +1028,12 @@ html.is-home:not(.past-hero) .filing .mark{opacity:0;visibility:hidden}
   .mark{min-height:44px}
 }
 @media(max-width:359px){
-  .filing__in{gap:10px}
-  .mark img{height:20px}
+  .filing__in{gap:6px}
   .contents__t{font-size:.8rem}
-  .contents ol{gap:8px}
-  .btn{letter-spacing:.05em;padding-inline:18px}
+  .contents ol{gap:6px}
+  .btn{white-space:nowrap;letter-spacing:.05em;padding-inline:14px;gap:8px}
+}
+@media(max-width:379px){
   .contact dl{grid-template-columns:1fr;gap:2px 0}
   .contact dd{margin-bottom:10px}
 }
@@ -1072,3 +1073,8 @@ p,li,dd,figcaption{text-wrap:pretty}
   .billing__cols > :first-child li{min-height:44px;display:flex;align-items:center}
   .billing ul{gap:0}
 }
+
+/* ── Mobile critique, round 3 ─────────────────────────────────────────── */
+.nw{white-space:nowrap}
+.hero > .wrap{width:100%}
+@media(max-width:1099px){.billing__cols > :first-child li{padding-block:6px}}

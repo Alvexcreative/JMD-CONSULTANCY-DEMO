@@ -224,9 +224,11 @@ document.querySelectorAll('form[data-enquiry]').forEach((form) => {
     /* once the form has closed up, make sure the confirmation is in view and
        clear of the sticky header (its scroll-margin allows for it) */
     box.focus({ preventScroll: true });
-    setTimeout(() => {
+    /* a smooth scroll started while the form is still closing up is cut
+       short, so it waits for every animation in the form to finish */
+    Promise.all(form.getAnimations ? form.getAnimations({ subtree: true }).map((a) => a.finished.catch(() => {})) : []).then(() => {
       const r = box.getBoundingClientRect(), hdr = document.querySelector('.filing')?.getBoundingClientRect().bottom || 0;
-      if (r.top < hdr + 12 || r.bottom > innerHeight) box.scrollIntoView({ block: 'start', behavior: motion ? 'smooth' : 'auto' });
-    }, motion ? 560 : 0);
+      if (r.top < hdr + 12 || r.bottom > innerHeight) scrollTo({ top: r.top + scrollY - hdr - 16, behavior: motion ? 'smooth' : 'auto' });
+    });
   }
 });

@@ -5,7 +5,7 @@ import { intro, systems, taglines } from '../data/content';
 import { IMG } from '../data/chalk';
 ---
 <Chalk page="systems" title="Systems" heroImage={`${IMG}/gen/systems-servers.jpg`}
-  description="CODA / Unit4 Financials and NetSuite, linked with Microsoft SQL Server or Oracle: the systems JMD Consulting implements and integrates.">
+  description="CODA / Unit4 Financials and NetSuite, linked with Microsoft SQL Server or Oracle: the systems JMD Consulting implements and integrates.">
 
   <PageHead n={2} label="Systems" title={taglines.specialists} image={`${IMG}/gen/systems-servers.jpg`}
     fx="68%" fy="50%" mfx="60%" mfy="60%" lede={intro.specialise} />
@@ -73,10 +73,10 @@ import { IMG } from '../data/chalk';
         <h2 id="claims-h" data-split>{taglines.evolve}</h2>
       </div>
       <div class="indent">
-        <ul class="claims" data-rise>
+        <div data-rise><ul class="claims">
           {/* the first note opens the page lede above, so it is not repeated here */}
           {systems.notes.slice(1).map((n) => <li class="claim">{n}</li>)}
-        </ul>
+        </ul></div>
       </div>
     </div>
   </section>
