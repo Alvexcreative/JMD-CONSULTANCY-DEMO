@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../shared/review.css">
 <!-- review only: faces for the three hero type variations (data-type 1–3) -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,500;1,6..72,300&family=Geist:wght@300;500&family=Albert+Sans:wght@300;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,500;1,6..72,300&family=Hanken+Grotesk:wght@300;500&family=Albert+Sans:wght@300;500&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:light}
@@ -162,11 +162,12 @@ p{margin:0}
       1 Editorial — Newsreader at its display optical size: a finer, sharper
         transitional serif, light, the clause in its true italic. The button
         drops the uppercase mono for the same face in sentence case.
-      2 Swiss — Geist 300, set tight and close-leaded; the clause stays
+      2 Swiss — Hanken Grotesk 300, set tight and close-leaded; the clause stays
         upright and is carried by colour alone. The button keeps small
-        tracked capitals, in Geist.
+        tracked capitals, in the same face.
       3 Paired — Albert Sans 300, whose round geometry sits closest to the
-        logo's wordmark, with the clause in Instrument Serif italic.
+        logo's wordmark, with the clause in Cormorant Garamond italic: a
+        high-contrast, calligraphic counterpoint to the plain sans.
       Sizes are matched by eye to Spectral's apparent size through --hx.
       Only the hero is varied: the headline, its torch overlay (which shares
       .rh) and the hero button. ── */
@@ -176,22 +177,24 @@ p{margin:0}
 [data-type="1"] .hero .btn{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;
   font-size:1.04rem;font-weight:500;letter-spacing:.004em;text-transform:none;gap:14px}
 
-[data-type="2"] .torchwrap .rh{font-family:"Geist",ui-sans-serif,system-ui,sans-serif;
-  font-weight:300;letter-spacing:-.04em;line-height:1.03;--hx:.9}
+[data-type="2"] .torchwrap .rh{font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  font-weight:300;letter-spacing:-.04em;line-height:1.03;--hx:.88}
 [data-type="2"] .torchwrap .rh em{font-style:normal}
-[data-type="2"] .hero .btn{font-family:"Geist",ui-sans-serif,system-ui,sans-serif;
+[data-type="2"] .hero .btn{font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
   font-size:.74rem;font-weight:500;letter-spacing:.14em}
 
 [data-type="3"] .torchwrap .rh{font-family:"Albert Sans",ui-sans-serif,system-ui,sans-serif;
   font-weight:300;letter-spacing:-.034em;line-height:1.05;--hx:.93}
-[data-type="3"] .torchwrap .rh em{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
-  font-size:1.12em;letter-spacing:-.008em}
+[data-type="3"] .torchwrap .rh em{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;
+  font-size:1.16em;letter-spacing:-.006em}
 [data-type="3"] .hero .btn{font-family:"Albert Sans",ui-sans-serif,system-ui,sans-serif;
   font-size:.94rem;font-weight:500;letter-spacing:.01em;text-transform:none;gap:14px}
 
 /* all three break by sense rather than by measure: one clause to a line,
    so "One family of systems." is never split across two */
-[data-type="1"] .torchwrap .rh,[data-type="2"] .torchwrap .rh,[data-type="3"] .torchwrap .rh{max-width:none}
+/* (.hero--photo caps the supplied setting at 15ch further down; that cap
+   is in the width of a zero, which differs from face to face) */
+[data-type="1"] .hero .torchwrap .rh,[data-type="2"] .hero .torchwrap .rh,[data-type="3"] .hero .torchwrap .rh{max-width:none}
 [data-type="1"] .torchwrap .rh em,[data-type="2"] .torchwrap .rh em,[data-type="3"] .torchwrap .rh em{display:block;text-wrap:balance}
 [data-type="3"] .torchwrap .rh em{line-height:1.02}
 
