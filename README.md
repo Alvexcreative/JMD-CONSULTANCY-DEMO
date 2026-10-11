@@ -140,8 +140,10 @@ background. The redraw keeps every shape where the JPEG has it but makes the
 edges clean: the heads are true circles; the figures' straight edges are
 exactly straight, with corners rebuilt where those edges meet; and the
 wordmark is drawn as monoline strokes along the letters' own centrelines, at
-the original's measured weight (2.42px at source size), clipped to its cap
-height and baseline. The SVG keeps the logo's three parts as separate groups
+the original's measured weight (2.42px at source size). Every letter sits on
+one cap height and one baseline, taken from the original's straight letters
+(94.31 and 112.56px at source size); the round letters (C, O, S, G and the
+foot of U) overshoot both by a uniform 0.2px, as round letters do in type. The SVG keeps the logo's three parts as separate groups
 (grey figure, blue figure, wordmark), which the first-load intro assembles
 before flying the logo into the hero. The original JPEG stays in `assets/`
 for the untouched `08-chalk-original.html`.
