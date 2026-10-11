@@ -133,7 +133,8 @@ const ov = document.getElementById('intro');
     tl.to(line, { '--p': '100%', duration: dur, ease: 'sine.inOut' }, at);
     at += dur * 0.8;                                      /* the next line starts as this one finishes */
   });
-  const written = at + 0.2 * Q;
+  /* the pauses between stages were each trimmed by 0.1s on review (0.3s in all) */
+  const written = at + 0.2 * Q - 0.1;
 
   /* ── into place: the headline glides home, the logo drops in above ── */
   let m;
@@ -142,7 +143,7 @@ const ov = document.getElementById('intro');
       x: () => (m ||= offset(t, h)).x, y: () => (m ||= offset(t, h)).y,
       duration: 0.9 * Q, ease: 'expo.inOut',
     }, written);
-  const seated = written + 0.5 * Q;
+  const seated = written + 0.5 * Q - 0.1;
   let g;
   tl.call(() => { g = null; }, null, seated - 0.001)
     .to(ghost, {
@@ -152,7 +153,7 @@ const ov = document.getElementById('intro');
     .fromTo(svg, { opacity: 0, yPercent: -8 }, { opacity: 1, yPercent: 0, duration: 0.7 * Q, ease: 'expo.out', immediateRender: false }, seated + 0.05);
 
   /* ── the reveal: the chalk cover fades away to the page beneath ───── */
-  tl.to(paper, { opacity: 0, duration: 0.9 * Q, ease: 'power2.inOut' }, seated + 0.25 * Q);
+  tl.to(paper, { opacity: 0, duration: 0.9 * Q, ease: 'power2.inOut' }, seated + 0.25 * Q - 0.1);
 
   tl.play();
   }
