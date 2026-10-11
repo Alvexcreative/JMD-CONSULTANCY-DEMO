@@ -134,13 +134,20 @@ entries jump straight to it; `?view=A1&n3=2` opens on a combination.
 Under the B3 hero, the Note 3 picture is re-printed in duotone to match.
 
 **Logo** — the hero, header and footer all carry the client's own logo
-(`assets/jmd-logo.svg`), traced from the 307×125 JPEG on jmdconsulting.co.uk
+(`assets/jmd-logo.svg`), redrawn from the 307×125 JPEG on jmdconsulting.co.uk
 with its inks unchanged (blue `#306AB3`, grey `#D0D0D0`) and no white
-background, so it sits straight on the page in both colour schemes. The SVG
-keeps the logo's three parts as separate groups (grey figure, blue figure,
-wordmark), which the first-load intro assembles before flying the logo into
-the hero. The original JPEG stays in `assets/` for the untouched
-`08-chalk-original.html`.
+background. The redraw keeps every shape where the JPEG has it but makes the
+edges clean: the heads are true circles; the figures' straight edges are
+exactly straight, with corners rebuilt where those edges meet; and the
+wordmark is drawn as monoline strokes along the letters' own centrelines, at
+the original's measured weight (2.42px at source size), clipped to its cap
+height and baseline. The SVG keeps the logo's three parts as separate groups
+(grey figure, blue figure, wordmark), which the first-load intro assembles
+before flying the logo into the hero. The original JPEG stays in `assets/`
+for the untouched `08-chalk-original.html`.
+
+**Palette and type** — settled on Harrogate Blue and the supplied Spectral
+headline; the other schemes and type variations, and their pickers, are gone.
 
 **Note 2** (Systems) carries the handshake (`hero-08`) as paired with the
 hero: a wide framed plate under A1, a full-bleed duotone band under B3.
