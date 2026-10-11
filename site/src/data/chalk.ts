@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════
-   Chalk — the full build of concept 08.
+   Chalk — the JMD Consulting site.
 
    Every factual line comes from `content.ts` (itself JMD's own copy from
    jmdconsulting.co.uk) or is quoted from CONTENT-SOURCE.md. Where a slot
@@ -13,7 +13,7 @@
    stock or a commissioned shoot.
    ═══════════════════════════════════════════════════════════════════ */
 
-export const BASE = '/chalk';
+export const BASE = '';
 export const IMG = '/assets/chalk';
 
 /* The site's sections, in filing order. `n` is the filing number shown in

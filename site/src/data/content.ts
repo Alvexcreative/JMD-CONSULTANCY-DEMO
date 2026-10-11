@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════
-   The single source of truth for every word on both designs.
+   The single source of truth for every word on the site.
 
    Copy is JMD's own, from jmdconsulting.co.uk, with three source typos
    corrected. Where a slot had no equivalent on the live site the line is
@@ -25,14 +25,6 @@ export const site = {
   clients: 'Circa 100 clients worldwide',
 } as const;
 
-export const nav = [
-  { label: 'Home', href: '' },
-  { label: 'Services', href: 'services' },
-  { label: 'Systems', href: 'systems' },
-  { label: 'About', href: 'about' },
-  { label: 'Contact', href: 'contact' },
-] as const;
-
 /* Taglines, all verbatim from the live site */
 export const taglines = {
   moving: 'Moving business forward',
@@ -56,24 +48,6 @@ export const intro = {
    the Managing Director, here it stands for the firm. */
 export const statement =
   'We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive, delivers a solution. In short, a ‘Solution Service’.';
-
-export const storyline = [
-  {
-    title: 'The problem',
-    body: 'Your finance system is holding the business back, and the last engagement left you with a report rather than a working answer.',
-    bridging: true,
-  },
-  {
-    title: 'The guide',
-    body: 'We specialise in the delivery of consultancy services and systems integration solutions, with a key focus on accounting and finance systems.',
-    bridging: false,
-  },
-  {
-    title: 'The success',
-    body: 'You run on finance systems that deliver strategic and functional solutions, with reporting your board can rely on.',
-    bridging: true,
-  },
-] as const;
 
 export const services = [
   {

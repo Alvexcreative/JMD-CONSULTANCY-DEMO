@@ -1,5 +1,5 @@
 /* Home hero only: the torch that follows the cursor across the headline,
-   the key light, and the cloud reflections in the glass. Ported from 08. */
+   the key light, and the cloud reflections in the glass. Carried over from the approved home page. */
 (function(){
   var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
   (function(){

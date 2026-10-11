@@ -1,4 +1,4 @@
-/* First-load intro, "Struck" — ported unchanged from concepts/08-chalk.html.
+/* First-load intro, "Struck" — carried over unchanged from the approved home page.
    The gate in the layout's <head> decides whether it plays (home, once a session). */
 
 (function(){

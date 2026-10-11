@@ -1,5 +1,5 @@
 /* ── Chalk: behaviour that every page shares ──────────────────────────────
-   Ported from concepts/08-chalk.html and extended for a multi-page site.
+   Carried over from the approved home page and extended for the full site.
    None of it is needed to read the page: without scripts the content is
    all there and the links all work. */
 

@@ -1,50 +1,226 @@
 ---
+import Chalk from '../layouts/Chalk.astro';
+import Logo from '../components/chalk/Logo.astro';
 import { site } from '../data/content';
-const designs = [
-  { href: '/chalk/', name: 'Chalk', note: 'The chosen direction. Spectral and Martian Mono on chalk blue, the full site with motion throughout.', bg: '#DCE6F2', fg: '#13283F' },
-  { href: '/montfort/', name: 'Montfort', note: 'Near-monochrome cloud and slate blue. Wide-tracked light capitals, enormous white space.', bg: '#EEF2F6', fg: '#26354A' },
-  { href: '/growth/', name: 'Path for Growth', note: 'Oswald and Lora, cream and tan, square corners. Alternating bands, Harrogate hero.', bg: '#FFFEF5', fg: '#8A6B47' },
-];
+import { href, IMG } from '../data/chalk';
 ---
-<!DOCTYPE html>
-<html lang="en-GB">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{site.name} — three builds</title>
-  <meta name="description" content="Three full site builds for JMD Consulting." />
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100svh;display:grid;place-items:center;padding:clamp(20px,5vw,60px);
-      background:#16181B;color:#F4F2ED;font:16px/1.6 ui-sans-serif,-apple-system,system-ui,sans-serif}
-    .in{width:100%;max-width:1120px}
-    h1{margin:0 0 10px;font-size:clamp(1.3rem,3vw,2rem);font-weight:500;letter-spacing:-.01em}
-    .sub{margin:0 0 clamp(28px,5vw,46px);color:rgba(244,242,237,.6)}
-    .row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,28px)}
-    a.card{display:flex;flex-direction:column;gap:10px;padding:clamp(22px,3vw,34px);
-      text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.16);
-      transition:border-color .2s ease,transform .2s ease}
-    a.card:hover{border-color:rgba(255,255,255,.5);transform:translateY(-2px)}
-    a.card:focus-visible{outline:2px solid #7DA7FF;outline-offset:3px}
-    .sw{height:64px;margin-bottom:6px;display:grid;place-items:center;font-weight:600;letter-spacing:.04em}
-    .nm{font-size:1.1rem;font-weight:600}
-    .nt{color:rgba(244,242,237,.62);font-size:.92rem}
-    @media(max-width:900px){.row{grid-template-columns:1fr}}
-  </style>
-</head>
-<body>
-  <div class="in">
-    <h1>{site.name}</h1>
-    <p class="sub">Three complete builds of the same site, one shared set of content. Chalk is the chosen direction.</p>
-    <div class="row">
-      {designs.map((d) => (
-        <a class="card" href={d.href}>
-          <span class="sw" style={`background:${d.bg};color:${d.fg}`}>{d.name}</span>
-          <span class="nm">{d.name}</span>
-          <span class="nt">{d.note}</span>
-        </a>
-      ))}
+<Chalk page="home" title="Home" heroImage={`${IMG}/hero-01.jpg`}
+  description="JMD Consulting: independent finance-systems consultancy in Harrogate. CODA / Unit4 Financials and NetSuite, project management, systems implementation, ETL and business intelligence.">
+
+
+  <section class="hero hero--photo" id="hero" data-hero style="--fx:72%;--fy:50%;--mx-fx:66%;--mx-fy:45%;--veil:1">
+    <div class="hero__media" id="hero-media" aria-hidden="true">
+      <img class="hero__img is-on" src="/assets/chalk/hero-01.jpg" alt="" width="2400" height="1340" fetchpriority="high" decoding="async">
+      <div class="hero__veil"></div>
     </div>
-  </div>
-</body>
-</html>
+    <span class="hero__rule" aria-hidden="true"></span>
+    <div class="wrap room">
+      <div class="room__obj">
+        <span class="room__card">
+          <Logo id="hero" />
+        </span>
+      </div>
+      <div>
+        <div class="torchwrap">
+          <h1 class="rh">One specialism. <em>One family of systems.</em> Since&nbsp;2000.</h1>
+          <p class="rh torch" aria-hidden="true">One specialism. <em>One family of systems.</em> Since&nbsp;2000.</p>
+        </div>
+        <div class="hero__acts">
+          <a class="btn" href={href('enquiry')} data-magnetic>
+            Describe your situation
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="note note--solution" id="note-1">
+    <div class="wrap note__grid">
+      <p class="mono note__ref"><b>Note 1</b>Solutions &amp; Services</p>
+      <div>
+        <h2 data-split>Solutions &amp; Services</h2>
+        <ol class="svcs reveal">
+          <li class="svc" style="--i:0">
+            <span class="svc__n" aria-hidden="true">1</span>
+            <h3 class="svc__name">Project management</h3>
+            <p class="svc__desc">Finance-systems projects planned, resourced and controlled from start to finish, with risk analysed and budgets tracked and monitored throughout.</p>
+            <ul class="svc__scope mono">
+              <li>Project planning</li>
+              <li>Resource management</li>
+              <li>Risk analysis</li>
+              <li>Budget tracking</li>
+            </ul>
+          </li>
+          <li class="svc" style="--i:1">
+            <span class="svc__n" aria-hidden="true">2</span>
+            <h3 class="svc__name">Systems implementation</h3>
+            <p class="svc__desc">ERP implementation with a proven track record of delivering complex multi&#8209;currency, multi&#8209;company and multi&#8209;site financial reporting systems.</p>
+            <ul class="svc__scope mono">
+              <li>ERP implementation</li>
+              <li>Multi-currency</li>
+              <li>Multi-company</li>
+              <li>Multi-site reporting</li>
+            </ul>
+          </li>
+          <li class="svc" style="--i:2">
+            <span class="svc__n" aria-hidden="true">3</span>
+            <h3 class="svc__name">ETL &amp; business intelligence</h3>
+            <p class="svc__desc">Business intelligence for clients across Europe, the USA and Canada: complex financial reports and KPIs, and financial data migrated from legacy systems.</p>
+            <ul class="svc__scope mono">
+              <li>Financial reports &amp; KPIs</li>
+              <li>Legacy data migration</li>
+              <li>Data analysis</li>
+              <li>SQL &amp; stored procedures</li>
+            </ul>
+          </li>
+        </ol>
+        <figure class="quote quote--signed">
+          <blockquote>We are committed to making sure that our clients receive more than just a good service. We aim to make sure that the service they receive delivers a solution. In short, a &lsquo;Solution Service&rsquo;.</blockquote>
+          <figcaption class="mono">JMD Consulting</figcaption>
+        </figure>
+        <a class="more mono" href={href('services')}>All four services<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="note" id="note-2">
+    <figure class="n2-band duo" aria-hidden="true">
+      <img src="/assets/chalk/hero-08.jpg" alt="" width="2400" height="1339" loading="lazy" decoding="async">
+      <span class="n2-band__veil"></span><span class="n2-band__rule"></span>
+    </figure>
+    <div class="wrap note__grid">
+      <p class="mono note__ref"><b>Note 2</b>Systems</p>
+      <div>
+        <h2 data-split>Practised systems</h2>
+        <div class="sysgrid">
+          <figure class="n2-plate">
+            <img src="/assets/chalk/hero-08.jpg" alt="Two colleagues shaking hands across a meeting table in a bright office." width="2400" height="1339" loading="lazy" decoding="async">
+          </figure>
+          <p class="mono sys__cap">Systems worked with in delivery</p>
+          <ul class="sys">
+            <li>CODA / Unit4 Financials</li>
+            <li>NetSuite</li>
+            <li>Microsoft SQL Server</li>
+            <li>Oracle</li>
+          </ul>
+          <ul class="claims">
+            <li class="claim">We specialise in the delivery of consultancy services and systems integration solutions.</li>
+            <li class="claim">Thanks to our knowledge and business partnerships we can deliver solutions using the latest technologies and ideas.</li>
+            <li class="claim">With our proven experience we are well placed to provide a high quality service to our clients and at competitive rates.</li>
+          </ul>
+        </div>
+        <a class="more mono" href={href('systems')}>How the systems fit together<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="note" id="note-3">
+    <figure class="n3-edge" aria-hidden="true">
+      <img src="/assets/chalk/hero-15.jpg" alt="" width="2400" height="1339" loading="lazy" decoding="async">
+    </figure>
+    <div class="wrap note__grid">
+      <p class="mono note__ref"><b>Note 3</b>Reach</p>
+      <div class="n3">
+        <div class="n3__text">
+          <h2 data-split>Harrogate is our base</h2>
+          <div class="note__body measure">
+            <p>The practice sits in North Yorkshire at the gateway to the Dales — twenty minutes from Leeds Bradford airport, thirty from York station. Where a site visit is not wanted, the work runs remotely into your servers or desktops.</p>
+          </div>
+          <div class="reach">
+            <dl>
+              <dt class="mono">Regions</dt><dd>United Kingdom, Europe, USA &amp; Canada, Middle East</dd>
+              <dt class="mono">Base</dt><dd>Harrogate, North Yorkshire</dd>
+            </dl>
+            <dl>
+              <dt class="mono">Formed</dt><dd>January 2000</dd>
+            </dl>
+          </div>
+          <a class="more mono" href={href('reach')}>Reach, in full<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <figure class="n3-photo">
+          <img src="/assets/chalk/hero-15.jpg" alt="Three colleagues reviewing charts together in a bright meeting room." width="2400" height="1339" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="note" id="note-4">
+    <div class="wrap note__grid">
+      <p class="mono note__ref"><b>Note 4</b>Client evidence</p>
+      <div>
+        <h2 data-split>Held open for the clients&rsquo; own words.</h2>
+        <div class="note__body measure">
+          <p>This practice does not publish a client list it has not been given permission to publish, and does not write its own testimonials. Three slots sit here for the real ones.</p>
+        </div>
+        <div class="ghosts">
+          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Client testimonial to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.1 &middot; awaiting content</figcaption></figure>
+          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Client testimonial to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.2 &middot; awaiting content</figcaption></figure>
+          <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">Case study to be supplied</p></div><figcaption class="mono ghost__lbl">Slot 4.3 &middot; awaiting content</figcaption></figure>
+        </div>
+        <a class="more mono" href={href('evidence')}>Credentials and track record<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="enq" id="enquiry">
+    <div class="wrap enq__in">
+      <div data-rise>
+        <h2>Tell us what the system is doing.</h2>
+        <p class="enq__lede">The more precise you are about the system and the symptom, the more useful the first reply will be. Every enquiry is read by a consultant.</p>
+        <div class="enq__facts mono">
+          <a href="mailto:info@jmdconsulting.co.uk">info@jmdconsulting.co.uk</a>
+          <a href={site.phoneHref}>{site.phone}</a>
+          <span>Harrogate, North Yorkshire, United Kingdom</span>
+        </div>
+      </div>
+
+      <form id="enquiry-form" data-enquiry novalidate>
+        <div class="f2">
+          <div class="field" data-field>
+            <label for="a-name" class="mono">Name <i aria-hidden="true">*</i></label>
+            <input id="a-name" name="name" type="text" autocomplete="name" required>
+            <p class="err mono" id="a-name-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Enter your name</p>
+          </div>
+          <div class="field" data-field>
+            <label for="a-org" class="mono">Organisation <i aria-hidden="true">*</i></label>
+            <input id="a-org" name="organisation" type="text" autocomplete="organization" required>
+            <p class="err mono" id="a-org-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Enter your organisation</p>
+          </div>
+        </div>
+        <div class="f2">
+          <div class="field" data-field>
+            <label for="a-email" class="mono">Email <i aria-hidden="true">*</i></label>
+            <input id="a-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <p class="err mono" id="a-email-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Enter a valid email address</p>
+          </div>
+          <div class="field" data-field>
+            <label for="a-sys" class="mono">Finance system <i aria-hidden="true">*</i></label>
+            <select id="a-sys" name="system" required>
+              <option value="">Select&hellip;</option>
+              <option>CODA / Unit4 Financials</option>
+              <option>NetSuite</option>
+              <option>Another ERP</option>
+              <option>Not sure yet</option>
+            </select>
+            <p class="err mono" id="a-sys-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Choose a system</p>
+          </div>
+        </div>
+        <div class="field" data-field>
+          <label for="a-detail" class="mono">What is happening <i aria-hidden="true">*</i></label>
+          <textarea id="a-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger&hellip;"></textarea>
+          <p class="err mono" id="a-detail-err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>Tell us briefly what is happening</p>
+        </div>
+        <button class="btn" type="submit">
+          Send enquiry
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </button>
+        <p class="mono enq__note">Replies come from a consultant directly, usually the same working day.</p>
+        <div class="sent" role="status">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8.4 6.2 12l7.3-8"/></svg>
+          <p>Enquiry recorded. <span style="color:var(--on-ink-dim)">Demonstration only — this concept is not yet wired to a mailbox.</span></p>
+        </div>
+      </form>
+    </div>
+  </section>
+</Chalk>

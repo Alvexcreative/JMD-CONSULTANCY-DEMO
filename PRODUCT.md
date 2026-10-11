@@ -8,12 +8,12 @@ web
 
 ## What this project is
 
-Five competing homepage concepts for **JMD Consulting**, built to choose a visual
-direction before a full site is produced. Each concept is a hero plus one content
-section (the three services). No other pages.
+The JMD Consulting website, in the Chalk design: a ten-page Astro site in
+`site/` (Home, Services, Systems, Reach, Evidence, Notes with three articles,
+Enquiry), built to the scope of the Alvex "Sky Is The Limit" package.
 
 Content truth lives in `CONTENT-SOURCE.md`, scraped from the live site at
-jmdconsulting.co.uk. Nothing on these pages may claim anything that file does not
+jmdconsulting.co.uk. Nothing on the site may claim anything that file does not
 support.
 
 ## The business
@@ -46,46 +46,24 @@ office, in daylight.
 
 ## Mode
 
-**Persuade.** These are marketing homepages. The visitor should finish the hero
-knowing what JMD does and finish the services section knowing it is credible.
+**Persuade.** A marketing site. The visitor should finish the first screen
+knowing what JMD does, and finish any page knowing it is credible.
 
 ## Visual authority
 
-Three concepts remain, each pinned to a named reference and taking its
-cues literally:
+**Chalk** — the client's chosen direction, and the only one in this project.
+Spectral for reading, Martian Mono for filing marks, the Harrogate Blue palette
+(chalk-blue surfaces anchored to the blue in the logo), hairline rules, each page
+opening on a photograph under a chalk veil, and a docking rail of pages on the
+right. The client's own logo, redrawn cleanly from the live site, sits on the
+page with no plate.
 
-| Concept | Reference | World |
-|---|---|---|
-| 02 | Montfort | Near-monochrome white cloud, slate blue, wide-tracked light caps |
-| 06 | Path for Growth | Oswald + Lora, cream and tan, square corners, Harrogate hero |
-| 08 | Chalk | Supplied by the client — Spectral + Martian Mono, chalk blue, navy, ochre |
-
-`09 Joe` also exists as a scratch page and is not a concept.
-
-Concepts 01 (Son Daven), 03 (ERA), 04 (Yolkk), 05 (Immersive Garden) and
-the 07 Harrogate image picker were reviewed and dropped; they are kept in
-`_archive/` with their assets, along with the cloud plates from a rolling-cloud
-intro for 02 that was built and then reverted.
-
-**Decision (October 2026): the client has chosen concept 08, Chalk.** 02 and 06
-stay in the repo for reference but are no longer in contention. 08's world —
-Spectral + Martian Mono, chalk blue, navy, ochre accent — is now the visual
-authority; a DESIGN.md should be written from it once the hero is settled.
-
-Client feedback on 08: it reads too plain and simple; it should look like a
-proper, established business site. The open work is a photographic hero:
-
-- Subjects the client asked to see: city towers shot from street level looking
-  up (one or several); a scenic view from inside an office; people working
-  together in a business setting; a handshake.
-- Keep it light — the image has to sit inside 08's existing chalk palette, not
-  bring a new one.
-- People in imagery support the "practice, not a person" positioning: the site
-  should read as a firm with several staff. Imagery may show a team; copy still
-  may not claim a team size or name staff.
-- Hero imagery is generated for review. A live build wants licensed stock or a
-  commissioned shoot, and no image may be presented as JMD's own office or
-  staff.
+Imagery: city towers from street level, colleagues working together, a
+handshake, Harrogate and the Dales, all light enough to sit inside the chalk
+palette. People in imagery support the "practice, not a person" positioning:
+imagery may show a team; copy may not claim a team size or name staff. Images
+are generated for review — a live build wants licensed stock or a commissioned
+shoot, and no image may be presented as JMD's own office or staff.
 
 ## Copy rules
 
@@ -96,20 +74,10 @@ source typos are corrected. No invented claims, clients, metrics or testimonials
 
 ## Constraints
 
-- Static HTML per concept, one file each, no build step. A persistent switcher bar
-  moves between concepts in the same tab.
-- One hero image per concept. Concept 08's hero is down to a shortlist of
-  two: A1 (single tower, Editorial) and B3 (converging towers, Duotone), both
-  with the handshake in Note 2, behind a review picker that comes out once
-  one is chosen.
-- Image 15 (a team reviewing charts around a screen) sits in Note 3, in three
-  treatments under review, and is also earmarked for the section pages of
-  the full site.
-- Concept 06's phone hero is the one open decision: three styles (Full, Column,
-  Band) ship behind a phone-only picker. Desktop is settled. The losing two and
-  the picker come out once a style is chosen.
-- Full motion: GSAP, scroll behaviour, authored intros. `prefers-reduced-motion`
-  respected everywhere.
+- Astro, matching the sibling Alvex projects. One shared content source
+  (`site/src/data/content.ts`, `site/src/data/chalk.ts`).
+- Full motion: GSAP, scroll-driven scenes, cross-page View Transitions, the
+  branded intro once a session. Content visible without scripts;
+  `prefers-reduced-motion` respected everywhere.
 - Phone: no horizontal scroll at 320px, every control at least 44px, no text
   below 12px.
-- The eventual full build will be Astro, matching the sibling projects.

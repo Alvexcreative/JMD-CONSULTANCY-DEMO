@@ -2,38 +2,6 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "chalk-dev",
-      "runtimeExecutable": "sh",
-      "runtimeArgs": [
-        "-c",
-        "CHALK_ROOT=1 PORT=8750 npm run dev"
-      ],
-      "cwd": "site",
-      "port": 8750,
-      "url": "http://localhost:8750"
-    },
-    {
-      "name": "chalk-concept",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": [
-        "chalk-dev.py",
-        "8751"
-      ],
-      "port": 8751,
-      "url": "http://localhost:8751"
-    },
-    {
-      "name": "chalk-original",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": [
-        "chalk-dev.py",
-        "8755",
-        "08-chalk-original.html"
-      ],
-      "port": 8755,
-      "url": "http://localhost:8755"
-    },
-    {
       "name": "jmd-site",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
@@ -41,18 +9,8 @@
         "dev"
       ],
       "cwd": "site",
-      "port": 4800,
-      "url": "http://localhost:4800"
-    },
-    {
-      "name": "jmd-concepts",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": [
-        "serve.py",
-        "8745"
-      ],
-      "port": 8745,
-      "url": "http://localhost:8745"
+      "port": 8750,
+      "url": "http://localhost:8750"
     }
   ]
 }
