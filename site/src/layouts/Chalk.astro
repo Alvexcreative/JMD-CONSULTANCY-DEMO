@@ -1,0 +1,146 @@
+---
+import '../styles/chalk.css';
+import VersionSwitch from '../components/VersionSwitch.astro';
+import { site } from '../data/content';
+import { pages, href, nextOf, IMG } from '../data/chalk';
+
+interface Props {
+  title: string;
+  description: string;
+  page: string;          /* 'home' or a page slug */
+  heroImage?: string;    /* preloaded */
+}
+const { title, description, page, heroImage } = Astro.props;
+const home = page === 'home';
+const section = pages.find((p) => p.slug === page);
+const next = home ? null : nextOf(page);
+const arrow = 'M2 8h11M9 4l4 4-4 4';
+---
+<!doctype html>
+<html lang="en-GB" class={home ? 'is-home' : undefined}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>{home ? `${site.name} — ${site.strapline}` : `${title} — ${site.name}`}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#DCE6F2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
+  <!-- motion and the intro are decided before first paint: scripts on and
+       reduced motion off gives html.motion; the intro plays on the home
+       page once a session, and never when the visit arrives on an anchor -->
+  <script is:inline define:vars={{ home }}>
+    (function () {
+      var r = document.documentElement;
+      if (!matchMedia('(prefers-reduced-motion:reduce)').matches) r.classList.add('motion');
+      if (!home || location.hash) return;
+      try { if (sessionStorage.getItem('jmd-intro')) return; sessionStorage.setItem('jmd-intro', '1'); } catch (e) {}
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      r.classList.add('intro-on');
+    })();
+  </script>
+</head>
+<body data-look="1" data-n3="2" class={heroImage ? 'hero-photo-on' : undefined}>
+  {home && (
+    <div class="intro intro--struck" id="intro" aria-hidden="true">
+      <div class="intro__paper"></div>
+      <p class="intro__skip" aria-hidden="true">Tap to skip</p>
+      <div class="intro__stage"><span class="intro__mk"></span></div>
+    </div>
+  )}
+  <span class="progress" aria-hidden="true"></span>
+
+  <header class="filing">
+    <div class="wrap filing__in">
+      <a class="mark" href={href()} aria-label="JMD Consulting, home">
+        <img src={`${IMG}/jmd-logo.svg`} width="296" height="115" alt="JMD Consulting" />
+      </a>
+      <nav class="contents" aria-label="Site">
+        <ol>
+          {pages.map((p) => (
+            <li><a href={href(p.slug)} aria-current={p.slug === page ? 'page' : undefined}><span class="contents__n">{p.n}</span><span class="contents__t">{p.label}</span></a></li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="sn sn--dock" aria-label="Site">
+    <ol>
+      {pages.map((p) => (
+        <li><a href={href(p.slug)} aria-current={p.slug === page ? 'page' : undefined}><span class="pull"><span class="t">{p.label}</span><span class="n">{p.n}</span></span></a></li>
+      ))}
+    </ol>
+  </nav>
+
+  <main id="top">
+    <slot />
+  </main>
+
+  {next && (
+    <a class="next" href={href(next.slug)}>
+      <div class="wrap">
+        <span class="mono next__ref"><b>Next</b>{next.n} · {next.label}</span>
+        <span class="next__t"><span data-split>{next.title}</span>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow} /></svg>
+        </span>
+      </div>
+    </a>
+  )}
+
+  <footer class="billing">
+    <div class="wrap">
+      <a class="billing__mark" href={href()} aria-label="JMD Consulting, home"><img src={`${IMG}/jmd-logo.svg`} width="296" height="115" alt="JMD Consulting" loading="lazy" /></a>
+      <div class="billing__cols">
+        <div>
+          <h3 class="mono">Practice</h3>
+          <ul>
+            <li>{site.name}</li>
+            <li>Consultancy &amp; systems integration</li>
+            <li>Formed {site.formed}</li>
+            <li>CODA consultancy since {site.codaSince}</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mono">Pages</h3>
+          <ul>
+            {pages.map((p) => <li><a href={href(p.slug)}>{p.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="mono">Systems</h3>
+          <ul>
+            <li>CODA / Unit4 Financials</li>
+            <li>NetSuite</li>
+            <li>Microsoft SQL Server</li>
+            <li>Oracle</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mono">Contact</h3>
+          <ul>
+            <li><a href={site.phoneHref}>{site.phone}</a></li>
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li>{site.base}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mono billing__foot">
+        <span>&copy; 2000&ndash;2026 {site.name}</span>
+        <span>CODA and Unit4 Financials are trademarks of their respective owners</span>
+      </div>
+    </div>
+  </footer>
+
+  <VersionSwitch />
+
+  <!-- intro.js and hero.js stand down on pages without the intro or the
+       home hero, so all four load everywhere and are cached once -->
+  <script src="../scripts/chalk/site.js"></script>
+  <script src="../scripts/chalk/motion.js"></script>
+  <script src="../scripts/chalk/intro.js"></script>
+  <script src="../scripts/chalk/hero.js"></script>
+</body>
+</html>

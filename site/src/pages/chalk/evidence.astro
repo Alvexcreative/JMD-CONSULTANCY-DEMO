@@ -1,0 +1,86 @@
+---
+import Chalk from '../../layouts/Chalk.astro';
+import PageHead from '../../components/chalk/PageHead.astro';
+import { credentials, evidence, site } from '../../data/content';
+import { IMG } from '../../data/chalk';
+
+/* every line of the timeline is a fact from the live site; the section
+   headings on this page ('The record, in four numbers', 'From inside CODA®
+   to an independent practice') are bridging copy, for approval */
+const years = [
+  { y: '1990', t: 'CODA / Unit4 Financials® consultancy begins', b: 'Knowledge and experience gained from providing real world consultancy whilst employed by CODA®.' },
+  { y: 'January 2000', t: 'JMD Consulting is formed', b: 'Independent consultancy from here on, across a broad range of vertical markets.' },
+  { y: 'More recently', t: 'NetSuite® joins CODA / Unit4 as a key focus', b: 'Linked with MS SQL Server® or Oracle®, delivering strategic and functional solutions.' },
+  { y: 'Today', t: 'Circa 100 clients worldwide', b: 'Servicing clients throughout the UK, Europe, the USA and Canada, and the Middle East.' },
+];
+---
+<Chalk page="evidence" title="Evidence" heroImage={`${IMG}/gen/evidence-boardroom.jpg`}
+  description="CODA / Unit4 Financials consultancy since 1990, JMD Consulting since 2000, circa 100 clients worldwide.">
+
+  <PageHead n={4} label="Evidence" title={credentials.heading} image={`${IMG}/gen/evidence-boardroom.jpg`}
+    fx="66%" fy="50%" mfx="70%" mfy="60%"
+    lede="JMD Consulting has been providing consulting services to a wide range of clients across a broad range of vertical markets since commencement in January 2000." />
+
+  <section class="sec" aria-labelledby="figs-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>4.1</b>In figures</p>
+        <h2 id="figs-h" data-split>The record, in four numbers</h2>
+      </div>
+      <div class="indent">
+        <div class="figs" data-rise>
+          <div class="fig"><p class="fig__v"><span data-odo>1990</span></p><p class="fig__l">CODA / Unit4 Financials&reg; consultancy and support since</p></div>
+          <div class="fig"><p class="fig__v"><span data-odo>2000</span></p><p class="fig__l">JMD Consulting formed, {site.formed}</p></div>
+          <div class="fig"><p class="fig__v"><small>c.</small><span data-odo>100</span></p><p class="fig__l">Clients worldwide since 2000</p></div>
+          <div class="fig"><p class="fig__v"><span data-odo>4</span></p><p class="fig__l">Regions served: UK, Europe, USA &amp; Canada, Middle East</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" aria-labelledby="tl-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>4.2</b>Track record</p>
+        <h2 id="tl-h" data-split>From inside CODA&reg; to an independent practice</h2>
+      </div>
+      <div class="indent">
+        <div class="tl-grid">
+          <div class="tl">
+            <span class="tl__line" aria-hidden="true"></span>
+            <ol>
+              {years.map((e) => <li><p class="tl__y">{e.y}</p><p class="tl__t">{e.t}</p><p class="tl__b">{e.b}</p></li>)}
+            </ol>
+          </div>
+          <figure class="ph ph--tall" data-reveal>
+            <img src={`${IMG}/gen/evidence-ledgers.jpg`} alt="Leather-bound ledgers stacked beside a modern laptop." width="896" height="1120" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="words-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>4.3</b>Client evidence</p>
+        <div>
+          <h2 id="words-h" data-split>{evidence.heading}</h2>
+          <p class="sec__lede" data-rise>{evidence.body}</p>
+        </div>
+      </div>
+      <div class="indent">
+        <div>
+          <div class="ghosts" data-rise>
+            {evidence.slots.map((s) => (
+              <figure class="ghost"><div><div class="ghost__rule"></div><p class="ghost__txt">{s.text}</p></div><figcaption class="mono ghost__lbl">{s.label}</figcaption></figure>
+            ))}
+          </div>
+          <figure class="ph ph--wide" data-reveal style="margin-top:clamp(40px,5vw,72px)">
+            <img src={`${IMG}/gen/evidence-signing.jpg`} alt="Hands initialling a printed project report with a fountain pen." width="1024" height="688" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</Chalk>

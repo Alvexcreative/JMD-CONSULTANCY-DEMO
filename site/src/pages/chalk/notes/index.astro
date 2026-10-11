@@ -1,0 +1,36 @@
+---
+import Chalk from '../../../layouts/Chalk.astro';
+import PageHead from '../../../components/chalk/PageHead.astro';
+import { taglines } from '../../../data/content';
+import { notes, href, IMG } from '../../../data/chalk';
+---
+<Chalk page="notes" title="Notes" heroImage={`${IMG}/gen/notes-whiteboard.jpg`}
+  description="Practice notes from JMD Consulting: Solution Services, CODA / Unit4 Financials since 1990, and working from Harrogate.">
+
+  {/* lede is bridging copy, for approval */}
+  <PageHead n={5} label="Notes" title={taglines.evolve} image={`${IMG}/gen/notes-whiteboard.jpg`}
+    fx="62%" fy="45%" mfx="60%" mfy="60%"
+    lede="Practice notes from JMD Consulting: how the practice works, where its specialism comes from, and how it reaches clients." />
+
+  <section class="sec" aria-labelledby="notes-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>5.1</b>Practice notes</p>
+        <h2 id="notes-h" data-split>From the practice</h2>
+      </div>
+      <div class="indent">
+        <div class="cards" data-rise>
+          {notes.map((n, i) => (
+            <a class="card" href={href(`notes/${n.slug}`)}>
+              <figure class="ph" data-reveal><img src={`${IMG}/${n.image}`} alt={n.alt} width="1024" height="688" loading="lazy" decoding="async" /></figure>
+              <span class="mono card__n">Note {String(i + 1).padStart(2, '0')}</span>
+              <span class="card__t"><span>{n.title}</span></span>
+              <span class="card__s">{n.standfirst}</span>
+              <span class="mono card__go">Read the note<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Chalk>

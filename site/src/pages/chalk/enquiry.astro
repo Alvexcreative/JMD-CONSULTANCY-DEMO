@@ -1,0 +1,93 @@
+---
+import Chalk from '../../layouts/Chalk.astro';
+import PageHead from '../../components/chalk/PageHead.astro';
+import { contact, site, taglines } from '../../data/content';
+import { IMG } from '../../data/chalk';
+const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>';
+---
+<Chalk page="enquiry" title="Enquiry" heroImage={`${IMG}/gen/enquiry-window.jpg`}
+  description="Tell JMD Consulting what your finance system is doing. Telephone +44 (0) 1423 884000 or email info@jmdconsulting.co.uk.">
+
+  <PageHead n={6} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-window.jpg`}
+    fx="66%" fy="50%" mfx="64%" mfy="62%" lede={contact.invitation} />
+
+  <section class="enq" id="enquiry" aria-labelledby="enq-h">
+    <div class="wrap enq__in">
+      <div data-rise>
+        <h2 id="enq-h">{contact.heading}.</h2>
+        <p class="enq__lede">{contact.lede}</p>
+        <div class="contact enq__facts mono">
+          <dl>
+            <dt>Telephone</dt><dd><a class="lnk" href={site.phoneHref}>{site.phone}</a></dd>
+            <dt>Email</dt><dd><a class="lnk" href={`mailto:${site.email}`}>{site.email}</a></dd>
+            <dt>Web</dt><dd>{site.web}</dd>
+            <dt>Base</dt><dd>{site.base}</dd>
+          </dl>
+        </div>
+        <figure class="ph" data-reveal>
+          <img src={`${IMG}/gen/enquiry-desk.jpg`} alt="A desk by a window with a telephone, an open notebook and a pen." width="896" height="1120" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+
+      <form data-enquiry novalidate>
+        <div class="f2">
+          <div class="field" data-field>
+            <label for="e-name" class="mono">Name <i aria-hidden="true">*</i></label>
+            <input id="e-name" name="name" type="text" autocomplete="name" required />
+            <p class="err mono" id="e-name-err"><Fragment set:html={err} />Enter your name</p>
+          </div>
+          <div class="field" data-field>
+            <label for="e-org" class="mono">Organisation <i aria-hidden="true">*</i></label>
+            <input id="e-org" name="organisation" type="text" autocomplete="organization" required />
+            <p class="err mono" id="e-org-err"><Fragment set:html={err} />Enter your organisation</p>
+          </div>
+        </div>
+        <div class="f2">
+          <div class="field" data-field>
+            <label for="e-email" class="mono">Email <i aria-hidden="true">*</i></label>
+            <input id="e-email" name="email" type="email" autocomplete="email" inputmode="email" required />
+            <p class="err mono" id="e-email-err"><Fragment set:html={err} />Enter a valid email address</p>
+          </div>
+          <div class="field" data-field>
+            <label for="e-sys" class="mono">Finance system <i aria-hidden="true">*</i></label>
+            <select id="e-sys" name="system" required>
+              <option value="">Select&hellip;</option>
+              {contact.systems.map((s) => <option>{s}</option>)}
+            </select>
+            <p class="err mono" id="e-sys-err"><Fragment set:html={err} />Choose a system</p>
+          </div>
+        </div>
+        <div class="field" data-field>
+          <label for="e-detail" class="mono">What is happening <i aria-hidden="true">*</i></label>
+          <textarea id="e-detail" name="detail" required placeholder="A stalled implementation, a consolidation that will not balance, a report the system will not produce, a migration off a legacy ledger…"></textarea>
+          <p class="err mono" id="e-detail-err"><Fragment set:html={err} />Tell us briefly what is happening</p>
+        </div>
+        <button class="btn" type="submit" data-magnetic>Send enquiry
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </button>
+        <p class="mono enq__note">Replies come from a consultant directly, usually the same working day.</p>
+        <div class="sent" role="status">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="tick" d="M2.5 8.4 6.2 12l7.3-8"/></svg>
+          <p>Enquiry recorded. <span style="color:var(--on-ink-dim)">{contact.demoNotice}</span></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="find-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>6.2</b>Find us</p>
+        <div>
+          <h2 id="find-h" data-split>Can do attitude.</h2>
+          <p class="sec__lede" data-rise>Based in Harrogate, North Yorkshire at the gateway to the Yorkshire Dales, we are a 20 minute drive from Leeds Bradford International Airport and 30 minutes from York railway station.</p>
+        </div>
+      </div>
+      <div class="indent">
+        <figure class="ph ph--wide" data-reveal>
+          <img src={`${IMG}/harrogate-03.jpg`} alt="Harrogate in morning light." width="2400" height="1339" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </div>
+  </section>
+</Chalk>

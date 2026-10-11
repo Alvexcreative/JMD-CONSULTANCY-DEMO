@@ -1,0 +1,82 @@
+---
+import Chalk from '../../layouts/Chalk.astro';
+import PageHead from '../../components/chalk/PageHead.astro';
+import { intro, systems, taglines } from '../../data/content';
+import { IMG } from '../../data/chalk';
+---
+<Chalk page="systems" title="Systems" heroImage={`${IMG}/gen/systems-servers.jpg`}
+  description="CODA / Unit4 Financials and NetSuite, linked with Microsoft SQL Server or Oracle: the systems JMD Consulting implements and integrates.">
+
+  <PageHead n={2} label="Systems" title={taglines.specialists} image={`${IMG}/gen/systems-servers.jpg`}
+    fx="68%" fy="50%" mfx="60%" mfy="60%" lede={intro.specialise} />
+
+  <section class="sec" aria-labelledby="fit-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>2.1</b>How they fit</p>
+        <div>
+          <h2 id="fit-h" data-split>One family of systems</h2>
+          {/* first sentence from the live site; the second is bridging copy, for approval */}
+          <p class="sec__lede" data-rise>Accounting and finance systems, linked with MS SQL Server&reg; or Oracle&reg;. The integration between them is the work.</p>
+        </div>
+      </div>
+      <div class="indent">
+        <div>
+          <div class="wire" role="img" aria-label="CODA / Unit4 Financials and NetSuite connect through systems integration to Microsoft SQL Server and Oracle.">
+            <svg class="wire__svg" aria-hidden="true"></svg>
+            <div class="wire__row wire__row--top">
+              <div class="node"><span class="mono">Finance system</span><b>CODA / Unit4 Financials&reg;</b></div>
+              <div class="node"><span class="mono">Finance system</span><b>NetSuite&reg;</b></div>
+            </div>
+            <div class="wire__hub"><div class="node"><span class="mono">JMD Consulting</span><b>Systems integration</b></div></div>
+            <div class="wire__row wire__row--bot">
+              <div class="node"><span class="mono">Database</span><b>Microsoft SQL Server&reg;</b></div>
+              <div class="node"><span class="mono">Database</span><b>Oracle&reg;</b></div>
+            </div>
+          </div>
+          <p class="mono wire__cap">Systems worked with in delivery</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" aria-labelledby="ledger-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>2.2</b>The ledger</p>
+        <h2 id="ledger-h" data-split>{systems.heading}</h2>
+      </div>
+      <div class="indent">
+        <div>
+          <ol class="ledger" data-rise>
+            {systems.list.map((s) => <li><span class="n">{s.n}</span><b>{s.name}</b><span>{s.note}</span></li>)}
+          </ol>
+          <div class="pair">
+            <figure class="ph ph--land" data-reveal>
+              <img src={`${IMG}/gen/systems-team.jpg`} alt="Three colleagues reviewing a system diagram on a wall screen." width="1024" height="688" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="ph ph--tall" data-reveal>
+              <img src={`${IMG}/gen/systems-atrium.jpg`} alt="A glass and steel atrium roof seen from below." width="896" height="1120" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="claims-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>2.3</b>In practice</p>
+        <h2 id="claims-h" data-split>{taglines.evolve}</h2>
+      </div>
+      <div class="indent">
+        <ul class="claims" data-rise>
+          {systems.notes.map((n) => <li class="claim">{n}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"><img src={`${IMG}/hero-08.jpg`} alt="" width="2400" height="1339" loading="lazy" decoding="async" /></div>
+</Chalk>

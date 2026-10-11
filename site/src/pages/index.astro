@@ -1,6 +1,7 @@
 ---
 import { site } from '../data/content';
 const designs = [
+  { href: '/chalk/', name: 'Chalk', note: 'The chosen direction. Spectral and Martian Mono on chalk blue, the full site with motion throughout.', bg: '#DCE6F2', fg: '#13283F' },
   { href: '/montfort/', name: 'Montfort', note: 'Near-monochrome cloud and slate blue. Wide-tracked light capitals, enormous white space.', bg: '#EEF2F6', fg: '#26354A' },
   { href: '/growth/', name: 'Path for Growth', note: 'Oswald and Lora, cream and tan, square corners. Alternating bands, Harrogate hero.', bg: '#FFFEF5', fg: '#8A6B47' },
 ];
@@ -10,16 +11,16 @@ const designs = [
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{site.name} — two directions</title>
-  <meta name="description" content="Two full site builds for JMD Consulting." />
+  <title>{site.name} — three builds</title>
+  <meta name="description" content="Three full site builds for JMD Consulting." />
   <style>
     *{box-sizing:border-box}
     body{margin:0;min-height:100svh;display:grid;place-items:center;padding:clamp(20px,5vw,60px);
       background:#16181B;color:#F4F2ED;font:16px/1.6 ui-sans-serif,-apple-system,system-ui,sans-serif}
-    .in{width:100%;max-width:900px}
+    .in{width:100%;max-width:1120px}
     h1{margin:0 0 10px;font-size:clamp(1.3rem,3vw,2rem);font-weight:500;letter-spacing:-.01em}
     .sub{margin:0 0 clamp(28px,5vw,46px);color:rgba(244,242,237,.6)}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px)}
+    .row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,28px)}
     a.card{display:flex;flex-direction:column;gap:10px;padding:clamp(22px,3vw,34px);
       text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.16);
       transition:border-color .2s ease,transform .2s ease}
@@ -28,13 +29,13 @@ const designs = [
     .sw{height:64px;margin-bottom:6px;display:grid;place-items:center;font-weight:600;letter-spacing:.04em}
     .nm{font-size:1.1rem;font-weight:600}
     .nt{color:rgba(244,242,237,.62);font-size:.92rem}
-    @media(max-width:700px){.row{grid-template-columns:1fr}}
+    @media(max-width:900px){.row{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="in">
     <h1>{site.name}</h1>
-    <p class="sub">Two complete builds of the same site. Five pages each, one shared set of content.</p>
+    <p class="sub">Three complete builds of the same site, one shared set of content. Chalk is the chosen direction.</p>
     <div class="row">
       {designs.map((d) => (
         <a class="card" href={d.href}>

@@ -1,0 +1,31 @@
+---
+/* The home hero's composition carried onto every page: a photograph under
+   the chalk veil, the copy held on the left, the rail clear on the right.
+   `fx`/`fy` place the photograph's focal point on wide screens, `mfx`/`mfy`
+   on phones, where the picture takes the lower part of the frame. */
+interface Props {
+  n: number | string;
+  label: string;
+  title: string;
+  lede?: string;
+  image: string;
+  fx?: string; fy?: string; mfx?: string; mfy?: string; veil?: number;
+}
+const { n, label, title, lede, image, fx = '70%', fy = '50%', mfx, mfy = '60%', veil = 1 } = Astro.props;
+const style = `--fx:${fx};--fy:${fy};--mx-fx:${mfx ?? fx};--mx-fy:${mfy};--veil:${veil}`;
+---
+<section class="hero hero--photo phead" data-hero style={style}>
+  <div class="hero__media" aria-hidden="true">
+    <img class="hero__img is-on" src={image} alt="" width="1344" height="752" fetchpriority="high" decoding="async" />
+    <div class="hero__veil"></div>
+  </div>
+  <span class="hero__rule" aria-hidden="true"></span>
+  <div class="wrap room">
+    <div class="phead__copy">
+      <p class="mono phead__ref"><b>{n}</b><span class="bar" aria-hidden="true"></span><span>{label}</span></p>
+      <h1 class="phead__h" data-split set:html={title} />
+      {lede && <p class="phead__lede">{lede}</p>}
+      {Astro.slots.has('default') && <div class="phead__acts"><slot /></div>}
+    </div>
+  </div>
+</section>

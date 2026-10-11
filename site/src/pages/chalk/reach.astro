@@ -1,0 +1,98 @@
+---
+import Chalk from '../../layouts/Chalk.astro';
+import PageHead from '../../components/chalk/PageHead.astro';
+import { reach, taglines } from '../../data/content';
+import { IMG } from '../../data/chalk';
+
+/* ring radii in a 600-unit square; the dashed outer ring is remote work */
+const R = [70, 130, 205, 280];
+---
+<Chalk page="reach" title="Reach" heroImage={`${IMG}/gen/reach-dales.jpg`}
+  description="Based in Harrogate at the gateway to the Yorkshire Dales, JMD Consulting works on site across the UK, Europe, the USA and Canada, and the Middle East, or remotely.">
+
+  <PageHead n={3} label="Reach" title={taglines.working} image={`${IMG}/gen/reach-dales.jpg`}
+    fx="64%" fy="55%" mfx="62%" mfy="60%"
+    lede="Based in Harrogate in the North Yorkshire countryside, we are able to travel to clients anywhere across the globe." />
+
+  <section class="sec" aria-labelledby="dist-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>3.1</b>Distance</p>
+        <div>
+          <h2 id="dist-h" data-split>{reach.heading}</h2>
+          <p class="sec__lede" data-rise>{reach.body}</p>
+        </div>
+      </div>
+      <div class="indent">
+        <div class="rings">
+          <svg class="rings__svg" viewBox="0 0 600 600" role="img" aria-label="Distances from Harrogate: 20 minutes to Leeds Bradford International Airport, 30 minutes to York railway station, then the UK and international regions, or remote.">
+            <circle class="r" cx="300" cy="300" r={R[0]} />
+            <circle class="r" cx="300" cy="300" r={R[1]} />
+            <circle class="r" cx="300" cy="300" r={R[2]} />
+            <circle class="r dash" cx="300" cy="300" r={R[3]} />
+            <circle class="pulse" cx="300" cy="300" r="10" />
+            <circle class="core" cx="300" cy="300" r="7" />
+            <text class="hq" x="300" y="336" text-anchor="middle">Harrogate</text>
+            <text data-ring="0" x="300" y={300 - R[0] - 10} text-anchor="middle">20 min</text>
+            <text data-ring="1" x="300" y={300 - R[1] - 10} text-anchor="middle">30 min</text>
+            <text data-ring="2" x="300" y={300 - R[2] - 10} text-anchor="middle">UK &amp; international</text>
+            <text data-ring="3" x="300" y={300 - R[3] - 10} text-anchor="middle">Remote</text>
+          </svg>
+          <ul class="legs">
+            <li data-ring="0"><span class="k">20 minutes</span><span class="v">Leeds Bradford International Airport</span></li>
+            <li data-ring="1"><span class="k">30 minutes</span><span class="v">York railway station</span></li>
+            <li data-ring="2"><span class="k">On site</span><span class="v">United Kingdom, Europe, USA &amp; Canada, Middle East</span></li>
+            <li data-ring="3"><span class="k">Remote</span><span class="v">Connected to your servers or desktop devices</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" aria-labelledby="travel-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>3.2</b>Travel</p>
+        <div>
+          <h2 id="travel-h" data-split>We love our location</h2>
+          <p class="sec__lede" data-rise>With easy road, rail and air routes that means we are able to visit clients all over the UK and internationally to Europe, USA &amp; Canada and the Middle East.</p>
+        </div>
+      </div>
+      <div class="indent">
+        <div class="trio">
+          <figure class="ph ph--land" data-reveal>
+            <img src={`${IMG}/gen/reach-station.jpg`} alt="A curved iron and glass station roof over a platform, morning light." width="1024" height="688" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="ph ph--tall" data-reveal>
+            <img src={`${IMG}/gen/reach-flight.jpg`} alt="An aircraft wing above white cloud at first light." width="896" height="1120" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="ph ph--land" data-reveal>
+            <img src={`${IMG}/gen/reach-remote.jpg`} alt="A laptop on a desk by a window over green countryside." width="1024" height="688" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="base-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>3.3</b>The base</p>
+        <h2 id="base-h" data-split>Harrogate, North Yorkshire</h2>
+      </div>
+      <div class="indent">
+        <div class="reach" data-rise>
+          <dl>
+            {reach.facts.slice(0, 2).map((f) => <><dt class="mono">{f.label}</dt><dd>{f.value}</dd></>)}
+          </dl>
+          <dl>
+            <dt class="mono">{reach.facts[2].label}</dt><dd>{reach.facts[2].value}</dd>
+            <dt class="mono">Remote</dt><dd>Servers or desktop devices, via cloud based applications</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"><img src={`${IMG}/harrogate-03.jpg`} alt="" width="2400" height="1339" loading="lazy" decoding="async" /></div>
+</Chalk>

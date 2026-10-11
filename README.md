@@ -1,18 +1,68 @@
 # JMD Consulting
 
-Two things live here: the **full site build** in `site/`, and the original
-**single-page concepts** in `concepts/` that it was chosen from.
+Two things live here: the **full site builds** in `site/`, and the original
+**single-page concepts** in `concepts/` that they were chosen from.
+
+## Chalk — the chosen direction, built in full — `site/` at `/chalk/`
+
+Concept 08 carried onto a ten-page site, to the scope of the Alvex "Sky Is The
+Limit" package: unlimited pages, a bespoke system, scroll motion throughout, a
+branded loading screen, and a news section.
+
+| Page | Carries |
+|---|---|
+| Home `/chalk/` | The approved 08 page, each note now leading on to its own page |
+| 1 Services | The four services as chapters beside a pinned numeral and progress spine; the practice's statement |
+| 2 Systems | The integration diagram (finance systems → integration → databases); the systems ledger; the three claims |
+| 3 Reach | Distance from Harrogate as rings; travel; the base |
+| 4 Evidence | Odometer figures (1990, 2000, c.100, 4 regions); the track-record timeline; the held-open testimonial slots |
+| 5 Notes | Three practice notes (`/chalk/notes/…`), bodies verbatim from the live site |
+| 6 Enquiry | The enquiry form (demonstration only), contact details, finding the practice |
+
+**Motion.** GSAP 3.15 (ScrollTrigger, SplitText, MotionPath), in
+`src/scripts/chalk/motion.js`:
+
+- *Intro* — the "Struck" loading screen: the two figures of the logo close and
+  meet, the wordmark prints, the logo flies into the hero. Home only, once a
+  session (`sessionStorage`), never on an anchored visit.
+- *Between pages* — native cross-document View Transitions: the header and the
+  rail hold still, the old page lifts and softens away, the new one rises, and
+  its heading sets itself line by line.
+- *On scroll* — headings rise line by line from their own masks; photographs are
+  uncovered by a rising mask and drift against the scroll; hairlines draw; the
+  Services numeral and spine track the chapter; the statement inks in word by
+  word; the systems diagram wires itself up and carries data packets; the reach
+  rings expand from Harrogate; the figures wind up on odometers; the timeline
+  draws and lights each year.
+- *Feedback* — the docking rail's magnetic pull, button sheen, magnetic calls to
+  action, underlines that draw, a reading-progress hairline, a header that steps
+  aside on the way down.
+
+Content is visible without scripts. Starting states only apply once a script has
+armed them (split headings also carry a 2.5s CSS failsafe), loops pause off
+screen, and `prefers-reduced-motion` gets a fully static site.
+
+**Photography** — eighteen images generated with Higgsfield (GPT Image 2.5, 1K,
+high) in `public/assets/chalk/gen/`, two to three per page, all to one brief:
+daylight, chalk white, pale steel and navy, candid, no text or logos. They are
+for review; none is presented as JMD's own office or staff, and a live build
+wants licensed stock or a commissioned shoot.
+
+**Copy** — facts and body copy come from `src/data/content.ts` and
+`src/data/chalk.ts`, both from the live site. A few headings, the Notes titles
+and standfirsts, and two section ledes had no source; each is marked
+*bridging* in a comment beside it and needs the client's approval.
 
 ## The site — `site/`
 
-Five pages, built twice, from one shared set of content.
+Five pages, built twice, from one shared set of content (plus Chalk, above).
 
 ```bash
 cd site && npm install && npm run dev
 ```
 
-Then open <http://localhost:4800>. The root is a picker; the two builds are at
-`/montfort/` and `/growth/`.
+Then open <http://localhost:4800>. The root is a picker; the builds are at
+`/chalk/`, `/montfort/` and `/growth/`.
 
 A switcher sits at the foot of every page and links to **the same page in the
 other build** — Services to Services, Contact to Contact — so comparison is like

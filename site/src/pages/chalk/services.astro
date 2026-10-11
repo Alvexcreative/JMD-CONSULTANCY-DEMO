@@ -1,0 +1,73 @@
+---
+import Chalk from '../../layouts/Chalk.astro';
+import PageHead from '../../components/chalk/PageHead.astro';
+import { intro, statement, services, taglines } from '../../data/content';
+import { href, IMG } from '../../data/chalk';
+
+/* one photograph per chapter; the CODA chapter takes the ledgers, the
+   practice's history in one still life */
+const art: Record<string, { src: string; alt: string }> = {
+  'project-management': { src: 'gen/services-planning.jpg', alt: 'Two colleagues planning against a wall of printed project timelines.' },
+  'systems-implementation': { src: 'gen/services-implementation.jpg', alt: 'A consultant at two monitors showing financial reporting dashboards.' },
+  'etl-business-intelligence': { src: 'gen/services-bi.jpg', alt: 'Charts on a laptop beside printed financial reports and a pen.' },
+  'coda-unit4': { src: 'gen/evidence-ledgers.jpg', alt: 'Leather-bound ledgers stacked beside a modern laptop.' },
+};
+---
+<Chalk page="services" title="Services" heroImage={`${IMG}/hero-15.jpg`}
+  description="Project management, systems implementation, ETL and business intelligence, and CODA / Unit4 Financials consultancy since 1990.">
+
+  <PageHead n={1} label="Services" title="Solutions for your business" image={`${IMG}/hero-15.jpg`}
+    fx="62%" fy="50%" mfx="58%" mfy="62%" lede={intro.welcome}>
+    <a class="btn" href={href('enquiry')} data-magnetic>Describe your situation
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+  </PageHead>
+
+  <section class="sec" aria-labelledby="chapters-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono sec__ref"><b>1.0</b>The practice</p>
+        <div>
+          <h2 id="chapters-h" data-split>{taglines.solution}</h2>
+          {/* bridging copy, for approval: a summary of the services below */}
+          <p class="sec__lede" data-rise>Four disciplines, one specialism: accounting and finance systems, delivered as a working solution rather than a report.</p>
+        </div>
+      </div>
+
+      <div class="chaps">
+        <div class="chaps__rail" aria-hidden="true">
+          <div class="chaps__num"><span>{services.map((s) => <div>{s.n}</div>)}</span></div>
+          <p class="mono chaps__lbl">{services[0].title}</p>
+          <div class="chaps__spine"><i></i></div>
+        </div>
+        <div class="chaps__list">
+          {services.map((s) => (
+            <article class="chap" id={s.slug} data-label={s.title}>
+              <div>
+                <p class="chap__n">{s.n} &middot; Service</p>
+                <h2 data-split>{s.title}</h2>
+                <p class="chap__body" data-rise>{s.body}</p>
+                <ul class="chap__scope" data-rules>
+                  {s.points.map((p, i) => <li>{p}<span>{s.n}.{i + 1}</span></li>)}
+                </ul>
+              </div>
+              <figure class="ph" data-reveal>
+                <img src={`${IMG}/${art[s.slug].src}`} alt={art[s.slug].alt} width="1024" height="688" loading="lazy" decoding="async" />
+              </figure>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" aria-label="Statement">
+    <div class="wrap indent">
+      <figure class="ink">
+        <blockquote>{statement}</blockquote>
+        <figcaption class="mono ink__by">JMD Consulting</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"><img src={`${IMG}/gen/systems-team.jpg`} alt="" width="1024" height="688" loading="lazy" decoding="async" /></div>
+</Chalk>

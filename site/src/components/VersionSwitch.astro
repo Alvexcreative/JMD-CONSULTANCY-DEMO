@@ -4,14 +4,24 @@
    of it. Links to the SAME page in the other build, so comparison is
    like for like instead of dumping you back on a homepage. */
 const path = Astro.url.pathname;
-const rest = path.replace(/^\/(montfort|growth)\/?/, '');
-const current = path.startsWith('/growth') ? 'growth' : 'montfort';
-const to = (d: string) => `/${d}/${rest}`;
+const current = path.startsWith('/growth') ? 'growth' : path.startsWith('/chalk') ? 'chalk' : 'montfort';
+const rest = path.replace(/^\/(montfort|growth|chalk)\/?/, '');
+const pageName = rest.replace(/\/$/, '').split('/')[0] || 'home';
+/* Chalk is a larger site with its own section names: each page maps to
+   its nearest equivalent in the other builds, and back */
+const toChalk: Record<string, string> = { '': '', services: 'services', systems: 'systems', about: 'reach', contact: 'enquiry' };
+const fromChalk: Record<string, string> = { '': '', services: 'services', systems: 'systems', reach: 'about', evidence: 'about', notes: '', enquiry: 'contact' };
+const to = (d: string) => {
+  if (d === current) return path;
+  if (d === 'chalk') return `/chalk/${toChalk[pageName === 'home' ? '' : pageName] ?? ''}`.replace(/([^/])$/, '$1/');
+  const slug = current === 'chalk' ? (fromChalk[pageName === 'home' ? '' : pageName] ?? '') : (pageName === 'home' ? '' : pageName);
+  return `/${d}/${slug}`.replace(/([^/])$/, '$1/');
+};
 const builds = [
+  { id: 'chalk', name: 'Chalk' },
   { id: 'montfort', name: 'Montfort' },
   { id: 'growth', name: 'Path for Growth' },
 ];
-const pageName = rest.replace(/\/$/, '') || 'home';
 ---
 <nav class="vswitch" aria-label="Compare design versions">
   <span class="vswitch-label">{pageName}</span>
@@ -24,7 +34,7 @@ const pageName = rest.replace(/\/$/, '') || 'home';
     >{b.name}</a>
   ))}
   <span class="vswitch-sep" aria-hidden="true"></span>
-  <a href="/" title="Both builds">Index</a>
+  <a href="/" title="All builds">Index</a>
 </nav>
 
 <style is:global>
