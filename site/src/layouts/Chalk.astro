@@ -30,19 +30,15 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   <!-- motion and the intro are decided before first paint. Scripts on and
        reduced motion off gives html.motion. The intro plays on the home page
        once a session, never on an anchored visit, never under reduced motion.
-       Review only: ?intro=draft|aperture picks an intro and replays it. -->
+       ?intro on the address replays it, for review. -->
   <script is:inline define:vars={{ home }}>
     (function () {
       var r = document.documentElement;
       var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
       if (!still) r.classList.add('motion');
-      var q = new URLSearchParams(location.search).get('intro'), modes = ['draft', 'aperture'], mode = 'draft';
-      try { mode = localStorage.getItem('jmd-intro-mode') || mode; } catch (e) {}
-      if (modes.indexOf(q) > -1) { mode = q; try { localStorage.setItem('jmd-intro-mode', q); } catch (e) {} }
-      if (modes.indexOf(mode) < 0) mode = 'draft';
-      r.dataset.intro = mode;
+      var replay = new URLSearchParams(location.search).has('intro');
       if (!home || location.hash || still) return;
-      if (modes.indexOf(q) < 0) {
+      if (!replay) {
         try { if (sessionStorage.getItem('jmd-intro')) return; sessionStorage.setItem('jmd-intro', '1'); } catch (e) {}
       }
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -54,19 +50,9 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
   {home && (
     <div class="intro" id="intro" aria-hidden="true">
       <div class="intro__paper"></div>
-      <svg class="intro__iris" aria-hidden="true"><circle cx="50%" cy="50%" r="0" /></svg>
       <p class="intro__skip" aria-hidden="true">Tap to skip</p>
-      <div class="intro__stage"><span class="intro__mk"></span><span class="intro__bar"><i></i></span></div>
+      <div class="intro__stage"><span class="intro__mk"></span></div>
     </div>
-  )}
-  {/* review only: compare the two intros. Each link replays its intro.
-      Delete this nav, its styles and the ?intro handling once one is chosen. */}
-  {home && (
-    <nav class="introsw" aria-label="Compare intros (review)">
-      <span class="introsw__t">Intro</span>
-      <a href="/?intro=draft" data-mode="draft">Draft</a>
-      <a href="/?intro=aperture" data-mode="aperture">Aperture</a>
-    </nav>
   )}
   <span class="progress" aria-hidden="true"></span>
 

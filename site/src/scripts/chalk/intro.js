@@ -1,25 +1,21 @@
-/* ── First-load intro: Draft or Aperture (under review) ──────────────────
-   The gate in the layout's <head> decides whether it plays (home, once a
-   session, never under reduced motion) and which one (html[data-intro]).
-   The ghost is a copy of the hero's logo, so the two can never drift apart,
-   and it lands exactly on the real one before the overlay goes.
+/* ── First-load intro: "Draft" ────────────────────────────────────────────
+   The gate in the layout's <head> decides whether it plays: the home page,
+   once a session, never on an anchored visit, never under reduced motion.
+   (?intro on the address replays it, for review.)
 
-   Draft     the wordmark is drawn stroke by stroke, the way it is built (a
-             pen line along each letter), the two figures ink in, then the
-             sheet lifts away as the logo glides into the hero. ~2.2s.
-   Aperture  the logo holds still while a hairline tracks the hero
-             photograph actually loading, then the sheet opens from the
-             centre like an iris and the logo settles into place. ~1.2-2s.
+   The wordmark is drawn stroke by stroke in reading order, the way it is
+   built (a pen line along each letter); the grey and blue figures ink in
+   while it is being written; then the chalk sheet lifts away as the logo
+   glides onto the hero. The ghost is a copy of the hero's logo, so the two
+   can never drift apart, and it lands exactly on the real one.
 
-   Any pointer, key, wheel or touch ends it at once; it can never cover the
-   page for more than six seconds; on a phone it runs at 70% of the time. */
+   About 3s on a desktop, 2.1s on a phone. Any pointer, key, wheel or touch
+   ends it at once, and it can never cover the page for more than six
+   seconds. */
 import { gsap } from 'gsap';
 
 const root = document.documentElement;
 const ov = document.getElementById('intro');
-
-/* review only: mark the intro in use on the comparison switcher */
-document.querySelectorAll('.introsw a').forEach((a) => a.setAttribute('aria-current', String(a.dataset.mode === root.dataset.intro)));
 
 (function () {
   if (!ov) return;
@@ -28,11 +24,13 @@ document.querySelectorAll('.introsw a').forEach((a) => a.setAttribute('aria-curr
   const real = document.querySelector('.room__card .mk');
   const ghost = ov.querySelector('.intro__mk');
   const paper = ov.querySelector('.intro__paper');
-  const mode = root.dataset.intro === 'aperture' ? 'aperture' : 'draft';
-  const P = innerWidth < 720 ? 0.7 : 1;
+  /* pace: every timing below is multiplied by P. 1.35 was chosen on review
+     (slower than the first cut); a phone runs at 70% of that */
+  const PACE = 1.35;
+  const P = PACE * (innerWidth < 720 ? 0.7 : 1);
   const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' }, onComplete: finish });
   const inputs = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
-  let done = false, settling = false;
+  let done = false;
   /* development only: lets a hidden browser be stepped to a given moment */
   if (import.meta.env.DEV) window.__intro = tl;
 
@@ -43,9 +41,6 @@ document.querySelectorAll('.introsw a').forEach((a) => a.setAttribute('aria-curr
     root.classList.remove('intro-on');
     ov.setAttribute('hidden', '');
     inputs.forEach((t) => removeEventListener(t, finish, true));
-    const img = document.querySelector('#hero-media .hero__img');
-    /* skipped before the photograph began to settle: put it at rest at once */
-    if (img && !settling) gsap.set(img, { clearProps: 'scale,transform,transition' });
   }
   if (!real) { finish(); return; }
   inputs.forEach((t) => addEventListener(t, finish, true));
@@ -62,13 +57,22 @@ document.querySelectorAll('.introsw a').forEach((a) => a.setAttribute('aria-curr
   });
   ghost.appendChild(svg);
 
-  /* the flight onto the real logo: measured, not guessed */
+  /* the flight onto the real logo: measured at the moment it starts, not
+     when the intro begins, because the hero below can still be settling
+     (its headline font arriving) during the first seconds */
   function flight(at, dur) {
-    const a = ghost.getBoundingClientRect(), b = real.getBoundingClientRect();
-    tl.to(ghost, { x: b.left - a.left, y: b.top - a.top, scale: b.width / a.width, duration: dur, ease: 'expo.inOut' }, at);
+    let m;
+    const measure = () => {
+      if (!m) { const a = ghost.getBoundingClientRect(), b = real.getBoundingClientRect();
+        m = { x: b.left - a.left, y: b.top - a.top, s: b.width / a.width }; }
+      return m;
+    };
+    tl.call(() => { m = null; }, null, at - 0.001);
+    tl.to(ghost, { x: () => measure().x, y: () => measure().y, scale: () => measure().s, duration: dur, ease: 'expo.inOut' }, at);
   }
 
-  if (mode === 'draft') { draft(); tl.play(); } else aperture();
+  draft();
+  tl.play();
 
   /* ── Draft ───────────────────────────────────────────────────────────── */
   function draft() {
@@ -101,44 +105,5 @@ document.querySelectorAll('.introsw a').forEach((a) => a.setAttribute('aria-curr
     const T = 1.42 * P;
     tl.fromTo(paper, { clipPath: 'inset(0% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.78 * P, ease: 'expo.inOut' }, T);
     flight(T - 0.04 * P, 0.86 * P);
-  }
-
-  /* ── Aperture ────────────────────────────────────────────────────────── */
-  function aperture() {
-    const bar = ov.querySelector('.intro__bar i'), barWrap = ov.querySelector('.intro__bar');
-    const ring = ov.querySelector('.intro__iris circle');
-    const img = document.querySelector('#hero-media .hero__img');
-    const R = Math.hypot(innerWidth, innerHeight) / 2 + 40;
-    const MIN = 0.6 * P, MAX = 1.6 * P;
-    const start = performance.now();
-    /* the hairline creeps while the photograph loads, then completes */
-    const creep = gsap.to(bar, { scaleX: 0.8, duration: MAX, ease: 'power2.out' });
-    const loaded = new Promise((res) => {
-      if (!img || (img.complete && img.naturalWidth)) return res();
-      img.addEventListener('load', res, { once: true });
-      img.addEventListener('error', res, { once: true });
-    });
-    const capped = Promise.race([loaded, new Promise((res) => setTimeout(res, MAX * 1000))]);
-    capped.then(() => {
-      if (done) return;
-      const wait = Math.max(0, MIN - (performance.now() - start) / 1000);
-      creep.kill();
-      tl.to(bar, { scaleX: 1, duration: 0.32 * P, ease: 'power2.out' }, wait)
-        .to(barWrap, { opacity: 0, duration: 0.25 * P, ease: 'none' }, wait + 0.3 * P);
-      const T = wait + 0.34 * P;
-      /* the iris: the sheet opens from the centre, a fine ring at its edge */
-      /* power3, not expo: the opening is meant to be watched, not snapped */
-      tl.fromTo(paper, { '--ap': '0px' }, { '--ap': `${R}px`, duration: 1.1 * P, ease: 'power3.inOut' }, T)
-        .fromTo(ring, { attr: { r: 0 }, opacity: 0.9 }, { attr: { r: R }, opacity: 0, duration: 1.1 * P, ease: 'power3.inOut' }, T);
-      /* the photograph's own CSS transition would fight the tween frame by frame */
-      /* the photograph settles on its own clock, so the page is free the
-         moment the iris is open rather than when the photograph comes to rest */
-      if (img) {
-        gsap.set(img, { transition: 'none', scale: 1.08 });
-        tl.call(() => { settling = true; gsap.to(img, { scale: 1, duration: 1.5 * P, ease: 'power3.out', onComplete: () => gsap.set(img, { clearProps: 'scale,transform,transition' }) }); }, null, T);
-      }
-      flight(T + 0.12 * P, 0.95 * P);
-      tl.play(0);
-    });
   }
 })();
