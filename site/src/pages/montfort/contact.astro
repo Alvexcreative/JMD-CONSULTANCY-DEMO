@@ -1,0 +1,44 @@
+---
+import L from '../../layouts/Montfort.astro';
+import EnquiryForm from '../../components/EnquiryForm.astro';
+import { site, contact, reach, taglines } from '../../data/content';
+---
+<L title="Contact" description={contact.invitation} page="Contact">
+  <section class="pagehead">
+    <div class="wrap">
+      <p class="caps">{taglines.working}</p>
+      <h1>{contact.heading}</h1>
+      <p class="lede">{contact.invitation}</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="grid2">
+        <div>
+          <h2 style="font-size:clamp(1.2rem,2vw,1.7rem)">Enquiry</h2>
+          <p class="body" style="margin:16px 0 34px">{contact.lede}</p>
+          <EnquiryForm tone="montfort" />
+        </div>
+        <div>
+          <div class="fact" style="border-top:1px solid var(--rule);padding-top:20px">
+            <p class="caps">Telephone</p>
+            <p class="body"><a href={site.phoneHref}>{site.phone}</a></p>
+          </div>
+          <div class="fact" style="border-top:1px solid var(--rule);padding-top:20px;margin-top:24px">
+            <p class="caps">Email</p>
+            <p class="body"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          </div>
+          <div class="fact" style="border-top:1px solid var(--rule);padding-top:20px;margin-top:24px">
+            <p class="caps">Base</p>
+            <p class="body">{reach.facts[1].value}</p>
+          </div>
+          <div class="fact" style="border-top:1px solid var(--rule);padding-top:20px;margin-top:24px">
+            <p class="caps">Regions</p>
+            <p class="body">{reach.facts[0].value}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</L>

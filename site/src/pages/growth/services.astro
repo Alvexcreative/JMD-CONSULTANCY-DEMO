@@ -1,0 +1,33 @@
+---
+import L from '../../layouts/Growth.astro';
+import { services, intro, taglines } from '../../data/content';
+---
+<L title="Services" description={intro.specialise} page="Services">
+  <section class="pagehead">
+    <div class="pagehead-wash"></div>
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h1 style="margin-top:12px">{taglines.specialists}</h1>
+      <p class="lead-xl">{intro.specialise}</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="two">
+        {services.map((s) => (
+          <article class="card">
+            <p class="eyebrow">{s.n}</p>
+            <h3>{s.title}</h3>
+            <p class="body" style="flex:1">{s.body}</p>
+            <ul>{s.points.map((p) => (<li>{p}</li>))}</ul>
+          </article>
+        ))}
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--solid" href="/growth/contact">Discuss a project</a>
+        <a class="btn btn--outline" href="/growth/systems">Systems we work with</a>
+      </div>
+    </div>
+  </section>
+</L>

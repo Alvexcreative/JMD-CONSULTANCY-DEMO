@@ -1,0 +1,65 @@
+---
+import L from '../../layouts/Montfort.astro';
+import { site, reach, credentials, evidence, statement, taglines, intro } from '../../data/content';
+---
+<L title="About" description={reach.body} page="About">
+  <section class="pagehead">
+    <div class="pagehead-media">
+      <img src="/assets/harrogate/harrogate-03.jpg" alt="A wide common with avenues of trees, backed by Victorian stone terraces and the Yorkshire hills." />
+    </div>
+    <div class="wrap">
+      <p class="caps">{taglines.listen}</p>
+      <h1>{reach.heading}</h1>
+      <p class="lede">{intro.specialise}</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="grid2">
+        <div>
+          <h2>Our practice</h2>
+          <p class="body" style="margin-top:20px">{reach.body}</p>
+        </div>
+        <div>
+          <p class="statement">{statement}</p>
+          <p class="caps">{site.name}</p>
+        </div>
+      </div>
+      <div class="facts">
+        {reach.facts.map((f) => (
+          <div class="fact"><p class="caps">{f.label}</p><p class="body">{f.value}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--mist">
+    <div class="wrap">
+      <div class="band-head"><h2>{credentials.heading}</h2></div>
+      <div class="grid3">
+        {credentials.items.map((c) => (
+          <div class="item"><h3 class="caps">{c.big}</h3><p class="body">{c.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="band-head">
+        <h2>{evidence.heading}</h2>
+        <p class="body" style="margin-top:18px">{evidence.body}</p>
+      </div>
+      <div class="grid3">
+        {evidence.slots.map((s) => (
+          <div class="slot">
+            <span class="slot-q" aria-hidden="true">&ldquo;</span>
+            <p class="slot-text">{s.text}</p>
+            <p class="caps">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</L>

@@ -1,0 +1,82 @@
+---
+import { site, nav } from '../data/content';
+import '../styles/growth.css';
+
+interface Props { title: string; description: string; page: string; }
+const { title, description, page } = Astro.props;
+const base = '/growth';
+const href = (h: string) => (h ? `${base}/${h}` : `${base}/`);
+---
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title} — {site.name}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a href="#main" style="position:absolute;left:-9999px;top:0;padding:12px 18px;background:#343432;color:#FFFEF5;z-index:100" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href={href('')} aria-label={`${site.name} — home`}>
+        <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
+          <path d="M17 2 33 36H1L17 2Z" fill="#343432" />
+          <path d="M17 11c-3.2 5.4 3.4 8.6 0 14.2-2.2 3.6-4.6 5.4-6 10.8h12c-1.6-6-6.8-8.4-4.2-13.6C21.4 17.2 20 14 17 11Z" fill="#FFFEF5" />
+        </svg>
+        <span class="brand-name">JMD<br />Consulting</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu <i></i></button>
+      <nav class="nav" id="nav">
+        {nav.map((n) => (
+          <a href={href(n.href)} aria-current={page === n.label ? 'page' : undefined}>{n.label}</a>
+        ))}
+        <a class="btn btn--solid btn--sm" href={href('contact')}>Contact us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main"><slot /></main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <span class="brand-name">JMD Consulting</span>
+          <p class="foot-blurb">{site.strapline}. Based in {site.base}, working with clients across the globe.</p>
+        </div>
+        <div>
+          <h3 class="ossy">Pages</h3>
+          <ul>{nav.map((n) => (<li><a href={href(n.href)}>{n.label}</a></li>))}</ul>
+        </div>
+        <div>
+          <h3 class="ossy">Contact</h3>
+          <ul>
+            <li><a href={site.phoneHref}>{site.phone}</a></li>
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li><a href={`https://${site.web}`}>{site.web}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-base">
+        <span>© 2000–2026 {site.name}. All rights reserved.</span>
+        <span>{site.base}</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('nav');
+    btn?.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  </script>
+</body>
+</html>

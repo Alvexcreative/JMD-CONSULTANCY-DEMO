@@ -2,6 +2,14 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "jmd-site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "site",
+      "port": 4800,
+      "url": "http://localhost:4800"
+    },
+    {
       "name": "jmd-concepts",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["serve.py", "8745"],

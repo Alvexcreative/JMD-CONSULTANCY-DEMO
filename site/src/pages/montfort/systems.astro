@@ -1,0 +1,38 @@
+---
+import L from '../../layouts/Montfort.astro';
+import { systems } from '../../data/content';
+---
+<L title="Systems" description={systems.notes[0]} page="Systems">
+  <section class="pagehead">
+    <div class="wrap">
+      <p class="caps">{systems.kicker}</p>
+      <h1>{systems.heading}</h1>
+      <p class="lede">{systems.notes[0]}</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      {systems.list.map((s) => (
+        <article class="sys">
+          <div class="sys-n">{s.n}</div>
+          <div>
+            <p class="sys-name">{s.name}</p>
+            <p class="sys-note body">{s.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="band band--mist">
+    <div class="wrap">
+      <div class="grid2">
+        <div><h2>Delivered with the tools the business already runs on</h2></div>
+        <div>{systems.notes.slice(1).map((n) => (<p class="body" style="margin-bottom:20px">{n}</p>))}
+          <div class="btn-row"><a class="btn" href="/montfort/contact">Tell us what you run</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</L>

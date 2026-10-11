@@ -1,0 +1,70 @@
+---
+import L from '../../layouts/Growth.astro';
+import { site, reach, credentials, evidence, statement, intro, taglines } from '../../data/content';
+---
+<L title="About" description={reach.body} page="About">
+  <section class="pagehead">
+    <img class="pagehead-photo" src="/assets/heroes/06-room.jpg" alt="A quiet meeting room in a Yorkshire stone building, oak table and north light." />
+    <div class="pagehead-wash"></div>
+    <div class="wrap">
+      <p class="eyebrow">{taglines.listen}</p>
+      <h1 style="margin-top:12px">{reach.heading}</h1>
+      <p class="lead-xl">{intro.specialise}</p>
+    </div>
+  </section>
+
+  <section class="block block--tan">
+    <div class="wrap">
+      <div class="two">
+        <div>
+          <p class="eyebrow">Our practice</p>
+          <h2 style="margin-top:10px">Consultancy &amp; systems integration</h2>
+          <p class="lead" style="margin-top:20px">{reach.body}</p>
+        </div>
+        <div>
+          <blockquote class="statement">{statement}</blockquote>
+          <p class="lead" style="margin-top:22px;opacity:.9">— {site.name}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="three">
+        {reach.facts.map((f) => (
+          <div class="cred"><p class="big">{f.label}</p><p class="body">{f.value}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="block block--muted">
+    <div class="wrap">
+      <div class="sec-head"><h2>{credentials.heading}</h2></div>
+      <div class="three">
+        {credentials.items.map((c) => (
+          <div class="cred"><p class="big">{c.big}</p><p class="body">{c.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>{evidence.heading}</h2>
+        <p class="body" style="margin-top:14px">{evidence.body}</p>
+      </div>
+      <div class="three">
+        {evidence.slots.map((s) => (
+          <div class="slot">
+            <span class="slot-q" aria-hidden="true">&ldquo;</span>
+            <p class="slot-text">{s.text}</p>
+            <p class="eyebrow">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</L>

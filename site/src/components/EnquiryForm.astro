@@ -1,0 +1,87 @@
+---
+import { contact } from '../data/content';
+interface Props { tone?: 'montfort' | 'growth'; }
+const { tone = 'montfort' } = Astro.props;
+---
+<form class={`enq enq--${tone}`} novalidate>
+  <div class="enq-field">
+    <label for="f-name">Name <span aria-hidden="true">*</span></label>
+    <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name" />
+    <p class="enq-err" id="e-name" hidden>Enter your name</p>
+  </div>
+  <div class="enq-field">
+    <label for="f-org">Organisation <span aria-hidden="true">*</span></label>
+    <input id="f-org" name="organisation" type="text" autocomplete="organization" required aria-describedby="e-org" />
+    <p class="enq-err" id="e-org" hidden>Enter your organisation</p>
+  </div>
+  <div class="enq-field">
+    <label for="f-email">Email <span aria-hidden="true">*</span></label>
+    <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email" />
+    <p class="enq-err" id="e-email" hidden>Enter a valid email address</p>
+  </div>
+  <div class="enq-field">
+    <label for="f-sys">Finance system <span aria-hidden="true">*</span></label>
+    <select id="f-sys" name="system" required aria-describedby="e-sys">
+      <option value="">Select…</option>
+      {contact.systems.map((s) => (<option value={s}>{s}</option>))}
+    </select>
+    <p class="enq-err" id="e-sys" hidden>Choose a system</p>
+  </div>
+  <div class="enq-field enq-field--wide">
+    <label for="f-detail">What is happening <span aria-hidden="true">*</span></label>
+    <textarea id="f-detail" name="detail" rows="5" required aria-describedby="e-detail"></textarea>
+    <p class="enq-err" id="e-detail" hidden>Tell us briefly what is happening</p>
+  </div>
+  <div class="enq-actions">
+    <button class="btn btn--solid" type="submit">Send enquiry</button>
+    <p class="enq-note caps">{contact.demoNotice}</p>
+  </div>
+  <p class="enq-done" role="status" hidden>Enquiry recorded. {contact.demoNotice}</p>
+</form>
+
+<style is:global>
+  .enq { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(18px, 2.4vw, 30px); max-width: 760px; }
+  .enq-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .enq-field--wide, .enq-actions, .enq-done { grid-column: 1 / -1; }
+  .enq label { font-size: clamp(12px, .8vw, 12.5px); letter-spacing: .14em; text-transform: uppercase; }
+  .enq input, .enq select, .enq textarea {
+    width: 100%; min-height: 52px; padding: 14px 16px;
+    font: inherit; font-size: 16px; /* 16px stops iOS zooming the page on focus */
+    border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit;
+  }
+  .enq textarea { min-height: 140px; resize: vertical; }
+  .enq [aria-invalid="true"] { border-width: 2px; }
+  .enq-err { font-size: clamp(12px, .8vw, 12.5px); margin: 0; }
+  .enq-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+  .enq-note { opacity: .7; }
+  .enq-done { padding: 16px 18px; border: 1px solid currentColor; }
+  @media (max-width: 720px) { .enq { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  document.querySelectorAll('form.enq').forEach((form) => {
+    const show = (el, on) => {
+      const err = document.getElementById(el.getAttribute('aria-describedby'));
+      if (err) err.hidden = !on;
+      el.setAttribute('aria-invalid', String(on));
+    };
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fields = [...form.querySelectorAll('input, select, textarea')];
+      let firstBad = null;
+      fields.forEach((f) => {
+        const ok = f.checkValidity();
+        show(f, !ok);
+        if (!ok && !firstBad) firstBad = f;
+      });
+      if (firstBad) { firstBad.focus(); return; }
+      /* Demonstration only: validated, acknowledged, deliberately not sent. */
+      form.querySelector('.enq-done').hidden = false;
+      form.querySelector('.enq-actions').hidden = true;
+      fields.forEach((f) => { f.disabled = true; });
+    });
+    form.querySelectorAll('input, select, textarea').forEach((f) => {
+      f.addEventListener('blur', () => { if (f.value) show(f, !f.checkValidity()); });
+    });
+  });
+</script>

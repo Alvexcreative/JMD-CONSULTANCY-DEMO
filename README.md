@@ -1,4 +1,55 @@
-# JMD Consulting — homepage concepts
+# JMD Consulting
+
+Two things live here: the **full site build** in `site/`, and the original
+**single-page concepts** in `concepts/` that it was chosen from.
+
+## The site — `site/`
+
+Five pages, built twice, from one shared set of content.
+
+```bash
+cd site && npm install && npm run dev
+```
+
+Then open <http://localhost:4800>. The root is a picker; the two builds are at
+`/montfort/` and `/growth/`.
+
+| Page | Carries |
+|---|---|
+| Home | Hero, the problem/guide/success framing, services summary, the practice's statement, credentials |
+| Services | All four disciplines in full, with their capability lists |
+| Systems | CODA/Unit4, NetSuite, SQL Server, Oracle, and the supporting notes |
+| About | The practice, Harrogate and reach, credentials, the open testimonial slots |
+| Contact | Enquiry form plus telephone, email, base and regions |
+
+**Every word on both builds comes from `src/data/content.ts`.** That is deliberate:
+the two designs cannot drift apart, and a copy change is made once. Lines with no
+equivalent on the live site are flagged `bridging: true` in that file.
+
+The enquiry form validates, moves focus to the first bad field and shows a success
+state, but **sends nothing** — it is marked as a demonstration on the page itself.
+Wiring it to a handler is a small change in `src/components/EnquiryForm.astro`.
+
+### Verified
+
+- 11 pages build clean; **zero broken internal links**.
+- One `h1`, a title, a description and a `main` landmark on every page.
+- No horizontal scroll at 375px or 1440px; every control at least 44px; no text
+  below 12px; form inputs at 16px so iOS does not zoom on focus.
+- Hero text contrast measured against the **real composited pixels** behind it,
+  not the CSS background. Montfort: h1 9.91, lede 6.99, caps 7.71 on desktop;
+  11.32 / 7.23 / 7.73 on a phone.
+- Mobile nav opens and closes with correct `aria-expanded`; form blocks an empty
+  submit, shows five field errors and moves focus.
+
+## The concepts — `concepts/`
+
+Single-page explorations, served separately:
+
+```bash
+python3 serve.py
+```
+
 
 Three homepage directions for **JMD Consulting**, an independent finance-systems
 consultancy in Harrogate, North Yorkshire (founded 2000; CODA/Unit4 Financials®
