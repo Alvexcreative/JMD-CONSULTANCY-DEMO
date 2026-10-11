@@ -3,13 +3,24 @@
   "configurations": [
     {
       "name": "chalk-dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "CHALK_ROOT=1 PORT=8750 npm run dev"
+      ],
+      "cwd": "site",
+      "port": 8750,
+      "url": "http://localhost:8750"
+    },
+    {
+      "name": "chalk-concept",
       "runtimeExecutable": "python3",
       "runtimeArgs": [
         "chalk-dev.py",
-        "8750"
+        "8751"
       ],
-      "port": 8750,
-      "url": "http://localhost:8750"
+      "port": 8751,
+      "url": "http://localhost:8751"
     },
     {
       "name": "chalk-original",
