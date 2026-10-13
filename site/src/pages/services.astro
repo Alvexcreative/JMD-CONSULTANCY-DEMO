@@ -4,10 +4,10 @@ import PageHead from '../components/chalk/PageHead.astro';
 import { intro, statement, services, taglines } from '../data/content';
 import { href, IMG } from '../data/chalk';
 
-/* one photograph per chapter */
-const art: Record<string, { src: string; alt: string }> = {
-  'project-management': { src: 'gen/services-planning.jpg', alt: 'Two colleagues planning against a wall of printed project timelines.' },
-  'systems-implementation': { src: 'gen/services-implementation.jpg', alt: 'A consultant at two monitors showing financial reporting dashboards.' },
+/* one photograph per chapter (optional: a chapter without an entry shows none) */
+const art: Record<string, { src: string; alt: string } | undefined> = {
+  'project-management': { src: 'gen/services-planning.jpg', alt: 'Two colleagues discussing a project chart on a glass board in a bright office.' },
+  'systems-implementation': { src: 'gen/services-implementation.jpg', alt: 'Two colleagues leaning over printed implementation plans at a desk by the window.' },
   'etl-business-intelligence': { src: 'gen/services-bi.jpg', alt: 'Charts on a laptop beside printed financial reports and a pen.' },
   'coda-unit4': { src: 'gen/services-coda.jpg', alt: 'A consultant and a finance manager reviewing financial reporting on a monitor.' },
 };
@@ -49,9 +49,11 @@ const art: Record<string, { src: string; alt: string }> = {
                   {s.points.map((p, i) => <li>{p}<span>{s.n}.{i + 1}</span></li>)}
                 </ul>
               </div>
-              <figure class="ph" data-reveal>
-                <img src={`${IMG}/${art[s.slug].src}`} alt={art[s.slug].alt} width="1024" height="688" loading="lazy" decoding="async" />
-              </figure>
+              {art[s.slug] && (
+                <figure class="ph" data-reveal>
+                  <img src={`${IMG}/${art[s.slug]!.src}`} alt={art[s.slug]!.alt} width="1024" height="688" loading="lazy" decoding="async" />
+                </figure>
+              )}
             </article>
           ))}
         </div>

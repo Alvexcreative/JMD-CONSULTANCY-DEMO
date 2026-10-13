@@ -888,8 +888,9 @@ button.node{width:100%;margin:0;border:0;border-radius:0;font:inherit;color:inhe
 .tl__t{margin-top:6px;font-size:clamp(1.25rem,2.2vw,1.8rem);font-weight:300;letter-spacing:-.02em;line-height:1.25;max-width:30ch}
 .tl__b{margin-top:8px;color:var(--on-paper-dim);max-width:52ch}
 .tl-grid{display:grid;gap:clamp(36px,5vw,80px)}
-@media(min-width:1000px){.tl-grid{grid-template-columns:minmax(0,1fr) minmax(0,.7fr);align-items:start}
-  .tl-grid .ph{position:sticky;top:120px}}
+/* the photograph scrolls with the page like every other one; it is not
+   pinned beside the timeline */
+@media(min-width:1000px){.tl-grid{grid-template-columns:minmax(0,1fr) minmax(0,.7fr);align-items:start}}
 
 
 /* ── Enquiry page ── */
