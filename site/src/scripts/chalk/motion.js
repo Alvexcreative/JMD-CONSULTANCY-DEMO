@@ -62,8 +62,12 @@ function entrance() {
   const h = head.querySelector('[data-split]');
   if (h && h._split) tl.to(h._split.lines, { yPercent: 0, duration: 0.75, stagger: 0.05 }, 0.02);
   tl.from(head.querySelectorAll('.phead__lede, .phead__acts'), { opacity: 0, y: 10, duration: 0.6, stagger: 0.06 }, 0.12);
-  /* afterwards the photograph drifts slower than the page */
-  if (img) gsap.to(img, { yPercent: 9, ease: 'none', scrollTrigger: { trigger: head, start: 'top top', end: 'bottom top', scrub: true } });
+  /* afterwards the photograph drifts slower than the page. The frame moves,
+     not the photograph: the photograph has its own CSS transition on
+     transform, which made every scrubbed step arrive late (a stutter). This
+     is the same arrangement as the home hero. */
+  const media = head.querySelector('.hero__media');
+  if (media) gsap.to(media, { yPercent: 9, ease: 'none', scrollTrigger: { trigger: head, start: 'top top', end: 'bottom top', scrub: true } });
 }
 
 function scenes() {
@@ -128,7 +132,7 @@ function ink() {
     const s = SplitText.create(q.querySelector('blockquote') || q, { type: 'words', wordsClass: 'w' });
     q.classList.add('armed');
     gsap.to(s.words, { '--wo': 1, stagger: 0.08, ease: 'none',
-      scrollTrigger: { trigger: q, start: 'top 78%', end: 'bottom 48%', scrub: 0.6 } });
+      scrollTrigger: { trigger: q, start: 'top 95%', end: 'bottom 72%', scrub: 0.6 } });
   });
 }
 

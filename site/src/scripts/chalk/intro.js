@@ -13,8 +13,8 @@
    cover fades away to reveal the page.
 
    Any pointer, key, wheel or touch ends it at once; it ends six seconds
-   after the setting begins (nine at the very most, if the font is slow);
-   a phone runs a quarter quicker. */
+   after the setting begins (nine at the very most, if the font is slow).
+   A phone runs at the same pace as a laptop. */
 import { gsap } from 'gsap';
 
 const root = document.documentElement;
@@ -29,7 +29,7 @@ const ov = document.getElementById('intro');
   const ghost = ov.querySelector('.intro__mk');
   const paper = ov.querySelector('.intro__paper');
   const layer = ov.querySelector('.intro__layer');
-  const Q = innerWidth < 720 ? 0.75 : 1;
+  const Q = 1;   /* one pace on every screen (phones once ran 25% quicker) */
   const tl = gsap.timeline({ paused: true, onComplete: finish });
   const inputs = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
   let done = false;

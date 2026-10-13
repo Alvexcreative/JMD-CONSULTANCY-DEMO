@@ -46,6 +46,7 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
       var r = document.documentElement;
       var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
       if (!still) r.classList.add('motion');
+      if (home) r.classList.add('over-hero');   /* Home opens on its hero, header aside */
       if (!home || location.hash || still) return;
       var force = new URLSearchParams(location.search).has('intro');
       var nav = 'navigate';

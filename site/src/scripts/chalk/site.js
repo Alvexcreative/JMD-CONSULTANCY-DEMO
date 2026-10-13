@@ -46,16 +46,25 @@ document.querySelectorAll('.btn').forEach((b) => {
       reading-progress hairline across the top of the window ── */
 (function () {
   const prog = document.querySelector('.progress');
-  let lastY = scrollY, ticking = false;
+  const hero = root.classList.contains('is-home') ? document.querySelector('.hero') : null;
+  let lastY = scrollY, ticking = false, grace = -1;
   function frame() {
     ticking = false;
     const y = scrollY, max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
     if (prog) prog.style.setProperty('--prog', Math.min(1, Math.max(0, y / max)).toFixed(4));
     root.classList.toggle('hdr-lift', y > 8);
+    /* Home: the header stays out of the way until the hero has scrolled off,
+       then slides in as the photograph leaves, even on the way down, and
+       only steps aside again after a further stretch of reading */
+    if (hero) {
+      const over = y < hero.offsetTop + hero.offsetHeight - 72;
+      if (!over && root.classList.contains('over-hero')) { root.classList.remove('hdr-off'); grace = y + 320; }
+      root.classList.toggle('over-hero', over);
+    }
     if (!still && !root.classList.contains('intro-on')) {
       const d = y - lastY;
       if (y < 140 || d < -6) root.classList.remove('hdr-off');
-      else if (d > 6 && document.activeElement?.closest?.('.filing') == null) root.classList.add('hdr-off');
+      else if (d > 6 && y > grace && document.activeElement?.closest?.('.filing') == null) root.classList.add('hdr-off');
     }
     lastY = y;
   }

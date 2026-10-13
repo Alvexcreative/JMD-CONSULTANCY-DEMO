@@ -740,7 +740,8 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 .phead__acts{margin-top:clamp(26px,3vw,36px);display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center}
 @media(min-width:960px){.phead .phead__copy{max-width:min(640px,46vw)}}
 /* the photograph drifts a little slower than the page (set by script) */
-.phead .hero__img{will-change:transform}
+.phead .hero__img{transition:opacity .9s var(--ease)}
+.phead .hero__media{will-change:transform}
 @media(max-width:959px){.phead.hero.hero--photo{min-height:auto;padding-bottom:clamp(220px,52vw,380px)}}
 
 /* ── Section scaffolding for the inner pages ── */
@@ -773,12 +774,12 @@ html.hdr-lift .filing{box-shadow:0 10px 30px -22px rgba(var(--on-ink-rgb),.45)}
 @media(min-width:900px){.chaps{grid-template-columns:172px minmax(0,1fr)}}
 .chaps__rail{display:none}
 @media(min-width:900px){
-  .chaps__rail{display:block;position:sticky;top:120px;align-self:start;height:min(62vh,520px)}
+  .chaps__rail{display:flex;flex-direction:column;position:sticky;top:120px;align-self:start;height:min(62vh,520px)}
   .chaps__num{position:relative;height:1em;overflow:hidden;
     font-weight:300;font-size:clamp(4.4rem,7vw,6.4rem);line-height:1;letter-spacing:-.05em;color:var(--blue)}
   .chaps__num span{display:block;transition:transform .7s var(--ease)}
   .chaps__num span div{height:1em;line-height:1}
-  .chaps__spine{position:absolute;left:3px;top:calc(clamp(4.4rem,7vw,6.4rem) + 26px);bottom:0;width:1px;background:var(--rule-paper)}
+  .chaps__spine{position:relative;flex:1 1 auto;margin:18px 0 0 3px;width:1px;background:var(--rule-paper)}
   .chaps__spine i{position:absolute;inset:0;background:var(--ochre);transform:scaleY(var(--chap-p,0));transform-origin:top center}
   .chaps__lbl{margin-top:14px;color:var(--on-paper-dim);min-height:3em}
 }
@@ -1106,3 +1107,13 @@ p,li,dd,figcaption{text-wrap:pretty}
 
 /* the phone's portrait photograph is composed for the frame: centred */
 @media(max-width:720px){.is-home .hero--photo .hero__img{object-position:50% 50%}}
+
+/* ── Home on a laptop: the hero is the whole screen ──────────────────────
+      The header (only the small logo here; the rail is the navigation)
+      sits out of the way until the photograph has scrolled off, then
+      slides in and behaves as on every other page. ── */
+@media(min-width:1100px){
+  html.is-home .filing{position:fixed;left:0;right:0;top:0}
+  html.is-home.over-hero .filing{transform:translateY(-101%);box-shadow:none}
+  .is-home .hero{min-height:100vh;min-height:100svh}
+}
