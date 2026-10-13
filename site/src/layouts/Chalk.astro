@@ -78,6 +78,8 @@ const arrow = 'M2 8h11M9 4l4 4-4 4';
       </a>
       <nav class="contents" aria-label="Site">
         <ol>
+          {/* on a phone the header carries Home in place of the logo */}
+          <li class="contents__home"><a href={href()} aria-current={home ? 'page' : undefined}><span class="contents__n">0</span><span class="contents__t">Home</span></a></li>
           {pages.map((p) => (
             <li><a href={href(p.slug)} aria-current={p.slug === page ? 'page' : undefined}><span class="contents__n">{p.n}</span><span class="contents__t">{p.label}</span></a></li>
           ))}

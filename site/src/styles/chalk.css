@@ -1117,3 +1117,25 @@ p,li,dd,figcaption{text-wrap:pretty}
   html.is-home.over-hero .filing{transform:translateY(-101%);box-shadow:none}
   .is-home .hero{min-height:100vh;min-height:100svh}
 }
+
+/* ── Phone header: Home in place of the logo, on every page ─────────────
+      Five tabs share the bar evenly, each centred in its share, set a
+      weight heavier and parted by a short hairline. The logo stays in the
+      header on tablets and laptops. ── */
+.contents__home{display:none}
+@media(max-width:720px){
+  .filing .mark{display:none}
+  .contents__home{display:block}
+  .contents:not(.is-over) ol{gap:0}
+  .contents:not(.is-over) li{flex:1 1 auto;display:flex;justify-content:center;position:relative}
+  .contents li + li::before{content:"";position:absolute;left:0;top:50%;width:1px;height:14px;transform:translateY(-50%);
+    background:rgba(var(--on-ink-rgb),.24)}
+  .contents.is-over li + li::before{left:-6px}
+  .contents__t{font-weight:500;letter-spacing:.005em}
+  /* the whole share of the bar is the tap target; the current page is
+     underlined under its word rather than across the share */
+  .contents:not(.is-over) li > a{flex:1 1 auto;justify-content:center}
+  .contents a,.contents a[aria-current="page"]{border-bottom-color:transparent}
+  .contents a[aria-current="page"] .contents__t{font-weight:600;color:var(--on-ink);
+    text-decoration:underline;text-decoration-color:var(--ochre);text-decoration-thickness:1.5px;text-underline-offset:7px}
+}
