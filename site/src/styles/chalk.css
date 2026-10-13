@@ -1139,3 +1139,22 @@ p,li,dd,figcaption{text-wrap:pretty}
   .contents a[aria-current="page"] .contents__t{font-weight:600;color:var(--on-ink);
     text-decoration:underline;text-decoration-color:var(--ochre);text-decoration-thickness:1.5px;text-underline-offset:7px}
 }
+
+/* ── Phone page heads: their own portrait photographs ───────────────────
+      Services, Systems, Evidence and Enquiry each have a portrait
+      photograph for phones (gen/<page>-mobile.jpg), composed with a calm,
+      pale upper half for the title, under the same light wash as the home
+      hero on a phone. ── */
+@media(max-width:720px){
+  .phead.has-mobile .hero__img{object-position:50% 0%}   /* pale top under the title, people lower */
+  .phead.has-mobile .hero__veil{background:
+    linear-gradient(180deg,
+      rgba(var(--ink-rgb),0) 0%,
+      rgba(var(--ink-rgb),.3) 12%,
+      rgba(var(--ink-rgb),.52) 24%,
+      rgba(var(--ink-rgb),.52) 72%,
+      rgba(var(--ink-rgb),.3) 86%,
+      rgba(var(--ink-rgb),0) 100%)}
+  /* with the lighter wash, the words take the dark ink, as on the home hero */
+  .phead.has-mobile .phead__lede,.phead.has-mobile .phead__ref{color:var(--on-ink)}
+}

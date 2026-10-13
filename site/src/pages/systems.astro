@@ -4,10 +4,10 @@ import PageHead from '../components/chalk/PageHead.astro';
 import { intro, systems, taglines } from '../data/content';
 import { IMG } from '../data/chalk';
 ---
-<Chalk page="systems" title="Systems" heroImage={`${IMG}/gen/systems-servers.jpg`}
+<Chalk page="systems" heroMobile={`${IMG}/gen/systems-mobile.jpg`} title="Systems" heroImage={`${IMG}/gen/systems-servers.jpg`}
   description="CODA / Unit4 Financials and NetSuite, linked with Microsoft SQL Server or Oracle: the systems JMD Consulting implements and integrates.">
 
-  <PageHead n={2} label="Systems" title={taglines.specialists} image={`${IMG}/gen/systems-servers.jpg`}
+  <PageHead mobile={`${IMG}/gen/systems-mobile.jpg`} n={2} label="Systems" title={taglines.specialists} image={`${IMG}/gen/systems-servers.jpg`}
     fx="68%" fy="50%" mfx="60%" mfy="60%" lede={intro.specialise} />
 
   <section class="sec" aria-labelledby="fit-h">

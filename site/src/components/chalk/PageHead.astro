@@ -10,14 +10,18 @@ interface Props {
   lede?: string;
   image: string;
   srcset?: string;   /* sizes of the photograph, when it has them */
+  mobile?: string;   /* a phone's own portrait photograph (720px and below) */
   fx?: string; fy?: string; mfx?: string; mfy?: string; veil?: number;
 }
-const { n, label, title, lede, image, srcset, fx = '70%', fy = '50%', mfx, mfy = '60%', veil = 1 } = Astro.props;
+const { n, label, title, lede, image, srcset, mobile, fx = '70%', fy = '50%', mfx, mfy = '60%', veil = 1 } = Astro.props;
 const style = `--fx:${fx};--fy:${fy};--mx-fx:${mfx ?? fx};--mx-fy:${mfy};--veil:${veil}`;
 ---
-<section class="hero hero--photo phead" data-hero style={style}>
+<section class={`hero hero--photo phead${mobile ? ' has-mobile' : ''}`} data-hero style={style}>
   <div class="hero__media" aria-hidden="true">
-    <img class="hero__img is-on" src={image} srcset={srcset} sizes={srcset ? '100vw' : undefined} alt="" width="1344" height="752" fetchpriority="high" decoding="async" />
+    <picture>
+      {mobile && <source media="(max-width:720px)" srcset={mobile} width="752" height="1344" />}
+      <img class="hero__img is-on" src={image} srcset={srcset} sizes={srcset ? '100vw' : undefined} alt="" width="1344" height="752" fetchpriority="high" decoding="async" />
+    </picture>
     <div class="hero__veil"></div>
   </div>
   <span class="hero__rule" aria-hidden="true"></span>

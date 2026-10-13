@@ -12,10 +12,10 @@ const art: Record<string, { src: string; alt: string } | undefined> = {
   'coda-unit4': { src: 'gen/services-coda.jpg', alt: 'A consultant and a finance manager reviewing financial reporting on a monitor.' },
 };
 ---
-<Chalk page="services" title="Services" heroImage={`${IMG}/hero-15.jpg`} heroSrcset={`${IMG}/hero-15-1200.jpg 1200w, ${IMG}/hero-15.jpg 2400w`}
+<Chalk page="services" heroMobile={`${IMG}/gen/services-mobile.jpg`} title="Services" heroImage={`${IMG}/hero-15.jpg`} heroSrcset={`${IMG}/hero-15-1200.jpg 1200w, ${IMG}/hero-15.jpg 2400w`}
   description="Project management, systems implementation, ETL and business intelligence, and CODA / Unit4 Financials consultancy since 1990.">
 
-  <PageHead n={1} label="Services" title="Solutions for your business" image={`${IMG}/hero-15.jpg`}
+  <PageHead mobile={`${IMG}/gen/services-mobile.jpg`} n={1} label="Services" title="Solutions for your business" image={`${IMG}/hero-15.jpg`}
     fx="62%" fy="50%" mfx="58%" mfy="62%" lede={intro.welcome} srcset={`${IMG}/hero-15-1200.jpg 1200w, ${IMG}/hero-15.jpg 2400w`}>
     <a class="btn" href={href('enquiry')} data-magnetic>Describe your situation
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>

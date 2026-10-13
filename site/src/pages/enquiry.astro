@@ -5,10 +5,10 @@ import { contact, site, taglines } from '../data/content';
 import { IMG } from '../data/chalk';
 const err = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.8v4M8 11.1v.1"/></svg>';
 ---
-<Chalk page="enquiry" title="Enquiry" heroImage={`${IMG}/gen/enquiry-meeting.jpg`}
+<Chalk page="enquiry" heroMobile={`${IMG}/gen/enquiry-mobile.jpg`} title="Enquiry" heroImage={`${IMG}/gen/enquiry-meeting.jpg`}
   description="Tell JMD Consulting what your finance system is doing. Telephone +44 (0) 1423 884000 or email info@jmdconsulting.co.uk.">
 
-  <PageHead n={4} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-meeting.jpg`}
+  <PageHead mobile={`${IMG}/gen/enquiry-mobile.jpg`} n={4} label="Enquiry" title={taglines.listen} image={`${IMG}/gen/enquiry-meeting.jpg`}
     fx="72%" fy="50%" mfx="76%" mfy="58%" lede={contact.invitation} />
 
   <section class="enq enq--page" id="enquiry" aria-labelledby="enq-h">
