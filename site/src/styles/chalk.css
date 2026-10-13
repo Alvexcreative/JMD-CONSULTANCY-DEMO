@@ -1158,3 +1158,23 @@ p,li,dd,figcaption{text-wrap:pretty}
   /* with the lighter wash, the words take the dark ink, as on the home hero */
   .phead.has-mobile .phead__lede,.phead.has-mobile .phead__ref{color:var(--on-ink)}
 }
+
+/* ── Page heads: one starting line and one height on every page ─────────
+      The words begin at the same distance from the top and the photograph
+      ends at the same point on Services, Systems, Evidence and Enquiry,
+      whatever the length of the copy. Laptops: a fixed height, tall enough
+      for the longest copy, words from the top. Phones and tablets: one
+      full screen, like the home hero, words from the top and the picture
+      below them. ── */
+.phead.hero{align-content:start}
+@media(min-width:960px){.phead.hero{min-height:max(min(calc(84svh - 71px),820px),660px)}}
+@media(max-width:959px){
+  .phead.hero.hero--photo{min-height:max(calc(100svh - var(--hdr,71px)),600px);padding-bottom:clamp(120px,26vw,220px)}
+}
+@media(max-width:359px){
+  /* the smallest phones fit the most words over the busiest part of the
+     picture: the wash behind them is a touch deeper (.6 rather than .52) */
+  .phead.has-mobile .hero__veil{background:
+    linear-gradient(180deg,rgba(var(--ink-rgb),0) 0%,rgba(var(--ink-rgb),.34) 10%,rgba(var(--ink-rgb),.6) 22%,
+      rgba(var(--ink-rgb),.6) 74%,rgba(var(--ink-rgb),.32) 88%,rgba(var(--ink-rgb),0) 100%)}
+}
