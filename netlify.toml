@@ -1,0 +1,5 @@
+# The Astro site lives in site/; build it there and publish its output.
+[build]
+  base = "site"
+  command = "npm ci && npm run build"
+  publish = "dist"
